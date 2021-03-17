@@ -1,1 +1,42 @@
-<p>signup works!</p>
+<div>
+    <h2>Sign Up</h2>
+    <form>
+        <!--Sign up Name-->
+        <div *ngIf="signUpNameFlag">
+            <span>USER DETAILS</span>
+            <button type="submit" (click)="signUpNameComplete()">Next</button>
+        </div>
+
+        <!--Sign up Mobile-->
+        <div *ngIf="signUpMobileFlag">
+            <span>ENTER MOBILE#</span>
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" (click)="signUpMobilePrevious()">Previous</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" (click)="signUpMobileComplete()">Get Code</button>
+                </div>
+            </div>
+        </div>
+
+        <!--Sign up conformation-->
+        <div *ngIf="signUpConformationFlag">
+            <span>CONFIRMATION CODE</span>
+            <button type="submit" (click)="signUpConfirmationComplete()">Get Code</button>
+        </div>
+
+        <!--Sign up Email Address-->
+        <div *ngIf="signUpEmailFlag">
+            <span>USER DETAILS</span>
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" (click)="signUpEmailPrevious()">Previous</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" (click)="signUpEmailComplete()">Get Code</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
