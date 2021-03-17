@@ -13,12 +13,12 @@
 
 .header-short ul li {
     width: 110px;
-    font-family: 'Poppins-SemiBold';
+    font-family: "Poppins-SemiBold";
     font-size: 12px;
 }
 
 .login-btn {
-    background-color: #FFE7B1;
+    background-color: #ffe7b1;
     border: none;
     border-radius: 5px;
     color: #000000;
@@ -28,7 +28,7 @@
 
 .repair-btn,
 .signup-btn {
-    background-color: #FFC542;
+    background-color: #ffc542;
     border: none;
     border-radius: 5px;
     color: #ffffff;
