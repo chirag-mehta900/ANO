@@ -1,0 +1,297 @@
+.ano-banner {
+    background-color: #ffffff;
+}
+
+.padding {
+    padding: 25px 0 25px 0;
+}
+
+.margin {
+    margin: 15px 0 15px 0;
+}
+
+h2 {
+    font-family: "Poppins-SemiBold";
+    font-size: 72px;
+    max-width: 610px;
+}
+
+.banner-detail p {
+    font-size: 18px;
+    font-family: "Poppins-regular";
+    max-width: 600px;
+}
+
+.repair-btn {
+    width: 15% !important;
+}
+
+.banner-service {
+    display: flex;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.banner-service::-webkit-scrollbar {
+    display: none;
+}
+
+.service-box {
+    padding: 10px;
+}
+
+.service-box img {
+    height: 120px;
+    width: auto;
+    border-radius: 20px;
+}
+
+.service-box h2 {
+    font-size: 20px;
+    text-align: center;
+    position: relative;
+    bottom: 50%;
+    color: #ffffff;
+}
+
+.extra-detail {
+    display: grid;
+}
+
+.extra-detail h3 {
+    margin-bottom: 0px;
+    text-align: center;
+    color: #2ec5ce;
+    font-family: "Poppins-SemiBold";
+    font-weight: bolder;
+    font-size: 40px;
+}
+
+.extra-detail p {
+    text-align: center;
+    font-family: "Poppins-regular";
+    font-size: 22px;
+}
+
+.howitwork,
+.whyus {
+    width: 100%;
+}
+
+.howitwork-title h3,
+.whyus-title h3,
+.about-title h3,
+.count-head h3 {
+    font-size: 48px;
+    font-family: "Poppins-SemiBold";
+    margin-bottom: 30px;
+}
+
+.servicelist,
+.whyuslist {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.service-detail,
+.whyus-detail {
+    display: grid;
+    text-align: center;
+}
+
+.service-detail h4 {
+    font-size: 24px;
+    font-family: "Poppins-Medium";
+}
+
+.whyus-detail h4 {
+    font-size: 18px;
+    font-family: "Poppins-SemiBold";
+}
+
+.service-detail p,
+.whyus-detail p {
+    font-size: 16px;
+    font-family: "Poppins-regular";
+}
+
+.whyus-detail {
+    text-align: left !important;
+}
+
+.service-detail img {
+    height: 100%;
+    width: 100%;
+}
+
+.whyimg {
+    display: flex;
+}
+
+.aboutus {
+    display: flex;
+    width: 100%;
+}
+
+.aboutdetail p {
+    font-family: "Poppins-regular";
+    font-size: 20px;
+}
+
+.about-img img {
+    width: 70%;
+    display: flex;
+    float: right;
+}
+
+.signup-driver {
+    display: flex;
+    width: 100%;
+    background: #fffff5;
+}
+
+.driver-title h3 {
+    font-size: 72px;
+    font-family: "Poppins-SemiBold";
+    margin-bottom: 30px;
+}
+
+.driver-title p,
+.client-title p,
+.service p,
+.service h4 {
+    font-size: 18px;
+    font-family: "Poppins-Regular";
+}
+
+.requestform {
+    padding-top: 25px;
+    width: 100%;
+}
+
+.requestform button {
+    background-color: #18191f;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px 10px 15px;
+}
+
+.requestform input {
+    background-color: #fffff5;
+    border: none;
+    border-bottom: 1px solid #ccccc4;
+    font-family: "Poppins-Regular";
+}
+
+.name,
+.contact {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    padding: 10px 0 10px 0;
+}
+
+.req-btn {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding-top: 25px;
+}
+
+.client {
+    background-color: #f9f9fa;
+    width: 100%;
+}
+
+.client-title {
+    text-align: center;
+}
+
+.review {
+    background-image: url(../../assets/images/Card.svg);
+    background-repeat: no-repeat;
+    width: 32%;
+    height: auto;
+    display: grid;
+}
+
+.review-blog {
+    position: relative;
+    width: 70%;
+    text-align: center;
+    margin-left: 65px;
+    padding: 40px 0 0 0;
+}
+
+.client-title h3,
+.service h3 {
+    font-size: 48px;
+    font-family: "Poppins-SemiBold";
+}
+
+.client-review {
+    display: flex;
+}
+
+.reviewer {
+    display: grid;
+    width: 100%;
+    justify-content: center;
+    padding-top: 50px;
+    text-align: -webkit-center;
+}
+
+.count-head h5 {
+    font-size: 18px;
+    font-family: "Poppins-Regular";
+}
+
+.count {
+    width: 100%;
+}
+
+.counts {
+    display: flex;
+    width: 100%;
+}
+
+.hexagon {
+    background-image: url(../../assets/images/Polygon.svg);
+    width: 100%;
+    height: 280px;
+    background-repeat: no-repeat;
+}
+
+.hexagonetext {
+    position: relative;
+    top: 98px;
+    text-align: center;
+}
+
+.hexagonetext h3 {
+    font-size: 18px;
+    font-family: "Poppins-SemiBold";
+}
+
+.hexagonetext h4 {
+    font-size: 18px;
+    font-family: "Poppins-Regular";
+}
+
+.service {
+    width: 100%;
+    background-color: #ffefcf;
+    display: flex;
+}
+
+.store img {
+    margin-right: 10px;
+}

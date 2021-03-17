@@ -1,0 +1,57 @@
+.container {
+    width: 100%;
+    padding: 50px 0 25px 0;
+}
+
+.nav-bar ul {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.nav-bar ul li {
+    width: 90px;
+    font-family: "Poppins-Regular";
+    font-size: 12px;
+}
+
+.footer-title {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.subscribe input {
+    background-color: #e3e3e3;
+    position: relative;
+    border: none;
+    border-radius: 6px;
+}
+
+.subscribe img {
+    position: relative;
+    right: 11%;
+}
+
+.line {
+    width: 100%;
+}
+
+.socail {
+    display: flex;
+}
+
+.socail img {
+    margin-left: 10px;
+}
+
+.footer-bottom {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+    font-family: "Poppins-regular";
+}
