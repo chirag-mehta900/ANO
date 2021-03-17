@@ -7,10 +7,11 @@ import { FooterComponent } from './footer/footer.component';
 import { MapComponent } from './map/map.component';
 import { AboutComponent } from './about/about.component';
 import { HeaderModuleModule } from './header-module/header-module.module';
+import { SharedModule } from 'src/@theme/shared.module';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent, MapComponent, AboutComponent],
-  imports: [BrowserModule, AppRoutingModule, HeaderModuleModule],
+  imports: [BrowserModule, AppRoutingModule, HeaderModuleModule, SharedModule],
   providers: [],
   bootstrap: [AppComponent],
 })
