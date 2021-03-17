@@ -1,6 +1,13 @@
+.map-booking {
+    margin-top: -50px;
+}
+
 .filter {
     display: flex;
     justify-content: space-between;
+    position: absolute;
+    top: 15%;
+    width: 78%;
 }
 
 .shop-filter {
@@ -50,7 +57,60 @@
     left: -40px;
 }
 
+.shop-come {
+    width: 90%;
+}
+
 .search-location img {
     height: 25px;
     width: 25px;
+}
+
+.bg-map,
+agm-map {
+    height: 80vh;
+    width: 100%;
+}
+
+.shop-box {
+    padding: 5px;
+}
+
+.shop-ing img {
+    height: 120px;
+    width: auto;
+}
+
+.shop-detail .detail-name {
+    display: flex;
+    align-items: baseline;
+}
+
+.shop-detail .detail-name h2 {
+    font-size: 15px;
+    margin-right: 10px;
+    margin-bottom: 0px;
+}
+
+.dis-f {
+    display: flex;
+    align-items: baseline;
+}
+
+.shop-detail {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.shop-detail img {
+    height: 15px;
+}
+
+.detail-name2 {
+    display: flex;
+}
+
+.detail-name2 p {
+    margin-left: 5px;
+    margin-bottom: 0px;
 }
