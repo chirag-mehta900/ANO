@@ -1,8 +1,10 @@
 .ano-header {
+    position: relative;
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
     align-items: baseline;
+    z-index: 99999;
 }
 
 .header-short ul {
