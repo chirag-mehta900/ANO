@@ -1,13 +1,103 @@
 <section class="map-booking">
-    <div class="filter">
-        <div>
-            <input type="text" name="mapshop" id="shop" placeholder="Search Device, Brand, Model, etc">
-            <button><img src="../../assets/images/Sliders.svg" alt=""></button>
-            <button><img src="../../assets/images/Bug.svg" alt=""></button>
+    <div class="bg-map">
+        <agm-map [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+    </div>
+    <div class="container">
+        <div class="filter">
+            <div class="shop-filter ">
+                <input type="text" name="mapshop" id="shop" placeholder="Search Device, Brand, Model, etc">
+                <button><img src="../../assets/images/Sliders.svg" alt=""></button>
+                <button><img src="../../assets/images/Bug.svg" alt=""></button>
+                <div class="shop-come">
+                    <div class="shop-box">
+                        <div class="shop-ing">
+                            <img class="img-fluid" src="../../assets/images/service1.png" alt="">
+                        </div>
+                        <div class="shop-detail">
+                            <div class="detail-name">
+                                <h2>Shop Name</h2>
+                                <ngb-rating [rate]="3" color="red"></ngb-rating>
+                            </div>
+                            <div class="detail-name2">
+                                <div class="dis-f">
+                                    <img src="../../assets/images/Icon awesome-car.svg" alt="">
+                                    <p>2.3 Miles</p>
+                                </div>
+                                <div class="dis-f">
+                                    <img src="../../assets/images/Icon material-attach-money.svg" alt="">
+                                    <p>10</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="search-location">
+                <input type="text" name="" id="" placeholder="Search Location">
+                <button><img src="../../assets/images/search.svg" alt=""></button>
+            </div>
         </div>
-        <div>
-            <input type="text" name="" id="" placeholder="Search Location">
-            <img src="../../assets/images/search.svg" alt="">
+    </div>
+    <div class="top-shop">
+        <div class="container">
+            <div class="text-center">
+                <h2>Top Shop</h2>
+            </div>
+            <div class="shop-box">
+                <div class="shop-ing">
+                    <img class="img-fluid" src="../../assets/images/service1.png" alt="">
+                </div>
+                <div class="shop-detail">
+                    <div class="detail-name">
+                        <h2>Shop Name</h2>
+                        <ngb-rating [rate]="3" color="red"></ngb-rating>
+                    </div>
+                    <div class="detail-name2">
+                        <div class="dis-f">
+                            <img src="../../assets/images/Icon awesome-car.svg" alt="">
+                            <p>2.3 Miles</p>
+                        </div>
+                        <div class="dis-f">
+                            <img src="../../assets/images/Icon material-attach-money.svg" alt="">
+                            <p>10</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="text-center">
+            <h2>Get the app for better Experience</h2>
+        </div>
+        <div class="experience">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="experience-detail">
+                            <h3>Get Service from your mobile</h3>
+                            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                            <h4>Get the App</h4>
+                            <div class="store">
+                                <button><img src="../../assets/images/Google Play Badge.svg" alt=""></button>
+                                <button><img src="../../assets/images/App Store Badge.svg" alt=""></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="experience-img1">
+                            <img class="img-fluid" src="../../assets/images/Screen1.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="experience-img2">
+                            <img class="img-fluid" src="../../assets/images/Screen2.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

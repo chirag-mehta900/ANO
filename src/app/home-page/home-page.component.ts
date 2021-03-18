@@ -18,7 +18,20 @@ export class HomePageComponent implements OnInit {
     "http://placehold.it/350x150/000000",
     "http://placehold.it/350x150/000000",
   ];
+
+  lat: any;
+  lng: any;
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (!navigator.geolocation) {
+      console.log("location not found");
+    }
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.lat = position.coords.latitude;
+      this.lng = position.coords.longitude;
+      console.log(this.lat, this.lng);
+    });
+  }
 }

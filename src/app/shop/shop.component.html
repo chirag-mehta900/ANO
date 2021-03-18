@@ -1,0 +1,78 @@
+<section>
+    <div class="bg-map">
+        <agm-map [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+    </div>
+    <div class="container">
+        <div class="filter">
+            <div class="shop-filter ">
+                <input type="text" name="mapshop" id="shop" placeholder="Search Device, Brand, Model, etc">
+                <button><img src="../../assets/images/Sliders.svg" alt=""></button>
+                <button><img src="../../assets/images/Bug.svg" alt=""></button>
+                <div class="shop-come">
+                    <div class="shop-box">
+                        <div class="shop-ing">
+                            <img class="img-fluid" src="../../assets/images/service1.png" alt="">
+                        </div>
+                        <div class="shop-detail">
+                            <div class="detail-name">
+                                <h2>Shop Name</h2>
+                                <ngb-rating [rate]="3" color="red"></ngb-rating>
+                            </div>
+                            <div class="detail-name2">
+                                <div class="dis-f">
+                                    <img src="../../assets/images/Icon awesome-car.svg" alt="">
+                                    <p>2.3 Miles</p>
+                                </div>
+                                <div class="dis-f">
+                                    <img src="../../assets/images/Icon material-attach-money.svg" alt="">
+                                    <p>10</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="add-product container">
+        <div>
+            <h2>Booking Made Easy</h2>
+        </div>
+        <div class="add-product-display">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="add-product-box">
+                        <div class="add-product-imd">
+                            <img class="img-fluid" src="../../assets/images/service1.png" alt="">
+                        </div>
+                        <div class="add-product-details">
+                            <h2>LG Monitor</h2>
+                            <p>Repair Master, Repair, Dec 16, 09:00 AM to 11:00AM</p>
+                            <button>Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="add-product-box">
+                        <div class="add-product-imd">
+                            <img class="img-fluid" src="../../assets/images/service1.png" alt="">
+                        </div>
+                        <div class="add-product-details">
+                            <h2>LG Monitor</h2>
+                            <p>Repair Master, Repair, Dec 16, 09:00 AM to 11:00AM</p>
+                            <button>Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="add-product-service">
+                        <button><img src="../../assets/images/add product.svg" alt=""></button>
+                        <p>Add More</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
