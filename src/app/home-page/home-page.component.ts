@@ -1,26 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  selector: "app-home-page",
+  templateUrl: "./home-page.component.html",
+  styleUrls: ["./home-page.component.css"],
 })
 export class HomePageComponent implements OnInit {
-  lat:any;
-  lng:any;
+  selectedImg = [
+    "http://placehold.it/350x150/000000",
+    "http://placehold.it/350x150/000000",
+    "http://placehold.it/350x150/000000",
+    "http://placehold.it/350x150/000000",
+    "http://placehold.it/350x150/000000",
+    "http://placehold.it/350x150/000000",
+    "http://placehold.it/350x150/000000",
+    "http://placehold.it/350x150/000000",
+    "http://placehold.it/350x150/000000",
+    "http://placehold.it/350x150/000000",
+  ];
 
-  constructor() { }
+  lat: any;
+  lng: any;
+
+  constructor() {}
 
   ngOnInit() {
     if (!navigator.geolocation) {
-      console.log('location not found');
+      console.log("location not found");
     }
     navigator.geolocation.getCurrentPosition((position) => {
       this.lat = position.coords.latitude;
       this.lng = position.coords.longitude;
-      console.log(this.lat,this.lng);
+      console.log(this.lat, this.lng);
     });
   }
 }
-
-
