@@ -1,42 +1,73 @@
-<div>
+<div class="signup-module">
     <h2>Sign Up</h2>
     <form>
         <!--Sign up Name-->
         <div *ngIf="signUpNameFlag">
-            <span>USER DETAILS</span>
-            <button type="submit" (click)="signUpNameComplete()">Next</button>
+            <div class="signup-form">
+                <p>User Details</p>
+                <div class="signup-inp">
+                    <input type="text" name="name" id="name" placeholder="Name">
+                    <input type="email" name="email" id="email" placeholder="Email">
+                    <input type="password" name="password" id="password" placeholder="Password">
+                </div>
+                <div class="signup-det">
+                    <h2>Already have account?<span>Login</span></h2>
+                </div>
+                <button class="next" type="submit" (click)="signUpNameComplete()">Next</button>
+            </div>
         </div>
 
         <!--Sign up Mobile-->
         <div *ngIf="signUpMobileFlag">
-            <span>ENTER MOBILE#</span>
+            <div class="signup-form">
+                <p>Enter Mobile#</p>
+                <div class="signup-inp">
+                    <input type="number" name="number" id="number" placeholder="Mobile#">
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-6">
-                    <button type="submit" (click)="signUpMobilePrevious()">Previous</button>
+                    <button class="previous" type="submit" (click)="signUpMobilePrevious()"> <span><</span> Previous</button>
                 </div>
                 <div class="col-md-6">
-                    <button type="submit" (click)="signUpMobileComplete()">Get Code</button>
+                    <button class="next" type="submit" (click)="signUpMobileComplete()">Get Code</button>
                 </div>
             </div>
         </div>
 
         <!--Sign up conformation-->
         <div *ngIf="signUpConformationFlag">
-            <span>CONFIRMATION CODE</span>
-            <button type="submit" (click)="signUpConfirmationComplete()">Get Code</button>
+            <div class="signup-form">
+                <p>Confirmation Code<span>Edit Mobile#</span></p>
+                <div class="signup-inp">
+                    <input type="number" name="otp" id="otp" placeholder="Enter Confirmation Code">
+                </div>
+            </div>
+            <button class="next" type="submit" (click)="signUpConfirmationComplete()">Get Code</button>
+            <div class="signup-det">
+                <h2>Resend Code in <span>00:53</span></h2>
+            </div>
         </div>
 
-        <!--Sign up Email Address-->
+        <!--Sign up Address-->
         <div *ngIf="signUpEmailFlag">
-            <span>USER DETAILS</span>
-            <div class="row">
+            <div class="signup-form">
+                <p>User Details</p>
+                <div class="signup-inp">
+                    <textarea name="address" id="address" cols="10" rows="2" placeholder="Address"></textarea>
+                    <input type="text" name="city" id="city" placeholder="City">
+                    <input type="text" name="state" id="state" placeholder="State">
+                    <input type="number" name="zip" id="zip" placeholder="Zip Code">
+                </div>
+            </div>
+            <!-- <div class="row">
                 <div class="col-md-6">
                     <button type="submit" (click)="signUpEmailPrevious()">Previous</button>
                 </div>
-                <div class="col-md-6">
-                    <button type="submit" (click)="signUpEmailComplete()">Get Code</button>
-                </div>
-            </div>
+                <div class="col-md-6"> -->
+                    <button class="next" type="submit" (click)="signUpEmailComplete()">Sign Up</button>
+                <!-- </div>
+            </div> -->
         </div>
     </form>
 </div>

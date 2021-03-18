@@ -46,3 +46,13 @@
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.modal-dialog{
+    margin-top: 100px !important;
+    z-index: 99999999999;
+}
+@media (min-width: 576px){
+    .modal-dialog {
+        max-width: 400px !important;
+    }
+}
