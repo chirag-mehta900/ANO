@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { HeaderService } from "src/@theme/Services/header.service";
+import { JwtTokenService } from "src/@theme/services/jwt-token.service";
+import { StoreTokenService } from "src/@theme/Services/store-token.service";
 import { SignupComponent } from "../signup/signup.component";
 
 @Component({
@@ -19,7 +21,9 @@ export class LoginComponent implements OnInit {
     private headerService: HeaderService,
     private modalService: NgbModal,
     private activeModal: NgbActiveModal,
-    private router: Router
+    private router: Router,
+    private jwtToken: JwtTokenService,
+    private storeTokenService: StoreTokenService
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +55,7 @@ export class LoginComponent implements OnInit {
         (data) => {
           if (data["status"] == 200) {
             console.log(data["data"].access_token);
+            this.storeTokenService.set("token", data["data"].access_token);
             this.activeModal.close(data["data"].access_token);
             this.router.navigate(["/home"]);
           }

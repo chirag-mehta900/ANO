@@ -7,14 +7,20 @@ import { FooterComponent } from "./footer/footer.component";
 import { MapComponent } from "./map/map.component";
 import { AboutComponent } from "./about/about.component";
 import { HeaderModuleModule } from "./header-module/header-module.module";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { SharedModule } from "src/@theme/shared.module";
-import { HeaderService } from "src/@theme/Services/header.service";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { CustomHttpInterceptor } from "src/@theme/interceptor/httpinterceptor";
 
 @NgModule({
   declarations: [AppComponent, FooterComponent, MapComponent, AboutComponent],
   imports: [BrowserModule, AppRoutingModule, HeaderModuleModule, SharedModule],
-  providers: [],
+  providers: [
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: CustomHttpInterceptor,
+    //   multi: true,
+    // },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

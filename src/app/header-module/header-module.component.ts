@@ -4,6 +4,8 @@ import { HeaderService } from "src/@theme/Services/header.service";
 import { LoginComponent } from "./login/login.component";
 import { SignupComponent } from "./signup/signup.component";
 import { HttpHeaders } from "@angular/common/http";
+import { JwtTokenService } from "src/@theme/services/jwt-token.service";
+import { StoreTokenService } from "src/@theme/Services/store-token.service";
 
 @Component({
   selector: "app-header-module",
@@ -22,12 +24,11 @@ export class HeaderModuleComponent implements OnInit {
     const modalRef = this.modalService.open(LoginComponent);
     modalRef.result.then((result) => {
       console.log(result);
-      this.setUserName(result);
+      this.setUserName();
     });
   }
-  setUserName(auth_token) {
-    const headers = new HttpHeaders().set("content-type", auth_token);
-    this.headerService.getUserName(headers).subscribe(
+  setUserName() {
+    this.headerService.getUserName().subscribe(
       (data) => {
         console.log(data["data"]);
       },
