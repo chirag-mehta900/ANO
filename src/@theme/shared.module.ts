@@ -1,19 +1,26 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { AgmCoreModule } from '@agm/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgCircleProgressModule } from 'ng-circle-progress';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { NbProgressBarModule } from '@nebular/theme';
+import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
+import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { IvyCarouselModule } from "angular-responsive-carousel";
+import { SlickCarouselModule } from "ngx-slick-carousel";
+import { CommonService } from "./Services/common.service";
+import { HeaderService } from "./Services/header.service";
+import { JwtTokenService } from "./services/jwt-token.service";
+import { StoreTokenService } from "./Services/store-token.service";
 
 const NB_Module = [
   NgbModule,
-  MatProgressBarModule,
-  NbProgressBarModule
-  ];
+  SlickCarouselModule,
+  HttpClientModule,
+  IvyCarouselModule,
+  FormsModule,
+  ReactiveFormsModule,
+];
 @NgModule({
   imports: [CommonModule, ...NB_Module],
   exports: [CommonModule, ...NB_Module],
-  providers: [],
+  providers: [HeaderService, JwtTokenService, StoreTokenService, CommonService],
 })
 export class SharedModule {}
