@@ -11,7 +11,7 @@
                 <li *ngIf="!userName"><button class="login-btn" (click)="logIn()">Log In</button></li>
                 <li *ngIf="userName">{{userName}}</li>
                 <li><button class="signup-btn" (click)="signUp()">Sign Up</button></li>
-                <li><button class="repair-btn">Book Repair</button></li>
+                <li><button class="repair-btn" (click)="bookRepair()">Book Repair</button></li>
             </ul>
         </nav>
     </div>
