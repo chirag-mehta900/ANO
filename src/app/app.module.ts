@@ -9,9 +9,11 @@ import { AboutComponent } from './about/about.component';
 import { HeaderModuleModule } from './header-module/header-module.module';
 import { SharedModule } from 'src/@theme/shared.module';
 import { AgmCoreModule } from '@agm/core';
+import { ShopComponent } from './shop/shop.component';
+import { AddproductComponent } from './shop/addproduct/addproduct.component';
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, MapComponent, AboutComponent],
+  declarations: [AppComponent, FooterComponent, MapComponent, AboutComponent, ShopComponent, AddproductComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

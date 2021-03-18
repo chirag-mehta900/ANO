@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeDetailsComponent } from './home-page/home-details/home-details.component';
 import { MapComponent } from './map/map.component';
+import { ShopComponent } from './shop/shop.component';
 
 const routes: Routes = [
   { path: 'map', component: MapComponent },
+  { path: 'shop', component: ShopComponent },
   {
     path: '',
     loadChildren: () =>
