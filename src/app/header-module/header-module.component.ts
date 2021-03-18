@@ -13,6 +13,7 @@ import { StoreTokenService } from "src/@theme/Services/store-token.service";
   styleUrls: ["./header-module.component.css"],
 })
 export class HeaderModuleComponent implements OnInit {
+  userName: any;
   constructor(
     private modalService: NgbModal,
     private headerService: HeaderService
@@ -21,6 +22,7 @@ export class HeaderModuleComponent implements OnInit {
   ngOnInit(): void {}
 
   logIn() {
+    this.userName = null;
     const modalRef = this.modalService.open(LoginComponent);
     modalRef.result.then((result) => {
       console.log(result);
@@ -30,7 +32,7 @@ export class HeaderModuleComponent implements OnInit {
   setUserName() {
     this.headerService.getUserName().subscribe(
       (data) => {
-        console.log(data["data"]);
+        this.userName = data["data"].name;
       },
       (error) => {}
     );

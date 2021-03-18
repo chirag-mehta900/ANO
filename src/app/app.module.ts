@@ -15,11 +15,11 @@ import { CustomHttpInterceptor } from "src/@theme/interceptor/httpinterceptor";
   declarations: [AppComponent, FooterComponent, MapComponent, AboutComponent],
   imports: [BrowserModule, AppRoutingModule, HeaderModuleModule, SharedModule],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: CustomHttpInterceptor,
-    //   multi: true,
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomHttpInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

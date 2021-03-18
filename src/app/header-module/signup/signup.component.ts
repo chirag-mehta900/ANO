@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -11,9 +12,28 @@ export class SignupComponent implements OnInit {
   signUpMobileFlag: boolean = false;
   signUpConformationFlag: boolean = false;
   signUpEmailFlag: boolean = false;
+
+  signUpForm: FormGroup;
+
   constructor(private activeModal: NgbActiveModal) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getData();
+  }
+
+  getData() {
+    this.signUpForm = new FormGroup({
+      name: new FormControl(null, Validators.required),
+      email: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(
+          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/
+        ),
+      ]),
+      password: new FormControl(null, Validators.required),
+      role: new FormControl("user"),
+    });
+  }
 
   signUpNameComplete() {
     this.signUpNameFlag = false;

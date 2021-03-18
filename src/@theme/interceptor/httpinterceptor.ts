@@ -52,7 +52,6 @@ export class CustomHttpInterceptor implements HttpInterceptor {
                 this.errorMessage = "token expired";
                 this.tokenService.remove("token");
                 this.tokenService.remove("refreshToken");
-                this.router.navigate(["auth"]);
                 break;
 
               default:

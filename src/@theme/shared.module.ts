@@ -21,11 +21,6 @@ const NB_Module = [
 @NgModule({
   imports: [CommonModule, ...NB_Module],
   exports: [CommonModule, ...NB_Module],
-  providers: [
-    HeaderService,
-    //JwtTokenService,
-    //StoreTokenService,
-    CommonService,
-  ],
+  providers: [HeaderService, JwtTokenService, StoreTokenService, CommonService],
 })
 export class SharedModule {}
