@@ -24,10 +24,14 @@
                             "src/assets"
                         ],
                         "styles": [
+                            "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
                             "src/styles.css",
-                            "node_modules/bootstrap/dist/css/bootstrap.css"
+                            "node_modules/bootstrap/dist/css/bootstrap.css",
+                            "node_modules/@nebular/theme/styles/prebuilt/default.css"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "src/@theme/js/script.js"
+                        ]
                     },
                     "configurations": {
                         "production": {
@@ -86,6 +90,7 @@
                             "src/assets"
                         ],
                         "styles": [
+                            "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
                             "src/styles.css"
                         ],
                         "scripts": []
