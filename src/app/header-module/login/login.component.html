@@ -1,7 +1,9 @@
-<div>
-    <h2>Login</h2>
-    <span>WELCOME BACK TO ANO</span>
-    <form [formGroup]="loginInfo">
+<div class="login-module">
+    <div class="login-intro">
+        <h2>Login</h2>
+        <p>Welcom back to <span>ANO</span></p>
+    </div>
+    <form [formGroup]="loginInfo" class="login-form">
         <div class="form-group">
             <input type="email" id="email" class="form-control" fieldsize="small" formControlName="email" name="email"
                 [ngClass]="{'is-invalid':(loginInfo.get('email').invalid)&&(formSubmitted || loginInfo.get('email').touched)}"
@@ -22,12 +24,12 @@
                 <span>Password is required. </span>
             </div>
         </div>
-        <div>
-            Don't Have An Account? <span (click)="signUp()">Get started</span>
+        <div class="login-det">
+            <h2>Don't Have An Account? <span (click)="signUp()">Get started</span></h2>
         </div>
         <span class="text-danger" *ngIf="invalidUserLog">
             Invalid Email or password
         </span>
-        <button class="primary" type="submit" (click)="logIn()" [disabled]="disableButton">Login</button>
+        <button class="next" type="submit" (click)="logIn()" [disabled]="disableButton">Login</button>
     </form>
 </div>
