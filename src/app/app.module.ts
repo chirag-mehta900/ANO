@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,10 +14,18 @@ import { ShopComponent } from './shop/shop.component';
 import { AddproductComponent } from './shop/addproduct/addproduct.component';
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, MapComponent, AboutComponent, ShopComponent, AddproductComponent],
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    MapComponent,
+    AboutComponent,
+    ShopComponent,
+    AddproductComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     HeaderModuleModule,
     SharedModule,
     AgmCoreModule.forRoot({
