@@ -8,6 +8,7 @@
     position: absolute;
     top: 15%;
     width: 78%;
+    font-family: 'Poppins-Regular';
 }
 
 .shop-filter {
@@ -74,6 +75,7 @@ agm-map {
 .shop-detail {
     margin-top: 10px;
     margin-bottom: 15px;
+    width: 75%;
 }
 
 .shop-detail img {
@@ -135,4 +137,101 @@ agm-map {
 
 .add-product-service {
     transform: translateY(100%);
+}
+.reviews{
+    margin-top: 50px;
+}
+.star{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.progres-bar{
+    width: 83%;
+    margin-left: 20px;
+    background-color: #F6F6F6;
+    height: 12px;
+    border-radius: 5px;
+}
+.progres-bar span{
+    height: 12px;
+    border-radius: 5px;
+    position: absolute;
+}
+.star progres-bar{
+    width: 85%;
+}
+.review-user{
+    margin-top: 30px;
+}
+.review-box{
+    display: flex;
+}
+.review-name{
+    display: flex;
+    justify-content: space-between;
+}
+.review-name h4{
+    font-size: 20px;
+    font-family: 'Poppins-SemiBold';
+    margin-bottom: 0px;
+}
+.review-detal{
+    margin-left: 25px;
+}
+.review-detal h3{
+    font-size: 16px;
+    margin-bottom: 0px;
+    font-family: 'Poppins-Regular';
+    color: #6E798C;
+}
+.review-name p{
+    font-size: 13px;
+    font-family: 'Poppins-Regular';
+
+}
+.review-rating{
+    display: flex;
+    margin-top: 10px;
+}
+.review-rating h3{
+    font-size: 20px;
+    font-family: 'Poppins-SemiBold';
+    color: #001833;
+    margin-bottom: 0px;
+    margin-right: 5px;
+}
+.location{
+    display: flex;
+    align-items: baseline;
+    margin-top: 5px;
+}
+.location p{
+    margin-bottom: 0px;
+    font-family: 'Poppins-Regular';
+}
+.shop-services{
+    margin-top: 20px;
+}
+.shop-ser-box{
+    margin-bottom: 30px;
+}
+.shop-ser-box img{
+    height: 270px;
+    width: auto;
+}
+.shop-ser-box h3{
+    font-size: 20px;
+    position: absolute;
+    top: 36%;
+    right: 40%;
+    color: #ffffff;
+    font-family: 'Poppins-SemiBold';
+}
+.service-service{
+    margin-top: 30px;
+}
+.ser-det h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 30px;
 }

@@ -13,6 +13,7 @@ import { ShopComponent } from "./shop/shop.component";
 import { AddproductComponent } from "./shop/addproduct/addproduct.component";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { CustomHttpInterceptor } from "src/@theme/interceptor/httpinterceptor";
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,15 @@ import { CustomHttpInterceptor } from "src/@theme/interceptor/httpinterceptor";
     SharedModule,
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyCrr-U8HBzd2cqmW9UpipocVTl9rHjCphY",
+    }),
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300,
     }),
   ],
   providers: [
