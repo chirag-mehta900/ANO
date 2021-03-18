@@ -1,0 +1,29 @@
+<div>
+    <!--Select Device-->
+    <div *ngIf="selectDeviceFlag">
+        <h2>Select Device</h2>
+        <span>DEVICE,BRAND,MODEL</span>
+        <div class="row">
+            <div class="col-md-6">
+                <button>Previous</button>
+            </div>
+            <div class="col-md-6">
+                <button (click)="goToIssue()">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Select Issues-->
+    <div *ngIf="selectIssueFlag">
+        <h2>Device Name</h2>
+        <span>PROBLEM</span>
+        <div class="row">
+            <div class="col-md-6">
+                <button (click)="goToDevice()">Previous</button>
+            </div>
+            <div class="col-md-6">
+                <button (click)="addRepair()">Done</button>
+            </div>
+        </div>
+    </div>
+</div>

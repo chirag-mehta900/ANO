@@ -6,6 +6,7 @@ import { SignupComponent } from "./signup/signup.component";
 import { HttpHeaders } from "@angular/common/http";
 import { JwtTokenService } from "src/@theme/services/jwt-token.service";
 import { StoreTokenService } from "src/@theme/Services/store-token.service";
+import { BookRepairComponent } from "./book-repair/book-repair.component";
 
 @Component({
   selector: "app-header-module",
@@ -39,5 +40,8 @@ export class HeaderModuleComponent implements OnInit {
   }
   signUp() {
     const modalRef = this.modalService.open(SignupComponent);
+  }
+  bookRepair() {
+    const modalRef = this.modalService.open(BookRepairComponent);
   }
 }
