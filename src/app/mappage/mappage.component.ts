@@ -1,26 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
-import { MapService } from 'src/@theme/Services/map.service';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
+import { MapService } from "src/@theme/Services/map.service";
 
 @Component({
-  selector: 'app-mappage',
-  templateUrl: './mappage.component.html',
-  styleUrls: ['./mappage.component.css'],
+  selector: "app-mappage",
+  templateUrl: "./mappage.component.html",
+  styleUrls: ["./mappage.component.css"],
 })
 export class MappageComponent implements OnInit {
   lat: any;
   lng: any;
   area: any;
-  url = 'https://maps.googleapis.com/maps/api/geocode/';
-  Key = 'AIzaSyCrr-U8HBzd2cqmW9UpipocVTl9rHjCphY';
-  constructor(private config: NgbRatingConfig, private mapService: MapService) {
+  url = "https://maps.googleapis.com/maps/api/geocode/";
+  Key = "AIzaSyCrr-U8HBzd2cqmW9UpipocVTl9rHjCphY";
+  storeInfo = [];
+  constructor(
+    private config: NgbRatingConfig,
+    private mapService: MapService,
+    private route: ActivatedRoute
+  ) {
     config.max = 5;
     config.readonly = true;
   }
 
   ngOnInit() {
     if (!navigator.geolocation) {
-      console.log('location not found');
+      console.log("location not found");
     }
 
     navigator.geolocation.getCurrentPosition((position) => {
@@ -37,9 +43,11 @@ export class MappageComponent implements OnInit {
       this.mapService.getArea(this.lat, this.lng).subscribe((data: any) => {
         this.area = data.plus_code.compound_code;
         console.log(data);
-        this.area = this.area.split(' ').slice(1).join(' ');
+        this.area = this.area.split(" ").slice(1).join(" ");
         console.log(this.area);
       });
     });
+
+    this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get("storeData"));
   }
 }
