@@ -1,7 +1,7 @@
 <section class="map-booking">
     <div class="bg-map">
-        <agm-map [latitude]="lat" [longitude]="lng">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        <agm-map [latitude]="Lat" [longitude]="Lng">
+            <agm-marker [latitude]="Lat" [longitude]="Lng"></agm-marker>
         </agm-map>
     </div>
     <div class="container">
@@ -35,8 +35,12 @@
                 </div>
             </div>
             <div class="search-location">
-                <input type="text" name="" id="" placeholder="Search Location" value="{{area}}">
-                <button><img src="../../assets/images/search.svg" alt=""></button>
+
+                <input id="pac-input" (change)="handleAddressChange($event.target.value)" value="{{area}}" />
+
+
+                <!-- <input ngx-google-places-autocomplete [options]='options' (onAddressChange)="AddressChange($event)" type="text" name="" id="" placeholder="Search Location">{{ formattedaddress }} -->
+                <button (change)="handleAddressChange($event.target.value)"><img src="../../assets/images/search.svg" alt=""></button>
             </div>
         </div>
     </div>

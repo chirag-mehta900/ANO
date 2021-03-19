@@ -15,6 +15,7 @@ import { CustomHttpInterceptor } from 'src/@theme/interceptor/httpinterceptor';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { MapService } from 'src/@theme/Services/map.service';
 import { MappageComponent } from './mappage/mappage.component';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MappageComponent } from './mappage/mappage.component';
     BrowserModule,
     AppRoutingModule,
     HeaderModuleModule,
+    GooglePlaceModule,
     SharedModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCrr-U8HBzd2cqmW9UpipocVTl9rHjCphY',
