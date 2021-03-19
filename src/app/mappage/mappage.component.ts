@@ -2,11 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MapService } from 'src/@theme/Services/map.service';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: 'app-mappage',
-  templateUrl: './mappage.component.html',
-  styleUrls: ['./mappage.component.css'],
+  selector: "app-mappage",
+  templateUrl: "./mappage.component.html",
+  styleUrls: ["./mappage.component.css"],
 })
 export class MappageComponent implements OnInit {
   lat: any;
@@ -19,7 +20,7 @@ export class MappageComponent implements OnInit {
 
   url = 'https://maps.googleapis.com/maps/api/geocode/';
   Key = 'AIzaSyCrr-U8HBzd2cqmW9UpipocVTl9rHjCphY';
-
+  storeInfo = [];
   formattedaddress = ' ';
   options = {
     type: [],
@@ -34,7 +35,8 @@ export class MappageComponent implements OnInit {
   constructor(
     private config: NgbRatingConfig,
     private mapService: MapService,
-    private storeTokenService: StoreTokenService
+    private storeTokenService: StoreTokenService,
+    private route: ActivatedRoute
   ) {
     config.max = 5;
     config.readonly = true;
@@ -42,7 +44,7 @@ export class MappageComponent implements OnInit {
 
   ngOnInit() {
     if (!navigator.geolocation) {
-      console.log('location not found');
+      console.log("location not found");
     }
 
     navigator.geolocation.getCurrentPosition((position) => {
@@ -90,5 +92,7 @@ export class MappageComponent implements OnInit {
       this.Lat = this.Location.lat;
       this.Lng = this.Location.lng;
     });
+
+    this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get("storeData"));
   }
 }

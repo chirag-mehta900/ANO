@@ -1,29 +1,75 @@
 <div>
-    <!--Select Device-->
-    <div *ngIf="selectDeviceFlag">
-        <h2>Select Device</h2>
-        <span>DEVICE,BRAND,MODEL</span>
-        <div class="row">
-            <div class="col-md-6">
-                <button>Previous</button>
+    <form #Repair="ngForm">
+        <div *ngIf="selectBrandFlag">
+            <h2>Select Brand</h2>
+            <span>BRAND</span>
+            <div>
+                <ng-select name="brand" [(ngModel)]="bookRepair.brand" (change)="getDeviceList($event)"
+                    #device1="ngModel" [ngClass]="{
+                'is-invalid':
+                device1.invalid &&
+                (formSubmitted || device1.touched) 
+                }">
+                    <ng-option *ngFor="let brand of brandList" [value]="brand.id">{{brand.brandName}}</ng-option>
+                </ng-select>
+                <div class="text-danger" *ngIf="device1.invalid &&
+                (formSubmitted || device1.touched)">
+                    Select Device
+                </div>
             </div>
-            <div class="col-md-6">
-                <button (click)="goToIssue()">Next</button>
+            <div class="row">
+                <div class="col-md-6">
+                    <button>Previous</button>
+                </div>
+                <div class="col-md-6">
+                    <button (click)="goToDevice()">Next</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!--Select Issues-->
-    <div *ngIf="selectIssueFlag">
-        <h2>Device Name</h2>
-        <span>PROBLEM</span>
-        <div class="row">
-            <div class="col-md-6">
-                <button (click)="goToDevice()">Previous</button>
+        <!--Select Device-->
+        <div *ngIf="selectDeviceFlag">
+            <h2>Select Device</h2>
+            <span>DEVICE,MODEL</span>
+            <div>
+                <ng-select name="device" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)"
+                    #device1="ngModel" [ngClass]="{
+                'is-invalid':
+                device1.invalid &&
+                (formSubmitted || device1.touched) 
+                }">
+                    <ng-option *ngFor="let device of deviceList" [value]="device.id">{{device.modelName}}</ng-option>
+                </ng-select>
+                <div class="text-danger" *ngIf="device1.invalid &&
+                (formSubmitted || device1.touched)">
+                    Select Device
+                </div>
             </div>
-            <div class="col-md-6">
-                <button (click)="addRepair()">Done</button>
+            <div class="row">
+                <div class="col-md-6">
+                    <button (click)="goToBrand()">Previous</button>
+                </div>
+                <div class="col-md-6">
+                    <button (click)="goToIssue()">Next</button>
+                </div>
             </div>
         </div>
-    </div>
+
+        <!--Select Issues-->
+        <div *ngIf="selectIssueFlag">
+            <h2>{{selectedDeviceName}}</h2>
+            <span>PROBLEM</span>
+            <ng-select name="problem" [(ngModel)]="bookRepair.problem">
+                <ng-option *ngFor="let issue of issueList" [value]="issue.id">{{issue.problemName}}</ng-option>
+            </ng-select>
+            <div class="row">
+                <div class="col-md-6">
+                    <button (click)="goToDeviceBack()">Previous</button>
+                </div>
+                <div class="col-md-6">
+                    <button (click)="addRepair(Repair)">Done</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>

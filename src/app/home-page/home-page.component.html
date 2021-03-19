@@ -1,44 +1,46 @@
-<section class="ano-banner container">
-    <div class="row">
-        <div class="col-md-4">
-            <img class="img-fluid" src="../../assets/images/ano-banner.svg" alt="">
+<section class="ano-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <img class="img-fluid" src="../../assets/images/ano-banner.svg" alt="">
+            </div>
+            <div class="col-md-8">
+                <div class="banner-detail">
+                    <h2>ANO Technology Client</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc odio in et, lectus sit lorem id
+                        integer.</p>
+                    <button class="repair-btn">Book Repair</button>
+                </div>
+            </div>
+            <carousel>
+                <div *ngFor="let data of selectedImg" class="carousel-cell service-box">
+                    <img src="../../assets/images/service1.png">
+                    <h2>Mic Services</h2>
+                </div>
+            </carousel>
+            <!-- <div class="banner-service">
+                <div class="service-box">
+                    <img src="../../assets/images/service1.png" alt="">
+                    <h2>Mic Services</h2>
+                </div>
+                <div class="service-box">
+                    <img src="../../assets/images/service1.png" alt="">
+                    <h2>Mic Services</h2>
+                </div>
+                <div class="service-box">
+                    <img src="../../assets/images/service1.png" alt="">
+                    <h2>Mic Services</h2>
+                </div>
+                <div class="service-box">
+                    <img src="../../assets/images/service1.png" alt="">
+                    <h2>Mic Services</h2>
+                </div>
+                <div class="service-box">
+                    <img src="../../assets/images/service1.png" alt="">
+                    <h2>Mic Services</h2>
+                </div>
+            </div> -->
         </div>
-        <div class="col-md-8">
-            <div class="banner-detail">
-                <h2>ANO Technology Client</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc odio in et, lectus sit lorem id
-                    integer.</p>
-                <button class="repair-btn">Book Repair</button>
-            </div>
-        </div>
-        <carousel>
-            <div *ngFor="let data of selectedImg" class="carousel-cell service-box">
-                <img src="../../assets/images/service1.png">
-                <h2>Mic Services</h2>
-            </div>
-        </carousel>
-        <!-- <div class="banner-service">
-            <div class="service-box">
-                <img src="../../assets/images/service1.png" alt="">
-                <h2>Mic Services</h2>
-            </div>
-            <div class="service-box">
-                <img src="../../assets/images/service1.png" alt="">
-                <h2>Mic Services</h2>
-            </div>
-            <div class="service-box">
-                <img src="../../assets/images/service1.png" alt="">
-                <h2>Mic Services</h2>
-            </div>
-            <div class="service-box">
-                <img src="../../assets/images/service1.png" alt="">
-                <h2>Mic Services</h2>
-            </div>
-            <div class="service-box">
-                <img src="../../assets/images/service1.png" alt="">
-                <h2>Mic Services</h2>
-            </div>
-        </div> -->
 
         <div class="extra-detail padding">
             <h3>"</h3>
@@ -50,22 +52,27 @@
             <div class="howitwork-title">
                 <h3>How it works</h3>
             </div>
-
             <div class="servicelist">
                 <div class="service-detail">
-                    <img src="../../assets/images/select device.svg" alt="">
+                    <div class="service-detail-img">
+                        <img src="../../assets/images/selectdevice.svg" alt="">
+                    </div>
                     <h4>Select Device</h4>
                     <p>Create an account to get started.</p>
                 </div>
 
                 <div class="service-detail">
-                    <img src="../../assets/images/Schedule Repair.svg" alt="">
+                    <div class="service-detail-img">
+                        <img src="../../assets/images/repair.svg" alt="">
+                    </div>
                     <h4>Schedule Repair</h4>
                     <p>Add contents and pages to your site.</p>
                 </div>
 
                 <div class="service-detail">
-                    <img src="../../assets/images/select device.svg" alt="">
+                    <div class="service-detail-img">
+                        <img src="../../assets/images/getback.svg" alt="">
+                    </div>
                     <h4>Get Back</h4>
                     <p>Now publish to make your site live!</p>
                 </div>
@@ -77,136 +84,160 @@
             <div class="whyus-title">
                 <h3>Why Us</h3>
             </div>
-
             <div class="whyuslist">
                 <div class="whyus-detail">
                     <div class="whyimg">
                         <img src="../../assets/images/whyus1.svg" alt="" style="margin: 0 10px 15px 10px;">
                         <img src="../../assets/images/Line1.svg" alt="">
                     </div>
-                    <h4>One-stop Solution</h4>
-                    <p>Sell, buy, repair or accessorize your smartphone</p>
+                    <div class="whyuslist-detailll">
+                        <h4>One-stop Solution</h4>
+                        <p>Sell, buy, repair or accessorize your smartphone</p>
+                    </div>
                 </div>
-
                 <div class="whyus-detail">
                     <div class="whyimg">
                         <img src="../../assets/images/whyus2.svg" alt="" style="margin: 0 10px 15px 10px;">
                         <img src="../../assets/images/Line2.svg" alt="">
                     </div>
-                    <h4>Quick & Hassle-free</h4>
-                    <p>Get mobile care in a click at your home or office</p>
+                    <div class="whyuslist-detailll">
+                        <h4>Quick & Hassle-free</h4>
+                        <p>Get mobile care in a click at your home or office</p>
+                    </div>
                 </div>
-
                 <div class="whyus-detail">
                     <div class="whyimg">
                         <img src="../../assets/images/whyus3.svg" alt="" style="margin: 0 10px 15px 10px;">
                         <img src="../../assets/images/Line3.svg" alt="">
                     </div>
-                    <h4>Amazing Prices</h4>
-                    <p>You’ll surely love our prices</p>
+                    <div class="whyuslist-detailll">
+                        <h4>Amazing Prices</h4>
+                        <p>You’ll surely love our prices</p>
+                    </div>
                 </div>
-
                 <div class="whyus-detail">
                     <div class="whyimg">
                         <img src="../../assets/images/whyus4.svg" alt="" style="margin: 0 0 15px 0;">
                     </div>
-                    <h4>Guaranteed Safety</h4>
-                    <p>We are the safest hands for your device security</p>
+                    <div class="whyuslist-detailll">
+                        <h4>Guaranteed Safety</h4>
+                        <p>We are the safest hands for your device security</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="aboutus padding">
-            <div class="aboutdetail col-md-6 ">
-                <div class="about-title">
-                    <h3>About Us</h3>
+        <div class="aboutus">
+            <div class="row">
+                <div class="aboutdetail col-md-6 ">
+                    <div class="about-title">
+                        <h3>About Us</h3>
+                    </div>
+                    <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat
+                        duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                    <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat
+                        duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                    <span>Read More >></span>
                 </div>
-                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat
-                    duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
-                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat
-                    duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
-
-                <p>Read More >></p>
-            </div>
-            <div class="about-img col-md-6">
-
-                <img src="../../assets/images/aboutpic.png" alt="">
-            </div>
-        </div>
-
-
-        <div class="signup-driver padding">
-            <div class="driverdetail col-md-6">
-                <div class="driver-title">
-                    <h3>Signup As a Driver</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc odio in et, lectus sit lorem id
-                        integer.</p>
-                </div>
-            </div>
-            <div class="requestform col-md-6">
-                <div class="name">
-                    <input type="text" name="first" id="first" placeholder="First Name">
-                    <input type="text" name="last" id="last" placeholder="Last Name">
-                </div>
-                <div class="contact">
-                    <input type="text" name="email" id="email" placeholder="Email">
-                    <input type="text" name="mobile" id="mobile" placeholder="Mobile No">
-                </div>
-                <div class="req-btn">
-                    <button>Request</button>
+                <div class="about-img col-md-6">
+                    <div class="about-img-12">
+                        <img class="img-fluid about-img-1" src="../../assets/images/about/Image 1.png" alt="">
+                        <img class="img-fluid about-img-2" src="../../assets/images/about/Image 2.png" alt="">
+                    </div>
+                    <div class="about-img-34">
+                        <img class="img-fluid about-img-3" src="../../assets/images/about/Image 3.png" alt="">
+                        <img class="img-fluid about-img-4" src="../../assets/images/about/Image 4.png" alt="">
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="signup-driver driver-bg" style="background: url(../../assets/images/stearing\ wheel.svg);">
+        <div class="container">
+            <div class="row">
+                <div class="driverdetail col-md-6">
+                    <div class="driver-title">
+                        <h3>Signup As a Driver</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc odio in et, lectus sit lorem id
+                            integer.</p>
+                    </div>
+                </div>
+                <div class="requestform col-md-6">
+                    <div class="name">
+                        <input type="text" name="first" id="first" placeholder="First Name">
+                        <input type="text" name="last" id="last" placeholder="Last Name">
+                    </div>
+                    <div class="contact">
+                        <input type="text" name="email" id="email" placeholder="Email">
+                        <input type="text" name="mobile" id="mobile" placeholder="Mobile No">
+                    </div>
+                    <div class="req-btn">
+                        <button>Request</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-        <div class="client padding margin">
+    <div class="client">
+        <div class="container">
             <div class="client-title">
                 <h3>Our Clients Speak</h3>
                 <p>We have been working with clients around the world</p>
             </div>
             <div class="client-review">
-                <div class="review">
-                    <div class="review-blog">
-                        <h4>Efficient Collaborating</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed imperdiet nibh
-                            lectus feugiat nunc sem.</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="review">
+                            <div class="review-blog">
+                                <h4>Efficient Collaborating</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed imperdiet nibh
+                                    lectus feugiat nunc sem.</p>
+                            </div>
+                            <div class="reviewer">
+                                <img src="../../assets/images/client.svg" alt="">
+                                <h5>Jane Cooper</h5>
+                                <p>CEO at ABC Corporation</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="reviewer">
-                        <img src="../../assets/images/client.svg" alt="">
-                        <h5>Jane Cooper</h5>
-                        <p>CEO at ABC Corporation</p>
+                    <div class="col-md-4">
+                        <div class="review">
+                            <div class="review-blog">
+                                <h4>Efficient Collaborating</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed imperdiet nibh
+                                    lectus feugiat nunc sem.</p>
+                            </div>
+                            <div class="reviewer">
+                                <img src="../../assets/images/client.svg" alt="">
+                                <h5>Jane Cooper</h5>
+                                <p>CEO at ABC Corporation</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="review">
-                    <div class="review-blog">
-                        <h4>Efficient Collaborating</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed imperdiet nibh
-                            lectus feugiat nunc sem.</p>
-                    </div>
-                    <div class="reviewer">
-                        <img src="../../assets/images/client.svg" alt="">
-                        <h5>Jane Cooper</h5>
-                        <p>CEO at ABC Corporation</p>
-                    </div>
-                </div>
-
-                <div class="review">
-                    <div class="review-blog">
-                        <h4>Efficient Collaborating</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed imperdiet nibh
-                            lectus feugiat nunc sem.</p>
-                    </div>
-                    <div class="reviewer">
-                        <img src="../../assets/images/client.svg" alt="">
-                        <h5>Jane Cooper</h5>
-                        <p>CEO at ABC Corporation</p>
+                    <div class="col-md-4">
+                        <div class="review">
+                            <div class="review-blog">
+                                <h4>Efficient Collaborating</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor neque sed imperdiet nibh
+                                    lectus feugiat nunc sem.</p>
+                            </div>
+                            <div class="reviewer">
+                                <img src="../../assets/images/client.svg" alt="">
+                                <h5>Jane Cooper</h5>
+                                <p>CEO at ABC Corporation</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="count padding">
+    <div class="count">
+        <div class="container">
             <div class="count-head">
                 <h3>Some count that matters</h3>
                 <h5>US First and Largest Online Mobile Expert</h5>
@@ -218,50 +249,56 @@
                         <h4>Happy Users</h4>
                     </div>
                 </div>
-
+    
                 <div class="hexagon">
                     <div class="hexagonetext">
                         <h3>540+</h3>
                         <h4>Devices repaired</h4>
                     </div>
                 </div>
-
+    
                 <div class="hexagon">
                     <div class="hexagonetext">
                         <h3>500</h3>
                         <h4>Dedicated Vendors</h4>
                     </div>
                 </div>
-
+    
                 <div class="hexagon">
                     <div class="hexagonetext">
                         <h3>4.6+</h3>
                         <h4>User rating</h4>
                     </div>
                 </div>
-
+    
             </div>
-
-
         </div>
+    </div>
 
-        <div class="service padding margin">
-            <div class="col-md-6">
-                <h3>Get Service from your mobile</h3>
-                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat
-                    duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
-                <h4>Get the App</h4>
-                <div class="store">
-                    <img src="../../assets/images/Google Play Badge.svg" alt="">
-                    <img src="../../assets/images/App Store Badge.svg" alt="">
+    <div class="service">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="experience-detail">
+                        <h3>Get Service from your mobile</h3>
+                        <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                        <h4>Get the App</h4>
+                        <div class="store">
+                            <button><img src="../../assets/images/Google Play Badge.svg" alt=""></button>
+                            <button><img src="../../assets/images/App Store Badge.svg" alt=""></button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3" style="position: relative;  bottom: 25px;">
-                <img src="../../assets/images/Screen1.svg" alt="">
-            </div>
-            <div class="col-md-3" style="position: relative;  top: 25px;">
-                <img src="../../assets/images/Screen2.svg" alt="">
-
+                <div class="col-md-3">
+                    <div class="experience-img1">
+                        <img class="img-fluid" src="../../assets/images/Screen1.svg" alt="">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="experience-img2">
+                        <img class="img-fluid" src="../../assets/images/Screen2.svg" alt="">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

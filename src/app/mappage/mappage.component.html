@@ -11,27 +11,29 @@
                 <button><img src="../../assets/images/Sliders.svg" alt=""></button>
                 <button><img src="../../assets/images/Bug.svg" alt=""></button>
                 <div class="shop-come">
-                    <div class="shop-box">
-                        <div class="shop-ing">
-                            <img class="img-fluid" src="../../assets/images/service1.png" alt="">
-                        </div>
-                        <div class="shop-detail">
-                            <div class="detail-name">
-                                <h2>Shop Name</h2>
-                                <ngb-rating [rate]="3" color="red"></ngb-rating>
+                    <carousel>
+                        <div class="shop-box carousel-cell" *ngFor="let store of storeInfo">
+                            <div class="shop-ing">
+                                <img class="img-fluid" src="../../assets/images/service1.png" alt="">
                             </div>
-                            <div class="detail-name2">
-                                <div class="dis-f">
-                                    <img src="../../assets/images/Icon awesome-car.svg" alt="">
-                                    <p>2.3 Miles</p>
+                            <div class="shop-detail">
+                                <div class="detail-name">
+                                    <h2>{{store.shopName}}</h2>
+                                    <ngb-rating [rate]="3" color="red"></ngb-rating>
                                 </div>
-                                <div class="dis-f">
-                                    <img src="../../assets/images/Icon material-attach-money.svg" alt="">
-                                    <p>10</p>
+                                <div class="detail-name2">
+                                    <div class="dis-f">
+                                        <img src="../../assets/images/Icon awesome-car.svg" alt="">
+                                        <p>{{store.distance | number : '1.2-2'}}</p>
+                                    </div>
+                                    <div class="dis-f">
+                                        <img src="../../assets/images/Icon material-attach-money.svg" alt="">
+                                        <p *ngFor="let price of store.pricing">{{price.price}}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </carousel>
                 </div>
             </div>
             <div class="search-location">
@@ -49,27 +51,30 @@
             <div class="text-center">
                 <h2>Top Shop</h2>
             </div>
-            <div class="shop-box">
-                <div class="shop-ing">
-                    <img class="img-fluid" src="../../assets/images/service1.png" alt="">
-                </div>
-                <div class="shop-detail">
-                    <div class="detail-name">
-                        <h2>Shop Name</h2>
-                        <ngb-rating [rate]="3" color="red"></ngb-rating>
+            <carousel>
+                <div class="shop-box carousel-cell" *ngFor="let store of storeInfo">
+                    <div class="shop-ing">
+                        <img class="img-fluid" src="../../assets/images/service1.png" alt="">
                     </div>
-                    <div class="detail-name2">
-                        <div class="dis-f">
-                            <img src="../../assets/images/Icon awesome-car.svg" alt="">
-                            <p>2.3 Miles</p>
+                    <div class="shop-detail">
+                        <div class="detail-name">
+                            <h2>{{store.shopName}}</h2>
+                            <ngb-rating [rate]="3" color="red"></ngb-rating>
                         </div>
-                        <div class="dis-f">
-                            <img src="../../assets/images/Icon material-attach-money.svg" alt="">
-                            <p>10</p>
+                        <div class="detail-name2">
+                            <div class="dis-f">
+                                <img src="../../assets/images/Icon awesome-car.svg" alt="">
+                                <p>{{store.distance | number : '1.2-2'}}</p>
+                            </div>
+                            <div class="dis-f">
+                                <img src="../../assets/images/Icon material-attach-money.svg" alt="">
+                                <p *ngFor="let price of store.pricing">{{price.price}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </carousel>
+
         </div>
     </div>
     <div>
@@ -82,7 +87,8 @@
                     <div class="col-md-6">
                         <div class="experience-detail">
                             <h3>Get Service from your mobile</h3>
-                            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
+                                consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
                             <h4>Get the App</h4>
                             <div class="store">
                                 <button><img src="../../assets/images/Google Play Badge.svg" alt=""></button>
