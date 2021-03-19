@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { MappageComponent } from './mappage/mappage.component';
 import { ShopComponent } from './shop/shop.component';
 
 const routes: Routes = [
   { path: 'map', component: MappageComponent },
   { path: 'shop', component: ShopComponent },
-
+  { path: 'checkout', component: CheckoutComponent },
   {
     path: '',
     loadChildren: () =>

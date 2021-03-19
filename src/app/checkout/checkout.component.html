@@ -1,0 +1,155 @@
+<section class="checkout">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="booking-detail">
+                    <div class="booking-shop">
+                        <div class="booking-shop-img">
+                            <img src="../../assets/images/checkout/shopimg.png" alt="">
+                            <h2>Shop name</h2>
+                        </div>
+                        <div class="booking-sho-price">
+                            <p>Total</p>
+                            <h2>$ 65.22</h2>
+                        </div>
+                    </div>
+                    <div class="booking-device">
+                        <div class="booking-device-box">
+                            <p>Device #: <span>3</span></p>
+                            <p>Category: <span>Repair</span></p>
+                            <p>Services: <span>Repair</span></p>
+                            <div class="booking-date">
+                                <p>Expected Date</p>
+                                <h2>December 21, 2020+</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="destroy-system">
+                    <div class="destroy-system-box">
+                        <div class="destroy-system-img">
+                            <img src="../../assets/images/checkout/destroy phone.png" alt="">
+                        </div>
+                        <div class="destroy-system-det">
+                            <h2>$ 65.22</h2>
+                            <p>Screen Replacement</p>
+                            <div class="destroy-system-btn">
+                                <button><img src="../../assets/images/checkout/trash_full.svg" alt=""></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="destroy-system-box">
+                        <div class="destroy-system-img">
+                            <img src="../../assets/images/checkout/destroy phone.png" alt="">
+                        </div>
+                        <div class="destroy-system-det">
+                            <h2>$ 65.22</h2>
+                            <p>Screen Replacement</p>
+                            <div class="destroy-system-btn">
+                                <button><img src="../../assets/images/checkout/trash_full.svg" alt=""></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="destroy-system-box">
+                        <div class="destroy-system-img">
+                            <img src="../../assets/images/checkout/destroy phone.png" alt="">
+                        </div>
+                        <div class="destroy-system-det">
+                            <h2>$ 65.22</h2>
+                            <p>Screen Replacement</p>
+                            <div class="destroy-system-btn">
+                                <button><img src="../../assets/images/checkout/trash_full.svg" alt=""></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alt-number">
+                    <p>Alternate Mobile Number</p>
+                    <div class="alt-number-inp">
+                        <input type="number" name="alt-no" id="alt-no" placeholder="">
+                        <button><img src="../../assets/images/checkout/FloppyDisk.svg" alt=""></button>
+                    </div>
+                </div>
+                <div class="deliver-system">
+                    <div class="deliver-cab radio">
+                        <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab" checked>
+                        <label for="deliver-cab" class="radio-label">
+                            <div>
+                                <img src="../../assets/images/checkout/pickup.svg" alt="">
+                            </div>
+                            <div style="width: 100%;">
+                                <input type="text" name="shop-address" id="shop-address" placeholder="shop-address">
+                                <hr>
+                                <input type="text" name="recive-address" id="recive-address"
+                                    placeholder="recive-address">
+                            </div>
+                        </label><br>
+                    </div>
+                    <div class="deliver-mail radio">
+                        <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system"
+                            value="deliver-mail">
+                        <label for="deliver-mail" class="radio-label radio-labell">
+                            <button>Mail-in Repair</button>
+                        </label><br>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="payment-side" *ngIf="!isPaid">
+                    <div class="promo-code">
+                        <input type="text" name="promo" id="promo" placeholder="Promo Code">
+                        <button class="promo-btn">Apply</button>
+                    </div>
+                    <div class="card-payment">
+                        <div class="card-number">
+                            <p>Add Card Details</p>
+                            <div class="card-noo">
+                                <input type="number" name="card-no" id="card-no" placeholder="12344567890">
+                                <img src="../../assets/images/checkout/Cards.svg" alt="">
+                            </div>
+                            <div class="card-exp-cvc">
+                                <input class="border-left" type="number" name="card-exp" id="card-exp" placeholder="MM / YY">
+                                <input class="border-righ" type="number" name="cvc" id="cvc" placeholder="CVC">
+                            </div>
+                        </div>
+                        <div class="card-name">
+                            <p>Name on card</p>
+                            <input type="text" name="card-name" id="card-name" placeholder="Card Holder Name">
+                        </div>
+                        <div class="payment-country">
+                            <p>Country or region</p>
+                            <select name="country" id="payment-country">
+                                <option value="United States">United States</option>
+                                <option value="United States">United States</option>
+                                <option value="United States">United States</option>
+                                <option value="United States">United States</option>
+                            </select>
+                            <input type="number" name="country-zip" id="country-zip" placeholder="ZIP">
+                        </div>
+                        <div class="payment-btns">
+                            <div class="pay-card">
+                                <button (click)="pay()">Pay $65.00</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-done" *ngIf="isPaid">
+                    <div class="payment-done-mess">
+                        <h2>Thank you for choosing us</h2>
+                        <p>Your Order Is Is <span>#63486587923</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc odio in et, lectus sit lorem id integer.</p>
+                        <button>Back to home</button>
+                    </div>
+                    <div class="payment-done-feedback">
+                        <h2>Feed us back</h2>
+                        <p>Help us know you better, so that we can serve you better.</p>
+                        <p>Information provided herein will be used solely for research purposes and will not be sold to any third parties.</p>
+                        <div class="feedback-input">
+                            <textarea name="feedback" id="feedback" cols="10" rows="2" placeholder="Your Feedback..."></textarea>
+                            <button><img src="../../assets/images/checkout/send.svg" alt=""></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
