@@ -8,21 +8,17 @@ import { CommonService } from './common.service';
 export class MapService {
   url = 'https://maps.googleapis.com/maps/api/geocode/';
   Key = 'AIzaSyCrr-U8HBzd2cqmW9UpipocVTl9rHjCphY';
-  constructor(
-    private httpClient: HttpClient,
-    private commonService: CommonService
-  ) {}
-
-  logIn(data: any) {
-    return this.httpClient.post(this.commonService.envUrl() + 'login', data);
-  }
-  getUserName() {
-    return this.httpClient.get(this.commonService.envUrl() + 'user');
-  }
+  constructor(private httpClient: HttpClient) {}
 
   getArea(Lat, Lng) {
     return this.httpClient.get(
       this.url + 'json?latlng=' + Lat + ',' + Lng + '&key=' + this.Key
+    );
+  }
+
+  getlatlong(address) {
+    return this.httpClient.get(
+      this.url + 'json?address=' + address + '&key=' + this.Key
     );
   }
 }

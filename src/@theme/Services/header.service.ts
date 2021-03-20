@@ -23,4 +23,19 @@ export class HeaderService {
   getUserName() {
     return this.httpClient.get(this.commonService.envUrl() + "user");
   }
+  getBrandList() {
+    return this.httpClient.get(this.commonService.envUrl() + "brand");
+  }
+  getDeviceList(id) {
+    return this.httpClient.get(this.commonService.envUrl() + "device/" + id);
+  }
+  getIssueListById(id) {
+    return this.httpClient.get(this.commonService.envUrl() + "problem/" + id);
+  }
+  searchStore(data) {
+    return this.httpClient.post(
+      this.commonService.envUrl() + "store/search",
+      data
+    );
+  }
 }
