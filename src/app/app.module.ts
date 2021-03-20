@@ -17,6 +17,8 @@ import { MapService } from 'src/@theme/Services/map.service';
 import { MappageComponent } from './mappage/mappage.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { TrackingComponent } from './tracking/tracking.component';
+import { TrackingmapComponent } from './trackingmap/trackingmap.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     AddproductComponent,
     MappageComponent,
     CheckoutComponent,
+    TrackingComponent,
+    TrackingmapComponent,
   ],
   imports: [
     BrowserModule,
