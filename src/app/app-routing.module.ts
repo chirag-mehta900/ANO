@@ -1,13 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AboutComponent } from './about/about.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MappageComponent } from './mappage/mappage.component';
 import { ShopComponent } from './shop/shop.component';
+import { TrackingComponent } from './tracking/tracking.component';
+import { TrackingmapComponent } from './trackingmap/trackingmap.component';
 
 const routes: Routes = [
   { path: 'map', component: MappageComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'tracking', component: TrackingComponent },
+  { path: 'trackmap', component: TrackingmapComponent },
   {
     path: '',
     loadChildren: () =>
