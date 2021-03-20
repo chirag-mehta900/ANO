@@ -104,6 +104,9 @@ SOFTWARE.
 ng-circle-progress
 MIT
 
+ng-otp-input
+MIT
+
 ngx-google-places-autocomplete
 MIT
 
