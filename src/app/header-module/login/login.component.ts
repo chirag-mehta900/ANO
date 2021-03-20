@@ -54,7 +54,6 @@ export class LoginComponent implements OnInit {
       this.headerService.logIn(this.loginInfo.value).subscribe(
         (data) => {
           if (data["status"] == 200) {
-            console.log(data["data"].access_token);
             this.storeTokenService.set("token", data["data"].access_token);
             this.activeModal.close(data["data"].access_token);
             this.router.navigate(["/home"]);

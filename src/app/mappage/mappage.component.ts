@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
-import { MapService } from 'src/@theme/Services/map.service';
-import { StoreTokenService } from 'src/@theme/Services/store-token.service';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
+import { MapService } from "src/@theme/Services/map.service";
+import { StoreTokenService } from "src/@theme/Services/store-token.service";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -18,14 +18,14 @@ export class MappageComponent implements OnInit {
   autocomplete: any;
   locat;
 
-  url = 'https://maps.googleapis.com/maps/api/geocode/';
-  Key = 'AIzaSyCrr-U8HBzd2cqmW9UpipocVTl9rHjCphY';
+  url = "https://maps.googleapis.com/maps/api/geocode/";
+  Key = "AIzaSyCrr-U8HBzd2cqmW9UpipocVTl9rHjCphY";
   storeInfo = [];
-  formattedaddress = ' ';
+  formattedaddress = " ";
   options = {
     type: [],
     componentRestrictions: {
-      country: ['IN'],
+      country: ["IN"],
     },
   };
   Location = {
@@ -43,6 +43,7 @@ export class MappageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get("storeData"));
     if (!navigator.geolocation) {
       console.log("location not found");
     }
@@ -52,15 +53,15 @@ export class MappageComponent implements OnInit {
       this.Location.lng = position.coords.longitude;
       console.log(this.Location);
       if (!this.Location) {
-        console.log('hello');
+        console.log("hello");
       }
       if (this.Location.lat === undefined && this.Location.lng === undefined) {
-        console.log('hello');
+        console.log("hello");
         this.Lat = 22.572645;
         this.Lng = 88.363892;
       }
-      localStorage.setItem('Location', JSON.stringify(this.Location));
-      this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+      localStorage.setItem("Location", JSON.stringify(this.Location));
+      this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
       this.Lat = this.Location.lat;
       this.Lng = this.Location.lng;
       console.log(this.Location);
@@ -73,7 +74,7 @@ export class MappageComponent implements OnInit {
           console.log(this.area);
         });
     });
-    const input = document.getElementById('pac-input') as HTMLInputElement;
+    const input = document.getElementById("pac-input") as HTMLInputElement;
     this.autocomplete = new google.maps.places.Autocomplete(input, {});
   }
 
@@ -86,13 +87,11 @@ export class MappageComponent implements OnInit {
       console.log(data);
       console.log(this.Location);
 
-      localStorage.setItem('Location', JSON.stringify(this.Location));
-      this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+      localStorage.setItem("Location", JSON.stringify(this.Location));
+      this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
 
       this.Lat = this.Location.lat;
       this.Lng = this.Location.lng;
     });
-
-    this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get("storeData"));
   }
 }
