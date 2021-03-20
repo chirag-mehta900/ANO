@@ -36,7 +36,6 @@ export class BookRepairComponent implements OnInit {
 
   ngOnInit(): void {
     if (!navigator.geolocation) {
-      console.log("location not found");
     }
     navigator.geolocation.getCurrentPosition((position) => {
       this.lat = position.coords.latitude;
@@ -57,15 +56,12 @@ export class BookRepairComponent implements OnInit {
     this.headerService.getDeviceList(event).subscribe(
       (data) => {
         this.deviceList.push(data["data"]);
-        console.log(this.deviceList);
       },
       (error) => {}
     );
   }
 
   getIssueList(event) {
-    console.log(event);
-
     this.deviceList.forEach((element: any) => {
       if (element.id == event) {
         this.selectedDeviceName = element.modelName;
@@ -73,9 +69,7 @@ export class BookRepairComponent implements OnInit {
     });
     this.headerService.getIssueListById(event).subscribe(
       (data) => {
-        console.log(data["data"]);
         this.issueList.push(data["data"]);
-        console.log(this.issueList);
       },
       (error) => {}
     );
@@ -106,7 +100,6 @@ export class BookRepairComponent implements OnInit {
       this.bookRepair.distanceMile = 10;
       this.bookRepair.latitude = this.lat;
       this.bookRepair.longitude = this.lng;
-      console.log(this.bookRepair);
       this.headerService.searchStore(this.bookRepair).subscribe(
         (data) => {
           this.router.navigate([

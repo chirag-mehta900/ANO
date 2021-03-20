@@ -1,17 +1,43 @@
 <div class="signup-module">
     <h2>Sign Up</h2>
-    <form>
+    <form [formGroup]="signUpForm">
         <!--Sign up Name-->
         <div *ngIf="signUpNameFlag">
             <div class="signup-form">
                 <p>User Details</p>
                 <div class="signup-inp">
-                    <input type="text" name="name" id="name" placeholder="Name">
-                    <input type="email" name="email" id="email" placeholder="Email">
-                    <input type="password" name="password" id="password" placeholder="Password">
+                    <input type="text" name="name" id="name" formControlName="name" placeholder="Name"
+                        [ngClass]="{'is-invalid':(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('name').touched)}"
+                        required>
+                    <div class="text-danger"
+                        *ngIf="(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('name').touched)">
+                        Name is required.
+                    </div>
+                    <input type="email" name="email" id="email" formControlName="email" placeholder="Email"
+                        (change)="checkEmail()"
+                        [ngClass]="{'is-invalid':(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('email').touched)}"
+                        required>
+                    <div class="text-danger"
+                        *ngIf="(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('email').touched)">
+                        Email is required.
+                    </div>
+                    <div class="text-danger" *ngIf="emailExist">
+                        Email already exist.
+                    </div>
+                    <div class="text-danger" *ngIf="signUpForm.get('email').errors?.pattern">
+                        Enter valid email.
+                    </div>
+                    <input type="password" name="password" id="password" formControlName="password"
+                        placeholder="Password"
+                        [ngClass]="{'is-invalid':(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('password').touched)}"
+                        required>
+                    <div class="text-danger"
+                        *ngIf="(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('password').touched)">
+                        Password is required.
+                    </div>
                 </div>
                 <div class="signup-det">
-                    <h2>Already have account?<span>Login</span></h2>
+                    <h2>Already have account?<span (click)="openLogIn()">Login</span></h2>
                 </div>
                 <button class="next" type="submit" (click)="signUpNameComplete()">Next</button>
             </div>
@@ -22,12 +48,20 @@
             <div class="signup-form">
                 <p>Enter Mobile#</p>
                 <div class="signup-inp">
-                    <input type="number" name="number" id="number" placeholder="Mobile#">
+                    <input type="number" name="number" id="number" formControlName="mobileNumber" placeholder="Mobile#"
+                        [ngClass]="{'is-invalid':(signUpForm.get('mobileNumber').invalid)&&(formSubmitted  || signUpForm.get('mobileNumber').touched)}"
+                        required>
+
+                    <div class="text-danger"
+                        *ngIf="(signUpForm.get('mobileNumber').invalid)&&(formSubmitted || signUpForm.get('mobileNumber').touched)">
+                        Mobile number is required.
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <button class="previous" type="submit" (click)="signUpMobilePrevious()"> <span><</span> Previous</button>
+                    <button class="previous" type="submit" (click)="signUpMobilePrevious()"> <span></span>
+                        Previous</button>
                 </div>
                 <div class="col-md-6">
                     <button class="next" type="submit" (click)="signUpMobileComplete()">Get Code</button>
@@ -48,26 +82,22 @@
                 <h2>Resend Code in <span>00:53</span></h2>
             </div>
         </div>
+    </form>
 
+    <form [formGroup]="userAddres">
         <!--Sign up Address-->
         <div *ngIf="signUpEmailFlag">
             <div class="signup-form">
                 <p>User Details</p>
                 <div class="signup-inp">
-                    <textarea name="address" id="address" cols="10" rows="2" placeholder="Address"></textarea>
-                    <input type="text" name="city" id="city" placeholder="City">
-                    <input type="text" name="state" id="state" placeholder="State">
-                    <input type="number" name="zip" id="zip" placeholder="Zip Code">
+                    <textarea name="address" id="address" cols="10" rows="2" formControlName="addressLine"
+                        placeholder="Address"></textarea>
+                    <input type="text" name="city" id="city" formControlName="city" placeholder="City">
+                    <input type="text" name="state" id="state" formControlName="state" placeholder="State">
+                    <input type="number" name="zip" id="zip" formControlName="zipCode" placeholder="Zip Code">
                 </div>
             </div>
-            <!-- <div class="row">
-                <div class="col-md-6">
-                    <button type="submit" (click)="signUpEmailPrevious()">Previous</button>
-                </div>
-                <div class="col-md-6"> -->
-                    <button class="next" type="submit" (click)="signUpEmailComplete()">Sign Up</button>
-                <!-- </div>
-            </div> -->
+            <button class="next" type="submit" (click)="signUpEmailComplete()">Sign Up</button>
         </div>
     </form>
 </div>
