@@ -15,6 +15,7 @@ import { CustomHttpInterceptor } from 'src/@theme/interceptor/httpinterceptor';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { MapService } from 'src/@theme/Services/map.service';
 import { MappageComponent } from './mappage/mappage.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     ShopComponent,
     AddproductComponent,
     MappageComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

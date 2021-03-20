@@ -44,6 +44,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+@ng-select/ng-select
+MIT
+
 angular-responsive-carousel
 Apache License 2.0
 
@@ -99,6 +102,9 @@ SOFTWARE.
 
 
 ng-circle-progress
+MIT
+
+ngx-google-places-autocomplete
 MIT
 
 ngx-slick-carousel
