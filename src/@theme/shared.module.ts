@@ -6,6 +6,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { IvyCarouselModule } from "angular-responsive-carousel";
 import { NgxDropzoneModule } from "ngx-dropzone";
+import { NgOtpInputModule } from "ng-otp-input";
 import { SlickCarouselModule } from "ngx-slick-carousel";
 import { CommonService } from "./Services/common.service";
 import { HeaderService } from "./Services/header.service";
@@ -24,6 +25,7 @@ const NB_Module = [
   NgSelectModule,
   ReactiveFormsModule,
   NgxDropzoneModule,
+  NgOtpInputModule,
 ];
 @NgModule({
   imports: [CommonModule, ...NB_Module],
