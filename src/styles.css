@@ -1,60 +1,79 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import "~@ng-select/ng-select/themes/material.theme.css";
-@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
 @font-face {
-    font-family: 'Poppins-Regular';
-    src: url('./assets/fonts/Poppins-Regular.eot');
-    src: url('./assets/fonts/Poppins-Regular.eot?#iefix') format('embedded-opentype'), url('./assets/fonts/Poppins-Regular.woff2') format('woff2'), url('./assets/fonts/Poppins-Regular.woff') format('woff'), url('./assets/fonts/Poppins-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Poppins-Regular";
+  src: url("./assets/fonts/Poppins-Regular.eot");
+  src: url("./assets/fonts/Poppins-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("./assets/fonts/Poppins-Regular.woff2") format("woff2"),
+    url("./assets/fonts/Poppins-Regular.woff") format("woff"),
+    url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Poppins-Medium';
-    src: url('./assets/fonts/Poppins-Medium.eot');
-    src: url('./assets/fonts/Poppins-Medium.eot?#iefix') format('embedded-opentype'), url('./assets/fonts/Poppins-Medium.woff2') format('woff2'), url('./assets/fonts/Poppins-Medium.woff') format('woff'), url('./assets/fonts/Poppins-Medium.ttf') format('truetype');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Poppins-Medium";
+  src: url("./assets/fonts/Poppins-Medium.eot");
+  src: url("./assets/fonts/Poppins-Medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("./assets/fonts/Poppins-Medium.woff2") format("woff2"),
+    url("./assets/fonts/Poppins-Medium.woff") format("woff"),
+    url("./assets/fonts/Poppins-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Poppins-SemiBold';
-    src: url('./assets/fonts/Poppins-SemiBold.eot');
-    src: url('./assets/fonts/Poppins-SemiBold.eot?#iefix') format('embedded-opentype'), url('./assets/fonts/Poppins-SemiBold.woff2') format('woff2'), url('./assets/fonts/Poppins-SemiBold.woff') format('woff'), url('./assets/fonts/Poppins-SemiBold.ttf') format('truetype');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Poppins-SemiBold";
+  src: url("./assets/fonts/Poppins-SemiBold.eot");
+  src: url("./assets/fonts/Poppins-SemiBold.eot?#iefix")
+      format("embedded-opentype"),
+    url("./assets/fonts/Poppins-SemiBold.woff2") format("woff2"),
+    url("./assets/fonts/Poppins-SemiBold.woff") format("woff"),
+    url("./assets/fonts/Poppins-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
 .login-btn {
-    background-color: #FFE7B1;
-    border: none;
-    border-radius: 5px;
-    color: #000000;
-    padding: 5px;
-    width: 90%;
+  background-color: #ffe7b1;
+  border: none;
+  border-radius: 5px;
+  color: #000000;
+  padding: 5px;
+  width: 90%;
 }
 
 .repair-btn,
 .signup-btn {
-    background-color: #FFC542;
-    border: none;
-    border-radius: 5px;
-    color: #ffffff;
-    padding: 5px;
-    width: 90%;
+  background-color: #ffc542;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  padding: 5px;
+  width: 90%;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-.modal-dialog{
-    margin-top: 100px !important;
-    z-index: 99999999999;
+.modal-dialog {
+  margin-top: 100px !important;
+  z-index: 99999999999;
 }
-@media (min-width: 576px){
-    .modal-dialog {
-        max-width: 400px !important;
-    }
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 400px !important;
+  }
 }
