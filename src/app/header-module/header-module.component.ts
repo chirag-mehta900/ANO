@@ -20,7 +20,14 @@ export class HeaderModuleComponent implements OnInit {
     private headerService: HeaderService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.headerService.getUserName().subscribe(
+      (data) => {
+        this.userName = data['data'].name;
+      },
+      (error) => {}
+    );
+  }
 
   logIn() {
     this.userName = null;

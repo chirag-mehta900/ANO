@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { CommonService } from "./common.service";
-import { StoreTokenService } from "./store-token.service";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonService } from './common.service';
+import { StoreTokenService } from './store-token.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class HeaderService {
   constructor(
@@ -14,27 +14,32 @@ export class HeaderService {
   ) {}
 
   public isAuthenticated(): boolean {
-    const token = this.token.get("token");
+    const token = this.token.get('token');
     return !!token ? true : false;
   }
   logIn(data: any) {
-    return this.httpClient.post(this.commonService.envUrl() + "login", data);
+    return this.httpClient.post(this.commonService.envUrl() + 'login', data);
   }
   getUserName() {
-    return this.httpClient.get(this.commonService.envUrl() + "user");
+    return this.httpClient.get(this.commonService.envUrl() + 'user');
   }
+
+  getEmail() {
+    return this.httpClient.get(this.commonService.envUrl() + 'user');
+  }
+
   getBrandList() {
-    return this.httpClient.get(this.commonService.envUrl() + "brand");
+    return this.httpClient.get(this.commonService.envUrl() + 'brand');
   }
   getDeviceList(id) {
-    return this.httpClient.get(this.commonService.envUrl() + "device/" + id);
+    return this.httpClient.get(this.commonService.envUrl() + 'device/' + id);
   }
   getIssueListById(id) {
-    return this.httpClient.get(this.commonService.envUrl() + "problem/" + id);
+    return this.httpClient.get(this.commonService.envUrl() + 'problem/' + id);
   }
   searchStore(data) {
     return this.httpClient.post(
-      this.commonService.envUrl() + "store/search",
+      this.commonService.envUrl() + 'store/search',
       data
     );
   }

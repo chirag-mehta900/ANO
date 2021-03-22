@@ -10,7 +10,7 @@
                 <li>About Us</li>
                 <li *ngIf="!userName"><button class="login-btn" (click)="logIn()">Log In</button></li>
                 <li *ngIf="userName">Welcome, {{userName}}</li>
-                <li><button class="signup-btn" (click)="signUp()">Sign Up</button></li>
+                <li *ngIf="!userName"><button class="signup-btn" (click)="signUp()">Sign Up</button></li>
                 <li><button class="repair-btn" (click)="bookRepair()">Book Repair</button></li>
             </ul>
         </nav>

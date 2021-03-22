@@ -10,7 +10,7 @@
                         </div>
                         <div class="booking-sho-price">
                             <p>Total</p>
-                            <h2>$ 65.22</h2>
+                            <h2>$ {{total}}</h2>
                         </div>
                     </div>
                     <div class="booking-device">
@@ -31,7 +31,7 @@
                             <img src="../../assets/images/checkout/destroy phone.png" alt="">
                         </div>
                         <div class="destroy-system-det">
-                            <h2>$ 65.22</h2>
+                            <h2>${{total}}</h2>
                             <p>Screen Replacement</p>
                             <div class="destroy-system-btn">
                                 <button><img src="../../assets/images/checkout/trash_full.svg" alt=""></button>
@@ -43,7 +43,7 @@
                             <img src="../../assets/images/checkout/destroy phone.png" alt="">
                         </div>
                         <div class="destroy-system-det">
-                            <h2>$ 65.22</h2>
+                            <h2>${{total}}</h2>
                             <p>Screen Replacement</p>
                             <div class="destroy-system-btn">
                                 <button><img src="../../assets/images/checkout/trash_full.svg" alt=""></button>
@@ -55,7 +55,7 @@
                             <img src="../../assets/images/checkout/destroy phone.png" alt="">
                         </div>
                         <div class="destroy-system-det">
-                            <h2>$ 65.22</h2>
+                            <h2>$ {{total}}</h2>
                             <p>Screen Replacement</p>
                             <div class="destroy-system-btn">
                                 <button><img src="../../assets/images/checkout/trash_full.svg" alt=""></button>
@@ -80,14 +80,13 @@
                             <div style="width: 100%;">
                                 <input type="text" name="shop-address" id="shop-address" placeholder="shop-address">
                                 <hr>
-                                <input type="text" name="recive-address" id="recive-address"
-                                    placeholder="recive-address">
+                                <input type="text" name="receive-address" id="receive-address"
+                                    placeholder="receive-address">
                             </div>
                         </label><br>
                     </div>
                     <div class="deliver-mail radio">
-                        <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system"
-                            value="deliver-mail">
+                        <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system" value="deliver-mail">
                         <label for="deliver-mail" class="radio-label radio-labell">
                             <button>Mail-in Repair</button>
                         </label><br>
@@ -100,37 +99,33 @@
                         <input type="text" name="promo" id="promo" placeholder="Promo Code">
                         <button class="promo-btn">Apply</button>
                     </div>
+
                     <div class="card-payment">
-                        <div class="card-number">
-                            <p>Add Card Details</p>
-                            <div class="card-noo">
-                                <input type="number" name="card-no" id="card-no" placeholder="12344567890">
-                                <img src="../../assets/images/checkout/Cards.svg" alt="">
+                        <form [formGroup]="CardInfo">
+                            <div class="card-number">
+                                <p>Add Card Details</p>
+                                <div class="card-noo">
+                                    <input type="text" name="card-no" class="form-control" [ngClass]="card_number" id="card-no" (keyup)="cardnum($event.target.value)" formControlName="card_number" maxlength="19" type="tel" placeholder="1234 4567 8901 2345" value="{{CARD}}" required>
+                                    <img src="../../assets/images/checkout/Cards.svg" alt="">
+                                </div>
+                                <div class="card-exp-cvc">
+                                    <input class="border-left" type="text" class="form-control" name="card-exp" (keyup)="expiry($event.target.value)" formControlName="exp_month" id="card-exp" maxlength="5" type="tel" placeholder="MM/YY" value="{{Expiry}}" required>
+                                    <input class="border-righ" type="text" class="form-control" name="cvv" id="cvc" formControlName="cvc" maxlength="3" placeholder="CVC">
+                                </div>
                             </div>
-                            <div class="card-exp-cvc">
-                                <input class="border-left" type="number" name="card-exp" id="card-exp" placeholder="MM / YY">
-                                <input class="border-righ" type="number" name="cvc" id="cvc" placeholder="CVC">
+                            <div class="card-name">
+                                <p>Name on card</p>
+                                <input type="text" name="card-name" id="card-name" class="form-control" formControlName="cardholdername" placeholder="Card Holder Name" required>
                             </div>
-                        </div>
-                        <div class="card-name">
-                            <p>Name on card</p>
-                            <input type="text" name="card-name" id="card-name" placeholder="Card Holder Name">
-                        </div>
-                        <div class="payment-country">
-                            <p>Country or region</p>
-                            <select name="country" id="payment-country">
-                                <option value="United States">United States</option>
-                                <option value="United States">United States</option>
-                                <option value="United States">United States</option>
-                                <option value="United States">United States</option>
-                            </select>
-                            <input type="number" name="country-zip" id="country-zip" placeholder="ZIP">
-                        </div>
-                        <div class="payment-btns">
-                            <div class="pay-card">
-                                <button (click)="pay()">Pay $65.00</button>
+                            <div class="payment-country">
+                                <input type="number" name="country-zip" id="country-zip" class="form-control" maxlength="6" formControlName="zip" placeholder="ZIP" required>
                             </div>
-                        </div>
+                            <div class="payment-btns">
+                                <div class="pay-card">
+                                    <button (click)="pay()" type="submit">Pay ${{total}}</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="payment-done" *ngIf="isPaid">
