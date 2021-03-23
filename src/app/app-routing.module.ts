@@ -38,6 +38,14 @@ const routes: Routes = [
         (m) => m.HeaderModuleModule
       ),
   },
+  {
+    path: "profile",
+    loadChildren: () =>
+      import('./profile/profile.module').then(
+        (m) => m.ProfileModule
+      ),
+  },
+  { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
   { path: '**', pathMatch: 'full', redirectTo: '/' },
 ];
 
