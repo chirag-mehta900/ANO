@@ -13,7 +13,7 @@ h2 {
 }
 
 .banner-detail p {
-    font-size: 18px;
+    font-size: 15px;
     font-family: "Poppins-regular";
     max-width: 600px;
 }
@@ -74,7 +74,7 @@ h2 {
 .extra-detail p {
     text-align: center;
     font-family: "Poppins-regular";
-    font-size: 22px;
+    font-size: 15px;
 }
 
 .howitwork,
@@ -124,7 +124,7 @@ h2 {
 
 .service-detail p,
 .whyus-detail p {
-    font-size: 16px;
+    font-size: 15px;
     font-family: "Poppins-regular";
 }
 
@@ -151,7 +151,7 @@ h2 {
 
 .aboutdetail p {
     font-family: "Poppins-regular";
-    font-size: 20px;
+    font-size: 15px;
 }
 .aboutdetail span{
     color: #FFC542;
@@ -181,7 +181,7 @@ h2 {
 .client-title p,
 .service p,
 .service h4 {
-    font-size: 18px;
+    font-size: 15px;
     font-family: "Poppins-Regular";
 }
 
@@ -253,6 +253,7 @@ h2 {
 }
 .review-blog p{
     font-family: 'Poppins-Regular';
+    font-size: 15px;
 }
 .client-title h3,
 .service h3 {
@@ -281,6 +282,7 @@ h2 {
 }
 .reviewer p{
     font-family: 'Poppins-Regular';
+    font-size: 15px;
 }
 .count-head h5 {
     font-size: 18px;

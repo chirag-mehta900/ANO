@@ -1,0 +1,80 @@
+.select-brand{
+    padding: 20px;
+}
+.select-device{
+    padding: 20px;
+}
+.select-problem{
+    padding: 20px;
+}
+.select-brand h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+.select-brand p{
+    font-family: 'Poppins-SemiBold';
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: #FFC542;
+}
+.select-device h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+.select-device p{
+    font-family: 'Poppins-SemiBold';
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: #FFC542;
+}
+.select-problem h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+.select-problem p{
+    font-family: 'Poppins-SemiBold';
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: #FFC542;
+}
+.ng-select.custom .ng-select-container{
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+.ng-select.custom {
+    border:10px;
+    min-height: 0px;
+    border-radius: 10px;
+}
+.sub-btn{
+    display: flex;
+    justify-content: space-between;
+}
+.previous button{
+    border: none;
+    background-color: transparent;
+    color: #D0D1D2;
+    padding: 10px;
+    font-family: 'Poppins-SemiBold';
+    width: 110px;
+}
+.previou button{
+    border: none;
+    background-color: transparent;
+    color: #000000;
+    padding: 10px;
+    font-family: 'Poppins-SemiBold';
+    width: 110px;
+}
+.next button{
+    border: none;
+    background-color: #FFC542;
+    color: #000000;
+    font-family: 'Poppins-SemiBold';
+    padding: 10px;
+    border-radius: 5px;
+    width: 110px;
+}
