@@ -14,14 +14,18 @@
 }
 
 .header-short ul li {
-    width: 110px;
+    /* width: 110px; */
     font-family: "Poppins-SemiBold";
     font-size: 12px;
     text-align: center;
     display: flex;
     align-items: center;
+    margin-left: 30px;
 }
-
+.header-short ul li button{
+    width: 110px;
+    margin-left: -10px;
+}
 .login-btn {
     background-color: #ffe7b1;
     border: none;
