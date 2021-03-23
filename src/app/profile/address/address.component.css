@@ -1,0 +1,46 @@
+.select-address{
+    margin-top: 50px;
+}
+.sec-add{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #000;
+    margin-bottom: 20px !important;
+    align-items: baseline;
+    width: 90%;
+    margin: auto;
+}
+.sec-add h2{
+    font-family: 'Poppins-Medium';
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+.add-addr button{
+    border: none;
+    background-color: transparent;
+    font-family: 'Poppins-SemiBold';
+    margin-left: 60px;
+}
+.profile-save{
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    margin: auto;
+    margin-top: 40px !important;
+}
+.profile-save button{
+    border: none;
+    width: 150px;
+    font-family: 'Poppins-SemiBold';
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.save-btn{
+    background-color: #FFC542;
+    color: #000000;
+}
+.cancle-btn{
+    background-color: #000000;
+    color: #ffffff;
+}
