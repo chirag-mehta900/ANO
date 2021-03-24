@@ -3,6 +3,7 @@
         <agm-map [latitude]="Lat" [longitude]="Lng" [zoom]="17" [styles]="styles">
             <agm-marker [latitude]="Lat" [longitude]="Lng" [label]="My"></agm-marker>
             <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude"></agm-marker>
+
             <!-- [label]="m.price" -->
         </agm-map>
     </div>
@@ -55,7 +56,7 @@
                 <h2>Top Shop</h2>
             </div>
             <carousel>
-                <div class="shop-box carousel-cell" *ngFor="let store of storeInfo" (click)="shopDetail(store.id)">
+                <div class="shop-box carousel-cell" *ngFor="let store of storeInfo" (click)="shopDetail(store.id,store)">
                     <div class="shop-ing">
                         <img class="img-fluid" src="../../assets/images/service1.png" alt="">
                     </div>
