@@ -43,4 +43,19 @@ export class HeaderService {
       data
     );
   }
+  signUp(data) {
+    return this.httpClient.post(this.commonService.envUrl() + "register", data);
+  }
+  userAddress(data) {
+    return this.httpClient.post(
+      this.commonService.envUrl() + "user/address",
+      data
+    );
+  }
+  checkEmail(data) {
+    return this.httpClient.post(
+      this.commonService.envUrl() + "emailValidate",
+      data
+    );
+  }
 }

@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderService } from 'src/@theme/Services/header.service';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { HttpHeaders } from '@angular/common/http';
-import { JwtTokenService } from 'src/@theme/services/jwt-token.service';
-import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { BookRepairComponent } from './book-repair/book-repair.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-module',
@@ -17,7 +15,9 @@ export class HeaderModuleComponent implements OnInit {
   userName: any;
   constructor(
     private modalService: NgbModal,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private activatedRoute: ActivatedRoute,
+    public router: Router
   ) {}
 
   ngOnInit() {
@@ -46,6 +46,17 @@ export class HeaderModuleComponent implements OnInit {
   }
   signUp() {
     const modalRef = this.modalService.open(SignupComponent);
+    modalRef.result.then((result) => {
+      this.userName = result;
+    });
+  }
+
+  onhome() {
+    this.router.navigate(['home']);
+  }
+
+  onabout() {
+    this.router.navigate(['about']);
   }
   bookRepair() {
     const modalRef = this.modalService.open(BookRepairComponent);

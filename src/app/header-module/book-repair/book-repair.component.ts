@@ -1,14 +1,22 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { HeaderService } from "src/@theme/Services/header.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderService } from 'src/@theme/Services/header.service';
 
 @Component({
-  selector: "app-book-repair",
-  templateUrl: "./book-repair.component.html",
-  styleUrls: ["./book-repair.component.css"],
+  selector: 'app-book-repair',
+  templateUrl: './book-repair.component.html',
+  styleUrls: ['./book-repair.component.css'],
 })
 export class BookRepairComponent implements OnInit {
+  shopmarker: object = {};
+  Data: any[] = [];
+  Marker: any[] = [];
+
+  Location = {
+    lat: 0,
+    lng: 0,
+  };
   bookRepair = {
     brand: null,
     device: null,
@@ -36,18 +44,16 @@ export class BookRepairComponent implements OnInit {
 
   ngOnInit(): void {
     if (!navigator.geolocation) {
-      console.log("location not found");
     }
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.lat = position.coords.latitude;
-      this.lng = position.coords.longitude;
-    });
+    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+    console.log(this.Location);
+
     this.getBrandList();
   }
   getBrandList() {
     this.headerService.getBrandList().subscribe(
       (data) => {
-        this.brandList = data["data"];
+        this.brandList = data['data'];
       },
       (error) => {}
     );
@@ -56,16 +62,13 @@ export class BookRepairComponent implements OnInit {
   getDeviceList(event) {
     this.headerService.getDeviceList(event).subscribe(
       (data) => {
-        this.deviceList.push(data["data"]);
-        console.log(this.deviceList);
+        this.deviceList.push(data['data']);
       },
       (error) => {}
     );
   }
 
   getIssueList(event) {
-    console.log(event);
-
     this.deviceList.forEach((element: any) => {
       if (element.id == event) {
         this.selectedDeviceName = element.modelName;
@@ -73,9 +76,7 @@ export class BookRepairComponent implements OnInit {
     });
     this.headerService.getIssueListById(event).subscribe(
       (data) => {
-        console.log(data["data"]);
-        this.issueList.push(data["data"]);
-        console.log(this.issueList);
+        this.issueList.push(data['data']);
       },
       (error) => {}
     );
@@ -103,15 +104,31 @@ export class BookRepairComponent implements OnInit {
   addRepair(Repair) {
     this.formSubmitted = true;
     if (Repair.valid) {
-      this.bookRepair.distanceMile = 10;
-      this.bookRepair.latitude = this.lat;
-      this.bookRepair.longitude = this.lng;
-      console.log(this.bookRepair);
+      this.bookRepair.distanceMile = 15;
+      this.bookRepair.latitude = this.Location.lat;
+      this.bookRepair.longitude = this.Location.lng;
       this.headerService.searchStore(this.bookRepair).subscribe(
         (data) => {
+          console.log(data);
+          this.Data.push(data);
+          for (var i = 0; i < this.Data.length; i++) {
+            for (var j = 0; j < this.Data[i].data.length; j++) {
+              this.shopmarker = {
+                latitude: this.Data[i].data[j].latitude,
+                longitude: this.Data[i].data[j].longitude,
+                // price: this.Data[i].data[j].pricing[0].price,
+              };
+
+              this.Marker.push(this.shopmarker);
+            }
+          }
+          localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
+
+          console.log(this.Marker);
+
           this.router.navigate([
-            "/map",
-            { storeData: JSON.stringify(data["data"]) },
+            '/map',
+            { storeData: JSON.stringify(data['data']) },
           ]);
           this.activeModal.close();
         },
