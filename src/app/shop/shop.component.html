@@ -1,7 +1,8 @@
 <section>
     <div class="bg-map">
-        <agm-map [latitude]="lat" [longitude]="lng">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="17" [styles]="styles">
+            <agm-marker *ngFor="let s of shop" [latitude]="s.latitude" [longitude]="s.longitude"></agm-marker>
+            <agm-marker [latitude]="lat" [longitude]="lng" [label]="My"></agm-marker>
         </agm-map>
     </div>
     <div class="container">
@@ -9,7 +10,7 @@
             <div class="shop-filter ">
                 <input type="text" name="mapshop" id="shop" placeholder="Search Device, Brand, Model, etc">
                 <div class="shop-come">
-                    <div class="shop-box" *ngFor="let store of storeInfo">
+                    <div class="shop-box" *ngFor="let store of shop">
                         <div class="shop-ing">
                             <img class="img-fluid" src="../../assets/images/service1.png" alt="">
                         </div>
@@ -96,9 +97,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="review-circle">
-                        <circle-progress [percent]="85" [radius]="100" [outerStrokeWidth]="12" [innerStrokeWidth]="5"
-                            [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true"
-                            [animationDuration]="300">
+                        <circle-progress [percent]="85" [radius]="100" [outerStrokeWidth]="12" [innerStrokeWidth]="5" [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300">
                         </circle-progress>
                     </div>
                 </div>
@@ -147,8 +146,7 @@
                             <h4>Fionn Norris</h4>
                             <p>01/20/2021, 09:16 AM</p>
                         </div>
-                        <h3>This is the perfect shade that I found after long time. It's fragrance is Very calming.got
-                            it in 168 rs.go for it.perfect shade for medium & dark skin tone.</h3>
+                        <h3>This is the perfect shade that I found after long time. It's fragrance is Very calming.got it in 168 rs.go for it.perfect shade for medium & dark skin tone.</h3>
                         <div class="review-rating">
                             <!-- <h3>3</h3>
                             <ngb-rating [rate]="3" color="red"></ngb-rating> -->

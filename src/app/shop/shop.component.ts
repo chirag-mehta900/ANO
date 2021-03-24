@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgbModal, NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
-import { MapService } from "src/@theme/Services/map.service";
 import { ShopService } from "src/@theme/Services/shop.service";
 import { StoreTokenService } from "src/@theme/Services/store-token.service";
-import { UploadService } from "src/@theme/Services/upload.service";
 import { AddproductComponent } from "./addproduct/addproduct.component";
+import { UploadService } from "src/@theme/Services/upload.service";
+import { MapService } from "src/@theme/Services/map.service";
 
 @Component({
   selector: "app-shop",
@@ -13,7 +13,16 @@ import { AddproductComponent } from "./addproduct/addproduct.component";
   styleUrls: ["./shop.component.css"],
 })
 export class ShopComponent implements OnInit {
-  placeOrder: any = {
+  shop: any[] = [];
+  lat: any;
+  lng: any;
+  My: string = "Home";
+  Location = {
+    lat: 0,
+    lng: 0,
+  };
+
+  placeOrder = {
     shop_id: 1,
     transactionId: "QQughibhhIuMTop",
     startTime: null,
@@ -25,8 +34,7 @@ export class ShopComponent implements OnInit {
     details: [],
   };
   title = "My first AGM project";
-  lat = 21.1588329;
-  lng = 72.7688111;
+
   colorTone = "#000";
   per = 78;
   storeId: any;
@@ -34,6 +42,179 @@ export class ShopComponent implements OnInit {
   timeList: any[];
   cartInfo: any = {};
   files: File[] = [];
+
+  styles = [
+    {
+      elementType: "geometry",
+      stylers: [
+        {
+          color: "#f5f5f5",
+        },
+      ],
+    },
+    {
+      elementType: "labels.icon",
+      stylers: [
+        {
+          visibility: "off",
+        },
+      ],
+    },
+    {
+      elementType: "labels.text.fill",
+      stylers: [
+        {
+          color: "#616161",
+        },
+      ],
+    },
+    {
+      elementType: "labels.text.stroke",
+      stylers: [
+        {
+          color: "#f5f5f5",
+        },
+      ],
+    },
+    {
+      featureType: "administrative.land_parcel",
+      elementType: "labels.text.fill",
+      stylers: [
+        {
+          color: "#bdbdbd",
+        },
+      ],
+    },
+    {
+      featureType: "poi",
+      elementType: "geometry",
+      stylers: [
+        {
+          color: "#eeeeee",
+        },
+      ],
+    },
+    {
+      featureType: "poi",
+      elementType: "labels.text.fill",
+      stylers: [
+        {
+          color: "#757575",
+        },
+      ],
+    },
+    {
+      featureType: "poi.park",
+      elementType: "geometry",
+      stylers: [
+        {
+          color: "#e5e5e5",
+        },
+      ],
+    },
+    {
+      featureType: "poi.park",
+      elementType: "labels.text.fill",
+      stylers: [
+        {
+          color: "#9e9e9e",
+        },
+      ],
+    },
+    {
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [
+        {
+          color: "#ffffff",
+        },
+      ],
+    },
+    {
+      featureType: "road.arterial",
+      elementType: "labels.text.fill",
+      stylers: [
+        {
+          color: "#757575",
+        },
+      ],
+    },
+    {
+      featureType: "road.highway",
+      elementType: "geometry",
+      stylers: [
+        {
+          color: "#dadada",
+        },
+      ],
+    },
+    {
+      featureType: "road.highway",
+      elementType: "labels.text.fill",
+      stylers: [
+        {
+          color: "#616161",
+        },
+      ],
+    },
+    {
+      featureType: "road.local",
+      elementType: "labels.text.fill",
+      stylers: [
+        {
+          color: "#9e9e9e",
+        },
+      ],
+    },
+    {
+      featureType: "transit.line",
+      elementType: "geometry",
+      stylers: [
+        {
+          color: "#e5e5e5",
+        },
+      ],
+    },
+    {
+      featureType: "transit.line",
+      elementType: "labels.text",
+      stylers: [
+        {
+          color: "#afa655",
+        },
+        {
+          visibility: "on",
+        },
+      ],
+    },
+    {
+      featureType: "transit.station",
+      elementType: "geometry",
+      stylers: [
+        {
+          color: "#eeeeee",
+        },
+      ],
+    },
+    {
+      featureType: "water",
+      elementType: "geometry",
+      stylers: [
+        {
+          color: "#c9c9c9",
+        },
+      ],
+    },
+    {
+      featureType: "water",
+      elementType: "labels.text.fill",
+      stylers: [
+        {
+          color: "#9e9e9e",
+        },
+      ],
+    },
+  ];
 
   constructor(
     config: NgbRatingConfig,
@@ -50,6 +231,13 @@ export class ShopComponent implements OnInit {
 
   ngOnInit(): void {
     this.storeId = JSON.parse(this.route.snapshot.paramMap.get("id"));
+    this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
+    console.log(this.Location);
+
+    this.lat = this.Location.lat;
+    this.lng = this.Location.lng;
+    this.shop.push(JSON.parse(localStorage.getItem("Shop") || "[]"));
+
     this.getStoreDetail();
     this.getCartData();
     console.log(this.storeId);
