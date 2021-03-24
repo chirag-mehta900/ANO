@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { HeaderService } from 'src/@theme/Services/header.service';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { HeaderService } from "src/@theme/Services/header.service";
 
 @Component({
-  selector: 'app-book-repair',
-  templateUrl: './book-repair.component.html',
-  styleUrls: ['./book-repair.component.css'],
+  selector: "app-book-repair",
+  templateUrl: "./book-repair.component.html",
+  styleUrls: ["./book-repair.component.css"],
 })
 export class BookRepairComponent implements OnInit {
   shopmarker: object = {};
@@ -45,7 +45,7 @@ export class BookRepairComponent implements OnInit {
   ngOnInit(): void {
     if (!navigator.geolocation) {
     }
-    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+    this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
     console.log(this.Location);
 
     this.getBrandList();
@@ -53,7 +53,7 @@ export class BookRepairComponent implements OnInit {
   getBrandList() {
     this.headerService.getBrandList().subscribe(
       (data) => {
-        this.brandList = data['data'];
+        this.brandList = data["data"];
       },
       (error) => {}
     );
@@ -62,7 +62,8 @@ export class BookRepairComponent implements OnInit {
   getDeviceList(event) {
     this.headerService.getDeviceList(event).subscribe(
       (data) => {
-        this.deviceList.push(data['data']);
+        console.log(data["data"]);
+        this.deviceList = data["data"];
       },
       (error) => {}
     );
@@ -76,7 +77,7 @@ export class BookRepairComponent implements OnInit {
     });
     this.headerService.getIssueListById(event).subscribe(
       (data) => {
-        this.issueList.push(data['data']);
+        this.issueList.push(data["data"]);
       },
       (error) => {}
     );
@@ -122,14 +123,14 @@ export class BookRepairComponent implements OnInit {
               this.Marker.push(this.shopmarker);
             }
           }
-          localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
+          localStorage.setItem("shopmarker", JSON.stringify(this.Marker));
 
           console.log(this.Marker);
           this.activeModal.close();
 
           this.router.navigate([
-            '/map',
-            { storeData: JSON.stringify(data['data']) },
+            "/map",
+            { storeData: JSON.stringify(data["data"]) },
           ]);
         },
         (error) => {}
