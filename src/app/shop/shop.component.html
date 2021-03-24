@@ -5,43 +5,43 @@
             <agm-marker [latitude]="lat" [longitude]="lng" [label]="My"></agm-marker>
         </agm-map>
     </div>
-    <div class="container">
-        <div class="filter">
-            <div class="shop-filter ">
-                <input type="text" name="mapshop" id="shop" placeholder="Search Device, Brand, Model, etc">
-                <div class="shop-come">
-                    <div class="shop-box" *ngFor="let store of shop">
-                        <div class="shop-ing">
-                            <img class="img-fluid" src="../../assets/images/service1.png" alt="">
+    <div class="filter">
+        <div class="shop-filter">
+            <input type="text" name="mapshop" id="shop" placeholder="Search Device, Brand, Model, etc">
+            <div class="shop-come">
+                <div class="shop-box" *ngFor="let store of shop">
+                    <div class="shop-ing">
+                        <img class="img-fluid" src="../../assets/images/service1.png" alt="">
+                    </div>
+                    <div class="shop-detail">
+                        <div class="detail-name">
+                            <h2>{{store.shopName}}</h2>
+                            <ngb-rating [rate]="3" color="red"></ngb-rating>
                         </div>
-                        <div class="shop-detail">
-                            <div class="detail-name">
-                                <h2>{{store.shopName}}</h2>
-                                <ngb-rating [rate]="3" color="red"></ngb-rating>
+                        <div class="detail-name2">
+                            <div class="dis-f">
+                                <img src="../../assets/images/Icon awesome-car.svg" alt="">
+                                <p>{{storeId.distance | number : '1.2-2'}}</p>
                             </div>
-                            <div class="detail-name2">
-                                <div class="dis-f">
-                                    <img src="../../assets/images/Icon awesome-car.svg" alt="">
-                                    <p>{{storeId.distance | number : '1.2-2'}}</p>
-                                </div>
-                                <div class="dis-f">
-                                    <img src="../../assets/images/Call.svg" alt="">
-                                    <p>{{store.mobileNumber}}</p>
-                                </div>
+                            <div class="dis-f">
+                                <img src="../../assets/images/Call.svg" alt="">
+                                <p>{{store.mobileNumber}}</p>
                             </div>
-                            <div class="shop-location">
-                                <div class="location">
-                                    <img src="../../assets/images/location.svg" alt="">
-                                    <p>{{store.addressLine1}} , {{store.addressLine2}}</p>
-                                </div>
-                                <p>{{store.description}}</p>
+                        </div>
+                        <div class="shop-location">
+                            <div class="location">
+                                <img src="../../assets/images/location.svg" alt="">
+                                <p>{{store.addressLine1}} , {{store.addressLine2}}</p>
                             </div>
+                            <p>{{store.description}}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- <div class="container">
+    </div> -->
     <div class="add-product container">
         <div>
             <h2>Booking Made Easy</h2>

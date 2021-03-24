@@ -1,5 +1,5 @@
 .map-booking {
-    margin-top: -50px;
+    margin-top: -55px;
 }
 
 .filter {
@@ -7,7 +7,7 @@
     justify-content: space-between;
     position: absolute;
     top: 15%;
-    left: 7%;
+    left: 0%;
     width: 78%;
     height: 45px;
 }
@@ -91,6 +91,10 @@ agm-map {
     height: 120px;
     width: auto;
 }
+.shop-img img {
+    height: 160px !important;
+    width: auto !important;
+}
 
 .shop-detail .detail-name {
     display: flex;
@@ -98,7 +102,8 @@ agm-map {
 }
 
 .shop-detail .detail-name h2 {
-    font-size: 15px;
+    font-family: 'Poppins-SemiBold';
+    font-size: 20px;
     margin-right: 10px;
     margin-bottom: 0px;
 }
@@ -106,22 +111,25 @@ agm-map {
 .dis-f {
     display: flex;
     align-items: baseline;
+    margin-right: 20px;
 }
 
 .shop-detail {
-    margin-top: 10px;
-    margin-bottom: 15px;
+    padding: 20px;
+
 }
 
 .shop-detail img {
-    height: 15px;
+    height: 13px;
 }
 
 .detail-name2 {
     display: flex;
+    align-items: baseline;
 }
 
 .detail-name2 p {
+    font-family: 'Poppins-Regular';
     margin-left: 5px;
     margin-bottom: 0px;
 }
@@ -130,13 +138,18 @@ agm-map {
     margin-top: 40px;
     font-family: "Poppins-SemiBold";
 }
-
+.expe{
+    margin-top: 40px;
+}
 .experience {
     background-color: #ffefcf;
     padding: 10px;
-    margin-top: 60px;
+    margin-top: 30px;
 }
-
+.expe .text-center h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 30px;
+}
 .experience-detail {
     display: grid;
     margin-top: 40px;
@@ -178,4 +191,17 @@ agm-map {
     display: flex;
     justify-content: space-evenly;
     margin-bottom: 20px;
+}
+.shop-in-box{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.title-shop{
+    margin-bottom: 40px;
+}
+.title-shop h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 30px;
 }

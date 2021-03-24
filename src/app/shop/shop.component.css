@@ -3,7 +3,7 @@
     justify-content: space-between;
     position: absolute;
     top: 1%;
-    left: 7%;
+    left: 0%;
     width: 25%;
     font-family: 'Poppins-Regular';
     background: transparent;
@@ -51,29 +51,22 @@ agm-map {
     width: 100%;
 }
 
-/* .shop-box {
-    padding: 5px;
-} */
 
 .shop-ing img {
-    height: 120px;
+    height: 170px;
     width: auto;
 }
 
-.shop-detail .detail-name {
-    display: flex;
-    align-items: baseline;
-}
-
 .shop-detail .detail-name h2 {
-    font-size: 15px;
-    margin-right: 10px;
+    font-family: 'Poppins-SemiBold';
+    font-size: 30px;
     margin-bottom: 0px;
 }
 
 .dis-f {
     display: flex;
     align-items: baseline;
+    margin-right: 20px;
 }
 
 .shop-detail {
@@ -206,12 +199,14 @@ agm-map {
 }
 .location{
     display: flex;
-    align-items: baseline;
+    align-items: center;
     margin-top: 5px;
+    margin-bottom: 10px;
 }
 .location p{
     margin-bottom: 0px;
     font-family: 'Poppins-Regular';
+    margin-left: 5px;
 }
 .shop-services{
     margin-top: 20px;
@@ -241,4 +236,5 @@ agm-map {
 .shop-location p{
     font-family: 'Poppins-Regular';
     font-size: 15px;
+    line-height: 17px;
 }
