@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
-import { MapService } from 'src/@theme/Services/map.service';
-import { StoreTokenService } from 'src/@theme/Services/store-token.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
+import { MapService } from "src/@theme/Services/map.service";
+import { StoreTokenService } from "src/@theme/Services/store-token.service";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
-  selector: 'app-mappage',
-  templateUrl: './mappage.component.html',
-  styleUrls: ['./mappage.component.css'],
+  selector: "app-mappage",
+  templateUrl: "./mappage.component.html",
+  styleUrls: ["./mappage.component.css"],
 })
 export class MappageComponent implements OnInit {
   lat: any;
@@ -18,188 +18,188 @@ export class MappageComponent implements OnInit {
   autocomplete: any;
   location: any;
   Marker: any[] = [];
-  My: string = 'Home';
+  My: string = "Home";
   styles = [
     {
-      elementType: 'geometry',
+      elementType: "geometry",
       stylers: [
         {
-          color: '#f5f5f5',
+          color: "#f5f5f5",
         },
       ],
     },
     {
-      elementType: 'labels.icon',
+      elementType: "labels.icon",
       stylers: [
         {
-          visibility: 'off',
+          visibility: "off",
         },
       ],
     },
     {
-      elementType: 'labels.text.fill',
+      elementType: "labels.text.fill",
       stylers: [
         {
-          color: '#616161',
+          color: "#616161",
         },
       ],
     },
     {
-      elementType: 'labels.text.stroke',
+      elementType: "labels.text.stroke",
       stylers: [
         {
-          color: '#f5f5f5',
+          color: "#f5f5f5",
         },
       ],
     },
     {
-      featureType: 'administrative.land_parcel',
-      elementType: 'labels.text.fill',
+      featureType: "administrative.land_parcel",
+      elementType: "labels.text.fill",
       stylers: [
         {
-          color: '#bdbdbd',
+          color: "#bdbdbd",
         },
       ],
     },
     {
-      featureType: 'poi',
-      elementType: 'geometry',
+      featureType: "poi",
+      elementType: "geometry",
       stylers: [
         {
-          color: '#eeeeee',
+          color: "#eeeeee",
         },
       ],
     },
     {
-      featureType: 'poi',
-      elementType: 'labels.text.fill',
+      featureType: "poi",
+      elementType: "labels.text.fill",
       stylers: [
         {
-          color: '#757575',
+          color: "#757575",
         },
       ],
     },
     {
-      featureType: 'poi.park',
-      elementType: 'geometry',
+      featureType: "poi.park",
+      elementType: "geometry",
       stylers: [
         {
-          color: '#e5e5e5',
+          color: "#e5e5e5",
         },
       ],
     },
     {
-      featureType: 'poi.park',
-      elementType: 'labels.text.fill',
+      featureType: "poi.park",
+      elementType: "labels.text.fill",
       stylers: [
         {
-          color: '#9e9e9e',
+          color: "#9e9e9e",
         },
       ],
     },
     {
-      featureType: 'road',
-      elementType: 'geometry',
+      featureType: "road",
+      elementType: "geometry",
       stylers: [
         {
-          color: '#ffffff',
+          color: "#ffffff",
         },
       ],
     },
     {
-      featureType: 'road.arterial',
-      elementType: 'labels.text.fill',
+      featureType: "road.arterial",
+      elementType: "labels.text.fill",
       stylers: [
         {
-          color: '#757575',
+          color: "#757575",
         },
       ],
     },
     {
-      featureType: 'road.highway',
-      elementType: 'geometry',
+      featureType: "road.highway",
+      elementType: "geometry",
       stylers: [
         {
-          color: '#dadada',
+          color: "#dadada",
         },
       ],
     },
     {
-      featureType: 'road.highway',
-      elementType: 'labels.text.fill',
+      featureType: "road.highway",
+      elementType: "labels.text.fill",
       stylers: [
         {
-          color: '#616161',
+          color: "#616161",
         },
       ],
     },
     {
-      featureType: 'road.local',
-      elementType: 'labels.text.fill',
+      featureType: "road.local",
+      elementType: "labels.text.fill",
       stylers: [
         {
-          color: '#9e9e9e',
+          color: "#9e9e9e",
         },
       ],
     },
     {
-      featureType: 'transit.line',
-      elementType: 'geometry',
+      featureType: "transit.line",
+      elementType: "geometry",
       stylers: [
         {
-          color: '#e5e5e5',
+          color: "#e5e5e5",
         },
       ],
     },
     {
-      featureType: 'transit.line',
-      elementType: 'labels.text',
+      featureType: "transit.line",
+      elementType: "labels.text",
       stylers: [
         {
-          color: '#afa655',
+          color: "#afa655",
         },
         {
-          visibility: 'on',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.station',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#eeeeee',
+          visibility: "on",
         },
       ],
     },
     {
-      featureType: 'water',
-      elementType: 'geometry',
+      featureType: "transit.station",
+      elementType: "geometry",
       stylers: [
         {
-          color: '#c9c9c9',
+          color: "#eeeeee",
         },
       ],
     },
     {
-      featureType: 'water',
-      elementType: 'labels.text.fill',
+      featureType: "water",
+      elementType: "geometry",
       stylers: [
         {
-          color: '#9e9e9e',
+          color: "#c9c9c9",
+        },
+      ],
+    },
+    {
+      featureType: "water",
+      elementType: "labels.text.fill",
+      stylers: [
+        {
+          color: "#9e9e9e",
         },
       ],
     },
   ];
 
-  url = 'https://maps.googleapis.com/maps/api/geocode/';
-  Key = 'AIzaSyA_cl83OpGB8aR6uUnZgx8z12rUGztlel4';
+  url = "https://maps.googleapis.com/maps/api/geocode/";
+  Key = "AIzaSyA_cl83OpGB8aR6uUnZgx8z12rUGztlel4";
   storeInfo = [];
-  formattedaddress = ' ';
+  formattedaddress = " ";
   options = {
     type: [],
     componentRestrictions: {
-      country: ['IN'],
+      country: ["IN"],
     },
   };
   Location = {
@@ -218,9 +218,9 @@ export class MappageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get('storeData'));
+    this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get("storeData"));
     if (!navigator.geolocation) {
-      console.log('location not found');
+      console.log("location not found");
     }
 
     navigator.geolocation.getCurrentPosition((position) => {
@@ -228,8 +228,8 @@ export class MappageComponent implements OnInit {
       this.Location.lng = position.coords.longitude;
       console.log(this.Location);
 
-      localStorage.setItem('Location', JSON.stringify(this.Location));
-      this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+      localStorage.setItem("Location", JSON.stringify(this.Location));
+      this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
       this.Lat = this.Location.lat;
       this.Lng = this.Location.lng;
 
@@ -243,10 +243,10 @@ export class MappageComponent implements OnInit {
           console.log(this.area);
         });
     });
-    const input = document.getElementById('pac-input') as HTMLInputElement;
+    const input = document.getElementById("pac-input") as HTMLInputElement;
     this.autocomplete = new google.maps.places.Autocomplete(input, {});
 
-    this.Marker = JSON.parse(localStorage.getItem('shopmarker') || '[]');
+    this.Marker = JSON.parse(localStorage.getItem("shopmarker") || "[]");
     console.log(this.Marker);
   }
 
@@ -261,18 +261,17 @@ export class MappageComponent implements OnInit {
       this.Location.lng = data.results[0].geometry.location.lng;
       console.log(this.Location);
 
-      localStorage.setItem('Location', JSON.stringify(this.Location));
-      this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+      localStorage.setItem("Location", JSON.stringify(this.Location));
+      this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
 
       this.Lat = this.Location.lat;
       this.Lng = this.Location.lng;
     });
 
-    this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get('storeData'));
+    this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get("storeData"));
   }
 
   shopDetail(id) {
-    console.log(id);
     let shopDetail = {
       id: id,
       distance: null,
@@ -282,7 +281,6 @@ export class MappageComponent implements OnInit {
         shopDetail.distance = element.distance;
       }
     });
-    this.router.navigate(['/shop', { id: JSON.stringify(shopDetail) }]);
-    console.log('efrgu');
+    this.router.navigate(["/shop", { id: JSON.stringify(shopDetail) }]);
   }
 }

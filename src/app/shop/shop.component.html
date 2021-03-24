@@ -50,8 +50,8 @@
                 <input type="date" name="distance" [(ngModel)]="placeOrder.date" (input)="getTimeAccoedingToDate()">
             </div>
             <div class="col-md-4">
-                <ng-select name="time">
-                    <ng-option *ngFor="let time of timeList" value=[time.id]>{{time.startTime}} - {{time.endTime}}
+                <ng-select name="time" (change)="setTime($event)">
+                    <ng-option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} - {{time.endTime}}
                     </ng-option>
                 </ng-select>
             </div>

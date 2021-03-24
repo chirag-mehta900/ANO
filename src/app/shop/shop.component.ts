@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgbModal, NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
+import { MapService } from "src/@theme/Services/map.service";
 import { ShopService } from "src/@theme/Services/shop.service";
 import { StoreTokenService } from "src/@theme/Services/store-token.service";
 import { AddproductComponent } from "./addproduct/addproduct.component";
@@ -11,7 +12,7 @@ import { AddproductComponent } from "./addproduct/addproduct.component";
   styleUrls: ["./shop.component.css"],
 })
 export class ShopComponent implements OnInit {
-  placeOrder = {
+  placeOrder: any = {
     shop_id: 1,
     transactionId: "QQughibhhIuMTop",
     startTime: null,
@@ -20,15 +21,7 @@ export class ShopComponent implements OnInit {
     pickupLocation: null,
     dropLocation: null,
     Total_Price: null,
-    details: [
-      {
-        device_id: null,
-        brand_id: null,
-        problem_id: null,
-        image: [],
-        price: null,
-      },
-    ],
+    details: [],
   };
   title = "My first AGM project";
   lat = 21.1588329;
@@ -39,13 +32,15 @@ export class ShopComponent implements OnInit {
   storeInfo: any[] = [];
   timeList: any[];
   cartInfo: any = {};
+  Location;
 
   constructor(
     config: NgbRatingConfig,
     private route: ActivatedRoute,
     private shopService: ShopService,
     private modalService: NgbModal,
-    private storeTokenService: StoreTokenService
+    private storeTokenService: StoreTokenService,
+    private mapService: MapService
   ) {
     config.max = 5;
     config.readonly = true;
@@ -55,6 +50,7 @@ export class ShopComponent implements OnInit {
     this.storeId = JSON.parse(this.route.snapshot.paramMap.get("id"));
     this.getStoreDetail();
     this.getCartData();
+    console.log(this.storeId);
   }
   getStoreDetail() {
     this.shopService.getStoreDetailById(this.storeId.id).subscribe(
@@ -77,7 +73,6 @@ export class ShopComponent implements OnInit {
   getCartData() {
     this.shopService.getCartDetail().subscribe((data) => {
       this.cartInfo = data["data"];
-      console.log(data["data"]);
     });
   }
   getTimeAccoedingToDate() {
@@ -90,7 +85,41 @@ export class ShopComponent implements OnInit {
       this.timeList = data["data"];
     });
   }
+  setTime(event) {
+    console.log(this.timeList);
+    console.log(event);
+    this.timeList.forEach((element) => {
+      if (element.id == event) {
+        this.placeOrder.startTime = element.startTime;
+        this.placeOrder.endTime = element.endTime;
+      }
+    });
+  }
   procced() {
+    if (
+      this.placeOrder.date &&
+      this.placeOrder.startTime &&
+      this.placeOrder.endTime
+    ) {
+      console.log("set");
+      this.cartInfo.forEach((element, index) => {
+        this.placeOrder.details.push({
+          device_id: element.device_id,
+          brand_id: element.brand_id,
+          problem_id: element.problem_id,
+          image: element.problem.image,
+          price: element.price,
+        });
+      });
+      console.log(this.Location);
+
+      console.log(this.cartInfo);
+      console.log(this.placeOrder.date);
+      console.log(this.placeOrder);
+    } else {
+      console.log("not set");
+      return;
+    }
     // this.placeOrder.details.forEach((element, index) => {
     //   this.cartInfo.forEach((ele, index) => {
     //     element[index].device_id = ele[index].device_id;
@@ -101,7 +130,5 @@ export class ShopComponent implements OnInit {
     //   copyCartInfo.push(element.device_id);
     // });
     // console.log("copy ", copyCartInfo);
-
-    console.log(this.placeOrder);
   }
 }
