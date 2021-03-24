@@ -55,7 +55,8 @@ export class BookRepairComponent implements OnInit {
   getDeviceList(event) {
     this.headerService.getDeviceList(event).subscribe(
       (data) => {
-        this.deviceList.push(data["data"]);
+        console.log(data["data"]);
+        this.deviceList = data["data"];
       },
       (error) => {}
     );

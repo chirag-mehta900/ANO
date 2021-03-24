@@ -36,8 +36,8 @@
                 <h2>Select Device</h2>
                 <p>DEVICE</p>
                 <div>
-                    <ng-select name="device" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)" placeholder="Select Device"
-                        #device1="ngModel" [ngClass]="{
+                    <ng-select name="device" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)"
+                        placeholder="Select Device" #device1="ngModel" [ngClass]="{
                 'is-invalid':
                 device1.invalid &&
                 (formSubmitted || device1.touched) 
