@@ -1,7 +1,6 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import "~@ng-select/ng-select/themes/material.theme.css";
 @import "~bootstrap/dist/css/bootstrap.min.css";
-@import "~ng-pick-datetime/assets/style/picker.min.css";
 @font-face {
   font-family: "Poppins-Regular";
   src: url("./assets/fonts/Poppins-Regular.eot");

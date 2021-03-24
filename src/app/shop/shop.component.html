@@ -60,26 +60,15 @@
         </div>
         <div class="add-product-display">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3" *ngFor="let cart of cartInfo">
                     <div class="add-product-box">
                         <div class="add-product-imd">
                             <img class="img-fluid" src="../../assets/images/service1.png" alt="">
                         </div>
                         <div class="add-product-details">
-                            <h2>LG Monitor</h2>
+                            <h2>{{cart.brand.brandName}} {{cart.device.modelName}}</h2>
                             <p>Repair Master, Repair, Dec 16, 09:00 AM to 11:00AM</p>
-                            <button>Delete</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="add-product-box">
-                        <div class="add-product-imd">
-                            <img class="img-fluid" src="../../assets/images/service1.png" alt="">
-                        </div>
-                        <div class="add-product-details">
-                            <h2>LG Monitor</h2>
-                            <p>Repair Master, Repair, Dec 16, 09:00 AM to 11:00AM</p>
+                            <p>Expected Price: {{cart.price}}</p>
                             <button>Delete</button>
                         </div>
                     </div>
@@ -91,6 +80,9 @@
                         <p>Add More</p>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <button (click)="procced()">Procced</button>
             </div>
         </div>
     </div>

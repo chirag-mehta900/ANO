@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgbModal, NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
 import { ShopService } from "src/@theme/Services/shop.service";
+import { StoreTokenService } from "src/@theme/Services/store-token.service";
 import { AddproductComponent } from "./addproduct/addproduct.component";
 
 @Component({
@@ -21,8 +22,10 @@ export class ShopComponent implements OnInit {
     Total_Price: null,
     details: [
       {
-        device: null,
-        brand: null,
+        device_id: null,
+        brand_id: null,
+        problem_id: null,
+        image: [],
         price: null,
       },
     ],
@@ -35,12 +38,14 @@ export class ShopComponent implements OnInit {
   storeId: any;
   storeInfo: any[] = [];
   timeList: any[];
+  cartInfo: any = {};
 
   constructor(
     config: NgbRatingConfig,
     private route: ActivatedRoute,
     private shopService: ShopService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private storeTokenService: StoreTokenService
   ) {
     config.max = 5;
     config.readonly = true;
@@ -49,6 +54,7 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this.storeId = JSON.parse(this.route.snapshot.paramMap.get("id"));
     this.getStoreDetail();
+    this.getCartData();
   }
   getStoreDetail() {
     this.shopService.getStoreDetailById(this.storeId.id).subscribe(
@@ -61,6 +67,18 @@ export class ShopComponent implements OnInit {
   addRepairDevice() {
     const modalRef = this.modalService.open(AddproductComponent);
     modalRef.componentInstance.shopId = this.storeId.id;
+    modalRef.result.then((result) => {
+      this.cartInfo = result;
+      console.log(this.cartInfo);
+      this.storeTokenService.set("cart_id", result.cart_id);
+      this.getCartData();
+    });
+  }
+  getCartData() {
+    this.shopService.getCartDetail().subscribe((data) => {
+      this.cartInfo = data["data"];
+      console.log(data["data"]);
+    });
   }
   getTimeAccoedingToDate() {
     let getTimeObj = {
@@ -71,5 +89,19 @@ export class ShopComponent implements OnInit {
     this.shopService.getTimeByDate(getTimeObj).subscribe((data) => {
       this.timeList = data["data"];
     });
+  }
+  procced() {
+    // this.placeOrder.details.forEach((element, index) => {
+    //   this.cartInfo.forEach((ele, index) => {
+    //     element[index].device_id = ele[index].device_id;
+    //   });
+    // });
+    // let copyCartInfo: any[];
+    // this.cartInfo.forEach((element) => {
+    //   copyCartInfo.push(element.device_id);
+    // });
+    // console.log("copy ", copyCartInfo);
+
+    console.log(this.placeOrder);
   }
 }

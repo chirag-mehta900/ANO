@@ -102,11 +102,11 @@ export class BookRepairComponent implements OnInit {
       this.bookRepair.longitude = this.lng;
       this.headerService.searchStore(this.bookRepair).subscribe(
         (data) => {
+          this.activeModal.close();
           this.router.navigate([
             "/map",
             { storeData: JSON.stringify(data["data"]) },
           ]);
-          this.activeModal.close();
         },
         (error) => {}
       );
