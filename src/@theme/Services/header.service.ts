@@ -27,7 +27,9 @@ export class HeaderService {
     return this.httpClient.get(this.commonService.envUrl() + "brand");
   }
   getDeviceList(id) {
-    return this.httpClient.get(this.commonService.envUrl() + "device/" + id);
+    return this.httpClient.get(
+      this.commonService.envUrl() + "device/filter/" + id
+    );
   }
   getIssueListById(id) {
     return this.httpClient.get(this.commonService.envUrl() + "problem/" + id);

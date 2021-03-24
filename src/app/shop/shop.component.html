@@ -9,33 +9,31 @@
             <div class="shop-filter ">
                 <input type="text" name="mapshop" id="shop" placeholder="Search Device, Brand, Model, etc">
                 <div class="shop-come">
-                    <div class="shop-box">
+                    <div class="shop-box" *ngFor="let store of storeInfo">
                         <div class="shop-ing">
                             <img class="img-fluid" src="../../assets/images/service1.png" alt="">
                         </div>
                         <div class="shop-detail">
                             <div class="detail-name">
-                                <h2>Shop Name</h2>
+                                <h2>{{store.shopName}}</h2>
                                 <ngb-rating [rate]="3" color="red"></ngb-rating>
                             </div>
                             <div class="detail-name2">
                                 <div class="dis-f">
                                     <img src="../../assets/images/Icon awesome-car.svg" alt="">
-                                    <p>2.3 Miles</p>
+                                    <p>{{storeId.distance | number : '1.2-2'}}</p>
                                 </div>
                                 <div class="dis-f">
                                     <img src="../../assets/images/Call.svg" alt="">
-                                    <p>+1 (855)-766-3835</p>
+                                    <p>{{store.mobileNumber}}</p>
                                 </div>
                             </div>
                             <div class="shop-location">
                                 <div class="location">
                                     <img src="../../assets/images/location.svg" alt="">
-                                    <p>2464 Royal Ln. Mesa, New Jersey 45463</p>
+                                    <p>{{store.addressLine1}} , {{store.addressLine2}}</p>
                                 </div>
-                                <p>This page will show the available repair shops near you. Depending on the customer
-                                    location the app shows pinpoint how far the nears tech repair shop is near them. If
-                                    the customer does not find a repair shop near them then they....</p>
+                                <p>{{store.description}}</p>
                             </div>
                         </div>
                     </div>
@@ -47,38 +45,42 @@
         <div>
             <h2>Booking Made Easy</h2>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input type="date" name="distance" [(ngModel)]="placeOrder.date" (input)="getTimeAccoedingToDate()">
+            </div>
+            <div class="col-md-4">
+                <ng-select name="time">
+                    <ng-option *ngFor="let time of timeList" value=[time.id]>{{time.startTime}} - {{time.endTime}}
+                    </ng-option>
+                </ng-select>
+            </div>
+        </div>
         <div class="add-product-display">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3" *ngFor="let cart of cartInfo">
                     <div class="add-product-box">
                         <div class="add-product-imd">
                             <img class="img-fluid" src="../../assets/images/service1.png" alt="">
                         </div>
                         <div class="add-product-details">
-                            <h2>LG Monitor</h2>
+                            <h2>{{cart.brand.brandName}} {{cart.device.modelName}}</h2>
                             <p>Repair Master, Repair, Dec 16, 09:00 AM to 11:00AM</p>
-                            <button>Delete</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="add-product-box">
-                        <div class="add-product-imd">
-                            <img class="img-fluid" src="../../assets/images/service1.png" alt="">
-                        </div>
-                        <div class="add-product-details">
-                            <h2>LG Monitor</h2>
-                            <p>Repair Master, Repair, Dec 16, 09:00 AM to 11:00AM</p>
+                            <p>Expected Price: {{cart.price}}</p>
                             <button>Delete</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="add-product-service">
-                        <button><img src="../../assets/images/add product.svg" alt=""></button>
+                        <button><img src="../../assets/images/add product.svg" alt=""
+                                (click)="addRepairDevice()"></button>
                         <p>Add More</p>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <button (click)="procced()">Procced</button>
             </div>
         </div>
     </div>

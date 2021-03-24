@@ -34,6 +34,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`,
+          mode: "no-cors",
           // id: `${this.userId}`,
         },
       });
