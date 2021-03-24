@@ -19,6 +19,7 @@ export class MappageComponent implements OnInit {
   location: any;
   Marker: any[] = [];
   My: string = 'Home';
+  shop: any;
   styles = [
     {
       elementType: 'geometry',
@@ -271,7 +272,10 @@ export class MappageComponent implements OnInit {
     this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get('storeData'));
   }
 
-  shopDetail(id) {
+  shopDetail(id, shop) {
+    console.log(shop);
+    localStorage.removeItem('Shop');
+    localStorage.setItem('Shop', JSON.stringify(shop));
     console.log(id);
     let shopDetail = {
       id: id,
@@ -283,6 +287,5 @@ export class MappageComponent implements OnInit {
       }
     });
     this.router.navigate(['/shop', { id: JSON.stringify(shopDetail) }]);
-    console.log('efrgu');
   }
 }
