@@ -1,10 +1,18 @@
 .ano-header {
     position: relative;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    align-items: baseline;
+
     z-index: 99999;
+    background: transparent;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0px 10px #595c59;
+}
+.hea-ano{
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    padding-top: 15px;
+    padding-bottom: 10px;
 }
 
 .header-short ul {
@@ -14,14 +22,18 @@
 }
 
 .header-short ul li {
-    width: 110px;
+    /* width: 110px; */
     font-family: "Poppins-SemiBold";
     font-size: 12px;
     text-align: center;
     display: flex;
     align-items: center;
+    margin-left: 30px;
 }
-
+.header-short ul li button{
+    width: 110px;
+    margin-left: -10px;
+}
 .login-btn {
     background-color: #ffe7b1;
     border: none;

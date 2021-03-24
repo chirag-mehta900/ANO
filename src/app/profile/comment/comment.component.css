@@ -1,0 +1,253 @@
+.checkout{
+    margin-top: 30px;
+}
+.booking-detail{
+    display: flex;
+}
+.booking-shop{
+    height: 160px;
+    margin-right: 15px;
+}
+.booking-shop-img img{
+    height: 60px;
+    width: auto;
+}
+.booking-shop-img h2{
+    font-size: 12px;
+    font-family: 'Poppins-SemiBold';
+    margin-top: 10px;
+}
+.booking-sho-price p{
+    font-size: 10px;
+    font-family: 'Poppins-Regular';
+}
+.booking-sho-price h2{
+    font-size: 30px;
+    font-family: 'Poppins-SemiBold';
+}
+.booking-device{
+    height: 160px;
+}
+.booking-device-box{
+    background: #FFF3D9;
+    padding: 20px;
+    height: 100%;
+    border-radius: 5px;
+    display: grid;
+    align-items: flex-end;
+}
+.booking-device-box p{
+    font-size: 10px;
+    margin-bottom: 5px;
+    font-family: 'Poppins-Regular';
+}
+.booking-device-box p span{
+    margin-left: 5px;
+    font-family: 'Poppins-SemiBold';
+}
+.booking-date h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 18px;
+}
+.Login_dividerWrapper__3pXsj {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.Login_dividerWrapper__3pXsj .Login_dividerLine__V8_5k {
+    height: 2px;
+    width: 30%;
+    background: #8792A2;
+    margin: 1px;
+}
+.Login_dividerWrapper__3pXsj p {
+    margin-bottom: 0!important;
+}
+.has-text-white {
+    color: #8792A2;
+}
+.destroy-system{
+    margin-top: 20px;
+    display: flex;
+}
+.destroy-system-box{
+    padding: 10px;
+}
+.destroy-system-img{
+    height: 255px;
+    width: auto;
+}
+.destroy-system-img img{
+    height: 320px;
+    width: auto;
+    border-radius: 10px;
+}
+.destroy-system-det h2{
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Poppins-SemiBold';
+}
+.destroy-system-det p{
+    font-size: 12px;
+    color: #ffffff;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Poppins-SemiBold';
+}
+.destroy-system-btn button{
+    border: none;
+    width: 98%;
+    border-radius: 10px;
+    background: #000000;
+}
+.deliver-cab{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.deliver-cab label{
+    display: flex;
+    background-color: #CDCDCD;
+    padding: 10px;
+    border-radius: 5px;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0px;
+}
+.deliver-cab label hr{
+    margin: 9px;
+    border-top: 1px solid #ffffff;
+    width: 96%;
+}
+.deliver-cab h2{
+    font-size: 18px;
+    font-family: 'Poppins-SemiBold';
+    color: #ffffff;
+    margin-left: 10px;
+    margin-bottom: 0px;
+}
+.deliver-radio{
+    margin-right: 10px;
+}
+.deliver-mail{
+    display: flex;
+    align-items: center;
+}
+.deliver-system{
+    margin-top: 30px;
+}
+.deliver-system p{
+    font-family: 'Poppins-Medium';
+    font-size: 15px;
+    color: #217D00;
+    margin-bottom: 0px;
+}
+.reviews-title h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+.revi-box{
+    display: flex;
+    margin-bottom: 20px;
+}
+.revi-img {
+    display: grid;
+    align-items: center;
+}
+.revi-img img{
+    height: 80px;
+    width: auto;
+    border-radius: 50%;
+}
+.revi-detail{
+    margin-left: 15px;
+}
+.revi-detail h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.revi-detail p{
+    font-family: 'Poppins-Regular';
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+.star-like{
+    display: flex;
+    justify-content: space-between;
+}
+.star-like img{
+    height: 20px;
+    width: auto;
+}
+.addcomment{
+    margin-top: 40px;
+}
+.addstar img{
+    height: 30px;
+    width: auto;
+    margin-bottom: 20px;
+}
+
+
+
+
+  /* payment-done */
+
+  .payment-done{
+      margin-top: 30px;
+  }
+  .payment-done-mess h2{
+      font-size: 60px;
+      font-family: 'Poppins-SemiBold';
+    color: #FFC542;
+  }
+  .payment-done-mess p{
+    font-size: 20px;
+    font-family: 'Poppins-Regular';
+}
+.payment-done-mess p span{
+    font-family: 'Poppins-SemiBold';
+    background-color: #FFC542;
+}
+.payment-done-mess button{
+    border: none;
+    background-color: #FFC542;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: 'Poppins-SemiBold';
+}
+.payment-done-feedback{
+    margin-top: 20px;
+}
+.payment-done-feedback h2{
+    font-size: 40px;
+    font-family: 'Poppins-SemiBold';
+}
+.payment-done-feedback p{
+    font-size: 20px;
+    font-family: 'Poppins-Regular';
+}
+.feedback-input{
+    display: flex;
+    width: 100%;
+}
+.feedback-input textarea{
+    padding: 10px;
+    border: 1px solid #D3D8E0;
+    border-radius: 10px;
+    font-family: 'Poppins-Regular';
+    width: 100%;
+}
+.feedback-input button{
+    border: none;
+    background-color: #000000;
+    margin-left: 20px;
+    border-radius: 5px;
+}

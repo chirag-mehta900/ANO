@@ -6,13 +6,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { CommonService } from './Services/common.service';
 import { HeaderService } from './Services/header.service';
 import { JwtTokenService } from './services/jwt-token.service';
 import { MapService } from './Services/map.service';
+import { ShopService } from './Services/shop.service';
 import { StoreTokenService } from './Services/store-token.service';
-
+import { UploadService } from './Services/upload.service';
 const NB_Module = [
   NgbModule,
   SlickCarouselModule,
@@ -21,6 +23,7 @@ const NB_Module = [
   FormsModule,
   NgSelectModule,
   ReactiveFormsModule,
+  NgxDropzoneModule,
   NgOtpInputModule,
 ];
 @NgModule({
@@ -32,6 +35,8 @@ const NB_Module = [
     StoreTokenService,
     CommonService,
     MapService,
+    ShopService,
+    UploadService,
   ],
 })
 export class SharedModule {}

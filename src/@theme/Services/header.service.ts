@@ -32,7 +32,9 @@ export class HeaderService {
     return this.httpClient.get(this.commonService.envUrl() + 'brand');
   }
   getDeviceList(id) {
-    return this.httpClient.get(this.commonService.envUrl() + 'device/' + id);
+    return this.httpClient.get(
+      this.commonService.envUrl() + 'device/filter/' + id
+    );
   }
   getIssueListById(id) {
     return this.httpClient.get(this.commonService.envUrl() + 'problem/' + id);
@@ -44,17 +46,17 @@ export class HeaderService {
     );
   }
   signUp(data) {
-    return this.httpClient.post(this.commonService.envUrl() + "register", data);
+    return this.httpClient.post(this.commonService.envUrl() + 'register', data);
   }
   userAddress(data) {
     return this.httpClient.post(
-      this.commonService.envUrl() + "user/address",
+      this.commonService.envUrl() + 'user/address',
       data
     );
   }
   checkEmail(data) {
     return this.httpClient.post(
-      this.commonService.envUrl() + "emailValidate",
+      this.commonService.envUrl() + 'emailValidate',
       data
     );
   }

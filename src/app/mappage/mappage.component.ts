@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MapService } from 'src/@theme/Services/map.service';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-mappage',
@@ -210,7 +210,8 @@ export class MappageComponent implements OnInit {
     private config: NgbRatingConfig,
     private mapService: MapService,
     private storeTokenService: StoreTokenService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     config.max = 5;
     config.readonly = true;
@@ -268,5 +269,20 @@ export class MappageComponent implements OnInit {
     });
 
     this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get('storeData'));
+  }
+
+  shopDetail(id) {
+    console.log(id);
+    let shopDetail = {
+      id: id,
+      distance: null,
+    };
+    this.storeInfo.forEach((element) => {
+      if (element.id == id) {
+        shopDetail.distance = element.distance;
+      }
+    });
+    this.router.navigate(['/shop', { id: JSON.stringify(shopDetail) }]);
+    console.log('efrgu');
   }
 }

@@ -125,12 +125,12 @@ export class BookRepairComponent implements OnInit {
           localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
 
           console.log(this.Marker);
+          this.activeModal.close();
 
           this.router.navigate([
             '/map',
             { storeData: JSON.stringify(data['data']) },
           ]);
-          this.activeModal.close();
         },
         (error) => {}
       );

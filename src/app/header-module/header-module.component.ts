@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { BookRepairComponent } from './book-repair/book-repair.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 
 @Component({
   selector: 'app-header-module',
@@ -17,6 +18,7 @@ export class HeaderModuleComponent implements OnInit {
     private modalService: NgbModal,
     private headerService: HeaderService,
     private activatedRoute: ActivatedRoute,
+    private storeTokenService: StoreTokenService,
     public router: Router
   ) {}
 
@@ -40,6 +42,7 @@ export class HeaderModuleComponent implements OnInit {
     this.headerService.getUserName().subscribe(
       (data) => {
         this.userName = data['data'].name;
+        this.storeTokenService.set('user_id', data['data'].id);
       },
       (error) => {}
     );
