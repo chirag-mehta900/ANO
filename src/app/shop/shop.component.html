@@ -61,7 +61,14 @@
                 <div class="col-md-3" *ngFor="let cart of cartInfo">
                     <div class="add-product-box">
                         <div class="add-product-imd">
-                            <img class="img-fluid" src="../../assets/images/service1.png" alt="">
+                            <!-- <img class="img-fluid" src="../../assets/images/service1.png" alt=""> -->
+                            <ngx-dropzone (change)="onSelect($event)">
+                                <ngx-dropzone-label>Drop it!</ngx-dropzone-label>
+                                <ngx-dropzone-preview *ngFor="let f of files" [removable]="true"
+                                    (removed)="onRemove(f)">
+                                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                </ngx-dropzone-preview>
+                            </ngx-dropzone>
                         </div>
                         <div class="add-product-details">
                             <h2>{{cart.brand.brandName}} {{cart.device.modelName}}</h2>

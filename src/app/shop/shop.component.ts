@@ -4,6 +4,7 @@ import { NgbModal, NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
 import { MapService } from "src/@theme/Services/map.service";
 import { ShopService } from "src/@theme/Services/shop.service";
 import { StoreTokenService } from "src/@theme/Services/store-token.service";
+import { UploadService } from "src/@theme/Services/upload.service";
 import { AddproductComponent } from "./addproduct/addproduct.component";
 
 @Component({
@@ -32,7 +33,7 @@ export class ShopComponent implements OnInit {
   storeInfo: any[] = [];
   timeList: any[];
   cartInfo: any = {};
-  Location;
+  files: File[] = [];
 
   constructor(
     config: NgbRatingConfig,
@@ -40,7 +41,8 @@ export class ShopComponent implements OnInit {
     private shopService: ShopService,
     private modalService: NgbModal,
     private storeTokenService: StoreTokenService,
-    private mapService: MapService
+    private mapService: MapService,
+    private uploadService: UploadService
   ) {
     config.max = 5;
     config.readonly = true;
@@ -95,6 +97,30 @@ export class ShopComponent implements OnInit {
       }
     });
   }
+
+  onSelect(event) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+    this.files.forEach((element) => {
+      //this.upload(element);
+      console.log(element);
+    });
+  }
+  upload(file) {
+    // const file = this.selectedFiles.item(0);
+    console.log("upload file function called");
+    let q = this.uploadService.uploadFile(file).subscribe((response) => {
+      console.log(response);
+    });
+    console.log("From Calling", q);
+    //this.uploadService.uploadfile(file);
+  }
+
+  onRemove(event) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
   procced() {
     if (
       this.placeOrder.date &&
@@ -111,7 +137,6 @@ export class ShopComponent implements OnInit {
           price: element.price,
         });
       });
-      console.log(this.Location);
 
       console.log(this.cartInfo);
       console.log(this.placeOrder.date);
