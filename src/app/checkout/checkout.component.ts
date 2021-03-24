@@ -15,7 +15,7 @@ export class CheckoutComponent implements OnInit {
   Email: any;
   CARD: any;
   Expiry: any;
-  total: any = 70.34;
+  total: any = 10.34;
   detail: object = {};
   Card: object = {};
   Payment: object = {};
