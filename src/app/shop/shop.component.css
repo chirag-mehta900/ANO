@@ -1,18 +1,21 @@
-.map-booking {
-    margin-top: -50px;
-}
-
 .filter {
     display: flex;
     justify-content: space-between;
     position: absolute;
-    top: 15%;
-    width: 78%;
+    top: 1%;
+    left: 7%;
+    width: 25%;
     font-family: 'Poppins-Regular';
+    background: transparent;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    /* box-shadow: 0 6px 60px #2b2e2a; */
+    padding: 20px;
+    height: 90vh;
 }
 
 .shop-filter {
-    width: 30%;
+    padding-top: 100px;
 }
 
 .shop-filter input {
@@ -20,6 +23,7 @@
     border-radius: 10px;
     padding: 5px;
     height: 35px;
+    width: 80%;
 }
 
 .shop-filter button {
@@ -38,7 +42,7 @@
 }
 
 .shop-come {
-    width: 90%;
+    margin-top: 30px;
 }
 
 .bg-map,
@@ -47,9 +51,9 @@ agm-map {
     width: 100%;
 }
 
-.shop-box {
+/* .shop-box {
     padding: 5px;
-}
+} */
 
 .shop-ing img {
     height: 120px;
@@ -73,9 +77,8 @@ agm-map {
 }
 
 .shop-detail {
-    margin-top: 10px;
+    margin-top: 15px;
     margin-bottom: 15px;
-    width: 75%;
 }
 
 .shop-detail img {
@@ -234,4 +237,8 @@ agm-map {
 .ser-det h2{
     font-family: 'Poppins-SemiBold';
     font-size: 30px;
+}
+.shop-location p{
+    font-family: 'Poppins-Regular';
+    font-size: 15px;
 }

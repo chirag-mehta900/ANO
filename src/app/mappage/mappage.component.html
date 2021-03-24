@@ -7,34 +7,33 @@
     <div class="container">
         <div class="filter">
             <div class="shop-filter ">
-                <input type="text" name="mapshop" id="shop" placeholder="Search Device, Brand, Model, etc">
-                <button><img src="../../assets/images/Sliders.svg" alt=""></button>
-                <button><img src="../../assets/images/Bug.svg" alt=""></button>
+                <div class="shop-filt-inp">
+                    <input type="text" name="mapshop" id="shop" placeholder="Search Device, Brand, Model, etc">
+                    <button><img src="../../assets/images/Sliders.svg" alt=""></button>
+                    <button><img src="../../assets/images/Bug.svg" alt=""></button>
+                </div>
                 <div class="shop-come">
-                    <carousel>
-                        <div class="shop-box carousel-cell" *ngFor="let store of storeInfo"
-                            (click)="shopDetail(store.id)">
-                            <div class="shop-ing">
-                                <img class="img-fluid" src="../../assets/images/service1.png" alt="">
+                    <div class="shop-box" *ngFor="let store of storeInfo">
+                        <div class="shop-ing">
+                            <img class="img-fluid" src="../../assets/images/service1.png" alt="">
+                        </div>
+                        <div class="shop-detail">
+                            <div class="detail-name">
+                                <h2>{{store.shopName}}</h2>
+                                <ngb-rating [rate]="3" color="red"></ngb-rating>
                             </div>
-                            <div class="shop-detail">
-                                <div class="detail-name">
-                                    <h2>{{store.shopName}}</h2>
-                                    <ngb-rating [rate]="3" color="red"></ngb-rating>
+                            <div class="detail-name2">
+                                <div class="dis-f">
+                                    <img src="../../assets/images/Icon awesome-car.svg" alt="">
+                                    <p>{{store.distance | number : '1.2-2'}}</p>
                                 </div>
-                                <div class="detail-name2">
-                                    <div class="dis-f">
-                                        <img src="../../assets/images/Icon awesome-car.svg" alt="">
-                                        <p>{{store.distance | number : '1.2-2'}}</p>
-                                    </div>
-                                    <div class="dis-f">
-                                        <img src="../../assets/images/Icon material-attach-money.svg" alt="">
-                                        <p *ngFor="let price of store.pricing">{{price.price}}</p>
-                                    </div>
+                                <div class="dis-f">
+                                    <img src="../../assets/images/Icon material-attach-money.svg" alt="">
+                                    <p *ngFor="let price of store.pricing">{{price.price}}</p>
                                 </div>
                             </div>
                         </div>
-                    </carousel>
+                    </div>
                 </div>
             </div>
             <div class="search-location">

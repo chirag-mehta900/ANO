@@ -1,18 +1,20 @@
-<section class="ano-header container">
-    <div>
-        <img src="../../assets/images/logo.svg" alt="">
-    </div>
-    <div class="header-short">
-        <nav>
-            <ul>
-                <li>Home</li>
-                <li>Contact Us</li>
-                <li>About Us</li>
-                <li *ngIf="!userName"><button class="login-btn" (click)="logIn()">Log In</button></li>
-                <li *ngIf="userName">Welcome, {{userName}}</li>
-                <li><button class="signup-btn" (click)="signUp()">Sign Up</button></li>
-                <li><button class="repair-btn" (click)="bookRepair()">Book Repair</button></li>
-            </ul>
-        </nav>
+<section class="ano-header">
+    <div class="continer hea-ano">
+        <div>
+            <img src="../../assets/images/logo.svg" alt="">
+        </div>
+        <div class="header-short">
+            <nav>
+                <ul>
+                    <li>Home</li>
+                    <li>Contact Us</li>
+                    <li>About Us</li>
+                    <li *ngIf="!userName"><button class="login-btn" (click)="logIn()">Log In</button></li>
+                    <li *ngIf="userName">Welcome, {{userName}}</li>
+                    <li><button class="signup-btn" (click)="signUp()">Sign Up</button></li>
+                    <li><button class="repair-btn" (click)="bookRepair()">Book Repair</button></li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </section>
