@@ -1,21 +1,20 @@
-import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
-import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { NgSelectModule } from "@ng-select/ng-select";
-import { IvyCarouselModule } from "angular-responsive-carousel";
-import { NgxDropzoneModule } from "ngx-dropzone";
-import { NgOtpInputModule } from "ng-otp-input";
-import { SlickCarouselModule } from "ngx-slick-carousel";
-import { CommonService } from "./Services/common.service";
-import { HeaderService } from "./Services/header.service";
-import { JwtTokenService } from "./services/jwt-token.service";
-import { MapService } from "./Services/map.service";
-import { ShopService } from "./Services/shop.service";
-import { StoreTokenService } from "./Services/store-token.service";
-import { UploadService } from "./Services/upload.service";
-
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { NgOtpInputModule } from 'ng-otp-input';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { CommonService } from './Services/common.service';
+import { HeaderService } from './Services/header.service';
+import { JwtTokenService } from './services/jwt-token.service';
+import { MapService } from './Services/map.service';
+import { ShopService } from './Services/shop.service';
+import { StoreTokenService } from './Services/store-token.service';
+import { UploadService } from './Services/upload.service';
 const NB_Module = [
   NgbModule,
   SlickCarouselModule,
