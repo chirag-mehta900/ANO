@@ -9,6 +9,14 @@ import { HeaderService } from "src/@theme/Services/header.service";
   styleUrls: ["./book-repair.component.css"],
 })
 export class BookRepairComponent implements OnInit {
+  shopmarker: object = {};
+  Data: any[] = [];
+  Marker: any[] = [];
+
+  Location = {
+    lat: 0,
+    lng: 0,
+  };
   bookRepair = {
     brand: null,
     device: null,
@@ -37,10 +45,9 @@ export class BookRepairComponent implements OnInit {
   ngOnInit(): void {
     if (!navigator.geolocation) {
     }
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.lat = position.coords.latitude;
-      this.lng = position.coords.longitude;
-    });
+    this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
+    console.log(this.Location);
+
     this.getBrandList();
   }
   getBrandList() {
@@ -98,12 +105,29 @@ export class BookRepairComponent implements OnInit {
   addRepair(Repair) {
     this.formSubmitted = true;
     if (Repair.valid) {
-      this.bookRepair.distanceMile = 10;
-      this.bookRepair.latitude = this.lat;
-      this.bookRepair.longitude = this.lng;
+      this.bookRepair.distanceMile = 15;
+      this.bookRepair.latitude = this.Location.lat;
+      this.bookRepair.longitude = this.Location.lng;
       this.headerService.searchStore(this.bookRepair).subscribe(
         (data) => {
+          console.log(data);
+          this.Data.push(data);
+          for (var i = 0; i < this.Data.length; i++) {
+            for (var j = 0; j < this.Data[i].data.length; j++) {
+              this.shopmarker = {
+                latitude: this.Data[i].data[j].latitude,
+                longitude: this.Data[i].data[j].longitude,
+                // price: this.Data[i].data[j].pricing[0].price,
+              };
+
+              this.Marker.push(this.shopmarker);
+            }
+          }
+          localStorage.setItem("shopmarker", JSON.stringify(this.Marker));
+
+          console.log(this.Marker);
           this.activeModal.close();
+
           this.router.navigate([
             "/map",
             { storeData: JSON.stringify(data["data"]) },

@@ -1,25 +1,35 @@
-import { Component, OnInit } from "@angular/core";
-import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { HeaderService } from "src/@theme/Services/header.service";
-import { LoginComponent } from "./login/login.component";
-import { SignupComponent } from "./signup/signup.component";
-import { BookRepairComponent } from "./book-repair/book-repair.component";
-import { StoreTokenService } from "src/@theme/Services/store-token.service";
+import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderService } from 'src/@theme/Services/header.service';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { BookRepairComponent } from './book-repair/book-repair.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 
 @Component({
-  selector: "app-header-module",
-  templateUrl: "./header-module.component.html",
-  styleUrls: ["./header-module.component.css"],
+  selector: 'app-header-module',
+  templateUrl: './header-module.component.html',
+  styleUrls: ['./header-module.component.css'],
 })
 export class HeaderModuleComponent implements OnInit {
   userName: any;
   constructor(
     private modalService: NgbModal,
     private headerService: HeaderService,
-    private storeTokenService: StoreTokenService
+    private activatedRoute: ActivatedRoute,
+    private storeTokenService: StoreTokenService,
+    public router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.headerService.getUserName().subscribe(
+      (data) => {
+        this.userName = data['data'].name;
+      },
+      (error) => {}
+    );
+  }
 
   logIn() {
     this.userName = null;
@@ -31,8 +41,8 @@ export class HeaderModuleComponent implements OnInit {
   setUserName() {
     this.headerService.getUserName().subscribe(
       (data) => {
-        this.userName = data["data"].name;
-        this.storeTokenService.set("user_id", data["data"].id);
+        this.userName = data['data'].name;
+        this.storeTokenService.set('user_id', data['data'].id);
       },
       (error) => {}
     );
@@ -42,6 +52,14 @@ export class HeaderModuleComponent implements OnInit {
     modalRef.result.then((result) => {
       this.userName = result;
     });
+  }
+
+  onhome() {
+    this.router.navigate(['home']);
+  }
+
+  onabout() {
+    this.router.navigate(['about']);
   }
   bookRepair() {
     const modalRef = this.modalService.open(BookRepairComponent);

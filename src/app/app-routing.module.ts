@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'tracking', component: TrackingComponent },
   { path: 'trackmap', component: TrackingmapComponent },
+
   {
     path: '',
     loadChildren: () =>

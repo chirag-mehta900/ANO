@@ -1,16 +1,16 @@
-import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
-import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { HeaderService } from "src/@theme/Services/header.service";
-import { JwtTokenService } from "src/@theme/services/jwt-token.service";
-import { StoreTokenService } from "src/@theme/Services/store-token.service";
-import { SignupComponent } from "../signup/signup.component";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderService } from 'src/@theme/Services/header.service';
+import { JwtTokenService } from 'src/@theme/services/jwt-token.service';
+import { StoreTokenService } from 'src/@theme/Services/store-token.service';
+import { SignupComponent } from '../signup/signup.component';
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   loginInfo: FormGroup;
@@ -53,10 +53,9 @@ export class LoginComponent implements OnInit {
     if (this.loginInfo.valid) {
       this.headerService.logIn(this.loginInfo.value).subscribe(
         (data) => {
-          if (data["status"] == 200) {
-            this.storeTokenService.set("token", data["data"].access_token);
-            this.activeModal.close(data["data"].access_token);
-            this.router.navigate(["/home"]);
+          if (data['status'] == 200) {
+            this.storeTokenService.set('token', data['data'].access_token);
+            this.activeModal.close(data['data'].access_token);
           }
           this.disableButton = false;
         },
