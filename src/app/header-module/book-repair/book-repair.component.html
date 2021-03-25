@@ -4,15 +4,15 @@
             <div class="select-brand">
                 <h2>Select Brand</h2>
                 <p>BRAND</p>
-                <div>
-                    <ng-select class="custom" name="brand" [(ngModel)]="bookRepair.brand"
-                        (change)="getDeviceList($event)" placeholder="Select Brand" #device1="ngModel" [ngClass]="{
+                <div class="optionselect">
+                    <select class="custom" name="brand" [(ngModel)]="bookRepair.brand" (change)="getDeviceList($event)"
+                        placeholder="Select Brand" #device1="ngModel" [ngClass]="{
                 'is-invalid':
                 device1.invalid &&
                 (formSubmitted || device1.touched) 
                 }">
-                        <ng-option *ngFor="let brand of brandList" [value]="brand.id">{{brand.brandName}}</ng-option>
-                    </ng-select>
+                        <option *ngFor="let brand of brandList" [value]="brand.id">{{brand.brandName}}</option>
+                    </select>
                     <div class="text-danger" *ngIf="device1.invalid &&
                 (formSubmitted || device1.touched)">
                         Select Device
@@ -35,16 +35,16 @@
             <div class="select-device">
                 <h2>Select Device</h2>
                 <p>DEVICE</p>
-                <div>
-                    <ng-select name="device" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)"
+                <div class="optionselect">
+                    <select class="custom" name="device" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)"
                         placeholder="Select Device" #device1="ngModel" [ngClass]="{
                 'is-invalid':
                 device1.invalid &&
                 (formSubmitted || device1.touched) 
                 }">
-                        <ng-option *ngFor="let device of deviceList" [value]="device.id">{{device.modelName}}
-                        </ng-option>
-                    </ng-select>
+                        <option *ngFor="let device of deviceList" [value]="device.id">{{device.modelName}}
+                        </option>
+                    </select>
                     <div class="text-danger" *ngIf="device1.invalid &&
                 (formSubmitted || device1.touched)">
                         Select Device
@@ -67,10 +67,12 @@
             <div class="select-problem">
                 <h2>{{selectedDeviceName}}</h2>
                 <p>PROBLEM</p>
-                <ng-select name="problem" [(ngModel)]="bookRepair.problem" placeholder="Select Problem">
-                    <ng-option *ngFor="let issue of issueList" [value]="issue.id">{{issue.problem.problemName}}
-                    </ng-option>
-                </ng-select>
+                <div class="optionselect">
+                    <select class="custom" name="problem" [(ngModel)]="bookRepair.problem" placeholder="Select Problem">
+                        <option *ngFor="let issue of issueList" [value]="issue.id">{{issue.problem.problemName}}
+                        </option>
+                    </select>
+                </div>
                 <div class="sub-btn">
                     <div class="previou">
                         <button (click)="goToDeviceBack()">
