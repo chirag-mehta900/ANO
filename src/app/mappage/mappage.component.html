@@ -57,25 +57,34 @@
                             <h2>{{store.shopName}}</h2>
                             <ngb-rating [rate]="3" color="red"></ngb-rating>
                         </div>
-                        <div class="detail-name2">
-                            <div class="dis-f">
-                                <img src="../../assets/images/Icon awesome-car.svg" alt="">
-                                <p>{{store.distance | number : '1.2-2'}}</p>
+                        <div class="shop-detail">
+                            <div class="detail-name">
+                                <h2>{{store.shopName}}</h2>
+                                <ngb-rating [rate]="3" color="red"></ngb-rating>
                             </div>
-                            <div class="dis-f">
-                                <img src="../../assets/images/Icon material-attach-money.svg" alt="">
-                                <p *ngFor="let price of store.pricing">{{price.price}}</p>
+                            <div class="detail-name2">
+                                <div class="dis-f">
+                                    <img src="../../assets/images/Icon awesome-car.svg" alt="">
+                                    <p>{{store.distance | number : '1.2-2'}}</p>
+                                </div>
+                                <div class="dis-f">
+                                    <img src="../../assets/images/Icon material-attach-money.svg" alt="">
+                                    <p *ngFor="let price of store.pricing">{{price.price}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="search-location">
+                <input id="pac-input" (change)="handleAddressChange($event.target.value)" value="{{area}}" />
+                <!-- <input ngx-google-places-autocomplete [options]='options' (onAddressChange)="AddressChange($event)" type="text" name="" id="" placeholder="Search Location">{{ formattedaddress }} -->
+                <button (change)="handleAddressChange($event.target.value)"><img src="../../assets/images/search.svg"
+                        alt=""></button>
+            </div>
         </div>
-        <div class="search-location">
-            <input id="pac-input" (change)="handleAddressChange($event.target.value)" value="{{area}}" />
-            <!-- <input ngx-google-places-autocomplete [options]='options' (onAddressChange)="AddressChange($event)" type="text" name="" id="" placeholder="Search Location">{{ formattedaddress }} -->
-            <button (change)="handleAddressChange($event.target.value)"><img src="../../assets/images/search.svg"
-                    alt=""></button>
+        <div class="blur-div">
+
         </div>
     </div>
     <!-- <div class="container">
@@ -85,7 +94,7 @@
             <div class="text-center title-shop">
                 <h2>Top Shop</h2>
             </div>
-            <carousel [height]="280" [cellWidth]="320">
+            <carousel [height]="280" [cellWidth]="320" [arrowsOutside]="true">
                 <div class="shop-box carousel-cell" *ngFor="let store of storeInfo"
                     (click)="shopDetail(store.id,store)">
                     <div class="shop-img">

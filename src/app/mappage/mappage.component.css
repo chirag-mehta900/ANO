@@ -1,5 +1,5 @@
 .map-booking {
-  margin-top: -55px;
+  margin-top: -15px;
 }
 
 .filter {
@@ -18,9 +18,9 @@
   backdrop-filter: blur(10px);
   /* box-shadow: 0 6px 60px #2b2e2a; */
   padding: 20px;
-  height: 76vh;
+  height: 80vh;
   width: 28%;
-  margin-top: -50px;
+  margin-top: -41px;
   padding-top: 50px;
 }
 
@@ -97,7 +97,7 @@ agm-map {
 }
 
 .shop-detail .detail-name {
-  display: flex;
+  /* display: flex; */
   align-items: baseline;
 }
 
@@ -115,7 +115,8 @@ agm-map {
 }
 
 .shop-detail {
-  padding: 20px;
+  padding-top: 10px;
+  padding-left: 5px;
 }
 
 .shop-detail img {
