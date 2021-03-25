@@ -10,11 +10,45 @@
         <div class="shop-filter shop-in-box">
             <div class="shop-filt-inp">
                 <input type="text" name="mapshop" id="shop" placeholder="Search Device, Brand, Model, etc">
-                <button><img src="../../assets/images/Sliders.svg" alt=""></button>
+                <button (click)="filter()"><img src="../../assets/images/Sliders.svg" alt=""></button>
                 <button><img src="../../assets/images/Bug.svg" alt=""></button>
             </div>
+            <!--Filer Pop up-->
+            <div *ngIf="filterFlag">
+                <h2>Filter</h2>
+                <span>BRAND</span>
+                <div class="optionselect">
+                    <select class="custom" name="brand" [(ngModel)]="filterData.brand_id"
+                        (change)="getDeviceList($event)" placeholder="Select Brand" #device1="ngModel">
+                        <option *ngFor="let brand of brandList" [value]="brand.id">{{brand.brandName}}</option>
+                    </select>
+                    <div class="text-danger" *ngIf="device1.invalid &&
+                (formSubmitted || device1.touched)">
+                        Select Device
+                    </div>
+                </div>
+                <span>DEVICE</span>
+                <div class="optionselect">
+                    <select class="custom" name="device" [(ngModel)]="filterData.device_id"
+                        (change)="getIssueList($event)" placeholder="Select Device" #device1="ngModel">
+                        <option *ngFor="let device of deviceList" [value]="device.id">{{device.modelName}}
+                        </option>
+                    </select>
+                </div>
+                <span>PROBLEM</span>
+                <div class="optionselect">
+                    <select class="custom" name="problem" [(ngModel)]="filterData.problem_id"
+                        placeholder="Select Problem">
+                        <option *ngFor="let issue of issueList" [value]="issue.id">{{issue.problem.problemName}}
+                        </option>
+                    </select>
+                </div>
+                <div>
+                    <button (click)="applyFilter()">Close</button>
+                </div>
+            </div>
             <div class="shop-come">
-                <div class="shop-box" *ngFor="let store of storeInfo">
+                <div class="shop-box" *ngFor="let store of storeInfo" (click)="shopDetail(store.id,store)">
                     <div class="shop-ing">
                         <img class="img-fluid" src="../../assets/images/service1.png" alt="">
                     </div>
@@ -52,7 +86,8 @@
                 <h2>Top Shop</h2>
             </div>
             <carousel [height]="280" [cellWidth]="320">
-                <div class="shop-box carousel-cell" *ngFor="let store of storeInfo" (click)="shopDetail(store.id,store)">
+                <div class="shop-box carousel-cell" *ngFor="let store of storeInfo"
+                    (click)="shopDetail(store.id,store)">
                     <div class="shop-img">
                         <img class="img-fluid" src="../../assets/images/service1.png" alt="">
                     </div>
@@ -86,7 +121,8 @@
                     <div class="col-md-6">
                         <div class="experience-detail">
                             <h3>Get Service from your mobile</h3>
-                            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
+                                consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
                             <h4>Get the App</h4>
                             <div class="store">
                                 <button><img src="../../assets/images/Google Play Badge.svg" alt=""></button>

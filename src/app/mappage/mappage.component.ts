@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModal, NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
 import { MapService } from "src/@theme/Services/map.service";
 import { StoreTokenService } from "src/@theme/Services/store-token.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { HeaderService } from "src/@theme/Services/header.service";
 
 @Component({
   selector: "app-mappage",
@@ -207,15 +208,26 @@ export class MappageComponent implements OnInit {
     lat: 0,
     lng: 0,
   };
+  filterFlag: boolean = false;
+  deviceList: any[] = [];
+  issueList: any[] = [];
+  brandList: [];
+  filterData = {
+    brand_id: null,
+    device_id: null,
+    problem_id: null,
+  };
   constructor(
     private config: NgbRatingConfig,
     private mapService: MapService,
     private storeTokenService: StoreTokenService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private headerService: HeaderService
   ) {
     config.max = 5;
     config.readonly = true;
+    this.getBrandList();
   }
 
   ngOnInit() {
@@ -287,5 +299,42 @@ export class MappageComponent implements OnInit {
       }
     });
     this.router.navigate(["/shop", { id: JSON.stringify(shopDetail) }]);
+  }
+  getBrandList() {
+    this.headerService.getBrandList().subscribe(
+      (data) => {
+        this.brandList = data["data"];
+      },
+      (error) => {}
+    );
+  }
+
+  getDeviceList(event) {
+    this.headerService.getDeviceList(event.target.value).subscribe(
+      (data) => {
+        this.deviceList = data["data"];
+      },
+      (error) => {}
+    );
+  }
+
+  getIssueList(event) {
+    let obj = {
+      brand_id: this.filterData.brand_id,
+      device_id: event,
+    };
+    console.log(obj);
+    this.headerService.getIssueListById(obj).subscribe(
+      (data) => {
+        this.issueList = data["data"];
+      },
+      (error) => {}
+    );
+  }
+  filter() {
+    this.filterFlag = true;
+  }
+  applyFilter() {
+    this.filterFlag = false;
   }
 }
