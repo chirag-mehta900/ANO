@@ -244,6 +244,8 @@ export class ShopComponent implements OnInit {
     this.lng = this.Location.lng;
     this.shop.push(JSON.parse(localStorage.getItem("Shop") || "[]"));
 
+    this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
+
     this.getStoreDetail();
     this.getCartData();
     console.log(this.storeId);
@@ -251,7 +253,7 @@ export class ShopComponent implements OnInit {
   getStoreDetail() {
     this.shopService.getStoreDetailById(this.storeId.id).subscribe(
       (data) => {
-        this.storeInfo.push(data["data"]);
+        this.storeInfo = data["data"];
       },
       (error) => {}
     );

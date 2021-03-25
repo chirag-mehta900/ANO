@@ -16,6 +16,7 @@ export class BookRepairComponent implements OnInit {
   Location = {
     lat: 0,
     lng: 0,
+    id: 0,
   };
   bookRepair = {
     brand: null,
@@ -62,7 +63,6 @@ export class BookRepairComponent implements OnInit {
   getDeviceList(event) {
     this.headerService.getDeviceList(event).subscribe(
       (data) => {
-        console.log(data["data"]);
         this.deviceList = data["data"];
       },
       (error) => {}
@@ -110,20 +110,32 @@ export class BookRepairComponent implements OnInit {
   addRepair(Repair) {
     this.formSubmitted = true;
     if (Repair.valid) {
-      this.bookRepair.distanceMile = 15;
+      this.bookRepair.distanceMile = 10;
       this.bookRepair.latitude = this.Location.lat;
       this.bookRepair.longitude = this.Location.lng;
+      console.log(this.bookRepair);
+
       this.headerService.searchStore(this.bookRepair).subscribe(
         (data) => {
           console.log(data);
           this.Data.push(data);
           for (var i = 0; i < this.Data.length; i++) {
             for (var j = 0; j < this.Data[i].data.length; j++) {
-              this.shopmarker = {
-                latitude: this.Data[i].data[j].latitude,
-                longitude: this.Data[i].data[j].longitude,
-                // price: this.Data[i].data[j].pricing[0].price,
-              };
+              if (!this.Data[i].data[j].pricing.length) {
+                this.shopmarker = {
+                  latitude: this.Data[i].data[j].latitude,
+                  longitude: this.Data[i].data[j].longitude,
+                  id: this.Data[i].data[j].id,
+
+                  // price: this.Data[i].data[j].pricing[0].price,
+                };
+              } else {
+                this.shopmarker = {
+                  latitude: this.Data[i].data[j].latitude,
+                  longitude: this.Data[i].data[j].longitude,
+                  price: this.Data[i].data[j].pricing[0].price,
+                };
+              }
 
               this.Marker.push(this.shopmarker);
             }

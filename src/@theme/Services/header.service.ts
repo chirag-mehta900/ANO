@@ -63,4 +63,8 @@ export class HeaderService {
       data
     );
   }
+
+  slider() {
+    return this.httpClient.get(this.commonService.envUrl() + 'slider');
+  }
 }
