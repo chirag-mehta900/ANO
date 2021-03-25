@@ -31,4 +31,7 @@ export class ShopService {
   getCartDetail() {
     return this.httpClient.get(this.commonService.envUrl() + "cart");
   }
+  placeOrder(data) {
+    return this.httpClient.post(this.commonService.envUrl() + "order", data);
+  }
 }

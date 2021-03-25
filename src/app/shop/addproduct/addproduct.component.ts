@@ -48,16 +48,22 @@ export class AddproductComponent implements OnInit {
   getDeviceList(event) {
     this.headerService.getDeviceList(event).subscribe(
       (data) => {
-        this.deviceList = [data["data"]];
+        console.log(data["data"]);
+        this.deviceList = data["data"];
       },
       (error) => {}
     );
   }
 
   getIssueList(event) {
-    this.headerService.getIssueListById(event).subscribe(
+    let obj = {
+      brand_id: this.bookRepair.brand_id,
+      device_id: event,
+    };
+    console.log(obj);
+    this.headerService.getIssueListById(obj).subscribe(
       (data) => {
-        this.issueList = [data["data"]];
+        this.issueList = data["data"];
       },
       (error) => {}
     );

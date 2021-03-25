@@ -68,7 +68,8 @@
                 <h2>{{selectedDeviceName}}</h2>
                 <p>PROBLEM</p>
                 <ng-select name="problem" [(ngModel)]="bookRepair.problem" placeholder="Select Problem">
-                    <ng-option *ngFor="let issue of issueList" [value]="issue.id">{{issue.problemName}}</ng-option>
+                    <ng-option *ngFor="let issue of issueList" [value]="issue.id">{{issue.problem.problemName}}
+                    </ng-option>
                 </ng-select>
                 <div class="sub-btn">
                     <div class="previou">

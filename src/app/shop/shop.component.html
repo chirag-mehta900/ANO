@@ -51,8 +51,8 @@
                 <input type="date" name="distance" [(ngModel)]="placeOrder.date" (input)="getTimeAccoedingToDate()">
             </div>
             <div class="col-md-4">
-                <ng-select name="time">
-                    <ng-option *ngFor="let time of timeList" value=[time.id]>{{time.startTime}} - {{time.endTime}}
+                <ng-select name="time" (change)="setTime($event)">
+                    <ng-option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} - {{time.endTime}}
                     </ng-option>
                 </ng-select>
             </div>
@@ -62,7 +62,29 @@
                 <div class="col-md-3" *ngFor="let cart of cartInfo">
                     <div class="add-product-box">
                         <div class="add-product-imd">
-                            <img class="img-fluid" src="../../assets/images/service1.png" alt="">
+                            <!-- <img class="img-fluid" src="../../assets/images/service1.png" alt=""> -->
+                            <!-- <ngx-dropzone (change)="onSelect($event)" [accept]="'image/*'" [multiple]="false">
+                                <ngx-dropzone-label>Drop it!</ngx-dropzone-label>
+                                <ngx-dropzone-preview [multiple]="false" ngProjectAs="ngx-dropzone-preview"
+                                    *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                                </ngx-dropzone-preview>
+                            </ngx-dropzone> -->
+                            <div *ngIf="!cart.image || imageEditFlag" id="cart.id" class="custom-dropzone"
+                                [multiple]="false" ngx-dropzone [accept]="'image/*'"
+                                (change)="onSelect($event,cart.id)">
+                                <ngx-dropzone-label>
+                                    <div>
+                                        <h2>+</h2>
+                                    </div>
+                                </ngx-dropzone-label>
+                                <ngx-dropzone-image-preview [multiple]="false" ngProjectAs="ngx-dropzone-preview"
+                                    *ngFor="let f of cart.image" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                    <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                </ngx-dropzone-image-preview>
+                            </div>
+                            <div *ngIf="cart.image && !imageEditFlag"><img src="{{cart.image}}"> </div>
+                            <div><button (click)="setEditToChangeImage()">Edit</button></div>
                         </div>
                         <div class="add-product-details">
                             <h2>{{cart.brand.brandName}} {{cart.device.modelName}}</h2>
@@ -90,7 +112,9 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="review-circle">
-                        <circle-progress [percent]="85" [radius]="100" [outerStrokeWidth]="12" [innerStrokeWidth]="5" [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300">
+                        <circle-progress [percent]="85" [radius]="100" [outerStrokeWidth]="12" [innerStrokeWidth]="5"
+                            [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true"
+                            [animationDuration]="300">
                         </circle-progress>
                     </div>
                 </div>
@@ -139,7 +163,8 @@
                             <h4>Fionn Norris</h4>
                             <p>01/20/2021, 09:16 AM</p>
                         </div>
-                        <h3>This is the perfect shade that I found after long time. It's fragrance is Very calming.got it in 168 rs.go for it.perfect shade for medium & dark skin tone.</h3>
+                        <h3>This is the perfect shade that I found after long time. It's fragrance is Very calming.got
+                            it in 168 rs.go for it.perfect shade for medium & dark skin tone.</h3>
                         <div class="review-rating">
                             <!-- <h3>3</h3>
                             <ngb-rating [rate]="3" color="red"></ngb-rating> -->
