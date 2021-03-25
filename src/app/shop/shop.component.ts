@@ -13,39 +13,6 @@ import { MapService } from "src/@theme/Services/map.service";
   styleUrls: ["./shop.component.css"],
 })
 export class ShopComponent implements OnInit {
-  subscription: any;
-  shop: any[] = [];
-  lat: any;
-  lng: any;
-  My: string = "Home";
-  Location = {
-    lat: 0,
-    lng: 0,
-  };
-
-  placeOrder: any = {
-    shop_id: 1,
-    transactionId: "QQughobhhIuMTop",
-    startTime: null,
-    endTime: null,
-    date: null,
-    pickupLocation: null,
-    dropLocation: null,
-    Total_Price: null,
-    details: [],
-  };
-  title = "My first AGM project";
-
-  colorTone = "#000";
-  per = 78;
-  storeId: any;
-  storeInfo: any[] = [];
-  timeList: any[];
-  cartInfo: any = {};
-  files: File[] = [];
-  imageUploaded: any[] = [];
-  imageEditFlag: boolean = false;
-
   styles = [
     {
       elementType: "geometry",
@@ -219,6 +186,40 @@ export class ShopComponent implements OnInit {
     },
   ];
 
+  subscription: any;
+  shop: any[] = [];
+  lat: any;
+  lng: any;
+  My: string = "Home";
+  Location = {
+    lat: 0,
+    lng: 0,
+  };
+
+  placeOrder: any = {
+    shop_id: 1,
+    transactionId: "QQughobhhIuMTop",
+    startTime: null,
+    endTime: null,
+    date: null,
+    pickupLocation: null,
+    dropLocation: null,
+    Total_Price: null,
+    details: [],
+  };
+  title = "My first AGM project";
+
+  colorTone = "#000";
+  per = 78;
+  storeId: any;
+  storeInfo: any[] = [];
+  timeList: any[];
+  cartInfo: any = {};
+  files: File[] = [];
+  imageUploaded: any[] = [];
+  imageEditFlag: boolean = false;
+  currentImageUrl: any = "";
+
   constructor(
     config: NgbRatingConfig,
     private route: ActivatedRoute,
@@ -229,13 +230,9 @@ export class ShopComponent implements OnInit {
   ) {
     config.max = 5;
     config.readonly = true;
-    this.uploadService.imageLocationUrl.subscribe((x) => {
-      console.log(x);
-    });
   }
 
   ngOnInit(): void {
-    this.uploadService.imageLocationUrl.emit("hue");
     this.storeId = JSON.parse(this.route.snapshot.paramMap.get("id"));
     this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
     console.log(this.Location);
@@ -271,7 +268,6 @@ export class ShopComponent implements OnInit {
   getCartData() {
     this.shopService.getCartDetail().subscribe((data) => {
       this.cartInfo = data["data"];
-
       console.log(this.cartInfo);
     });
   }
@@ -302,9 +298,9 @@ export class ShopComponent implements OnInit {
     this.cartInfo.forEach((element) => {
       if (element.id == id) {
         element.image = event.addedFiles;
+        console.log("added Image", element.image);
       }
     });
-
     console.log(this.cartInfo);
     this.files.push(...event.addedFiles);
     this.files.forEach((element) => {
@@ -314,11 +310,18 @@ export class ShopComponent implements OnInit {
     console.log(this.files);
     let imgUrl = this.storeTokenService.get("ImgUrl");
     console.log(imgUrl);
+    this.uploadService.imageLocationUrl.subscribe((x) => {
+      console.log("Subscribed Url", x);
+      this.currentImageUrl = x;
+      console.log("Current Image Url", this.currentImageUrl);
+    });
+    console.log("on select CurrentUrl ", this.currentImageUrl);
+
     this.cartInfo.forEach((element) => {
       if (element.id == id) {
         element.image = imgUrl;
         this.placeOrder.details.push({
-          image: imgUrl,
+          image: this.currentImageUrl,
           device_id: element.device_id,
           brand_id: element.brand_id,
           problem_id: element.problem_id,

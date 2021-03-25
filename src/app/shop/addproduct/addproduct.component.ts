@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { HeaderService } from "src/@theme/Services/header.service";
 import { ShopService } from "src/@theme/Services/shop.service";
+import { StoreTokenService } from "src/@theme/Services/store-token.service";
 import { UploadService } from "src/@theme/Services/upload.service";
 
 @Component({
@@ -18,6 +19,7 @@ export class AddproductComponent implements OnInit {
     price: null,
     shop_id: null,
     image: [],
+    cart_id: null,
   };
   brandList: any[];
   deviceList: any[];
@@ -29,7 +31,8 @@ export class AddproductComponent implements OnInit {
     private headerService: HeaderService,
     private uploadService: UploadService,
     private shopService: ShopService,
-    private activeModal: NgbActiveModal
+    private activeModal: NgbActiveModal,
+    private storeTokenService: StoreTokenService
   ) {}
 
   ngOnInit(): void {
@@ -93,6 +96,7 @@ export class AddproductComponent implements OnInit {
   // }
 
   getExpectedPrice() {
+    this.expectedPrice = "";
     let obj = {
       device: this.bookRepair.device_id,
       brand: this.bookRepair.brand_id,
@@ -112,6 +116,7 @@ export class AddproductComponent implements OnInit {
     this.formSubmitted = true;
     if (addCart.valid) {
       this.bookRepair.price = this.expectedPrice;
+      this.bookRepair.cart_id = this.storeTokenService.get("cart_id");
       console.log(addCart);
       console.log(this.bookRepair);
       this.shopService.addCartData(this.bookRepair).subscribe(

@@ -38,7 +38,8 @@
         issue1.invalid &&
         (formSubmitted || issue1.touched) 
         }">
-                <ng-option *ngFor="let issue of issueList" [value]="issue.id">{{issue.problem.problemName}}</ng-option>
+                <ng-option *ngFor="let issue of issueList" [value]="issue.problem.id">{{issue.problem.problemName}}
+                </ng-option>
             </ng-select>
             <div class="text-danger" *ngIf="issue1.invalid &&
             (formSubmitted || issue1.touched)">
