@@ -1,17 +1,17 @@
-import { Injectable } from "@angular/core";
+import { EventEmitter, Injectable, Output } from "@angular/core";
 // import { S3 } from "aws-sdk";
 import * as AWS from "aws-sdk/global";
 import * as S3 from "aws-sdk/clients/s3";
+import { StoreTokenService } from "./store-token.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class UploadService {
-  constructor() {}
+  public imageLocationUrl = new EventEmitter<any>(null);
+  constructor(storeTokenService: StoreTokenService) {}
 
-  uploadFile(file) {
-    let successData;
-    console.log("called");
+  async uploadFile(file) {
     const contentType = file.type;
     const bucket = new S3({
       accessKeyId: "AKIA6FVO5N22QUZE7P3V",
@@ -28,17 +28,18 @@ export class UploadService {
       ContentType: contentType,
     };
     console.log(params);
-    bucket.upload(params, function (err, data) {
+    let that = this;
+    await bucket.upload(params, function (err, data) {
       console.log("bucket upload call");
       if (err) {
         console.log("There was an error uploading your file: ", err);
         return false;
       }
       console.log("Successfully uploaded file.", data);
-      successData = data;
-      console.log(successData.Location);
       console.log(data.Location);
-      return successData;
+      that.imageLocationUrl.emit(data.Location);
+      localStorage.setItem("ImgUrl", data.Location);
+      return true;
     });
     //for upload progress
     // bucket
@@ -55,6 +56,5 @@ export class UploadService {
     //     console.log("in location", data.location);
     //     return true;
     //   });
-    return successData;
   }
 }

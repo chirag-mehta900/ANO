@@ -75,9 +75,14 @@ export class BookRepairComponent implements OnInit {
         this.selectedDeviceName = element.modelName;
       }
     });
-    this.headerService.getIssueListById(event).subscribe(
+    let obj = {
+      brand_id: this.bookRepair.brand,
+      device_id: event,
+    };
+    console.log(obj);
+    this.headerService.getIssueListById(obj).subscribe(
       (data) => {
-        this.issueList.push(data["data"]);
+        this.issueList = data["data"];
       },
       (error) => {}
     );

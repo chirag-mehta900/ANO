@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { NgbModal, NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
 import { ShopService } from "src/@theme/Services/shop.service";
@@ -13,6 +13,7 @@ import { MapService } from "src/@theme/Services/map.service";
   styleUrls: ["./shop.component.css"],
 })
 export class ShopComponent implements OnInit {
+  subscription: any;
   shop: any[] = [];
   lat: any;
   lng: any;
@@ -22,9 +23,9 @@ export class ShopComponent implements OnInit {
     lng: 0,
   };
 
-  placeOrder = {
+  placeOrder: any = {
     shop_id: 1,
-    transactionId: "QQughibhhIuMTop",
+    transactionId: "QQughobhhIuMTop",
     startTime: null,
     endTime: null,
     date: null,
@@ -42,6 +43,8 @@ export class ShopComponent implements OnInit {
   timeList: any[];
   cartInfo: any = {};
   files: File[] = [];
+  imageUploaded: any[] = [];
+  imageEditFlag: boolean = false;
 
   styles = [
     {
@@ -222,14 +225,17 @@ export class ShopComponent implements OnInit {
     private shopService: ShopService,
     private modalService: NgbModal,
     private storeTokenService: StoreTokenService,
-    private mapService: MapService,
     private uploadService: UploadService
   ) {
     config.max = 5;
     config.readonly = true;
+    this.uploadService.imageLocationUrl.subscribe((x) => {
+      console.log(x);
+    });
   }
 
   ngOnInit(): void {
+    this.uploadService.imageLocationUrl.emit("hue");
     this.storeId = JSON.parse(this.route.snapshot.paramMap.get("id"));
     this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
     console.log(this.Location);
@@ -263,6 +269,8 @@ export class ShopComponent implements OnInit {
   getCartData() {
     this.shopService.getCartDetail().subscribe((data) => {
       this.cartInfo = data["data"];
+
+      console.log(this.cartInfo);
     });
   }
   getTimeAccoedingToDate() {
@@ -286,27 +294,58 @@ export class ShopComponent implements OnInit {
     });
   }
 
-  onSelect(event) {
+  onSelect(event, id) {
     console.log(event);
+    console.log(id);
+    this.cartInfo.forEach((element) => {
+      if (element.id == id) {
+        element.image = event.addedFiles;
+      }
+    });
+
+    console.log(this.cartInfo);
     this.files.push(...event.addedFiles);
     this.files.forEach((element) => {
-      //this.upload(element);
+      this.upload(element);
       console.log(element);
     });
+    console.log(this.files);
+    let imgUrl = this.storeTokenService.get("ImgUrl");
+    console.log(imgUrl);
+    this.cartInfo.forEach((element) => {
+      if (element.id == id) {
+        element.image = imgUrl;
+        this.placeOrder.details.push({
+          image: imgUrl,
+          device_id: element.device_id,
+          brand_id: element.brand_id,
+          problem_id: element.problem_id,
+          price: element.price,
+        });
+      }
+    });
+    this.imageUploaded.push({ id: id, imgUrl: imgUrl });
+    console.log(this.imageUploaded);
+    this.imageEditFlag = false;
+
+    // console.log("Location Url", this.imageLocationUrl);
+    this.subscription = this.uploadService.imageLocationUrl;
+    console.log(this.subscription);
   }
-  upload(file) {
+  async upload(file) {
     // const file = this.selectedFiles.item(0);
     console.log("upload file function called");
-    let q = this.uploadService.uploadFile(file).subscribe((response) => {
-      console.log(response);
-    });
-    console.log("From Calling", q);
+    await this.uploadService.uploadFile(file);
     //this.uploadService.uploadfile(file);
   }
 
   onRemove(event) {
     console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  setEditToChangeImage() {
+    this.imageEditFlag = true;
   }
 
   procced() {
@@ -316,18 +355,22 @@ export class ShopComponent implements OnInit {
       this.placeOrder.endTime
     ) {
       console.log("set");
-      this.cartInfo.forEach((element, index) => {
-        this.placeOrder.details.push({
-          device_id: element.device_id,
-          brand_id: element.brand_id,
-          problem_id: element.problem_id,
-          image: element.problem.image,
-          price: element.price,
-        });
+      let Total_price: Number = 0;
+      this.cartInfo.forEach((element) => {
+        Total_price = Total_price + element.price;
+        // this.placeOrder.details.push({
+        //   device_id: element.device_id,
+        //   brand_id: element.brand_id,
+        //   problem_id: element.problem_id,
+        //   price: element.price,
+        // });
       });
-
+      this.placeOrder.Total_Price = Total_price;
+      this.shopService.placeOrder(this.placeOrder).subscribe((data) => {
+        console.log(data["data"]);
+      });
+      console.log("total price", Total_price);
       console.log(this.cartInfo);
-      console.log(this.placeOrder.date);
       console.log(this.placeOrder);
     } else {
       console.log("not set");
