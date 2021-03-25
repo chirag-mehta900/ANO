@@ -2,7 +2,7 @@
     <div class="bg-map">
         <agm-map [latitude]="Lat" [longitude]="Lng" [zoom]="17" [styles]="styles">
             <agm-marker [latitude]="Lat" [longitude]="Lng" [label]="My"></agm-marker>
-            <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude"></agm-marker>
+            <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude" [label]="m.price"></agm-marker>
 
             <!-- [label]="m.price" -->
         </agm-map>

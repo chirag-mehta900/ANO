@@ -1,51 +1,60 @@
-.profile{
+.profile {
     margin-top: 50px;
     /* height: 100vh; */
 }
-.user-profile-img img{
+
+.user-profile-img img {
     height: 180px;
     width: auto;
     border: 4px solid #000;
     border-radius: 83%;
 }
-.profile-detail{
+
+.profile-detail {
     margin-top: 20px;
 }
-.profile-detail input{
-    font-family: 'Poppins-SemiBold';
+
+.profile-detail input {
+    font-family: "Poppins-SemiBold";
     border: none;
     border-bottom: 1px solid #000;
     margin-bottom: 10px;
-}   
-.user-profile-detail p{
-    font-family: 'Poppins-SemiBold';
+}
+
+.user-profile-detail p {
+    font-family: "Poppins-SemiBold";
     font-size: 15px;
     margin-bottom: 0px;
 }
+
 .user-profile {
     display: grid;
     justify-content: center;
 }
-.profile-save{
+
+.profile-save {
     display: flex;
     justify-content: space-between;
     width: 40%;
     margin: auto;
     margin-top: 100px !important;
 }
-.profile-save button{
+
+.profile-save button {
     border: none;
     width: 150px;
-    font-family: 'Poppins-SemiBold';
+    font-family: "Poppins-SemiBold";
     font-size: 15px;
     padding: 10px;
     border-radius: 5px;
 }
-.save-btn{
-    background-color: #FFC542;
+
+.save-btn {
+    background-color: #ffc542;
     color: #000000;
 }
-.cancle-btn{
+
+.cancel-btn {
     background-color: #000000;
     color: #ffffff;
 }
