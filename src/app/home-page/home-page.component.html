@@ -14,7 +14,7 @@
                     </div>
                 </div>
             </div>
-            <carousel>
+            <carousel [height]="280" [cellWidth]="320">
                 <div class="carousel-cell service-box" *ngFor="let s of slider" (click)="OnChange(s)">
                     <img src="{{s.image}}" alt="hey">
                     <h2>{{s.heading}}</h2>

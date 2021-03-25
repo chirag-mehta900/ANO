@@ -29,6 +29,7 @@
     display: flex;
     align-items: center;
     margin-left: 30px;
+    cursor: pointer;
 }
 .header-short ul li button{
     width: 110px;
