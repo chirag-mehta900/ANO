@@ -212,3 +212,12 @@ agm-map {
   border-radius: 5px;
   margin-bottom: 25px;
 }
+.blur-div {
+  background: #fff;
+  background-size: cover;
+  overflow: hidden;
+  filter: blur(10px);
+  position: relative;
+  height: 55px;
+  top: -30px;
+}
