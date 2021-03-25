@@ -70,6 +70,7 @@
 .shop-come {
   width: 80%;
   margin: auto;
+  padding-bottom: 30px;
 }
 
 .search-location img {
@@ -210,7 +211,7 @@ agm-map {
   width: 100%;
   padding: 10px;
   border-radius: 5px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 .blur-div {
   background: #fff;
@@ -220,4 +221,33 @@ agm-map {
   position: relative;
   height: 55px;
   top: -30px;
+}
+.filter-popup{
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.filter-popup h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+.filter-popup p{
+    font-family: 'Poppins-SemiBold';
+    font-size: 10px;
+    margin-bottom: 0px;
+    color: #FFC542;
+}
+.filter-popup-btn{
+    width: 100%;
+    margin-top: 15px;
+}
+.filter-popup-btn button{
+    font-family: 'Poppins-SemiBold';
+    border: none;
+    background-color: #FFC542;
+    border-radius: 5px;
+    width: 100%;
+    margin: auto;
 }
