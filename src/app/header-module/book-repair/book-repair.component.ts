@@ -18,6 +18,7 @@ export class BookRepairComponent implements OnInit {
     lng: 0,
   };
   bookRepair = {
+    brand: null,
     device: null,
     problem: null,
     latitude: null,
@@ -59,7 +60,7 @@ export class BookRepairComponent implements OnInit {
   }
 
   getDeviceList(event) {
-    this.headerService.getDeviceList(event).subscribe(
+    this.headerService.getDeviceList(event.target.value).subscribe(
       (data) => {
         this.deviceList = data['data'];
       },
@@ -73,9 +74,14 @@ export class BookRepairComponent implements OnInit {
         this.selectedDeviceName = element.modelName;
       }
     });
-    this.headerService.getIssueListById(event).subscribe(
+    let obj = {
+      brand_id: this.bookRepair.brand,
+      device_id: event,
+    };
+    console.log(obj);
+    this.headerService.getIssueListById(obj).subscribe(
       (data) => {
-        this.issueList.push(data['data']);
+        this.issueList = data['data'];
       },
       (error) => {}
     );

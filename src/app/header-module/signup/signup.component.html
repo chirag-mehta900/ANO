@@ -7,32 +7,32 @@
                 <p>User Details</p>
                 <div class="signup-inp">
                     <input type="text" name="name" id="name" formControlName="name" placeholder="Name"
-                        [ngClass]="{'is-invalid':(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('name').touched)}"
+                        [ngClass]="{'is-invalid':(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled )}"
                         required>
-                    <div class="text-danger"
-                        *ngIf="(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('name').touched)">
+                    <div class="text-dangerr"
+                        *ngIf="(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled )">
                         Name is required.
                     </div>
                     <input type="email" name="email" id="email" formControlName="email" placeholder="Email"
                         (change)="checkEmail()"
-                        [ngClass]="{'is-invalid':(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('email').touched)}"
+                        [ngClass]="{'is-invalid':(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled )}"
                         required>
-                    <div class="text-danger"
-                        *ngIf="(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('email').touched)">
+                    <div class="text-dangerr"
+                        *ngIf="(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled )">
                         Email is required.
                     </div>
-                    <div class="text-danger" *ngIf="emailExist">
+                    <div class="text-dangerr" *ngIf="emailExist">
                         Email already exist.
                     </div>
-                    <div class="text-danger" *ngIf="signUpForm.get('email').errors?.pattern">
+                    <div class="text-dangerr" *ngIf="signUpForm.get('email').errors?.pattern">
                         Enter valid email.
                     </div>
                     <input type="password" name="password" id="password" formControlName="password"
                         placeholder="Password"
-                        [ngClass]="{'is-invalid':(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('password').touched)}"
+                        [ngClass]="{'is-invalid':(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled )}"
                         required>
-                    <div class="text-danger"
-                        *ngIf="(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('password').touched)">
+                    <div class="text-dangerr"
+                        *ngIf="(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled)">
                         Password is required.
                     </div>
                 </div>
@@ -46,14 +46,15 @@
         <!--Sign up Mobile-->
         <div *ngIf="signUpMobileFlag">
             <div class="signup-form">
-                <p>Enter Mobile#</p>
+                <p>Enter Phone</p>
                 <div class="signup-inp">
-                    <input type="number" name="number" id="number" formControlName="mobileNumber" placeholder="Mobile#"
-                        [ngClass]="{'is-invalid':(signUpForm.get('mobileNumber').invalid)&&(formSubmitted  || signUpForm.get('mobileNumber').touched)}"
-                        required>
+                    <input type="text" name="txtInput" id="bar" formControlName="mobileNumber"
+                        placeholder="Example: (xxx)-xxx-xxxx"
+                        [ngClass]="{'is-invalid':(signUpForm.get('mobileNumber').invalid)&&(formSubmitted)}" required
+                        onkeydown="javascript:backspacerDOWN(this,event);"
+                        onkeyup="javascript:backspacerUP(this,event);">
 
-                    <div class="text-danger"
-                        *ngIf="(signUpForm.get('mobileNumber').invalid)&&(formSubmitted || signUpForm.get('mobileNumber').touched)">
+                    <div class="text-dangerr" *ngIf="(signUpForm.get('mobileNumber').invalid)&&(formSubmitted )">
                         Mobile number is required.
                     </div>
                 </div>

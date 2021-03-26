@@ -56,8 +56,6 @@ export class HomePageComponent implements OnInit {
       console.log(this.Location);
 
       localStorage.setItem('Location', JSON.stringify(this.Location));
-
-      localStorage.setItem('Location', JSON.stringify(this.Location));
       this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
       this.lat = this.Location.lat;
       this.lng = this.Location.lng;

@@ -76,3 +76,21 @@ body {
     max-width: 400px !important;
   }
 }
+
+input.star ~ label.star:before {
+  font-size: 20px !important;
+  padding: -5px;  
+}
+label.star {
+  color: #444;
+  float: right;
+  font-size: 0px !important;
+  margin-right: 7px;
+  padding: 0px !important;
+}
+input:focus {
+  outline: 0 !important;
+}
+select:focus{
+  outline: 0 !important;
+}

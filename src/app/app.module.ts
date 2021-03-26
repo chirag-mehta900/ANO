@@ -19,6 +19,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { TrackingComponent } from './tracking/tracking.component';
 import { TrackingmapComponent } from './trackingmap/trackingmap.component';
+import { CartComponent } from './cart/cart.component';
 import { AgmDirectionModule } from 'agm-direction';
 
 @NgModule({
@@ -32,6 +33,7 @@ import { AgmDirectionModule } from 'agm-direction';
     CheckoutComponent,
     TrackingComponent,
     TrackingmapComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

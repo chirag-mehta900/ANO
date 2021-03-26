@@ -45,25 +45,51 @@
     </div> -->
     <div class="add-product container">
         <div>
-            <h2>Booking Made Easy</h2>
+            <!-- <h2>Booking Made Easy</h2> -->
+            <p>A 30-minute gaming session shows the extent of the rise in temperature, as well as the battery drain.
+                Fortunately for us, all three phones happen to have the exact same 6,000mAh battery capacity. Starting
+                the gaming session with all phones charged at 100 percent, the Narzo 30A dropped about 11 percent while
+                the temperature gained was 12 degrees after 30 minutes.</p>
+            <div style="text-align: center;">
+                <h6>Pricing Factors</h6>
+                <div class="row">
+                    <div class="col-md-3">Base Fee:{{baseFee}}</div>
+                    <div class="col-md-3">ANO's Commission Fee:{{ANOFee}}</div>
+                    <div class="col-md-3">Repair Shop Commission Fee: {{shopCommission}}</div>
+                    <div class="col-md-3">Part Price Based on ANO’s Parts Lists (Price Scale)</div>
+                </div>
+            </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-6">
                 <input type="date" name="distance" [(ngModel)]="placeOrder.date" (input)="getTimeAccoedingToDate()">
             </div>
             <div class="col-md-4">
-                <ng-select name="time">
-                    <ng-option *ngFor="let time of timeList" value=[time.id]>{{time.startTime}} - {{time.endTime}}
+                <ng-select name="time" (change)="setTime($event)">
+                    <ng-option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} - {{time.endTime}}
                     </ng-option>
                 </ng-select>
             </div>
-        </div>
+        </div> -->
         <div class="add-product-display">
             <div class="row">
-                <div class="col-md-3" *ngFor="let cart of cartInfo">
+                <!-- <div class="col-md-3" *ngFor="let cart of cartInfo">
                     <div class="add-product-box">
                         <div class="add-product-imd">
-                            <img class="img-fluid" src="../../assets/images/service1.png" alt="">
+                            <div *ngIf="!cart.image || imageEditFlag" id="cart.id" class="custom-dropzone"
+                                [multiple]="false" ngx-dropzone [accept]="'image/*'"
+                                (change)="onSelect($event,cart.id)">
+                                <ngx-dropzone-label>
+                                    <div>
+                                        <h2>+</h2>
+                                    </div>
+                                </ngx-dropzone-label>
+                                <ngx-dropzone-image-preview [multiple]="false" ngProjectAs="ngx-dropzone-preview"
+                                    *ngFor="let f of cart.image" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                </ngx-dropzone-image-preview>
+                            </div>
+                            <div *ngIf="cart.image && !imageEditFlag"><img src="{{cart.image}}"> </div>
+                            <div><button (click)="setEditToChangeImage()">Edit</button></div>
                         </div>
                         <div class="add-product-details">
                             <h2>{{cart.brand.brandName}} {{cart.device.modelName}}</h2>
@@ -79,10 +105,40 @@
                                 (click)="addRepairDevice()"></button>
                         <p>Add More</p>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="row">
-                <button (click)="procced()">Procced</button>
+                <button (click)="goToCart()">Add Device To Repair</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Our 8 Years of Achivements</h2>
+                <span>With our super powers we have reached this</span>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>5500+</h2>
+                        <span>Happy Users</span>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>5740+</h2>
+                        <span>Devices repaired</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>500+</h2>
+                        <span>Online Services</span>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>4.5</h2>
+                        <span>User rating</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -91,47 +147,54 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="review-circle">
-                        <circle-progress [percent]="85" [radius]="100" [outerStrokeWidth]="12" [innerStrokeWidth]="5" [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300">
+                        <circle-progress [title]="averageRating" [percent]="averageCalculateRating" [radius]="100"
+                            [outerStrokeWidth]="12" [innerStrokeWidth]="5" [outerStrokeColor]="'#78C000'"
+                            [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300">
                         </circle-progress>
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="star">
-                        <img src="../../assets/images/start5.svg" alt="">
+                        <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'"
+                            [disabled]="true" [disabled]=true></ngx-star-rating>
                         <div class="progres-bar">
-                            <span style="width: 20%; background-color: black;"></span>
+                            <span style=" background-color: black;" [style.width.%]="fiveStarRatingBarValue"></span>
                         </div>
 
                     </div>
                     <div class="star">
-                        <img src="../../assets/images/start4.svg" alt="">
+                        <ngx-star-rating class="rating" [(ngModel)]="starValueFour" [id]="'starValueFour'"
+                            [disabled]="true" [disabled]=true></ngx-star-rating>
                         <div class="progres-bar">
-                            <span style="width: 20%; background-color: black;"></span>
+                            <span style=" background-color: black;" [style.width.%]="fourStarRatingBarValue"></span>
                         </div>
 
                     </div>
                     <div class="star">
-                        <img src="../../assets/images/start3.svg" alt="">
+                        <ngx-star-rating class="rating" [(ngModel)]="starValueThree" [id]="'starValueThree'"
+                            [disabled]="true" [disabled]=true></ngx-star-rating>
                         <div class="progres-bar">
-                            <span style="width: 20%; background-color: black;"></span>
+                            <span style=" background-color: black;" [style.width.%]="threeStarRatingBarValue"></span>
                         </div>
                     </div>
                     <div class="star">
-                        <img src="../../assets/images/start2.svg" alt="">
+                        <ngx-star-rating class="rating" [(ngModel)]="starValueTwo" [id]="'starValueTwo'"
+                            [disabled]="true" [disabled]=true></ngx-star-rating>
                         <div class="progres-bar">
-                            <span style="width: 20%; background-color: black;"></span>
+                            <span style="background-color: black;" [style.width.%]="twoStarRatingBarValue"></span>
                         </div>
                     </div>
                     <div class="star">
-                        <img src="../../assets/images/star1.svg" alt="">
+                        <ngx-star-rating class="rating" [(ngModel)]="starValueOne" [id]="'starValueOne'"
+                            [disabled]="true" [disabled]=true></ngx-star-rating>
                         <div class="progres-bar">
-                            <span style="width: 20%; background-color: black;"></span>
+                            <span style=" background-color: black;" [style.width.%]="oneStarRatingBarValue"></span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="review-user">
-                <div class="review-box">
+                <div class="review-box" *ngFor="let review of ratings">
                     <div class="review-photo">
                         <img src="../../assets/images/review user.png" alt="">
                     </div>
@@ -140,10 +203,13 @@
                             <h4>Fionn Norris</h4>
                             <p>01/20/2021, 09:16 AM</p>
                         </div>
-                        <h3>This is the perfect shade that I found after long time. It's fragrance is Very calming.got it in 168 rs.go for it.perfect shade for medium & dark skin tone.</h3>
+                        <span>
+                            <h2>{{review.title}}</h2>
+                        </span>
+                        <h3>{{review.commet}}</h3>
                         <div class="review-rating">
-                            <!-- <h3>3</h3>
-                            <ngb-rating [rate]="3" color="red"></ngb-rating> -->
+                            <ngx-star-rating class="rating" [(ngModel)]="review.rating" [disabled]="true"
+                                [id]="review.id" [disabled]=true></ngx-star-rating>
                         </div>
                     </div>
                 </div>
