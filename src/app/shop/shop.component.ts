@@ -275,7 +275,6 @@ export class ShopComponent implements OnInit {
     this.getAnoFee();
     this.getBaseFee();
     //this.getCartData();
-    console.log(this.storeId);
   }
   getStoreDetail() {
     this.shopService.getStoreDetailById(this.storeId.id).subscribe(
@@ -284,13 +283,9 @@ export class ShopComponent implements OnInit {
         this.shopCommission = data["data"].shopCommision;
         this.averageRating = data["data"].average_rating;
         this.ratings = data["data"].ratings;
-        console.log(this.ratings);
         this.averageCalculateRating = parseInt(
           String((this.averageRating / 5) * 100)
         );
-        console.log(this.averageCalculateRating);
-        console.log(this.averageRating);
-        console.log(this.storeInfo);
         this.calculateReviewBarValue();
       },
       (error) => {}
@@ -336,33 +331,6 @@ export class ShopComponent implements OnInit {
     );
     this.fiveStarRatingBarValue = parseInt(
       String((this.fiveStar / totalCount) * 100)
-    );
-    console.log(
-      "one Star",
-      this.oneStar,
-      "bar value",
-      this.oneStarRatingBarValue
-    );
-    console.log(
-      "Two Star",
-      this.twoStar,
-      "bar value",
-      this.twoStarRatingBarValue
-    );
-    console.log(
-      "Three Star",
-      this.threeStar,
-      "bar value",
-      this.threeStarRatingBarValue
-    );
-    console.log("Four Star", this.fourStar),
-      "bar value",
-      this.fourStarRatingBarValue;
-    console.log(
-      "Five Star",
-      this.fiveStar,
-      "bar value",
-      this.fiveStarRatingBarValue
     );
   }
   getAnoFee() {
