@@ -27,7 +27,7 @@
         <div class="login-det">
             <h2>Don't Have An Account? <span (click)="signUp()">Get started</span></h2>
         </div>
-        <span class="text-danger" *ngIf="invalidUserLog">
+        <span class="text-dangerr" *ngIf="invalidUserLog">
             Invalid Email or password
         </span>
         <button class="next" type="submit" (click)="logIn()" [disabled]="disableButton">Login</button>
