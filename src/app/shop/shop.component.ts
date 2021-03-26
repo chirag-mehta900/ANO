@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { NgbModal, NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
 import { ShopService } from "src/@theme/Services/shop.service";
 import { StoreTokenService } from "src/@theme/Services/store-token.service";
@@ -219,14 +219,42 @@ export class ShopComponent implements OnInit {
   imageUploaded: any[] = [];
   imageEditFlag: boolean = false;
   currentImageUrl: any = "";
+  averageRating: number;
+  averageCalculateRating: number;
+  ratings: any[];
+  //To Count No of star
+  oneStar = 0;
+  twoStar = 0;
+  threeStar = 0;
+  fourStar = 0;
+  fiveStar = 0;
 
+  //to calculate Value for review bar
+  oneStarRatingBarValue = 0;
+  twoStarRatingBarValue = 0;
+  threeStarRatingBarValue = 0;
+  fourStarRatingBarValue = 0;
+  fiveStarRatingBarValue = 0;
+
+  //to give static star value
+  starValueOne = 1;
+  starValueTwo = 2;
+  starValueThree = 3;
+  starValueFour = 4;
+  starValueFive = 5;
+
+  //Price Factors
+  shopCommission;
+  baseFee;
+  ANOFee;
   constructor(
     config: NgbRatingConfig,
     private route: ActivatedRoute,
     private shopService: ShopService,
     private modalService: NgbModal,
     private storeTokenService: StoreTokenService,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private router: Router
   ) {
     config.max = 5;
     config.readonly = true;
@@ -244,152 +272,215 @@ export class ShopComponent implements OnInit {
     this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
 
     this.getStoreDetail();
-    this.getCartData();
-    console.log(this.storeId);
+    this.getAnoFee();
+    this.getBaseFee();
+    //this.getCartData();
   }
   getStoreDetail() {
     this.shopService.getStoreDetailById(this.storeId.id).subscribe(
       (data) => {
         this.storeInfo = data["data"];
+        this.shopCommission = data["data"].shopCommision;
+        this.averageRating = data["data"].average_rating;
+        this.ratings = data["data"].ratings;
+        this.averageCalculateRating = parseInt(
+          String((this.averageRating / 5) * 100)
+        );
+        this.calculateReviewBarValue();
       },
       (error) => {}
     );
   }
-  addRepairDevice() {
-    const modalRef = this.modalService.open(AddproductComponent);
-    modalRef.componentInstance.shopId = this.storeId.id;
-    modalRef.result.then((result) => {
-      this.cartInfo = result;
-      console.log(this.cartInfo);
-      this.storeTokenService.set("cart_id", result.cart_id);
-      this.getCartData();
-    });
-  }
-  getCartData() {
-    this.shopService.getCartDetail().subscribe((data) => {
-      this.cartInfo = data["data"];
-      console.log(this.cartInfo);
-    });
-  }
-  getTimeAccoedingToDate() {
-    let getTimeObj = {
-      durating: 60,
-      shopId: this.storeId.id,
-      date: this.placeOrder.date,
-    };
-    this.shopService.getTimeByDate(getTimeObj).subscribe((data) => {
-      this.timeList = data["data"];
-    });
-  }
-  setTime(event) {
-    console.log(this.timeList);
-    console.log(event);
-    this.timeList.forEach((element) => {
-      if (element.id == event) {
-        this.placeOrder.startTime = element.startTime;
-        this.placeOrder.endTime = element.endTime;
+  calculateReviewBarValue() {
+    this.ratings.forEach((element) => {
+      switch (element.rating) {
+        case 1:
+          this.oneStar++;
+          break;
+        case 2:
+          this.twoStar++;
+          break;
+        case 3:
+          this.threeStar++;
+          break;
+        case 4:
+          this.fourStar++;
+          break;
+        case 5:
+          this.fiveStar++;
+          break;
       }
     });
+    let totalCount =
+      this.oneStar +
+      this.twoStar +
+      this.threeStar +
+      this.fourStar +
+      this.fiveStar;
+    this.oneStarRatingBarValue = parseInt(
+      String((this.oneStar / totalCount) * 100)
+    );
+    this.twoStarRatingBarValue = parseInt(
+      String((this.twoStar / totalCount) * 100)
+    );
+    this.threeStarRatingBarValue = parseInt(
+      String((this.threeStar / totalCount) * 100)
+    );
+    this.fourStarRatingBarValue = parseInt(
+      String((this.fourStar / totalCount) * 100)
+    );
+    this.fiveStarRatingBarValue = parseInt(
+      String((this.fiveStar / totalCount) * 100)
+    );
   }
-
-  onSelect(event, id) {
-    console.log(event);
-    console.log(id);
-    this.cartInfo.forEach((element) => {
-      if (element.id == id) {
-        element.image = event.addedFiles;
-        console.log("added Image", element.image);
-      }
+  getAnoFee() {
+    this.shopService.getAnoFee().subscribe((data) => {
+      this.ANOFee = data["data"][0].value;
     });
-    console.log(this.cartInfo);
-    this.files.push(...event.addedFiles);
-    this.files.forEach((element) => {
-      this.upload(element);
-      console.log(element);
+  }
+  getBaseFee() {
+    this.shopService.getBaseFee().subscribe((data) => {
+      this.baseFee = data["data"][0].value;
     });
-    console.log(this.files);
-    let imgUrl = this.storeTokenService.get("ImgUrl");
-    console.log(imgUrl);
-    this.uploadService.imageLocationUrl.subscribe((x) => {
-      console.log("Subscribed Url", x);
-      this.currentImageUrl = x;
-      console.log("Current Image Url", this.currentImageUrl);
-    });
-    console.log("on select CurrentUrl ", this.currentImageUrl);
-
-    this.cartInfo.forEach((element) => {
-      if (element.id == id) {
-        element.image = imgUrl;
-        this.placeOrder.details.push({
-          image: this.currentImageUrl,
-          device_id: element.device_id,
-          brand_id: element.brand_id,
-          problem_id: element.problem_id,
-          price: element.price,
-        });
-      }
-    });
-    this.imageUploaded.push({ id: id, imgUrl: imgUrl });
-    console.log(this.imageUploaded);
-    this.imageEditFlag = false;
-
-    // console.log("Location Url", this.imageLocationUrl);
-    this.subscription = this.uploadService.imageLocationUrl;
-    console.log(this.subscription);
   }
-  async upload(file) {
-    // const file = this.selectedFiles.item(0);
-    console.log("upload file function called");
-    await this.uploadService.uploadFile(file);
-    //this.uploadService.uploadfile(file);
+  goToCart() {
+    this.router.navigate(["/cart"]);
   }
+  // addRepairDevice() {
+  //   const modalRef = this.modalService.open(AddproductComponent);
+  //   modalRef.componentInstance.shopId = this.storeId.id;
+  //   modalRef.result.then((result) => {
+  //     this.cartInfo = result;
+  //     console.log(this.cartInfo);
+  //     this.storeTokenService.set("cart_id", result.cart_id);
+  //     this.getCartData();
+  //   });
+  // }
+  // getCartData() {
+  //   this.shopService.getCartDetail().subscribe((data) => {
+  //     this.cartInfo = data["data"];
+  //     console.log(this.cartInfo);
+  //   });
+  // }
+  // getTimeAccoedingToDate() {
+  //   let getTimeObj = {
+  //     durating: 60,
+  //     shopId: this.storeId.id,
+  //     date: this.placeOrder.date,
+  //   };
+  //   this.shopService.getTimeByDate(getTimeObj).subscribe((data) => {
+  //     this.timeList = data["data"];
+  //   });
+  // }
+  // setTime(event) {
+  //   console.log(this.timeList);
+  //   console.log(event);
+  //   this.timeList.forEach((element) => {
+  //     if (element.id == event) {
+  //       this.placeOrder.startTime = element.startTime;
+  //       this.placeOrder.endTime = element.endTime;
+  //     }
+  //   });
+  // }
 
-  onRemove(event) {
-    console.log(event);
-    this.files.splice(this.files.indexOf(event), 1);
-  }
+  // onSelect(event, id) {
+  //   console.log(event);
+  //   console.log(id);
+  //   this.cartInfo.forEach((element) => {
+  //     if (element.id == id) {
+  //       element.image = event.addedFiles;
+  //       console.log("added Image", element.image);
+  //     }
+  //   });
+  //   console.log(this.cartInfo);
+  //   this.files.push(...event.addedFiles);
+  //   this.files.forEach((element) => {
+  //     this.upload(element);
+  //     console.log(element);
+  //   });
+  //   console.log(this.files);
+  //   let imgUrl = this.storeTokenService.get("ImgUrl");
+  //   console.log(imgUrl);
+  //   this.uploadService.imageLocationUrl.subscribe((x) => {
+  //     console.log("Subscribed Url", x);
+  //     this.currentImageUrl = x;
+  //     console.log("Current Image Url", this.currentImageUrl);
+  //   });
+  //   console.log("on select CurrentUrl ", this.currentImageUrl);
 
-  setEditToChangeImage() {
-    this.imageEditFlag = true;
-  }
+  //   this.cartInfo.forEach((element) => {
+  //     if (element.id == id) {
+  //       element.image = imgUrl;
+  //       this.placeOrder.details.push({
+  //         image: this.currentImageUrl,
+  //         device_id: element.device_id,
+  //         brand_id: element.brand_id,
+  //         problem_id: element.problem_id,
+  //         price: element.price,
+  //       });
+  //     }
+  //   });
+  //   this.imageUploaded.push({ id: id, imgUrl: imgUrl });
+  //   console.log(this.imageUploaded);
+  //   this.imageEditFlag = false;
 
-  procced() {
-    if (
-      this.placeOrder.date &&
-      this.placeOrder.startTime &&
-      this.placeOrder.endTime
-    ) {
-      console.log("set");
-      let Total_price: Number = 0;
-      this.cartInfo.forEach((element) => {
-        Total_price = Total_price + element.price;
-        // this.placeOrder.details.push({
-        //   device_id: element.device_id,
-        //   brand_id: element.brand_id,
-        //   problem_id: element.problem_id,
-        //   price: element.price,
-        // });
-      });
-      this.placeOrder.Total_Price = Total_price;
-      this.shopService.placeOrder(this.placeOrder).subscribe((data) => {
-        console.log(data["data"]);
-      });
-      console.log("total price", Total_price);
-      console.log(this.cartInfo);
-      console.log(this.placeOrder);
-    } else {
-      console.log("not set");
-      return;
-    }
-    // this.placeOrder.details.forEach((element, index) => {
-    //   this.cartInfo.forEach((ele, index) => {
-    //     element[index].device_id = ele[index].device_id;
-    //   });
-    // });
-    // let copyCartInfo: any[];
-    // this.cartInfo.forEach((element) => {
-    //   copyCartInfo.push(element.device_id);
-    // });
-    // console.log("copy ", copyCartInfo);
-  }
+  //   // console.log("Location Url", this.imageLocationUrl);
+  //   this.subscription = this.uploadService.imageLocationUrl;
+  //   console.log(this.subscription);
+  // }
+  // async upload(file) {
+  //   // const file = this.selectedFiles.item(0);
+  //   console.log("upload file function called");
+  //   await this.uploadService.uploadFile(file);
+  //   //this.uploadService.uploadfile(file);
+  // }
+
+  // onRemove(event) {
+  //   console.log(event);
+  //   this.files.splice(this.files.indexOf(event), 1);
+  // }
+
+  // setEditToChangeImage() {
+  //   this.imageEditFlag = true;
+  // }
+
+  // procced() {
+  //   if (
+  //     this.placeOrder.date &&
+  //     this.placeOrder.startTime &&
+  //     this.placeOrder.endTime
+  //   ) {
+  //     console.log("set");
+  //     let Total_price: Number = 0;
+  //     this.cartInfo.forEach((element) => {
+  //       Total_price = Total_price + element.price;
+  //       // this.placeOrder.details.push({
+  //       //   device_id: element.device_id,
+  //       //   brand_id: element.brand_id,
+  //       //   problem_id: element.problem_id,
+  //       //   price: element.price,
+  //       // });
+  //     });
+  //     this.placeOrder.Total_Price = Total_price;
+  //     this.shopService.placeOrder(this.placeOrder).subscribe((data) => {
+  //       console.log(data["data"]);
+  //     });
+  //     console.log("total price", Total_price);
+  //     console.log(this.cartInfo);
+  //     console.log(this.placeOrder);
+  //   } else {
+  //     console.log("not set");
+  //     return;
+  //   }
+  //   // this.placeOrder.details.forEach((element, index) => {
+  //   //   this.cartInfo.forEach((ele, index) => {
+  //   //     element[index].device_id = ele[index].device_id;
+  //   //   });
+  //   // });
+  //   // let copyCartInfo: any[];
+  //   // this.cartInfo.forEach((element) => {
+  //   //   copyCartInfo.push(element.device_id);
+  //   // });
+  //   // console.log("copy ", copyCartInfo);
+  // }
 }
