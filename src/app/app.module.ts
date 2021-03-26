@@ -19,6 +19,7 @@ import { CheckoutComponent } from "./checkout/checkout.component";
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { TrackingComponent } from "./tracking/tracking.component";
 import { TrackingmapComponent } from "./trackingmap/trackingmap.component";
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { TrackingmapComponent } from "./trackingmap/trackingmap.component";
     CheckoutComponent,
     TrackingComponent,
     TrackingmapComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
