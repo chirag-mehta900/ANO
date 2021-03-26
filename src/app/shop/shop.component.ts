@@ -1,204 +1,256 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { NgbModal, NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
-import { ShopService } from "src/@theme/Services/shop.service";
-import { StoreTokenService } from "src/@theme/Services/store-token.service";
-import { AddproductComponent } from "./addproduct/addproduct.component";
-import { UploadService } from "src/@theme/Services/upload.service";
-import { MapService } from "src/@theme/Services/map.service";
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ShopService } from 'src/@theme/Services/shop.service';
+import { StoreTokenService } from 'src/@theme/Services/store-token.service';
+import { AddproductComponent } from './addproduct/addproduct.component';
+import { UploadService } from 'src/@theme/Services/upload.service';
+import { MapService } from 'src/@theme/Services/map.service';
 
 @Component({
-  selector: "app-shop",
-  templateUrl: "./shop.component.html",
-  styleUrls: ["./shop.component.css"],
+  selector: 'app-shop',
+  templateUrl: './shop.component.html',
+  styleUrls: ['./shop.component.css'],
 })
 export class ShopComponent implements OnInit {
+  shop: any[] = [];
+  lat: any;
+  lng: any;
+  price: {} = {
+    text: '$00',
+    color: 'white',
+    fontWeight: '500',
+    fontSize: '20px',
+  };
+  Location = {
+    lat: 0,
+    lng: 0,
+    Icon: {},
+  };
+
+  ourmark = {
+    icon: {
+      url:
+        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shopmark.png?alt=media&token=a88b489d-4f6d-470a-9aa4-211f82ce6976',
+      scaledSize: {
+        width: 135,
+        height: 115,
+      },
+    },
+  };
+
+  shopmark = {
+    icon: {
+      url:
+        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+      scaledSize: {
+        width: 90,
+        height: 70,
+      },
+    },
+  };
+
+  renderOptions = {
+    suppressMarkers: true,
+  };
+
+  markerOptions = {
+    origin: {
+      icon:
+        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shopmark.png?alt=media&token=a88b489d-4f6d-470a-9aa4-211f82ce6976',
+      draggable: true,
+    },
+    destination: {
+      icon:
+        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+      label: '$00',
+      color: 'white',
+      fontWeight: '500',
+      fontSize: '20px',
+    },
+  };
+
+  origin = { lat: 0, lng: 0 };
+  destination = { lat: 0, lng: 0 };
+
   styles = [
     {
-      elementType: "geometry",
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#f5f5f5",
+          color: '#f5f5f5',
         },
       ],
     },
     {
-      elementType: "labels.icon",
+      elementType: 'labels.icon',
       stylers: [
         {
-          visibility: "off",
+          visibility: 'off',
         },
       ],
     },
     {
-      elementType: "labels.text.fill",
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#616161",
+          color: '#616161',
         },
       ],
     },
     {
-      elementType: "labels.text.stroke",
+      elementType: 'labels.text.stroke',
       stylers: [
         {
-          color: "#f5f5f5",
+          color: '#f5f5f5',
         },
       ],
     },
     {
-      featureType: "administrative.land_parcel",
-      elementType: "labels.text.fill",
+      featureType: 'administrative.land_parcel',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#bdbdbd",
+          color: '#bdbdbd',
         },
       ],
     },
     {
-      featureType: "poi",
-      elementType: "geometry",
+      featureType: 'poi',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#eeeeee",
+          color: '#eeeeee',
         },
       ],
     },
     {
-      featureType: "poi",
-      elementType: "labels.text.fill",
+      featureType: 'poi',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#757575",
+          color: '#757575',
         },
       ],
     },
     {
-      featureType: "poi.park",
-      elementType: "geometry",
+      featureType: 'poi.park',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#e5e5e5",
+          color: '#e5e5e5',
         },
       ],
     },
     {
-      featureType: "poi.park",
-      elementType: "labels.text.fill",
+      featureType: 'poi.park',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#9e9e9e",
+          color: '#9e9e9e',
         },
       ],
     },
     {
-      featureType: "road",
-      elementType: "geometry",
+      featureType: 'road',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#ffffff",
+          color: '#ffffff',
         },
       ],
     },
     {
-      featureType: "road.arterial",
-      elementType: "labels.text.fill",
+      featureType: 'road.arterial',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#757575",
+          color: '#757575',
         },
       ],
     },
     {
-      featureType: "road.highway",
-      elementType: "geometry",
+      featureType: 'road.highway',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#dadada",
+          color: '#dadada',
         },
       ],
     },
     {
-      featureType: "road.highway",
-      elementType: "labels.text.fill",
+      featureType: 'road.highway',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#616161",
+          color: '#616161',
         },
       ],
     },
     {
-      featureType: "road.local",
-      elementType: "labels.text.fill",
+      featureType: 'road.local',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#9e9e9e",
+          color: '#9e9e9e',
         },
       ],
     },
     {
-      featureType: "transit.line",
-      elementType: "geometry",
+      featureType: 'transit.line',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#e5e5e5",
+          color: '#e5e5e5',
         },
       ],
     },
     {
-      featureType: "transit.line",
-      elementType: "labels.text",
+      featureType: 'transit.line',
+      elementType: 'labels.text',
       stylers: [
         {
-          color: "#afa655",
+          color: '#afa655',
         },
         {
-          visibility: "on",
-        },
-      ],
-    },
-    {
-      featureType: "transit.station",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#eeeeee",
+          visibility: 'on',
         },
       ],
     },
     {
-      featureType: "water",
-      elementType: "geometry",
+      featureType: 'transit.station',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#c9c9c9",
+          color: '#eeeeee',
         },
       ],
     },
     {
-      featureType: "water",
-      elementType: "labels.text.fill",
+      featureType: 'water',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#9e9e9e",
+          color: '#c9c9c9',
+        },
+      ],
+    },
+    {
+      featureType: 'water',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#9e9e9e',
         },
       ],
     },
   ];
 
   subscription: any;
-  shop: any[] = [];
-  lat: any;
-  lng: any;
-  My: string = "Home";
-  Location = {
-    lat: 0,
-    lng: 0,
-  };
 
   placeOrder: any = {
     shop_id: 1,
-    transactionId: "QQughobhhIuMTop",
+    transactionId: 'QQughobhhIuMTop',
     startTime: null,
     endTime: null,
     date: null,
@@ -207,9 +259,9 @@ export class ShopComponent implements OnInit {
     Total_Price: null,
     details: [],
   };
-  title = "My first AGM project";
+  title = 'My first AGM project';
 
-  colorTone = "#000";
+  colorTone = '#000';
   per = 78;
   storeId: any;
   storeInfo: any[] = [];
@@ -218,7 +270,7 @@ export class ShopComponent implements OnInit {
   files: File[] = [];
   imageUploaded: any[] = [];
   imageEditFlag: boolean = false;
-  currentImageUrl: any = "";
+  currentImageUrl: any = '';
   averageRating: number;
   averageCalculateRating: number;
   ratings: any[];
@@ -261,15 +313,26 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.storeId = JSON.parse(this.route.snapshot.paramMap.get("id"));
-    this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
+    this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
+    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
     console.log(this.Location);
 
     this.lat = this.Location.lat;
     this.lng = this.Location.lng;
-    this.shop.push(JSON.parse(localStorage.getItem("Shop") || "[]"));
 
-    this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
+    this.origin.lat = this.Location.lat;
+    this.origin.lng = this.Location.lng;
+    console.log(this.origin);
+
+    this.shop.push(JSON.parse(localStorage.getItem('Shop') || '[]'));
+
+    this.destination.lat = this.shop[0].latitude;
+    this.destination.lng = this.shop[0].longitude;
+
+    console.log(this.destination);
+
+    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+    this.shop.push(JSON.parse(localStorage.getItem('Shop') || '[]'));
 
     this.getStoreDetail();
     this.getAnoFee();
@@ -279,10 +342,10 @@ export class ShopComponent implements OnInit {
   getStoreDetail() {
     this.shopService.getStoreDetailById(this.storeId.id).subscribe(
       (data) => {
-        this.storeInfo = data["data"];
-        this.shopCommission = data["data"].shopCommision;
-        this.averageRating = data["data"].average_rating;
-        this.ratings = data["data"].ratings;
+        this.storeInfo = data['data'];
+        this.shopCommission = data['data'].shopCommision;
+        this.averageRating = data['data'].average_rating;
+        this.ratings = data['data'].ratings;
         this.averageCalculateRating = parseInt(
           String((this.averageRating / 5) * 100)
         );
@@ -335,16 +398,16 @@ export class ShopComponent implements OnInit {
   }
   getAnoFee() {
     this.shopService.getAnoFee().subscribe((data) => {
-      this.ANOFee = data["data"][0].value;
+      this.ANOFee = data['data'][0].value;
     });
   }
   getBaseFee() {
     this.shopService.getBaseFee().subscribe((data) => {
-      this.baseFee = data["data"][0].value;
+      this.baseFee = data['data'][0].value;
     });
   }
   goToCart() {
-    this.router.navigate(["/cart"]);
+    this.router.navigate(['/cart']);
   }
   // addRepairDevice() {
   //   const modalRef = this.modalService.open(AddproductComponent);
