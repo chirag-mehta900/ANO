@@ -16,13 +16,20 @@ export class HeaderModuleComponent implements OnInit {
   userName: any;
   isopenDropdown:boolean = false
   isModalOpen: boolean = false;
-  constructor(
+  isCollapsed
+  expandPanel
+  isTablet
+
+  isMobile
+    constructor(
     private modalService: NgbModal,
     private headerService: HeaderService,
     private activatedRoute: ActivatedRoute,
     private storeTokenService: StoreTokenService,
     public router: Router
-  ) {}
+  ) {
+    this.formatDevice()
+  }
 
   ngOnInit() {
     this.headerService.getUserName().subscribe(
@@ -31,6 +38,33 @@ export class HeaderModuleComponent implements OnInit {
       },
       (error) => {}
     );
+  }
+  formatDevice() {
+    this.expandPanel = this.isTablet = this.isMobile = this.isCollapsed=false;
+    if (window.innerWidth >= 1024) {
+      this.expandPanel = true;
+      console.log("expand",this.expandPanel)
+      this.isCollapsed=false
+      console.log(this.isCollapsed)
+    } else if (window.innerWidth >= 767 && window.innerWidth < 1024) {
+      this.isTablet = true;
+      console.log("tablet",this.isTablet)
+      this.isCollapsed=true
+    } else {
+      this.isMobile = true;
+      console.log("mobile",this.isMobile)
+      this.isCollapsed=true
+    }
+    if (
+      window.innerWidth > window.innerHeight &&
+      window.innerWidth >= 640 &&
+      (this.isMobile || this.isTablet)
+    ) {
+      this.isMobile = this.isTablet = false;
+      this.isCollapsed=false
+      this.expandPanel = true;
+    }
+  
   }
   openDropdown(){
     if(this.isopenDropdown){
