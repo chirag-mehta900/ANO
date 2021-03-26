@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HeaderService } from 'src/@theme/Services/header.service';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { BookRepairComponent } from './book-repair/book-repair.component';
-import { ActivatedRoute, Router } from '@angular/router';
-import { StoreTokenService } from 'src/@theme/Services/store-token.service';
+import { Component, OnInit } from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { HeaderService } from "src/@theme/Services/header.service";
+import { LoginComponent } from "./login/login.component";
+import { SignupComponent } from "./signup/signup.component";
+import { BookRepairComponent } from "./book-repair/book-repair.component";
+import { ActivatedRoute, Router } from "@angular/router";
+import { StoreTokenService } from "src/@theme/Services/store-token.service";
 
 @Component({
-  selector: 'app-header-module',
-  templateUrl: './header-module.component.html',
-  styleUrls: ['./header-module.component.css'],
+  selector: "app-header-module",
+  templateUrl: "./header-module.component.html",
+  styleUrls: ["./header-module.component.css"],
 })
 export class HeaderModuleComponent implements OnInit {
   userName: any;
+  isModalOpen: boolean = false;
   constructor(
     private modalService: NgbModal,
     private headerService: HeaderService,
@@ -25,7 +26,7 @@ export class HeaderModuleComponent implements OnInit {
   ngOnInit() {
     this.headerService.getUserName().subscribe(
       (data) => {
-        this.userName = data['data'].name;
+        this.userName = data["data"].name;
       },
       (error) => {}
     );
@@ -33,6 +34,9 @@ export class HeaderModuleComponent implements OnInit {
 
   logIn() {
     this.userName = null;
+    if (this.modalService.hasOpenModals()) {
+      this.modalService.dismissAll();
+    }
     const modalRef = this.modalService.open(LoginComponent);
     modalRef.result.then((result) => {
       this.setUserName();
@@ -41,13 +45,16 @@ export class HeaderModuleComponent implements OnInit {
   setUserName() {
     this.headerService.getUserName().subscribe(
       (data) => {
-        this.userName = data['data'].name;
-        this.storeTokenService.set('user_id', data['data'].id);
+        this.userName = data["data"].name;
+        this.storeTokenService.set("user_id", data["data"].id);
       },
       (error) => {}
     );
   }
   signUp() {
+    if (this.modalService.hasOpenModals()) {
+      this.modalService.dismissAll();
+    }
     const modalRef = this.modalService.open(SignupComponent);
     modalRef.result.then((result) => {
       this.userName = result;
@@ -55,13 +62,16 @@ export class HeaderModuleComponent implements OnInit {
   }
 
   onhome() {
-    this.router.navigate(['home']);
+    this.router.navigate(["home"]);
   }
 
   onabout() {
-    this.router.navigate(['about']);
+    this.router.navigate(["about"]);
   }
   bookRepair() {
+    if (this.modalService.hasOpenModals()) {
+      this.modalService.dismissAll();
+    }
     const modalRef = this.modalService.open(BookRepairComponent);
   }
 }
