@@ -9,7 +9,7 @@
                     <input type="text" name="name" id="name" formControlName="name" placeholder="Name"
                         [ngClass]="{'is-invalid':(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('name').touched)}"
                         required>
-                    <div class="text-danger"
+                    <div class="text-dangerr"
                         *ngIf="(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('name').touched)">
                         Name is required.
                     </div>
@@ -17,21 +17,21 @@
                         (change)="checkEmail()"
                         [ngClass]="{'is-invalid':(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('email').touched)}"
                         required>
-                    <div class="text-danger"
+                    <div class="text-dangerr"
                         *ngIf="(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('email').touched)">
                         Email is required.
                     </div>
-                    <div class="text-danger" *ngIf="emailExist">
+                    <div class="text-dangerr" *ngIf="emailExist">
                         Email already exist.
                     </div>
-                    <div class="text-danger" *ngIf="signUpForm.get('email').errors?.pattern">
+                    <div class="text-dangerr" *ngIf="signUpForm.get('email').errors?.pattern">
                         Enter valid email.
                     </div>
                     <input type="password" name="password" id="password" formControlName="password"
                         placeholder="Password"
                         [ngClass]="{'is-invalid':(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('password').touched)}"
                         required>
-                    <div class="text-danger"
+                    <div class="text-dangerr"
                         *ngIf="(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled || signUpForm.get('password').touched)">
                         Password is required.
                     </div>
@@ -52,7 +52,7 @@
                         [ngClass]="{'is-invalid':(signUpForm.get('mobileNumber').invalid)&&(formSubmitted  || signUpForm.get('mobileNumber').touched)}"
                         required>
 
-                    <div class="text-danger"
+                    <div class="text-dangerr"
                         *ngIf="(signUpForm.get('mobileNumber').invalid)&&(formSubmitted || signUpForm.get('mobileNumber').touched)">
                         Mobile number is required.
                     </div>
