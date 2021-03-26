@@ -9,7 +9,7 @@
     <div class="filter">
         <div class="shop-filter shop-in-box">
             <div class="shop-filt-inp">
-                <input type="text" name="mapshop" id="shop" placeholder="Search Device, Brand, Model, etc">
+                <input type="text" name="mapshop" id="shop" placeholder="Search Shop">
                 <button (click)="filter()"><img src="../../assets/images/Sliders.svg" alt=""></button>
             </div>
             <!--Filer Pop up-->
@@ -44,6 +44,7 @@
                         </select>
                     </div>
                     <div class="filter-popup-btn">
+                        <button>Apply Filter</button>
                         <button (click)="applyFilter()">Close</button>
                     </div>
                 </div>
@@ -56,7 +57,10 @@
                     <div class="shop-detail">
                         <div class="detail-name">
                             <h2>{{store.shopName}}</h2>
-                            <ngb-rating [rate]="3" color="red"></ngb-rating>
+                            <div class="cont">
+                                <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'"
+                                    [disabled]="true"></ngx-star-rating>
+                            </div>
                         </div>
                         <div class="detail-name2">
                             <div class="dis-f">
@@ -88,7 +92,7 @@
             <div class="text-center title-shop">
                 <h2>Top Shop</h2>
             </div>
-            <carousel [height]="280" [cellWidth]="320" [arrowsOutside]="true">
+            <carousel [height]="245" [cellWidth]="320" [arrowsOutside]="true">
                 <div class="shop-box carousel-cell" *ngFor="let store of storeInfo"
                     (click)="shopDetail(store.id,store)">
                     <div class="shop-img">
@@ -97,7 +101,10 @@
                     <div class="shop-detail">
                         <div class="detail-name">
                             <h2>{{store.shopName}}</h2>
-                            <ngb-rating [rate]="3" color="red"></ngb-rating>
+                            <div class="cont">
+                                <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'"
+                                    [disabled]="true"></ngx-star-rating>
+                            </div>
                         </div>
                         <div class="detail-name2">
                             <div class="dis-f">

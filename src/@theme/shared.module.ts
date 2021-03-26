@@ -15,6 +15,7 @@ import { MapService } from './Services/map.service';
 import { ShopService } from './Services/shop.service';
 import { StoreTokenService } from './Services/store-token.service';
 import { UploadService } from './Services/upload.service';
+import { NgxStarRatingModule } from 'ngx-star-rating';
 const NB_Module = [
   NgbModule,
   SlickCarouselModule,
@@ -25,6 +26,7 @@ const NB_Module = [
   ReactiveFormsModule,
   NgxDropzoneModule,
   NgOtpInputModule,
+  NgxStarRatingModule
 ];
 @NgModule({
   imports: [CommonModule, ...NB_Module],
