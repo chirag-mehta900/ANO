@@ -13,6 +13,7 @@ export class HomePageComponent implements OnInit {
   Data: any[] = [];
   slider: any[] = [];
   display: any[] = [];
+
   selectedImg = [
     'http://placehold.it/350x150/000000',
     'http://placehold.it/350x150/000000',
@@ -32,10 +33,20 @@ export class HomePageComponent implements OnInit {
   Location = {
     lat: 0,
     lng: 0,
+    Icon: {
+      url:
+        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
+      scaledSize: {
+        width: 200,
+        height: 100,
+      },
+    },
   };
   constructor(private modalService: NgbModal, private header: HeaderService) {}
 
   ngOnInit() {
+    localStorage.setItem('Location', JSON.stringify(this.Location));
+
     if (!navigator.geolocation) {
       console.log('location not found');
     }
@@ -45,10 +56,24 @@ export class HomePageComponent implements OnInit {
       console.log(this.Location);
 
       localStorage.setItem('Location', JSON.stringify(this.Location));
+
+      localStorage.setItem('Location', JSON.stringify(this.Location));
       this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
       this.lat = this.Location.lat;
       this.lng = this.Location.lng;
     });
+
+    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+
+    if (this.Location.lat == 0 && this.Location.lng == 0) {
+      this.Location.lat = 21.27;
+      this.Location.lng = 72.958;
+
+      this.lat = this.Location.lat;
+      this.lng = this.Location.lng;
+    }
+
+    localStorage.setItem('Location', JSON.stringify(this.Location));
 
     this.header.slider().subscribe((data) => {
       // this.Data.push(data);

@@ -91,6 +91,7 @@ agm-map {
     height: 120px;
     width: auto;
 }
+
 .shop-img img {
     height: 160px !important;
     width: auto !important;
@@ -102,7 +103,7 @@ agm-map {
 }
 
 .shop-detail .detail-name h2 {
-    font-family: 'Poppins-SemiBold';
+    font-family: "Poppins-SemiBold";
     font-size: 20px;
     margin-right: 10px;
     margin-bottom: 0px;
@@ -116,7 +117,6 @@ agm-map {
 
 .shop-detail {
     padding: 20px;
-
 }
 
 .shop-detail img {
@@ -129,7 +129,7 @@ agm-map {
 }
 
 .detail-name2 p {
-    font-family: 'Poppins-Regular';
+    font-family: "Poppins-Regular";
     margin-left: 5px;
     margin-bottom: 0px;
 }
@@ -138,18 +138,22 @@ agm-map {
     margin-top: 40px;
     font-family: "Poppins-SemiBold";
 }
-.expe{
+
+.expe {
     margin-top: 40px;
 }
+
 .experience {
     background-color: #ffefcf;
     padding: 10px;
     margin-top: 30px;
 }
-.expe .text-center h2{
-    font-family: 'Poppins-SemiBold';
+
+.expe .text-center h2 {
+    font-family: "Poppins-SemiBold";
     font-size: 30px;
 }
+
 .experience-detail {
     display: grid;
     margin-top: 40px;
@@ -187,21 +191,25 @@ agm-map {
     position: relative;
     top: 10px;
 }
-.shop-filt-inp{
+
+.shop-filt-inp {
     display: flex;
     justify-content: space-evenly;
     margin-bottom: 20px;
 }
-.shop-in-box{
+
+.shop-in-box {
     overflow-y: scroll;
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
-.title-shop{
+
+.title-shop {
     margin-bottom: 40px;
 }
-.title-shop h2{
-    font-family: 'Poppins-SemiBold';
+
+.title-shop h2 {
+    font-family: "Poppins-SemiBold";
     font-size: 30px;
 }

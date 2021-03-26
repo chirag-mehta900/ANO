@@ -3,6 +3,7 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MapService } from 'src/@theme/Services/map.service';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderService } from 'src/@theme/Services/header.service';
 
 @Component({
   selector: 'app-mappage',
@@ -15,11 +16,27 @@ export class MappageComponent implements OnInit {
   Lat: any;
   Lng: any;
   area: any;
+  shopmarker: object = {};
   autocomplete: any;
   location: any;
   Marker: any[] = [];
-  My: string = 'Home';
+  searchshop: any[] = [];
   shop: any;
+  Data: any[] = [];
+  price: {} = {
+    text: '$00',
+    color: 'white',
+    fontWeight: '500',
+    fontSize: '20px',
+  };
+
+  icon: {
+    url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247';
+    scaledSize: {
+      width: 200;
+      height: 150;
+    };
+  };
   styles = [
     {
       elementType: 'geometry',
@@ -206,13 +223,15 @@ export class MappageComponent implements OnInit {
   Location = {
     lat: 0,
     lng: 0,
+    Icon: {},
   };
   constructor(
     private config: NgbRatingConfig,
     private mapService: MapService,
     private storeTokenService: StoreTokenService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private headerService: HeaderService
   ) {
     config.max = 5;
     config.readonly = true;
@@ -227,6 +246,7 @@ export class MappageComponent implements OnInit {
     navigator.geolocation.getCurrentPosition((position) => {
       this.Location.lat = position.coords.latitude;
       this.Location.lng = position.coords.longitude;
+
       console.log(this.Location);
 
       localStorage.setItem('Location', JSON.stringify(this.Location));
@@ -236,14 +256,17 @@ export class MappageComponent implements OnInit {
 
       console.log(this.Lat);
       console.log(this.Lng);
-
-      this.mapService
-        .getArea(this.Location.lat, this.Location.lng)
-        .subscribe((data: any) => {
-          this.area = data.results[0].formatted_address;
-          console.log(this.area);
-        });
     });
+    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+    this.Lat = this.Location.lat;
+    this.Lng = this.Location.lng;
+
+    this.mapService
+      .getArea(this.Location.lat, this.Location.lng)
+      .subscribe((data: any) => {
+        this.area = data.results[0].formatted_address;
+        console.log(this.area);
+      });
     const input = document.getElementById('pac-input') as HTMLInputElement;
     this.autocomplete = new google.maps.places.Autocomplete(input, {});
 
@@ -252,6 +275,7 @@ export class MappageComponent implements OnInit {
   }
 
   handleAddressChange(address: any) {
+    this.Marker.length = 0;
     console.log(address);
     this.area = address;
 
@@ -268,6 +292,53 @@ export class MappageComponent implements OnInit {
       this.Lat = this.Location.lat;
       this.Lng = this.Location.lng;
     });
+
+    this.searchshop.length = 0;
+    this.searchshop.push(
+      JSON.parse(localStorage.getItem('deviceProblem') || '[]')
+    );
+
+    this.searchshop[0].latitude = this.Lat;
+    this.searchshop[0].longitude = this.Lng;
+
+    console.log(this.searchshop);
+    localStorage.setItem('deviceProblem', JSON.stringify(this.searchshop[0]));
+
+    this.headerService.searchStore(this.searchshop[0]).subscribe(
+      (data) => {
+        console.log(data);
+        this.Data.push(data);
+        for (var i = 0; i < this.Data.length; i++) {
+          for (var j = 0; j < this.Data[i].data.length; j++) {
+            this.shopmarker = {
+              latitude: this.Data[i].data[j].latitude,
+              longitude: this.Data[i].data[j].longitude,
+              icon: {
+                url:
+                  'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+                scaledSize: {
+                  width: 100,
+                  height: 70,
+                },
+              },
+              Price: this.price,
+            };
+
+            this.Marker.push(this.shopmarker);
+          }
+        }
+
+        localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
+
+        console.log(this.Marker);
+
+        this.router.navigate([
+          '/map',
+          { storeData: JSON.stringify(data['data']) },
+        ]);
+      },
+      (error) => {}
+    );
 
     this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get('storeData'));
   }

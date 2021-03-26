@@ -12,14 +12,12 @@ export class BookRepairComponent implements OnInit {
   shopmarker: object = {};
   Data: any[] = [];
   Marker: any[] = [];
-
+  price: number = 0;
   Location = {
     lat: 0,
     lng: 0,
-    id: 0,
   };
   bookRepair = {
-    brand: null,
     device: null,
     problem: null,
     latitude: null,
@@ -110,31 +108,32 @@ export class BookRepairComponent implements OnInit {
       this.bookRepair.longitude = this.Location.lng;
       console.log(this.bookRepair);
 
+      localStorage.setItem('deviceProblem', JSON.stringify(this.bookRepair));
+
       this.headerService.searchStore(this.bookRepair).subscribe(
         (data) => {
           console.log(data);
           this.Data.push(data);
           for (var i = 0; i < this.Data.length; i++) {
             for (var j = 0; j < this.Data[i].data.length; j++) {
-              if (!this.Data[i].data[j].pricing.length) {
-                this.shopmarker = {
-                  latitude: this.Data[i].data[j].latitude,
-                  longitude: this.Data[i].data[j].longitude,
-                  id: this.Data[i].data[j].id,
-
-                  // price: this.Data[i].data[j].pricing[0].price,
-                };
-              } else {
-                this.shopmarker = {
-                  latitude: this.Data[i].data[j].latitude,
-                  longitude: this.Data[i].data[j].longitude,
-                  price: this.Data[i].data[j].pricing[0].price,
-                };
-              }
+              this.shopmarker = {
+                latitude: this.Data[i].data[j].latitude,
+                longitude: this.Data[i].data[j].longitude,
+                icon: {
+                  url:
+                    'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+                  scaledSize: {
+                    width: 100,
+                    height: 70,
+                  },
+                },
+                Price: this.price,
+              };
 
               this.Marker.push(this.shopmarker);
             }
           }
+
           localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
 
           console.log(this.Marker);

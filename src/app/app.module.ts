@@ -19,6 +19,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { TrackingComponent } from './tracking/tracking.component';
 import { TrackingmapComponent } from './trackingmap/trackingmap.component';
+import { AgmDirectionModule } from 'agm-direction';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { TrackingmapComponent } from './trackingmap/trackingmap.component';
     HeaderModuleModule,
     GooglePlaceModule,
     SharedModule,
+    AgmDirectionModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCrr-U8HBzd2cqmW9UpipocVTl9rHjCphY',
     }),

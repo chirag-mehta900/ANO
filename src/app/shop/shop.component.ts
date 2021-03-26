@@ -14,11 +14,62 @@ export class ShopComponent implements OnInit {
   shop: any[] = [];
   lat: any;
   lng: any;
-  My: string = 'Home';
+  price: {} = {
+    text: '$00',
+    color: 'white',
+    fontWeight: '500',
+    fontSize: '20px',
+  };
   Location = {
     lat: 0,
     lng: 0,
+    Icon: {},
   };
+
+  ourmark = {
+    icon: {
+      url:
+        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shopmark.png?alt=media&token=a88b489d-4f6d-470a-9aa4-211f82ce6976',
+      scaledSize: {
+        width: 135,
+        height: 115,
+      },
+    },
+  };
+
+  shopmark = {
+    icon: {
+      url:
+        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+      scaledSize: {
+        width: 90,
+        height: 70,
+      },
+    },
+  };
+
+  renderOptions = {
+    suppressMarkers: true,
+  };
+
+  markerOptions = {
+    origin: {
+      icon:
+        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shopmark.png?alt=media&token=a88b489d-4f6d-470a-9aa4-211f82ce6976',
+      draggable: true,
+    },
+    destination: {
+      icon:
+        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+      label: '$00',
+      color: 'white',
+      fontWeight: '500',
+      fontSize: '20px',
+    },
+  };
+
+  origin = { lat: 0, lng: 0 };
+  destination = { lat: 0, lng: 0 };
 
   placeOrder = {
     shop_id: 1,
@@ -39,7 +90,6 @@ export class ShopComponent implements OnInit {
       },
     ],
   };
-  title = 'My first AGM project';
 
   colorTone = '#000';
   per = 78;
@@ -239,7 +289,17 @@ export class ShopComponent implements OnInit {
 
     this.lat = this.Location.lat;
     this.lng = this.Location.lng;
+
+    this.origin.lat = this.Location.lat;
+    this.origin.lng = this.Location.lng;
+    console.log(this.origin);
+
     this.shop.push(JSON.parse(localStorage.getItem('Shop') || '[]'));
+
+    this.destination.lat = this.shop[0].latitude;
+    this.destination.lng = this.shop[0].longitude;
+
+    console.log(this.destination);
 
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
 

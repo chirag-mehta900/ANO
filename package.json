@@ -11,7 +11,6 @@
     },
     "private": true,
     "dependencies": {
-        "@agm/core": "^3.0.0-beta.0",
         "@angular/animations": "~11.2.6",
         "@angular/common": "~11.2.6",
         "@angular/compiler": "~11.2.6",
@@ -24,6 +23,7 @@
         "@ng-bootstrap/ng-bootstrap": "^9.0.2",
         "@ng-select/ng-select": "^6.1.0",
         "@types/googlemaps": "^3.39.12",
+        "agm-direction": "^0.8.9",
         "angular-responsive-carousel": "^2.0.2",
         "aws-s3": "^2.0.5",
         "aws-sdk": "^2.868.0",
