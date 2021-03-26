@@ -236,6 +236,17 @@ export class ShopComponent implements OnInit {
   fourStarRatingBarValue = 0;
   fiveStarRatingBarValue = 0;
 
+  //to give static star value
+  starValueOne = 1;
+  starValueTwo = 2;
+  starValueThree = 3;
+  starValueFour = 4;
+  starValueFive = 5;
+
+  //Price Factors
+  shopCommission;
+  baseFee;
+  ANOFee;
   constructor(
     config: NgbRatingConfig,
     private route: ActivatedRoute,
@@ -261,6 +272,8 @@ export class ShopComponent implements OnInit {
     this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
 
     this.getStoreDetail();
+    this.getAnoFee();
+    this.getBaseFee();
     //this.getCartData();
     console.log(this.storeId);
   }
@@ -268,6 +281,7 @@ export class ShopComponent implements OnInit {
     this.shopService.getStoreDetailById(this.storeId.id).subscribe(
       (data) => {
         this.storeInfo = data["data"];
+        this.shopCommission = data["data"].shopCommision;
         this.averageRating = data["data"].average_rating;
         this.ratings = data["data"].ratings;
         console.log(this.ratings);
@@ -350,6 +364,16 @@ export class ShopComponent implements OnInit {
       "bar value",
       this.fiveStarRatingBarValue
     );
+  }
+  getAnoFee() {
+    this.shopService.getAnoFee().subscribe((data) => {
+      this.ANOFee = data["data"][0].value;
+    });
+  }
+  getBaseFee() {
+    this.shopService.getBaseFee().subscribe((data) => {
+      this.baseFee = data["data"][0].value;
+    });
   }
   goToCart() {
     this.router.navigate(["/cart"]);

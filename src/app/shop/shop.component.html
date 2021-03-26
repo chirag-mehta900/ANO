@@ -51,12 +51,12 @@
                 the temperature gained was 12 degrees after 30 minutes.</p>
             <div style="text-align: center;">
                 <h6>Pricing Factors</h6>
-                <span>
-                    Base Fee:
-                    ANO's Commission Fee:
-                    Repair Shop Commission Fee:
-                    Part Price Based on ANO’s Parts Lists (Price Scale)
-                </span>
+                <div class="row">
+                    <div class="col-md-3">Base Fee:{{baseFee}}</div>
+                    <div class="col-md-3">ANO's Commission Fee:{{ANOFee}}</div>
+                    <div class="col-md-3">Repair Shop Commission Fee: {{shopCommission}}</div>
+                    <div class="col-md-3">Part Price Based on ANO’s Parts Lists (Price Scale)</div>
+                </div>
             </div>
         </div>
         <!-- <div class="row">
@@ -111,6 +111,36 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Our 8 Years of Achivements</h2>
+                <span>With our super powers we have reached this</span>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>5500+</h2>
+                        <span>Happy Users</span>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>5740+</h2>
+                        <span>Devices repaired</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h2>500+</h2>
+                        <span>Online Services</span>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>4.5</h2>
+                        <span>User rating</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="reviews">
         <div class="container">
             <div class="row">
@@ -124,33 +154,38 @@
                 </div>
                 <div class="col-md-8">
                     <div class="star">
-                        <img src="../../assets/images/start5.svg" alt="">
+                        <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'"
+                            [disabled]="true" [disabled]=true></ngx-star-rating>
                         <div class="progres-bar">
                             <span style=" background-color: black;" [style.width.%]="fiveStarRatingBarValue"></span>
                         </div>
 
                     </div>
                     <div class="star">
-                        <img src="../../assets/images/start4.svg" alt="">
+                        <ngx-star-rating class="rating" [(ngModel)]="starValueFour" [id]="'starValueFour'"
+                            [disabled]="true" [disabled]=true></ngx-star-rating>
                         <div class="progres-bar">
                             <span style=" background-color: black;" [style.width.%]="fourStarRatingBarValue"></span>
                         </div>
 
                     </div>
                     <div class="star">
-                        <img src="../../assets/images/start3.svg" alt="">
+                        <ngx-star-rating class="rating" [(ngModel)]="starValueThree" [id]="'starValueThree'"
+                            [disabled]="true" [disabled]=true></ngx-star-rating>
                         <div class="progres-bar">
                             <span style=" background-color: black;" [style.width.%]="threeStarRatingBarValue"></span>
                         </div>
                     </div>
                     <div class="star">
-                        <img src="../../assets/images/start2.svg" alt="">
+                        <ngx-star-rating class="rating" [(ngModel)]="starValueTwo" [id]="'starValueTwo'"
+                            [disabled]="true" [disabled]=true></ngx-star-rating>
                         <div class="progres-bar">
                             <span style="background-color: black;" [style.width.%]="twoStarRatingBarValue"></span>
                         </div>
                     </div>
                     <div class="star">
-                        <img src="../../assets/images/star1.svg" alt="">
+                        <ngx-star-rating class="rating" [(ngModel)]="starValueOne" [id]="'starValueOne'"
+                            [disabled]="true" [disabled]=true></ngx-star-rating>
                         <div class="progres-bar">
                             <span style=" background-color: black;" [style.width.%]="oneStarRatingBarValue"></span>
                         </div>
@@ -172,8 +207,8 @@
                         </span>
                         <h3>{{review.commet}}</h3>
                         <div class="review-rating">
-                            <!-- <h3>3</h3>
-                            <ngb-rating [rate]="3" color="red"></ngb-rating> -->
+                            <ngx-star-rating class="rating" [(ngModel)]="review.rating" [disabled]="true"
+                                [id]="review.id" [disabled]=true></ngx-star-rating>
                         </div>
                     </div>
                 </div>
