@@ -217,6 +217,9 @@ export class MappageComponent implements OnInit {
     device_id: null,
     problem_id: null,
   };
+
+  rating3 = 3;
+
   constructor(
     private config: NgbRatingConfig,
     private mapService: MapService,

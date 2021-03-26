@@ -14,6 +14,7 @@ import { StoreTokenService } from "src/@theme/Services/store-token.service";
 })
 export class HeaderModuleComponent implements OnInit {
   userName: any;
+  isopenDropdown:boolean = false
   isModalOpen: boolean = false;
   constructor(
     private modalService: NgbModal,
@@ -30,6 +31,12 @@ export class HeaderModuleComponent implements OnInit {
       },
       (error) => {}
     );
+  }
+  openDropdown(){
+    if(this.isopenDropdown){
+      this.isopenDropdown=false
+    }else{
+    this.isopenDropdown = true}
   }
 
   logIn() {
@@ -64,7 +71,12 @@ export class HeaderModuleComponent implements OnInit {
   onhome() {
     this.router.navigate(["home"]);
   }
-
+  account(){
+    this.router.navigate(['profile'])
+  }
+  cart(){
+    this.router.navigate(['profile/service'])
+  }
   onabout() {
     this.router.navigate(["about"]);
   }
