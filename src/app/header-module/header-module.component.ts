@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { HeaderService } from "src/@theme/Services/header.service";
 import { LoginComponent } from "./login/login.component";
@@ -13,12 +13,13 @@ import { StoreTokenService } from "src/@theme/Services/store-token.service";
   styleUrls: ["./header-module.component.css"],
 })
 export class HeaderModuleComponent implements OnInit {
+  @ViewChild('toggleButton') toggleButton: ElementRef;
+  @ViewChild('menu') menu: ElementRef;
+  @ViewChild('userProfile') userProfile: ElementRef;
+  @ViewChild('drop') drop: ElementRef;
   userName: any;
-  isopenDropdown:boolean = false
   isModalOpen: boolean = false;
-  isCollapsed
-  expandPanel
-  isTablet
+
 
   isMobile
     constructor(
@@ -26,11 +27,27 @@ export class HeaderModuleComponent implements OnInit {
     private headerService: HeaderService,
     private activatedRoute: ActivatedRoute,
     private storeTokenService: StoreTokenService,
-    public router: Router
+    public router: Router,
+    private renderer: Renderer2
   ) {
-    this.formatDevice()
+    this.renderer.listen('window', 'click',(e:Event)=>{
+     if(e.target !== this.toggleButton.nativeElement && e.target!==this.menu.nativeElement){
+         this.isMenuOpen=false;
+     }
+     if(e.target !==this.userProfile.nativeElement && e.target!==this.drop.nativeElement){
+       this.isopenDropdown=false
+     }
+ });
   }
+  isMenuOpen = false;
+  isopenDropdown = false
 
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+  openDropdown(){
+    this.isopenDropdown = !this.isopenDropdown;
+  }
   ngOnInit() {
     this.headerService.getUserName().subscribe(
       (data) => {
@@ -39,39 +56,35 @@ export class HeaderModuleComponent implements OnInit {
       (error) => {}
     );
   }
-  formatDevice() {
-    this.expandPanel = this.isTablet = this.isMobile = this.isCollapsed=false;
-    if (window.innerWidth >= 1024) {
-      this.expandPanel = true;
-      console.log("expand",this.expandPanel)
-      this.isCollapsed=false
-      console.log(this.isCollapsed)
-    } else if (window.innerWidth >= 767 && window.innerWidth < 1024) {
-      this.isTablet = true;
-      console.log("tablet",this.isTablet)
-      this.isCollapsed=true
-    } else {
-      this.isMobile = true;
-      console.log("mobile",this.isMobile)
-      this.isCollapsed=true
-    }
-    if (
-      window.innerWidth > window.innerHeight &&
-      window.innerWidth >= 640 &&
-      (this.isMobile || this.isTablet)
-    ) {
-      this.isMobile = this.isTablet = false;
-      this.isCollapsed=false
-      this.expandPanel = true;
-    }
+  // formatDevice() {
+  //   this.expandPanel = this.isTablet = this.isMobile = this.isCollapsed=false;
+  //   if (window.innerWidth >= 1024) {
+  //     this.expandPanel = true;
+  //     //document.getElementById("navUl").classList.remove("navbar-nav")
+  //     console.log("expand",this.expandPanel)
+  //     this.isCollapsed=false
+  //     console.log(this.isCollapsed)
+  //   } else if (window.innerWidth >= 767 && window.innerWidth < 1024) {
+  //     this.isTablet = true;
+  //     console.log("tablet",this.isTablet)
+  //     this.isCollapsed=true
+  //   } else {
+  //     this.isMobile = true;
+  //     console.log("mobile",this.isMobile)
+  //     this.isCollapsed=true
+  //   }
+  //   if (
+  //     window.innerWidth > window.innerHeight &&
+  //     window.innerWidth >= 640 &&
+  //     (this.isMobile || this.isTablet)
+  //   ) {
+  //     this.isMobile = this.isTablet = false;
+  //     this.isCollapsed=false
+  //     this.expandPanel = true;
+  //   }
   
-  }
-  openDropdown(){
-    if(this.isopenDropdown){
-      this.isopenDropdown=false
-    }else{
-    this.isopenDropdown = true}
-  }
+  // }
+  
 
   logIn() {
     this.userName = null;
