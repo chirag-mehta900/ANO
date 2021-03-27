@@ -13,6 +13,7 @@ import { MapService } from 'src/@theme/Services/map.service';
   styleUrls: ['./shop.component.css'],
 })
 export class ShopComponent implements OnInit {
+  rating3 = 3;
   shop: any[] = [];
   lat: any;
   lng: any;
@@ -321,7 +322,7 @@ export class ShopComponent implements OnInit {
     this.lng = this.Location.lng;
 
     this.origin.lat = this.Location.lat;
-    this.origin.lng = this.Location.lng;
+    this.origin.lng = this.Location.lng;  
     console.log(this.origin);
 
     this.shop.push(JSON.parse(localStorage.getItem('Shop') || '[]'));
@@ -332,7 +333,7 @@ export class ShopComponent implements OnInit {
     console.log(this.destination);
 
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
-    this.shop.push(JSON.parse(localStorage.getItem('Shop') || '[]'));
+  console.log(this.shop);
 
     this.getStoreDetail();
     this.getAnoFee();

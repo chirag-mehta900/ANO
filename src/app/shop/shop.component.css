@@ -22,15 +22,15 @@
     border: 2px solid #c0c0c0;
     border-radius: 10px;
     padding: 5px;
-    height: 35px;
-    width: 80%;
+    height: 45px;
+    width: 100%;
 }
 
 .shop-filter button {
     border: none;
     background-color: #000;
-    height: 35px;
-    width: 35px;
+    height: 45px;
+    width: 45px;
     margin-left: 8px;
     padding: 5px;
     border-radius: 10px;
@@ -55,6 +55,8 @@ agm-map {
 .shop-ing img {
     height: 170px;
     width: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 11px #707070;
 }
 
 .shop-detail .detail-name h2 {
@@ -93,6 +95,8 @@ agm-map {
 
 .add-product-display {
     margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 .add-product-box {
@@ -135,15 +139,15 @@ agm-map {
     transform: translateY(100%);
 }
 .reviews{
-    margin-top: 50px;
+    margin-top: 80px !important;
 }
 .star{
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    align-items: center;
 }
 .progres-bar{
-    width: 83%;
+    width: 80%;
     margin-left: 20px;
     background-color: #F6F6F6;
     height: 12px;
@@ -162,6 +166,7 @@ agm-map {
 }
 .review-box{
     display: flex;
+    margin-bottom: 25px;
 }
 .review-name{
     display: flex;
@@ -173,7 +178,13 @@ agm-map {
     margin-bottom: 0px;
 }
 .review-detal{
+    width: 100%;
     margin-left: 25px;
+}
+.review-detal h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 20px;
+    margin-bottom: 0px;
 }
 .review-detal h3{
     font-size: 16px;
@@ -188,7 +199,6 @@ agm-map {
 }
 .review-rating{
     display: flex;
-    margin-top: 10px;
 }
 .review-rating h3{
     font-size: 20px;
@@ -237,4 +247,78 @@ agm-map {
     font-family: 'Poppins-Regular';
     font-size: 15px;
     line-height: 17px;
+}
+.shop-filt-inp {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 20px !important;
+}
+.cont {
+    display: flex;
+}
+.blur-div {
+    background: #fff;
+    background-size: cover;
+    overflow: hidden;
+    filter: blur(10px);
+    position: relative;
+    height: 55px;
+    top: -30px;
+}
+.shop-det-para p{
+    font-family: 'Poppins-Regular';
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.shop-det-para h6{
+    font-family: 'Poppins-SemiBold';
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+.pricing-fe{
+    font-family: 'Poppins-Regular';
+    font: 17px;
+}
+.pricing-fe span{
+    color: #FFC542;
+}
+.add-product-display button{
+    font-family: 'Poppins-SemiBold';
+    border: none;
+    background-color: #FFC542;
+    padding: 10px;
+    border-radius: 5px;
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+}
+.shop-achi{
+    margin-top: 60px;
+}
+.achive{
+    transform: translateY(20%);
+}
+.achive h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 30px;
+    max-width: 250px;
+    margin-bottom: 0px;
+}
+.achive span{
+    font-family: 'Poppins-Regular';
+    font-size: 15px;
+}
+.shop-record h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 25px;
+    margin-bottom: 0px;
+}
+.shop-record p{
+    font-family: 'Poppins-Regular';
+    font-size: 14px;
+    margin-top: 0px;
+    margin-bottom: 15px;
 }
