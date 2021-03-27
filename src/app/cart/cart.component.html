@@ -1,1 +1,134 @@
-<p>cart works!</p>
+<section class="cart">
+    <div class="container">
+        <div class="shop-det">
+            <div class="shop-dettt">
+                <h2>Shop Name</h2>
+                <div class="cont">
+                    <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true">
+                    </ngx-star-rating>
+                </div>
+            </div>
+            <div class="detail-name2">
+                <div class="dis-f">
+                    <img src="../../assets/images/Call.svg" alt="">
+                    <p>+1 (855)-766-3835</p>
+                </div>
+                <div class="dis-f">
+                    <img src="../../assets/images/location.svg" alt="">
+                    <p>2464 Royal Ln. Mesa, New Jersey 45463</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-added">
+            <h3>Services Added</h3>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="add-pro">
+                        <div class="add-pro-img">
+                            <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+                                <ngx-dropzone-label>
+                                    <div class="addd-btnn">
+                                        <img src="../../assets/images/checkout/addproduct.svg" alt="">
+                                    </div>
+                                </ngx-dropzone-label>
+                                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
+                                    [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                    <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                </ngx-dropzone-image-preview>
+                            </div>
+                        </div>
+                        <div class="add-pro-dett">
+                            <h2>LG Monitor</h2>
+                            <p>Repair Master, Repair</p>
+                            <div class="add-pro-price">
+                                <p>Expected price : <span>$45.00</span></p>
+                                <img src="../../assets/images/checkout/outline.svg" alt="">
+                            </div>
+                            <div class="add-pro-btn">
+                                <button>Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="add-product-service">
+                        <button><img class="img-fluid" src="../../assets/images/add product.svg" alt="" (click)="addRepairDevice()"></button>
+                        <p>Add More</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pic-booking-date">
+            <h3>Booking Made Easy</h3>
+            <div class="deliver-system">
+                <div class="deliver-cab radio">
+                    <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab" checked>
+                    <label for="deliver-cab" class="radio-label">
+                        <div class="selectdate-time">
+                            <input type="date" name="distance" [(ngModel)]="placeOrder.date" (input)="getTimeAccoedingToDate()">
+                            <select name="time" (change)="setTime($event)">
+                                <option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} - {{time.endTime}}
+                                </option>
+                            </select>
+                        </div>
+                    </label><br>
+                </div>
+                <div class="deliver-mail radio">
+                    <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system" value="deliver-mail">
+                    <label for="deliver-mail" class="radio-label radio-labell">
+                        <div class="mail-product">
+                            <img src="../../assets/images/checkout/mail.svg" alt="">
+                            <h3>Mail-in Repair</h3>
+                        </div>
+                        <div class="mail-product">
+                            <p>Please drop in your devices </p>
+                        </div>
+                    </label><br>
+                </div>
+            </div>
+            <div class="proceed-btn">
+                <button>Proceed</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- <section class="cart">
+    <div class="add-product-display">
+        <div class="row">
+            <div class="col-md-3" *ngFor="let cart of cartInfo">
+                <div class="add-product-box">
+                    <div class="add-product-imd">
+                        <div *ngIf="!cart.image || imageEditFlag" id="cart.id" class="custom-dropzone"
+                            [multiple]="false" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event,cart.id)">
+                            <ngx-dropzone-label>
+                                <div>
+                                    <h2>+</h2>
+                                </div>
+                            </ngx-dropzone-label>
+                            <ngx-dropzone-image-preview [multiple]="false" ngProjectAs="ngx-dropzone-preview"
+                                *ngFor="let f of cart.image" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                            </ngx-dropzone-image-preview>
+                        </div>
+                        <div *ngIf="cart.image && !imageEditFlag"><img src="{{cart.image}}"> </div>
+                        <div><button (click)="setEditToChangeImage()">Edit</button></div>
+                    </div>
+                    <div class="add-product-details">
+                        <h2>{{cart.brand.brandName}} {{cart.device.modelName}}</h2>
+                        <p>Repair Master, Repair, Dec 16, 09:00 AM to 11:00AM</p>
+                        <p>Expected Price: {{cart.price}}</p>
+                        <button>Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="add-product-service">
+                    <button><img src="../../assets/images/add product.svg" alt="" (click)="addRepairDevice()"></button>
+                    <p>Add More</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
