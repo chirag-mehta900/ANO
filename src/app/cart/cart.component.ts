@@ -1,18 +1,21 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ShopService } from 'src/@theme/Services/shop.service';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
-import { AddproductComponent } from './addproduct/addproduct.component';
 import { UploadService } from 'src/@theme/Services/upload.service';
 import { MapService } from 'src/@theme/Services/map.service';
+import { AddProductComponent } from './add-product/add-product.component';
+// import { AddproductComponent } from './addproduct/addproduct.component';
+
 
 @Component({
-  selector: 'app-shop',
-  templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.css'],
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css']
 })
-export class ShopComponent implements OnInit {
+export class CartComponent implements OnInit {
+  
   rating3 = 3;
   shop: any[] = [];
   lat: any;
@@ -410,8 +413,9 @@ export class ShopComponent implements OnInit {
   goToCart() {
     this.router.navigate(['/cart']);
   }
-  // addRepairDevice() {
-  //   const modalRef = this.modalService.open(AddproductComponent);
+  
+  addRepairDevice() {
+    const modalRef = this.modalService.open(AddProductComponent);
   //   modalRef.componentInstance.shopId = this.storeId.id;
   //   modalRef.result.then((result) => {
   //     this.cartInfo = result;
@@ -419,34 +423,46 @@ export class ShopComponent implements OnInit {
   //     this.storeTokenService.set("cart_id", result.cart_id);
   //     this.getCartData();
   //   });
-  // }
-  // getCartData() {
-  //   this.shopService.getCartDetail().subscribe((data) => {
-  //     this.cartInfo = data["data"];
-  //     console.log(this.cartInfo);
-  //   });
-  // }
-  // getTimeAccoedingToDate() {
-  //   let getTimeObj = {
-  //     durating: 60,
-  //     shopId: this.storeId.id,
-  //     date: this.placeOrder.date,
-  //   };
-  //   this.shopService.getTimeByDate(getTimeObj).subscribe((data) => {
-  //     this.timeList = data["data"];
-  //   });
-  // }
-  // setTime(event) {
-  //   console.log(this.timeList);
-  //   console.log(event);
-  //   this.timeList.forEach((element) => {
-  //     if (element.id == event) {
-  //       this.placeOrder.startTime = element.startTime;
-  //       this.placeOrder.endTime = element.endTime;
-  //     }
-  //   });
-  // }
+   }
+  getCartData() {
+    this.shopService.getCartDetail().subscribe((data) => {
+      this.cartInfo = data["data"];
+      console.log(this.cartInfo);
+    });
+  }
+  getTimeAccoedingToDate() {
+    let getTimeObj = {
+      durating: 60,
+      shopId: this.storeId.id,
+      date: this.placeOrder.date,
+    };
+    this.shopService.getTimeByDate(getTimeObj).subscribe((data) => {
+      this.timeList = data["data"];
+    });
+  }
+  setTime(event) {
+    console.log(this.timeList);
+    console.log(event);
+    this.timeList.forEach((element) => {
+      if (element.id == event) {
+        this.placeOrder.startTime = element.startTime;
+        this.placeOrder.endTime = element.endTime;
+      }
+    });
+  }
 
+
+	onSelect(event) {
+		console.log(event);
+		this.files.push(...event.addedFiles);
+	}
+
+	onRemove(event) {
+		console.log(event);
+		this.files.splice(this.files.indexOf(event), 1);
+	}
+
+  
   // onSelect(event, id) {
   //   console.log(event);
   //   console.log(id);
@@ -504,47 +520,48 @@ export class ShopComponent implements OnInit {
   //   this.files.splice(this.files.indexOf(event), 1);
   // }
 
-  // setEditToChangeImage() {
-  //   this.imageEditFlag = true;
-  // }
+  setEditToChangeImage() {
+    this.imageEditFlag = true;
+  }
 
-  // procced() {
-  //   if (
-  //     this.placeOrder.date &&
-  //     this.placeOrder.startTime &&
-  //     this.placeOrder.endTime
-  //   ) {
-  //     console.log("set");
-  //     let Total_price: Number = 0;
-  //     this.cartInfo.forEach((element) => {
-  //       Total_price = Total_price + element.price;
-  //       // this.placeOrder.details.push({
-  //       //   device_id: element.device_id,
-  //       //   brand_id: element.brand_id,
-  //       //   problem_id: element.problem_id,
-  //       //   price: element.price,
-  //       // });
-  //     });
-  //     this.placeOrder.Total_Price = Total_price;
-  //     this.shopService.placeOrder(this.placeOrder).subscribe((data) => {
-  //       console.log(data["data"]);
-  //     });
-  //     console.log("total price", Total_price);
-  //     console.log(this.cartInfo);
-  //     console.log(this.placeOrder);
-  //   } else {
-  //     console.log("not set");
-  //     return;
-  //   }
-  //   // this.placeOrder.details.forEach((element, index) => {
-  //   //   this.cartInfo.forEach((ele, index) => {
-  //   //     element[index].device_id = ele[index].device_id;
-  //   //   });
-  //   // });
-  //   // let copyCartInfo: any[];
-  //   // this.cartInfo.forEach((element) => {
-  //   //   copyCartInfo.push(element.device_id);
-  //   // });
-  //   // console.log("copy ", copyCartInfo);
-  // }
+  procced() {
+    if (
+      this.placeOrder.date &&
+      this.placeOrder.startTime &&
+      this.placeOrder.endTime
+    ) {
+      console.log("set");
+      let Total_price: Number = 0;
+      this.cartInfo.forEach((element) => {
+        Total_price = Total_price + element.price;
+        // this.placeOrder.details.push({
+        //   device_id: element.device_id,
+        //   brand_id: element.brand_id,
+        //   problem_id: element.problem_id,
+        //   price: element.price,
+        // });
+      });
+      this.placeOrder.Total_Price = Total_price;
+      this.shopService.placeOrder(this.placeOrder).subscribe((data) => {
+        console.log(data["data"]);
+      });
+      console.log("total price", Total_price);
+      console.log(this.cartInfo);
+      console.log(this.placeOrder);
+    } else {
+      console.log("not set");
+      return;
+    }
+    this.placeOrder.details.forEach((element, index) => {
+      this.cartInfo.forEach((ele, index) => {
+        element[index].device_id = ele[index].device_id;
+      });
+    });
+    let copyCartInfo: any[];
+    this.cartInfo.forEach((element) => {
+      copyCartInfo.push(element.device_id);
+    });
+    console.log("copy ", copyCartInfo);
+  }
+
 }

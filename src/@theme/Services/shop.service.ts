@@ -14,7 +14,7 @@ export class ShopService {
   ) {}
 
   getStoreDetailById(id) {
-    return this.httpClient.get(this.commonService.envUrl() + "store/" + id);
+    return this.httpClient.get(this.commonService.envUrl() + "storeById/" + id);
   }
   getExpectedPrice(data) {
     return this.httpClient.post(
@@ -33,5 +33,15 @@ export class ShopService {
   }
   placeOrder(data) {
     return this.httpClient.post(this.commonService.envUrl() + "order", data);
+  }
+  getAnoFee() {
+    return this.httpClient.get(
+      this.commonService.envUrl() + "lookup?key=ANO_FEE"
+    );
+  }
+  getBaseFee() {
+    return this.httpClient.get(
+      this.commonService.envUrl() + "lookup?key=BASE_FEE"
+    );
   }
 }

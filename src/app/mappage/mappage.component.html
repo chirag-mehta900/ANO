@@ -1,8 +1,8 @@
 <section class="map-booking">
     <div class="bg-map">
         <agm-map [latitude]="Lat" [longitude]="Lng" [zoom]="17" [styles]="styles">
-            <agm-marker [latitude]="Lat" [longitude]="Lng" [label]="My"></agm-marker>
-            <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude"></agm-marker>
+            <agm-marker [latitude]="Lat" [longitude]="Lng" [iconUrl]="Location.Icon"></agm-marker>
+            <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude" [label]="price" [iconUrl]="m.icon"></agm-marker>
             <!-- [label]="m.price" -->
         </agm-map>
     </div>
@@ -18,8 +18,7 @@
                     <h2>Filter</h2>
                     <p>BRAND</p>
                     <div class="optionselect">
-                        <select class="custom" name="brand" [(ngModel)]="filterData.brand_id"
-                            (change)="getDeviceList($event)" placeholder="Select Brand" #device1="ngModel">
+                        <select class="custom" name="brand" [(ngModel)]="filterData.brand_id" (change)="getDeviceList($event)" placeholder="Select Brand" #device1="ngModel">
                             <option *ngFor="let brand of brandList" [value]="brand.id">{{brand.brandName}}</option>
                         </select>
                         <div class="text-danger" *ngIf="device1.invalid &&
@@ -29,16 +28,14 @@
                     </div>
                     <p>DEVICE</p>
                     <div class="optionselect">
-                        <select class="custom" name="device" [(ngModel)]="filterData.device_id"
-                            (change)="getIssueList($event)" placeholder="Select Device" #device1="ngModel">
+                        <select class="custom" name="device" [(ngModel)]="filterData.device_id" (change)="getIssueList($event)" placeholder="Select Device" #device1="ngModel">
                             <option *ngFor="let device of deviceList" [value]="device.id">{{device.modelName}}
                             </option>
                         </select>
                     </div>
                     <p>PROBLEM</p>
                     <div class="optionselect">
-                        <select class="custom" name="problem" [(ngModel)]="filterData.problem_id"
-                            placeholder="Select Problem">
+                        <select class="custom" name="problem" [(ngModel)]="filterData.problem_id" placeholder="Select Problem">
                             <option *ngFor="let issue of issueList" [value]="issue.id">{{issue.problem.problemName}}
                             </option>
                         </select>
@@ -58,8 +55,7 @@
                         <div class="detail-name">
                             <h2>{{store.shopName}}</h2>
                             <div class="cont">
-                                <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'"
-                                    [disabled]="true"></ngx-star-rating>
+                                <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
                             </div>
                         </div>
                         <div class="detail-name2">
@@ -93,8 +89,7 @@
                 <h2>Top Shop</h2>
             </div>
             <carousel [height]="245" [cellWidth]="320" [arrowsOutside]="true">
-                <div class="shop-box carousel-cell" *ngFor="let store of storeInfo"
-                    (click)="shopDetail(store.id,store)">
+                <div class="shop-box carousel-cell" *ngFor="let store of storeInfo" (click)="shopDetail(store.id,store)">
                     <div class="shop-img">
                         <img class="img-fluid" src="../../assets/images/service1.png" alt="">
                     </div>
@@ -102,8 +97,7 @@
                         <div class="detail-name">
                             <h2>{{store.shopName}}</h2>
                             <div class="cont">
-                                <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'"
-                                    [disabled]="true"></ngx-star-rating>
+                                <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
                             </div>
                         </div>
                         <div class="detail-name2">
@@ -131,8 +125,7 @@
                     <div class="col-md-6">
                         <div class="experience-detail">
                             <h3>Get Service from your mobile</h3>
-                            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
-                                consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
                             <h4>Get the App</h4>
                             <div class="store">
                                 <button><img src="../../assets/images/Google Play Badge.svg" alt=""></button>
