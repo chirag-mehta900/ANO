@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { HeaderService } from "src/@theme/Services/header.service";
 import { LoginComponent } from "./login/login.component";
@@ -13,16 +19,15 @@ import { StoreTokenService } from "src/@theme/Services/store-token.service";
   styleUrls: ["./header-module.component.css"],
 })
 export class HeaderModuleComponent implements OnInit {
-  @ViewChild('toggleButton') toggleButton: ElementRef;
-  @ViewChild('menu') menu: ElementRef;
-  @ViewChild('userProfile') userProfile: ElementRef;
-  @ViewChild('drop') drop: ElementRef;
-  userName: any;
+  @ViewChild("toggleButton") toggleButton: ElementRef;
+  @ViewChild("menu") menu: ElementRef;
+  @ViewChild("userProfile") userProfile: ElementRef;
+  @ViewChild("drop") drop: ElementRef;
+  userName: any = "";
   isModalOpen: boolean = false;
 
-
-  isMobile
-    constructor(
+  isMobile;
+  constructor(
     private modalService: NgbModal,
     private headerService: HeaderService,
     private activatedRoute: ActivatedRoute,
@@ -30,22 +35,28 @@ export class HeaderModuleComponent implements OnInit {
     public router: Router,
     private renderer: Renderer2
   ) {
-    this.renderer.listen('window', 'click',(e:Event)=>{
-     if(e.target !== this.toggleButton.nativeElement && e.target!==this.menu.nativeElement){
-         this.isMenuOpen=false;
-     }
-     if(e.target !==this.userProfile.nativeElement && e.target!==this.drop.nativeElement){
-       this.isopenDropdown=false
-     }
- });
+    this.renderer.listen("window", "click", (e: Event) => {
+      if (
+        e.target !== this.toggleButton.nativeElement &&
+        e.target !== this.menu.nativeElement
+      ) {
+        this.isMenuOpen = false;
+      }
+      if (
+        e.target !== this.userProfile.nativeElement &&
+        e.target !== this.drop.nativeElement
+      ) {
+        this.isopenDropdown = false;
+      }
+    });
   }
   isMenuOpen = false;
-  isopenDropdown = false
+  isopenDropdown = false;
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
-  openDropdown(){
+  openDropdown() {
     this.isopenDropdown = !this.isopenDropdown;
   }
   ngOnInit() {
@@ -82,9 +93,8 @@ export class HeaderModuleComponent implements OnInit {
   //     this.isCollapsed=false
   //     this.expandPanel = true;
   //   }
-  
+
   // }
-  
 
   logIn() {
     this.userName = null;
@@ -121,11 +131,11 @@ export class HeaderModuleComponent implements OnInit {
   onContact() {
     this.router.navigate(["contact"]);
   }
-  account(){
-    this.router.navigate(['profile'])
+  account() {
+    this.router.navigate(["profile"]);
   }
-  cart(){
-    this.router.navigate(['profile/service'])
+  cart() {
+    this.router.navigate(["profile/service"]);
   }
   onabout() {
     this.router.navigate(["about"]);
