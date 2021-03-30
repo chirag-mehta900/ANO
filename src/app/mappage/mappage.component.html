@@ -1,8 +1,8 @@
 <section class="map-booking">
     <div class="bg-map">
-        <agm-map [latitude]="Lat" [longitude]="Lng" [zoom]="17" [styles]="styles">
+        <agm-map [latitude]="Lat" [longitude]="Lng" [zoom]="14" [styles]="styles">
             <agm-marker [latitude]="Lat" [longitude]="Lng" [iconUrl]="Location.Icon"></agm-marker>
-            <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude" [label]="price" [iconUrl]="m.icon"></agm-marker>
+            <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude" [label]="m.price" [iconUrl]="m.icon"></agm-marker>
             <!-- [label]="m.price" -->
         </agm-map>
     </div>
@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="shop-come">
-                <div class="shop-box" *ngFor="let store of storeInfo" (click)="shopDetail(store.id,store)">
+                <div class="shop-box" *ngFor="let store of Shoplist" (click)="shopDetail(store.id,store)">
                     <div class="shop-ing">
                         <img class="img-fluid" src="../../assets/images/service1.png" alt="">
                     </div>
@@ -89,7 +89,7 @@
                 <h2>Top Shop</h2>
             </div>
             <carousel [height]="245" [cellWidth]="320" [arrowsOutside]="true">
-                <div class="shop-box carousel-cell" *ngFor="let store of storeInfo" (click)="shopDetail(store.id,store)">
+                <div class="shop-box carousel-cell" *ngFor="let store of Shoplist" (click)="shopDetail(store.id,store)">
                     <div class="shop-img">
                         <img class="img-fluid" src="../../assets/images/service1.png" alt="">
                     </div>

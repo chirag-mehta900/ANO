@@ -1,5 +1,5 @@
-import { Observable } from "rxjs";
-import { Injectable, Injector } from "@angular/core";
+import { Observable } from 'rxjs';
+import { Injectable, Injector } from '@angular/core';
 import {
   HttpErrorResponse,
   HttpInterceptor,
@@ -7,11 +7,11 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-} from "@angular/common/http";
-import { Router } from "@angular/router";
-import { tap } from "rxjs/operators";
-import { JwtTokenService } from "../services/jwt-token.service";
-import { StoreTokenService } from "../services/store-token.service";
+} from '@angular/common/http';
+import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
+import { JwtTokenService } from '../services/jwt-token.service';
+import { StoreTokenService } from '../services/store-token.service';
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
   userId;
@@ -27,11 +27,11 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     if (token) {
       let service = this.injector.get(JwtTokenService);
       // this.userId = service.getDecodeToken("userId");
-       if (request.url.indexOf('googleapis.com') !== 13) {
+      if (request.url.indexOf('googleapis.com') !== 13) {
         request = request.clone({
           setHeaders: {
             Authorization: `Bearer ${token}`,
@@ -53,13 +53,13 @@ export class CustomHttpInterceptor implements HttpInterceptor {
           if (err instanceof HttpErrorResponse) {
             switch (err.status) {
               case 403:
-                this.errorMessage = "token expired";
-                this.tokenService.remove("token");
-                this.tokenService.remove("refreshToken");
+                this.errorMessage = 'token expired';
+                this.tokenService.remove('token');
+                this.tokenService.remove('refreshToken');
                 break;
 
               default:
-                this.errorMessage = "Something went wrong!";
+                this.errorMessage = 'Something went wrong!';
             }
           }
         }

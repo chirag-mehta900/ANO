@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { CommonService } from "./common.service";
-import { StoreTokenService } from "./store-token.service";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonService } from './common.service';
+import { StoreTokenService } from './store-token.service';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class HeaderService {
   constructor(
@@ -14,52 +14,53 @@ export class HeaderService {
   ) {}
 
   public isAuthenticated(): boolean {
-    const token = this.token.get("token");
+    const token = this.token.get('token');
     return !!token ? true : false;
   }
   logIn(data: any) {
-    return this.httpClient.post(this.commonService.envUrl() + "login", data);
+    return this.httpClient.post(this.commonService.envUrl() + 'login', data);
   }
   getUserName() {
-    return this.httpClient.get(this.commonService.envUrl() + "user");
+    return this.httpClient.get(this.commonService.envUrl() + 'user');
   }
 
   getEmail() {
-    return this.httpClient.get(this.commonService.envUrl() + "user");
+    return this.httpClient.get(this.commonService.envUrl() + 'user');
   }
 
   getBrandList() {
-    return this.httpClient.get(this.commonService.envUrl() + "brand");
+    return this.httpClient.get(this.commonService.envUrl() + 'models');
   }
   getDeviceList(id) {
     return this.httpClient.get(
-      this.commonService.envUrl() + "device/filter/" + id
+      this.commonService.envUrl() + 'problem/filter' + id
     );
   }
   getIssueListById(data) {
     return this.httpClient.post(
-      this.commonService.envUrl() + "problem/filter",
+      this.commonService.envUrl() + 'problem/filter',
       data
     );
   }
+
   searchStore(data) {
     return this.httpClient.post(
-      this.commonService.envUrl() + "store/search",
+      this.commonService.envUrl() + 'store/search',
       data
     );
   }
   signUp(data) {
-    return this.httpClient.post(this.commonService.envUrl() + "register", data);
+    return this.httpClient.post(this.commonService.envUrl() + 'register', data);
   }
   userAddress(data) {
     return this.httpClient.post(
-      this.commonService.envUrl() + "user/address",
+      this.commonService.envUrl() + 'user/address',
       data
     );
   }
   checkEmail(data) {
     return this.httpClient.post(
-      this.commonService.envUrl() + "emailValidate",
+      this.commonService.envUrl() + 'emailValidate',
       data
     );
   }
