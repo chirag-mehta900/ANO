@@ -31,8 +31,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     if (token) {
       let service = this.injector.get(JwtTokenService);
       // this.userId = service.getDecodeToken("userId");
-      if (!request.url.indexOf('googleapis.com')) {
-        console.log('hey');
+      if (request.url.indexOf('googleapis.com') !== 13) {
         request = request.clone({
           setHeaders: {
             Authorization: `Bearer ${token}`,

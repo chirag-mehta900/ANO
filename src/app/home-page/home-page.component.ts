@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonService } from 'src/@theme/Services/common.service';
 import { HeaderService } from 'src/@theme/Services/header.service';
@@ -42,7 +43,11 @@ export class HomePageComponent implements OnInit {
       },
     },
   };
-  constructor(private modalService: NgbModal, private header: HeaderService) {}
+  constructor(
+    private modalService: NgbModal,
+    private header: HeaderService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     localStorage.setItem('Location', JSON.stringify(this.Location));
@@ -87,6 +92,10 @@ export class HomePageComponent implements OnInit {
     const modalRef = this.modalService.open(BookRepairComponent);
   }
 
+  call() {
+    const modalRef = this.modalService.open(BookRepairComponent);
+    this.router.navigate(['']);
+  }
   OnChange(obj: any) {
     this.display.pop();
     console.log(obj);

@@ -63,10 +63,12 @@ export class ShopComponent implements OnInit {
     destination: {
       icon:
         'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
-      label: '$00',
-      color: 'white',
-      fontWeight: '500',
-      fontSize: '20px',
+      label: {
+        text: '',
+        color: 'white',
+        fontWeight: '500',
+        fontSize: '20px',
+      },
     },
   };
 
@@ -323,8 +325,9 @@ export class ShopComponent implements OnInit {
     this.origin.lat = this.Location.lat;
     this.origin.lng = this.Location.lng;
     console.log(this.origin);
-
     this.shop.push(JSON.parse(localStorage.getItem('Shop') || '[]'));
+    this.markerOptions.destination.label.text = this.shop[0].pricing[0].price.toString();
+    console.log(this.markerOptions);
 
     this.destination.lat = this.shop[0].latitude;
     this.destination.lng = this.shop[0].longitude;
@@ -332,7 +335,6 @@ export class ShopComponent implements OnInit {
     console.log(this.destination);
 
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
-    this.shop.push(JSON.parse(localStorage.getItem('Shop') || '[]'));
 
     this.getStoreDetail();
     this.getAnoFee();

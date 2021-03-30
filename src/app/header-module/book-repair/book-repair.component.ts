@@ -3,6 +3,14 @@ import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderService } from 'src/@theme/Services/header.service';
 
+type ResponseType = {
+  data: [
+    {
+      pricing: [];
+    }
+  ];
+};
+
 @Component({
   selector: 'app-book-repair',
   templateUrl: './book-repair.component.html',
@@ -10,15 +18,15 @@ import { HeaderService } from 'src/@theme/Services/header.service';
 })
 export class BookRepairComponent implements OnInit {
   shopmarker: object = {};
+  tempData: [] = [];
   Data: any[] = [];
   Marker: any[] = [];
-  price: number = 0;
   Location = {
     lat: 0,
     lng: 0,
   };
+
   bookRepair = {
-    brand: null,
     device: null,
     problem: null,
     latitude: null,
@@ -43,6 +51,8 @@ export class BookRepairComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.deviceList = JSON.parse(localStorage.getItem('deviceList') || '[]');
+
     if (!navigator.geolocation) {
     }
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
@@ -51,32 +61,39 @@ export class BookRepairComponent implements OnInit {
     this.getBrandList();
   }
   getBrandList() {
-    this.headerService.getBrandList().subscribe(
-      (data) => {
-        this.brandList = data['data'];
-      },
-      (error) => {}
-    );
+    if (this.deviceList.length == 0) {
+      this.headerService.getBrandList().subscribe(
+        (data) => {
+          console.log(data);
+
+          this.deviceList = data['data'];
+          console.log(this.deviceList);
+          localStorage.setItem('deviceList', JSON.stringify(this.deviceList));
+        },
+        (error) => {}
+      );
+    }
   }
 
-  getDeviceList(event) {
-    this.headerService.getDeviceList(event.target.value).subscribe(
-      (data) => {
-        this.deviceList = data['data'];
-      },
-      (error) => {}
-    );
-  }
+  // getDeviceList(event) {
+  //   console.log(event);
+  //   let obj = {
+  //     device_id: event.target.value,
+  //   };
+
+  //   this.headerService.getIssueListById(obj).subscribe(
+  //     (data) => {
+  //       console.log(data);
+
+  //       this.deviceList = data['data'];
+  //     },
+  //     (error) => {}
+  //   );
+  // }
 
   getIssueList(event) {
-    this.deviceList.forEach((element: any) => {
-      if (element.id == event) {
-        this.selectedDeviceName = element.modelName;
-      }
-    });
     let obj = {
-      brand_id: this.bookRepair.brand,
-      device_id: event,
+      device_id: event.target.value,
     };
     console.log(obj);
     this.headerService.getIssueListById(obj).subscribe(
@@ -107,37 +124,52 @@ export class BookRepairComponent implements OnInit {
     this.selectIssueFlag = false;
   }
   addRepair(Repair) {
+    console.log(this.bookRepair);
+
     this.formSubmitted = true;
     if (Repair.valid) {
       this.bookRepair.distanceMile = 10;
       this.bookRepair.latitude = this.Location.lat;
       this.bookRepair.longitude = this.Location.lng;
-      console.log(this.bookRepair);
+      console.log(JSON.stringify(this.bookRepair));
 
       localStorage.setItem('deviceProblem', JSON.stringify(this.bookRepair));
 
       this.headerService.searchStore(this.bookRepair).subscribe(
-        (data) => {
-          console.log(data);
-          this.Data.push(data);
-          for (var i = 0; i < this.Data.length; i++) {
-            for (var j = 0; j < this.Data[i].data.length; j++) {
-              this.shopmarker = {
-                latitude: this.Data[i].data[j].latitude,
-                longitude: this.Data[i].data[j].longitude,
-                icon: {
-                  url:
-                    'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
-                  scaledSize: {
-                    width: 100,
-                    height: 70,
-                  },
-                },
-                Price: this.price,
-              };
+        (response: ResponseType) => {
+          console.log(response);
 
-              this.Marker.push(this.shopmarker);
+          response.data.forEach((e) => {
+            if (e.pricing.length) {
+              this.Data.push(e);
             }
+          });
+          console.log(this.Data);
+          localStorage.removeItem('Shoplist');
+          localStorage.setItem('Shoplist', JSON.stringify(this.Data));
+
+          for (var i = 0; i < this.Data.length; i++) {
+            // console.log(this.Data[i].pricing[0].price);
+            this.shopmarker = {
+              latitude: this.Data[i].latitude,
+              longitude: this.Data[i].longitude,
+              price: {
+                text: this.Data[i].pricing[0].price.toString(),
+                color: 'white',
+                fontWeight: '500',
+                fontSize: '20px',
+              },
+              icon: {
+                url:
+                  'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+                scaledSize: {
+                  width: 100,
+                  height: 70,
+                },
+              },
+            };
+
+            this.Marker.push(this.shopmarker);
           }
 
           localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
@@ -147,7 +179,7 @@ export class BookRepairComponent implements OnInit {
 
           this.router.navigate([
             '/map',
-            { storeData: JSON.stringify(data['data']) },
+            { storeData: JSON.stringify(response['data']) },
           ]);
         },
         (error) => {}

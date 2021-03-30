@@ -5,6 +5,14 @@ import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'src/@theme/Services/header.service';
 
+type ResponseType = {
+  data: [
+    {
+      pricing: [];
+    }
+  ];
+};
+
 @Component({
   selector: 'app-mappage',
   templateUrl: './mappage.component.html',
@@ -20,11 +28,19 @@ export class MappageComponent implements OnInit {
   autocomplete: any;
   location: any;
   Marker: any[] = [];
-  searchshop: any[] = [];
+  searchshop = {
+    problem: '',
+    longitude: '',
+    latitude: '',
+    distanceMile: 10,
+    device: '',
+  };
   shop: any;
   Data: any[] = [];
+  Shoplist: any[] = [];
+
   price: {} = {
-    text: '$00',
+    text: '',
     color: 'white',
     fontWeight: '500',
     fontSize: '20px',
@@ -251,6 +267,12 @@ export class MappageComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.searchshop = JSON.parse(localStorage.getItem('deviceProblem') || '[]');
+    // console.log(this.searchshop);
+
+    this.Shoplist = JSON.parse(localStorage.getItem('Shoplist') || '[]');
+    console.log(this.Shoplist);
+
     this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get('storeData'));
     if (!navigator.geolocation) {
       console.log('location not found');
@@ -287,7 +309,9 @@ export class MappageComponent implements OnInit {
     console.log(this.Marker);
   }
 
-  handleAddressChange(address: any) {
+  async handleAddressChange(address: any) {
+    this.searchshop = JSON.parse(localStorage.getItem('deviceProblem') || '[]');
+    console.log(this.searchshop);
     this.Marker.length = 0;
     console.log(address);
     this.area = address;
@@ -300,46 +324,61 @@ export class MappageComponent implements OnInit {
       console.log(this.Location);
 
       localStorage.setItem('Location', JSON.stringify(this.Location));
-      this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+      console.log(this.Location.lng);
 
       this.Lat = this.Location.lat;
       this.Lng = this.Location.lng;
+
+      this.searchshop.latitude = data.results[0].geometry.location.lat;
+      this.searchshop.longitude = data.results[0].geometry.location.lng;
+
+      // let inter = setInterval(() => {
+      //   this.searchshop[0].latitude = this.Location.lat;
+      //   this.searchshop[0].longitude = this.Location.lng;
+
+      //   if (this.searchshop[0].latitude != undefined) {
+      //     clearInterval(inter);
+      //   }
+      // }, 10);
+
+      console.log(JSON.stringify(this.searchshop));
+      localStorage.setItem('deviceProblem', JSON.stringify(this.searchshop));
     });
 
-    this.searchshop.length = 0;
-    this.searchshop.push(
-      JSON.parse(localStorage.getItem('deviceProblem') || '[]')
-    );
-
-    this.searchshop[0].latitude = this.Lat;
-    this.searchshop[0].longitude = this.Lng;
-
-    console.log(this.searchshop);
-    localStorage.setItem('deviceProblem', JSON.stringify(this.searchshop[0]));
-
-    this.headerService.searchStore(this.searchshop[0]).subscribe(
-      (data) => {
-        console.log(data);
-        this.Data.push(data);
-        for (var i = 0; i < this.Data.length; i++) {
-          for (var j = 0; j < this.Data[i].data.length; j++) {
-            this.shopmarker = {
-              latitude: this.Data[i].data[j].latitude,
-              longitude: this.Data[i].data[j].longitude,
-              icon: {
-                url:
-                  'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
-                scaledSize: {
-                  width: 100,
-                  height: 70,
-                },
-              },
-              Price: this.price,
-            };
-
-            this.Marker.push(this.shopmarker);
+    this.headerService.searchStore(this.searchshop).subscribe(
+      (response: ResponseType) => {
+        console.log(response);
+        this.Data.length = 0;
+        response.data.forEach((e) => {
+          if (e.pricing.length) {
+            this.Data.push(e);
           }
+        });
+        console.log(this.Data);
+        localStorage.removeItem('Shoplist');
+        localStorage.setItem('Shoplist', JSON.stringify(this.Data));
+        for (var i = 0; i < this.Data.length; i++) {
+          this.shopmarker = {
+            latitude: this.Data[i].latitude,
+            longitude: this.Data[i].longitude,
+            price: {
+              text: this.Data[i].pricing[0].price.toString(),
+              color: 'white',
+              fontWeight: '500',
+              fontSize: '20px',
+            },
+            icon: {
+              url:
+                'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+              scaledSize: {
+                width: 100,
+                height: 70,
+              },
+            },
+          };
         }
+
+        this.Marker.push(this.shopmarker);
 
         localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
 
@@ -347,7 +386,7 @@ export class MappageComponent implements OnInit {
 
         this.router.navigate([
           '/map',
-          { storeData: JSON.stringify(data['data']) },
+          { storeData: JSON.stringify(response['data']) },
         ]);
       },
       (error) => {}
