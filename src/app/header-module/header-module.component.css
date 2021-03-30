@@ -111,3 +111,11 @@
 .ano-logo{
     cursor: pointer;
 }
+.header-mobile {
+    position: absolute;
+    background-color: #ffffff;
+    height: 100vh;
+    width: 400px;
+    top: 0%;
+    left: 0%;
+}

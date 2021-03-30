@@ -94,3 +94,40 @@ input:focus {
 select:focus{
   outline: 0 !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* `````````````````````````````````
+
+  Reaponsive
+
+
+  ````````````````````````````````` */
+
+  @media only screen and (max-width: 991px){
+    .desktop {
+      display: none !important;
+    }
+    .mobile {
+      display: block !important;
+    }
+  }
+  .desktop {
+    display: block;
+  }
+  .mobile {
+    display: none;
+  }
