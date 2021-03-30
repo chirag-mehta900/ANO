@@ -22,6 +22,7 @@ import { TrackingmapComponent } from './trackingmap/trackingmap.component';
 import { CartComponent } from './cart/cart.component';
 import { AgmDirectionModule } from 'agm-direction';
 import { AddProductComponent } from './cart/add-product/add-product.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AddProductComponent } from './cart/add-product/add-product.component';
     TrackingmapComponent,
     CartComponent,
     AddProductComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
