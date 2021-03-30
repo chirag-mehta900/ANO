@@ -118,6 +118,9 @@ export class HeaderModuleComponent implements OnInit {
   onhome() {
     this.router.navigate(["home"]);
   }
+  onContact() {
+    this.router.navigate(["contact"]);
+  }
   account(){
     this.router.navigate(['profile'])
   }
