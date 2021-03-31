@@ -49,7 +49,7 @@
             <div class="shop-come">
                 <div class="shop-box" *ngFor="let store of Shoplist" (click)="shopDetail(store.id,store)">
                     <div class="shop-ing">
-                        <img class="img-fluid" src="../../assets/images/service1.png" alt="">
+                        <img class="img-fluid" src="{{store.image}}" alt="">
                     </div>
                     <div class="shop-detail">
                         <div class="detail-name">
@@ -89,9 +89,9 @@
                 <h2>Top Shop</h2>
             </div>
             <carousel [height]="245" [cellWidth]="320" [arrowsOutside]="true">
-                <div class="shop-box carousel-cell" *ngFor="let store of Shoplist" (click)="shopDetail(store.id,store)">
+                <div class="carousel-cell shop-box-carousel" *ngFor="let store of Shoplist" (click)="shopDetail(store.id,store)" [height]="245" [cellWidth]="320">
                     <div class="shop-img">
-                        <img class="img-fluid" src="../../assets/images/service1.png" alt="">
+                        <img class="img-fluid" src="{{store.image}}" alt="">
                     </div>
                     <div class="shop-detail">
                         <div class="detail-name">

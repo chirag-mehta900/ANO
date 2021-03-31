@@ -50,6 +50,7 @@
 .search-location {
     width: 70%;
     display: flex;
+    margin-top: 10px;
 }
 
 .search-location input {
@@ -69,9 +70,9 @@
 }
 
 .shop-come {
-    /* width: 80%;
-  margin: auto; */
     padding-bottom: 30px;
+    display: grid;
+    justify-content: center;
 }
 
 .search-location img {
@@ -90,11 +91,15 @@ agm-map {
     cursor: pointer;
     display: grid;
     justify-content: center;
+    box-shadow: 0 0 11px #CFD1D3;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: fit-content;
 }
 
 .shop-ing img {
-    height: 140px;
-    width: auto;
+    height: 190px;
+    width: 100%;
     border-radius: 5px;
 }
 
@@ -205,7 +210,7 @@ agm-map {
 .shop-filt-inp {
     display: flex;
     justify-content: space-evenly;
-    width: 94%;
+    width: 100%;
     margin: auto;
     margin-bottom: 20px !important;
 }
@@ -302,4 +307,11 @@ agm-map {
 
 .cont {
     display: flex;
+}
+.shop-box-carousel{
+    padding: 5px;
+    cursor: pointer;
+    display: grid;
+    justify-content: center;
+    border-radius: 5px;
 }
