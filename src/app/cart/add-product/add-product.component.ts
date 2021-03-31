@@ -42,6 +42,7 @@ export class AddProductComponent implements OnInit {
     problemId: null,
     deviceId: null,
   };
+  estimatedRepairTime;
   constructor(
     private headerService: HeaderService,
     private uploadService: UploadService,
@@ -108,11 +109,17 @@ export class AddProductComponent implements OnInit {
         this.addedDeviceProblemToDisplayInCart.ANOCommissionFees =
           data["data"][0].ANOCommissionFees;
         this.addedDeviceProblemToDisplayInCart.price = data["data"][0].price;
+        this.estimatedRepairTime = data["data"][0].estimatedRepaidTime;
+        this.getTime();
       },
       (error) => {}
     );
   }
-
+  getTime() {
+    var hms = this.expectedPrice;
+    var target = new Date("1970-01-01 " + hms);
+    console.log(target.getUTCHours());
+  }
   addDevice() {
     //check user is log in if log in then set user id
     this.bookRepair.user_id = JSON.parse(localStorage.getItem("user_id"));

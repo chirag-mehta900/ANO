@@ -6,13 +6,13 @@
                     <div class="booking-shop">
                         <div class="booking-shop-img">
                             <img src="../../assets/images/checkout/shopimg.png" alt="">
-                            <h2>Shop name</h2>
+                            <h2>{{shopDetails.shopName}}</h2>
                         </div>
                         <div class="booking-sho-price">
                             <p>Total</p>
                             <div class="booking-sho-prices">
-                                <h2>$ {{total}}</h2>
-                                <h3>$ {{total + 7}}</h3>
+                                <h2>$ {{orderDetails.Total_Price}}</h2>
+                                <h3>$ {{orderDetails.Total_Price + 17}}</h3>
                             </div>
                         </div>
                     </div>
@@ -30,37 +30,13 @@
                     </div>
                 </div>
                 <div class="destroy-system">
-                    <div class="destroy-system-box">
+                    <div class="destroy-system-box" *ngFor="let details of productDisplay">
                         <div class="destroy-system-img">
-                            <img src="../../assets/images/checkout/destroy phone.png" alt="">
+                            <img src={{details.images}} alt="">
                         </div>
                         <div class="destroy-system-det">
-                            <h2>${{total}}</h2>
-                            <p>Screen Replacement</p>
-                            <div class="destroy-system-btn">
-                                <button><img src="../../assets/images/edit.svg" alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="destroy-system-box">
-                        <div class="destroy-system-img">
-                            <img src="../../assets/images/checkout/destroy phone.png" alt="">
-                        </div>
-                        <div class="destroy-system-det">
-                            <h2>${{total}}</h2>
-                            <p>Screen Replacement</p>
-                            <div class="destroy-system-btn">
-                                <button><img src="../../assets/images/edit.svg" alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="destroy-system-box">
-                        <div class="destroy-system-img">
-                            <img src="../../assets/images/checkout/destroy phone.png" alt="">
-                        </div>
-                        <div class="destroy-system-det">
-                            <h2>$ {{total}}</h2>
-                            <p>Screen Replacement</p>
+                            <h2>${{details.price}}</h2>
+                            <p>{{details.problem_name}}</p>
                             <div class="destroy-system-btn">
                                 <button><img src="../../assets/images/edit.svg" alt=""></button>
                             </div>

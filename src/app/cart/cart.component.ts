@@ -550,12 +550,12 @@ export class CartComponent implements OnInit {
 
     //calculating cart amount
     this.placeOrder.details.forEach((element) => {
-      totalCartAmount = +element.price;
+      totalCartAmount += element.price;
     });
     this.placeOrder.Total_Price = totalCartAmount;
     console.log(this.placeOrder);
 
-    localStorage.setItem("PlaceOrder", this.placeOrder);
+    localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
     this.router.navigate(["/checkout"]);
   }
 }
