@@ -1,16 +1,25 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from "@angular/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { HeaderService } from "src/@theme/Services/header.service";
-import { LoginComponent } from "./login/login.component";
-import { SignupComponent } from "./signup/signup.component";
-import { BookRepairComponent } from "./book-repair/book-repair.component";
-import { ActivatedRoute, Router } from "@angular/router";
-import { StoreTokenService } from "src/@theme/Services/store-token.service";
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderService } from 'src/@theme/Services/header.service';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { BookRepairComponent } from './book-repair/book-repair.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 
 @Component({
-  selector: "app-header-module",
-  templateUrl: "./header-module.component.html",
-  styleUrls: ["./header-module.component.css"],
+  selector: 'app-header-module',
+  templateUrl: './header-module.component.html',
+  styleUrls: ['./header-module.component.css'],
+  host: {
+    '(document:click)': 'onClick($event)',
+  },
 })
 export class HeaderModuleComponent implements OnInit {
   @ViewChild('toggleButton') toggleButton: ElementRef;
@@ -20,38 +29,51 @@ export class HeaderModuleComponent implements OnInit {
   userName: any;
   isModalOpen: boolean = false;
 
-
-  isMobile
-    constructor(
+  isMobile;
+  constructor(
     private modalService: NgbModal,
     private headerService: HeaderService,
     private activatedRoute: ActivatedRoute,
     private storeTokenService: StoreTokenService,
     public router: Router,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private _eref: ElementRef
   ) {
-    this.renderer.listen('window', 'click',(e:Event)=>{
-     if(e.target !== this.toggleButton.nativeElement && e.target!==this.menu.nativeElement){
-         this.isMenuOpen=false;
-     }
-     if(e.target !==this.userProfile.nativeElement && e.target!==this.drop.nativeElement){
-       this.isopenDropdown=false
-     }
- });
+    this.renderer.listen('window', 'click', (e: Event) => {
+      if (
+        e.target !== this.toggleButton.nativeElement &&
+        e.target !== this.menu.nativeElement
+      ) {
+        this.isMenuOpen = false;
+      }
+      if (
+        e.target !== this.userProfile.nativeElement &&
+        e.target !== this.drop.nativeElement
+      ) {
+        this.isopenDropdown = false;
+      }
+    });
   }
   isMenuOpen = false;
-  isopenDropdown = false
+  isopenDropdown = false;
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
-  openDropdown(){
+  openDropdown() {
     this.isopenDropdown = !this.isopenDropdown;
+  }
+
+  onClick(event) {
+    // for close dropdown on outside dropdown click
+    if (!this._eref.nativeElement.contains(event.target)) {
+      this.isopenDropdown = false;
+    }
   }
   ngOnInit() {
     this.headerService.getUserName().subscribe(
       (data) => {
-        this.userName = data["data"].name;
+        this.userName = data['data'].name;
       },
       (error) => {}
     );
@@ -82,9 +104,8 @@ export class HeaderModuleComponent implements OnInit {
   //     this.isCollapsed=false
   //     this.expandPanel = true;
   //   }
-  
+
   // }
-  
 
   logIn() {
     this.userName = null;
@@ -99,8 +120,8 @@ export class HeaderModuleComponent implements OnInit {
   setUserName() {
     this.headerService.getUserName().subscribe(
       (data) => {
-        this.userName = data["data"].name;
-        this.storeTokenService.set("user_id", data["data"].id);
+        this.userName = data['data'].name;
+        this.storeTokenService.set('user_id', data['data'].id);
       },
       (error) => {}
     );
@@ -116,24 +137,31 @@ export class HeaderModuleComponent implements OnInit {
   }
 
   onhome() {
-    this.router.navigate(["home"]);
+    this.router.navigate(['home']);
   }
   onContact() {
-    this.router.navigate(["contact"]);
+    this.router.navigate(['contact']);
   }
-  account(){
-    this.router.navigate(['profile'])
+  account() {
+    this.router.navigate(['profile']);
   }
-  cart(){
-    this.router.navigate(['profile/service'])
+  cart() {
+    this.router.navigate(['profile/service']);
   }
   onabout() {
-    this.router.navigate(["about"]);
+    this.router.navigate(['about']);
   }
   bookRepair() {
     if (this.modalService.hasOpenModals()) {
       this.modalService.dismissAll();
     }
     const modalRef = this.modalService.open(BookRepairComponent);
+  }
+
+  logout() {
+    this.storeTokenService.remove('token');
+    this.isopenDropdown = !this.isopenDropdown;
+    this.userName = null;
+    this.router.navigate(['home']);
   }
 }
