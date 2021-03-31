@@ -65,6 +65,16 @@ export class HeaderService {
     );
   }
 
+  generateOTP(data) {
+    return this.httpClient.post(
+      this.commonService.envUrl() + 'generateOTP',
+      data
+    );
+  }
+
+  verifyOTP(data) {
+    return this.httpClient.put(this.commonService.envUrl() + 'verifyOTP', data);
+  }
   slider() {
     return this.httpClient.get(this.commonService.envUrl() + 'slider');
   }
