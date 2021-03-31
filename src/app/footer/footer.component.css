@@ -1,8 +1,8 @@
-.container {
-    width: 100%;
-    padding: 50px 0 25px 0;
+.footer{
+    background-color: #FFC542;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
-
 .nav-bar ul {
     display: flex;
     justify-content: space-between;
@@ -18,21 +18,17 @@
 
 .footer-title {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
+    max-width: 455px;
+    margin: auto;
+    font-family: 'Poppins-Regular';
+    color: #000000;
 }
 
-.subscribe input {
-    background-color: #e3e3e3;
-    position: relative;
-    border: none;
-    border-radius: 5px;
-    padding: 5px;
-}
-
-.subscribe img {
-    position: relative;
-    right: 25px;
+.subscribe p{
+    font-family: 'Poppins-Regular';
+    font-size: 15px;
+    margin-bottom: 0px;
+    color: #000000;
 }
 
 .line {
@@ -41,6 +37,9 @@
 
 .socail {
     display: flex;
+    max-width: 145px;
+    margin: auto;
+    margin-bottom: 20px !important;
 }
 
 .socail img {

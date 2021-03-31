@@ -44,4 +44,7 @@ export class ShopService {
       this.commonService.envUrl() + "lookup?key=BASE_FEE"
     );
   }
+  deleteCartData(id) {
+    return this.httpClient.delete(this.commonService.envUrl() + "cart/" + id);
+  }
 }

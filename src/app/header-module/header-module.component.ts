@@ -26,7 +26,7 @@ export class HeaderModuleComponent implements OnInit {
   @ViewChild('menu') menu: ElementRef;
   @ViewChild('userProfile') userProfile: ElementRef;
   @ViewChild('drop') drop: ElementRef;
-  userName: any;
+  userName: any = '';
   isModalOpen: boolean = false;
 
   isMobile;

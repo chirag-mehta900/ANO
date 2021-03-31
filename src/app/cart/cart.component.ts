@@ -1,30 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
-import { ShopService } from 'src/@theme/Services/shop.service';
-import { StoreTokenService } from 'src/@theme/Services/store-token.service';
-import { UploadService } from 'src/@theme/Services/upload.service';
-import { MapService } from 'src/@theme/Services/map.service';
-import { AddProductComponent } from './add-product/add-product.component';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { NgbModal, NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
+import { ShopService } from "src/@theme/Services/shop.service";
+import { StoreTokenService } from "src/@theme/Services/store-token.service";
+import { UploadService } from "src/@theme/Services/upload.service";
+import { MapService } from "src/@theme/Services/map.service";
+import { AddProductComponent } from "./add-product/add-product.component";
+import { HeaderService } from "src/@theme/Services/header.service";
 // import { AddproductComponent } from './addproduct/addproduct.component';
 
-
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  selector: "app-cart",
+  templateUrl: "./cart.component.html",
+  styleUrls: ["./cart.component.css"],
 })
 export class CartComponent implements OnInit {
-  
-  rating3 = 3;
+  rating3;
   shop: any[] = [];
   lat: any;
   lng: any;
   price: {} = {
-    text: '$00',
-    color: 'white',
-    fontWeight: '500',
-    fontSize: '20px',
+    text: "$00",
+    color: "white",
+    fontWeight: "500",
+    fontSize: "20px",
   };
   Location = {
     lat: 0,
@@ -35,7 +34,7 @@ export class CartComponent implements OnInit {
   ourmark = {
     icon: {
       url:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shopmark.png?alt=media&token=a88b489d-4f6d-470a-9aa4-211f82ce6976',
+        "https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shopmark.png?alt=media&token=a88b489d-4f6d-470a-9aa4-211f82ce6976",
       scaledSize: {
         width: 135,
         height: 115,
@@ -46,7 +45,7 @@ export class CartComponent implements OnInit {
   shopmark = {
     icon: {
       url:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+        "https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e",
       scaledSize: {
         width: 90,
         height: 70,
@@ -61,16 +60,16 @@ export class CartComponent implements OnInit {
   markerOptions = {
     origin: {
       icon:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shopmark.png?alt=media&token=a88b489d-4f6d-470a-9aa4-211f82ce6976',
+        "https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shopmark.png?alt=media&token=a88b489d-4f6d-470a-9aa4-211f82ce6976",
       draggable: true,
     },
     destination: {
       icon:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
-      label: '$00',
-      color: 'white',
-      fontWeight: '500',
-      fontSize: '20px',
+        "https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e",
+      label: "$00",
+      color: "white",
+      fontWeight: "500",
+      fontSize: "20px",
     },
   };
 
@@ -79,172 +78,172 @@ export class CartComponent implements OnInit {
 
   styles = [
     {
-      elementType: 'geometry',
+      elementType: "geometry",
       stylers: [
         {
-          color: '#f5f5f5',
+          color: "#f5f5f5",
         },
       ],
     },
     {
-      elementType: 'labels.icon',
+      elementType: "labels.icon",
       stylers: [
         {
-          visibility: 'off',
+          visibility: "off",
         },
       ],
     },
     {
-      elementType: 'labels.text.fill',
+      elementType: "labels.text.fill",
       stylers: [
         {
-          color: '#616161',
+          color: "#616161",
         },
       ],
     },
     {
-      elementType: 'labels.text.stroke',
+      elementType: "labels.text.stroke",
       stylers: [
         {
-          color: '#f5f5f5',
+          color: "#f5f5f5",
         },
       ],
     },
     {
-      featureType: 'administrative.land_parcel',
-      elementType: 'labels.text.fill',
+      featureType: "administrative.land_parcel",
+      elementType: "labels.text.fill",
       stylers: [
         {
-          color: '#bdbdbd',
+          color: "#bdbdbd",
         },
       ],
     },
     {
-      featureType: 'poi',
-      elementType: 'geometry',
+      featureType: "poi",
+      elementType: "geometry",
       stylers: [
         {
-          color: '#eeeeee',
+          color: "#eeeeee",
         },
       ],
     },
     {
-      featureType: 'poi',
-      elementType: 'labels.text.fill',
+      featureType: "poi",
+      elementType: "labels.text.fill",
       stylers: [
         {
-          color: '#757575',
+          color: "#757575",
         },
       ],
     },
     {
-      featureType: 'poi.park',
-      elementType: 'geometry',
+      featureType: "poi.park",
+      elementType: "geometry",
       stylers: [
         {
-          color: '#e5e5e5',
+          color: "#e5e5e5",
         },
       ],
     },
     {
-      featureType: 'poi.park',
-      elementType: 'labels.text.fill',
+      featureType: "poi.park",
+      elementType: "labels.text.fill",
       stylers: [
         {
-          color: '#9e9e9e',
+          color: "#9e9e9e",
         },
       ],
     },
     {
-      featureType: 'road',
-      elementType: 'geometry',
+      featureType: "road",
+      elementType: "geometry",
       stylers: [
         {
-          color: '#ffffff',
+          color: "#ffffff",
         },
       ],
     },
     {
-      featureType: 'road.arterial',
-      elementType: 'labels.text.fill',
+      featureType: "road.arterial",
+      elementType: "labels.text.fill",
       stylers: [
         {
-          color: '#757575',
+          color: "#757575",
         },
       ],
     },
     {
-      featureType: 'road.highway',
-      elementType: 'geometry',
+      featureType: "road.highway",
+      elementType: "geometry",
       stylers: [
         {
-          color: '#dadada',
+          color: "#dadada",
         },
       ],
     },
     {
-      featureType: 'road.highway',
-      elementType: 'labels.text.fill',
+      featureType: "road.highway",
+      elementType: "labels.text.fill",
       stylers: [
         {
-          color: '#616161',
+          color: "#616161",
         },
       ],
     },
     {
-      featureType: 'road.local',
-      elementType: 'labels.text.fill',
+      featureType: "road.local",
+      elementType: "labels.text.fill",
       stylers: [
         {
-          color: '#9e9e9e',
+          color: "#9e9e9e",
         },
       ],
     },
     {
-      featureType: 'transit.line',
-      elementType: 'geometry',
+      featureType: "transit.line",
+      elementType: "geometry",
       stylers: [
         {
-          color: '#e5e5e5',
+          color: "#e5e5e5",
         },
       ],
     },
     {
-      featureType: 'transit.line',
-      elementType: 'labels.text',
+      featureType: "transit.line",
+      elementType: "labels.text",
       stylers: [
         {
-          color: '#afa655',
+          color: "#afa655",
         },
         {
-          visibility: 'on',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.station',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#eeeeee',
+          visibility: "on",
         },
       ],
     },
     {
-      featureType: 'water',
-      elementType: 'geometry',
+      featureType: "transit.station",
+      elementType: "geometry",
       stylers: [
         {
-          color: '#c9c9c9',
+          color: "#eeeeee",
         },
       ],
     },
     {
-      featureType: 'water',
-      elementType: 'labels.text.fill',
+      featureType: "water",
+      elementType: "geometry",
       stylers: [
         {
-          color: '#9e9e9e',
+          color: "#c9c9c9",
+        },
+      ],
+    },
+    {
+      featureType: "water",
+      elementType: "labels.text.fill",
+      stylers: [
+        {
+          color: "#9e9e9e",
         },
       ],
     },
@@ -253,19 +252,26 @@ export class CartComponent implements OnInit {
   subscription: any;
 
   placeOrder: any = {
-    shop_id: 1,
-    transactionId: 'QQughobhhIuMTop',
+    shop_id: null,
+    transactionId: "QQughobhhIuMTop",
     startTime: null,
     endTime: null,
     date: null,
     pickupLocation: null,
     dropLocation: null,
     Total_Price: null,
-    details: [],
+    details: [
+      {
+        device_id: null,
+        problem_id: null,
+        image: [],
+        price: null,
+      },
+    ],
   };
-  title = 'My first AGM project';
+  title = "My first AGM project";
 
-  colorTone = '#000';
+  colorTone = "#000";
   per = 78;
   storeId: any;
   storeInfo: any[] = [];
@@ -274,35 +280,25 @@ export class CartComponent implements OnInit {
   files: File[] = [];
   imageUploaded: any[] = [];
   imageEditFlag: boolean = false;
-  currentImageUrl: any = '';
-  averageRating: number;
-  averageCalculateRating: number;
-  ratings: any[];
-  //To Count No of star
-  oneStar = 0;
-  twoStar = 0;
-  threeStar = 0;
-  fourStar = 0;
-  fiveStar = 0;
-
-  //to calculate Value for review bar
-  oneStarRatingBarValue = 0;
-  twoStarRatingBarValue = 0;
-  threeStarRatingBarValue = 0;
-  fourStarRatingBarValue = 0;
-  fiveStarRatingBarValue = 0;
-
-  //to give static star value
-  starValueOne = 1;
-  starValueTwo = 2;
-  starValueThree = 3;
-  starValueFour = 4;
-  starValueFive = 5;
-
-  //Price Factors
-  shopCommission;
-  baseFee;
-  ANOFee;
+  currentImageUrl: any = "";
+  addedDeviceProblem;
+  displayCartInfo = [
+    {
+      id: null,
+      deviceName: null,
+      problemName: null,
+      total_amount: null,
+      ANOBaseFees: null,
+      ANOCommissionFees: null,
+      price: null,
+      images: null,
+      imageFiles: File,
+      problemId: null,
+      deviceId: null,
+    },
+  ];
+  today;
+  modifiedToday;
   constructor(
     config: NgbRatingConfig,
     private route: ActivatedRoute,
@@ -310,120 +306,101 @@ export class CartComponent implements OnInit {
     private modalService: NgbModal,
     private storeTokenService: StoreTokenService,
     private uploadService: UploadService,
-    private router: Router
+    private router: Router,
+    private headerService: HeaderService
   ) {
     config.max = 5;
     config.readonly = true;
   }
 
   ngOnInit(): void {
-    this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
-    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+    this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
     console.log(this.Location);
-
     this.lat = this.Location.lat;
     this.lng = this.Location.lng;
-
     this.origin.lat = this.Location.lat;
-    this.origin.lng = this.Location.lng;  
+    this.origin.lng = this.Location.lng;
     console.log(this.origin);
-
-    this.shop.push(JSON.parse(localStorage.getItem('Shop') || '[]'));
-
+    this.shop.push(JSON.parse(localStorage.getItem("Shop") || "[]"));
     this.destination.lat = this.shop[0].latitude;
     this.destination.lng = this.shop[0].longitude;
-
     console.log(this.destination);
+    console.log(this.shop);
 
-    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
-  console.log(this.shop);
+    //set Shop id in place order object
+    this.placeOrder.shop_id = this.shop[0].id;
 
-    this.getStoreDetail();
-    this.getAnoFee();
-    this.getBaseFee();
-    //this.getCartData();
+    //rating
+    this.rating3 = parseInt(this.shop[0].average_rating);
+
+    //get priously selected problem device
+    this.setPreviouslyAddedDeviceIssue();
   }
-  getStoreDetail() {
-    this.shopService.getStoreDetailById(this.storeId.id).subscribe(
+
+  getCurrentDate() {
+    this.today = new Date();
+    var dd = String(this.today.getDate()).padStart(2, "0");
+    var mm = String(this.today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = this.today.getFullYear();
+    this.today = yyyy + "/" + mm + "/" + dd;
+    this.modifiedToday = dd + "/" + mm + "/" + yyyy;
+  }
+  addRepairDevice() {
+    const modalRef = this.modalService.open(AddProductComponent);
+    modalRef.result.then((result) => {
+      console.log(result);
+      this.displayCartInfo.push(result);
+    });
+    console.log(this.displayCartInfo);
+  }
+
+  setPreviouslyAddedDeviceIssue() {
+    //set static id for priously selected device problem
+    this.displayCartInfo[0].id = 1;
+    //get priously selected problem device
+    this.addedDeviceProblem = JSON.parse(localStorage.getItem("deviceProblem"));
+    console.log(this.addedDeviceProblem);
+    //set Device Name
+    JSON.parse(localStorage.getItem("deviceList")).forEach((element) => {
+      if (element.id == this.addedDeviceProblem.device) {
+        this.displayCartInfo[0].deviceId = element.id;
+        this.displayCartInfo[0].deviceName = element.full_name;
+      }
+    });
+    //set Problem Name
+    let getProblemList = {
+      device_id: this.addedDeviceProblem.device,
+    };
+    this.headerService.getIssueListById(getProblemList).subscribe(
       (data) => {
-        this.storeInfo = data['data'];
-        this.shopCommission = data['data'].shopCommision;
-        this.averageRating = data['data'].average_rating;
-        this.ratings = data['data'].ratings;
-        this.averageCalculateRating = parseInt(
-          String((this.averageRating / 5) * 100)
-        );
-        this.calculateReviewBarValue();
+        data["data"].forEach((element) => {
+          if (element.id == this.addedDeviceProblem.problem) {
+            this.displayCartInfo[0].problemName = element.problem.problemName;
+            this.displayCartInfo[0].problemId = element.id;
+          }
+        });
+      },
+      (error) => {}
+    );
+    //set Expected Price
+    let getExpectedPrice = {
+      device: this.addedDeviceProblem.device,
+      problem: this.addedDeviceProblem.problem,
+      shop_id: this.shop[0].id,
+    };
+    this.shopService.getExpectedPrice(getExpectedPrice).subscribe(
+      (data) => {
+        console.log(data["data"]);
+        this.displayCartInfo[0].total_amount = data["data"][0].TotalAmount;
+        this.displayCartInfo[0].ANOBaseFees = data["data"][0].ANOBaseFees;
+        this.displayCartInfo[0].ANOCommissionFees =
+          data["data"][0].ANOCommissionFees;
+        this.displayCartInfo[0].price = data["data"][0].price;
       },
       (error) => {}
     );
   }
-  calculateReviewBarValue() {
-    this.ratings.forEach((element) => {
-      switch (element.rating) {
-        case 1:
-          this.oneStar++;
-          break;
-        case 2:
-          this.twoStar++;
-          break;
-        case 3:
-          this.threeStar++;
-          break;
-        case 4:
-          this.fourStar++;
-          break;
-        case 5:
-          this.fiveStar++;
-          break;
-      }
-    });
-    let totalCount =
-      this.oneStar +
-      this.twoStar +
-      this.threeStar +
-      this.fourStar +
-      this.fiveStar;
-    this.oneStarRatingBarValue = parseInt(
-      String((this.oneStar / totalCount) * 100)
-    );
-    this.twoStarRatingBarValue = parseInt(
-      String((this.twoStar / totalCount) * 100)
-    );
-    this.threeStarRatingBarValue = parseInt(
-      String((this.threeStar / totalCount) * 100)
-    );
-    this.fourStarRatingBarValue = parseInt(
-      String((this.fourStar / totalCount) * 100)
-    );
-    this.fiveStarRatingBarValue = parseInt(
-      String((this.fiveStar / totalCount) * 100)
-    );
-  }
-  getAnoFee() {
-    this.shopService.getAnoFee().subscribe((data) => {
-      this.ANOFee = data['data'][0].value;
-    });
-  }
-  getBaseFee() {
-    this.shopService.getBaseFee().subscribe((data) => {
-      this.baseFee = data['data'][0].value;
-    });
-  }
-  goToCart() {
-    this.router.navigate(['/cart']);
-  }
-  
-  addRepairDevice() {
-    const modalRef = this.modalService.open(AddProductComponent);
-  //   modalRef.componentInstance.shopId = this.storeId.id;
-  //   modalRef.result.then((result) => {
-  //     this.cartInfo = result;
-  //     console.log(this.cartInfo);
-  //     this.storeTokenService.set("cart_id", result.cart_id);
-  //     this.getCartData();
-  //   });
-   }
+
   getCartData() {
     this.shopService.getCartDetail().subscribe((data) => {
       this.cartInfo = data["data"];
@@ -433,7 +410,7 @@ export class CartComponent implements OnInit {
   getTimeAccoedingToDate() {
     let getTimeObj = {
       durating: 60,
-      shopId: this.storeId.id,
+      shopId: this.shop[0].id,
       date: this.placeOrder.date,
     };
     this.shopService.getTimeByDate(getTimeObj).subscribe((data) => {
@@ -441,28 +418,64 @@ export class CartComponent implements OnInit {
     });
   }
   setTime(event) {
-    console.log(this.timeList);
-    console.log(event);
     this.timeList.forEach((element) => {
-      if (element.id == event) {
+      if (element.id == event.target.value) {
         this.placeOrder.startTime = element.startTime;
         this.placeOrder.endTime = element.endTime;
       }
     });
+    console.log(this.placeOrder);
+    console.log(this.displayCartInfo);
   }
 
+  onSelect(event, id) {
+    console.log(event);
+    console.log(id);
+    this.files.push(...event.addedFiles);
+    this.files.forEach((element) => {
+      this.upload(element);
+    });
+    this.uploadService.imageLocationUrl.subscribe((x) => {
+      this.displayCartInfo.forEach((element) => {
+        if (element.id == id) {
+          element.images = x;
+          element.imageFiles = event.addedFiles;
+        }
+      });
+      this.currentImageUrl = x;
+      console.log("Current Image Url", this.currentImageUrl);
+    });
+    console.log(this.displayCartInfo);
+  }
+  async upload(file) {
+    console.log("upload file function called");
+    await this.uploadService.uploadFile(file);
+  }
+  onRemove(event, id) {
+    console.log(event);
+    this.displayCartInfo.forEach((element, index) => {
+      if (element.id == id) {
+        delete this.displayCartInfo[index].imageFiles;
+        delete this.displayCartInfo[index].images;
+      }
+    });
+    console.log(this.displayCartInfo);
+  }
 
-	onSelect(event) {
-		console.log(event);
-		this.files.push(...event.addedFiles);
-	}
+  deleteCartProduct(event) {
+    this.shopService.deleteCartData(event).subscribe(
+      (data) => {},
+      (error) => {}
+    );
+    this.displayCartInfo.forEach((element, index) => {
+      if (element.id == event) {
+        this.displayCartInfo.splice(index, 1);
+      }
+    });
+    console.log(this.displayCartInfo);
+    console.log(event);
+  }
 
-	onRemove(event) {
-		console.log(event);
-		this.files.splice(this.files.indexOf(event), 1);
-	}
-
-  
   // onSelect(event, id) {
   //   console.log(event);
   //   console.log(id);
@@ -520,48 +533,29 @@ export class CartComponent implements OnInit {
   //   this.files.splice(this.files.indexOf(event), 1);
   // }
 
-  setEditToChangeImage() {
-    this.imageEditFlag = true;
-  }
+  proceed() {
+    //to calculate total cart amount
+    let totalCartAmount = 0;
 
-  procced() {
-    if (
-      this.placeOrder.date &&
-      this.placeOrder.startTime &&
-      this.placeOrder.endTime
-    ) {
-      console.log("set");
-      let Total_price: Number = 0;
-      this.cartInfo.forEach((element) => {
-        Total_price = Total_price + element.price;
-        // this.placeOrder.details.push({
-        //   device_id: element.device_id,
-        //   brand_id: element.brand_id,
-        //   problem_id: element.problem_id,
-        //   price: element.price,
-        // });
-      });
-      this.placeOrder.Total_Price = Total_price;
-      this.shopService.placeOrder(this.placeOrder).subscribe((data) => {
-        console.log(data["data"]);
-      });
-      console.log("total price", Total_price);
-      console.log(this.cartInfo);
-      console.log(this.placeOrder);
-    } else {
-      console.log("not set");
-      return;
-    }
-    this.placeOrder.details.forEach((element, index) => {
-      this.cartInfo.forEach((ele, index) => {
-        element[index].device_id = ele[index].device_id;
+    //Add product in cart
+    this.displayCartInfo.forEach((element) => {
+      this.placeOrder.details.push({
+        device_id: element.deviceId,
+        problem_id: element.problemId,
+        price: element.total_amount,
+        image: element.images,
       });
     });
-    let copyCartInfo: any[];
-    this.cartInfo.forEach((element) => {
-      copyCartInfo.push(element.device_id);
-    });
-    console.log("copy ", copyCartInfo);
-  }
+    this.placeOrder.details.splice(0, 1);
 
+    //calculating cart amount
+    this.placeOrder.details.forEach((element) => {
+      totalCartAmount = +element.price;
+    });
+    this.placeOrder.Total_Price = totalCartAmount;
+    console.log(this.placeOrder);
+
+    localStorage.setItem("PlaceOrder", this.placeOrder);
+    this.router.navigate(["/checkout"]);
+  }
 }

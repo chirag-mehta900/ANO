@@ -89,7 +89,7 @@
                 <h2>Top Shop</h2>
             </div>
             <carousel [height]="245" [cellWidth]="320" [arrowsOutside]="true">
-                <div class="shop-box carousel-cell" *ngFor="let store of Shoplist" (click)="shopDetail(store.id,store)">
+                <div class="carousel-cell shop-box-carousel" *ngFor="let store of Shoplist" (click)="shopDetail(store.id,store)" [height]="245" [cellWidth]="320">
                     <div class="shop-img">
                         <img class="img-fluid" src="{{store.image}}" alt="">
                     </div>

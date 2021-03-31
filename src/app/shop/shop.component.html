@@ -11,7 +11,7 @@
         <div class="shop-filter">
             <div class="shop-filt-inp">
                 <input type="text" name="mapshop" id="shop" placeholder="Search Shop">
-                <button><img src="../../assets/images/Sliders.svg" alt=""></button>
+                <!-- <button><img src="../../assets/images/Sliders.svg" alt=""></button> -->
             </div>
             <div class="shop-come">
                 <div class="shop-box" *ngFor="let store of shop">
@@ -163,14 +163,14 @@
             <div class="review-user">
                 <div class="review-box" *ngFor="let review of ratings">
                     <div class="review-photo">
-                        <img src="../../assets/images/review user.png" alt="">
+                        <img src={{review.user_image}} alt="" width="50px" height="50px">
                     </div>
                     <div class="review-detal">
                         <div class="review-name">
-                            <h4>Fionn Norris</h4>
+                            <h4>{{review.user_name}}</h4>
                             <p>01/20/2021, 09:16 AM</p>
                         </div>
-                            <h2>{{review.title}}</h2>
+                        <h2>{{review.title}}</h2>
                         <h3>{{review.commet}}</h3>
                         <div class="review-rating">
                             <ngx-star-rating class="rating" [(ngModel)]="review.rating" [disabled]="true"
