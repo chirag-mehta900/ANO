@@ -275,7 +275,7 @@ export class CartComponent implements OnInit {
   per = 78;
   storeId: any;
   storeInfo: any[] = [];
-  timeList: any[];
+  timeList: any[] = [];
   cartInfo: any = {};
   files: File[] = [];
   imageUploaded: any[] = [];
@@ -299,6 +299,7 @@ export class CartComponent implements OnInit {
   ];
   today;
   modifiedToday;
+  totalCartAmount = 0;
   constructor(
     config: NgbRatingConfig,
     private route: ActivatedRoute,
@@ -335,6 +336,7 @@ export class CartComponent implements OnInit {
 
     //get priously selected problem device
     this.setPreviouslyAddedDeviceIssue();
+    this.getCurrentDate();
   }
 
   getCurrentDate() {
@@ -342,16 +344,27 @@ export class CartComponent implements OnInit {
     var dd = String(this.today.getDate()).padStart(2, "0");
     var mm = String(this.today.getMonth() + 1).padStart(2, "0"); //January is 0!
     var yyyy = this.today.getFullYear();
-    this.today = yyyy + "/" + mm + "/" + dd;
-    this.modifiedToday = dd + "/" + mm + "/" + yyyy;
+    this.today = yyyy + "-" + mm + "-" + dd;
+    this.placeOrder.date = this.today;
+    this.modifiedToday = mm + "/" + dd + "/" + yyyy;
   }
   addRepairDevice() {
     const modalRef = this.modalService.open(AddProductComponent);
     modalRef.result.then((result) => {
       console.log(result);
+      console.log(result.price);
+      this.totalCartAmount += result.total_amount;
       this.displayCartInfo.push(result);
     });
+    //this.recalculateTotalCartAmount();
     console.log(this.displayCartInfo);
+  }
+
+  recalculateTotalCartAmount() {
+    this.totalCartAmount = 0;
+    this.displayCartInfo.forEach((element) => {
+      this.totalCartAmount += element.total_amount;
+    });
   }
 
   setPreviouslyAddedDeviceIssue() {
@@ -391,7 +404,8 @@ export class CartComponent implements OnInit {
     this.shopService.getExpectedPrice(getExpectedPrice).subscribe(
       (data) => {
         console.log(data["data"]);
-        this.displayCartInfo[0].total_amount = data["data"][0].TotalAmount;
+        this.totalCartAmount = this.displayCartInfo[0].total_amount =
+          data["data"][0].TotalAmount;
         this.displayCartInfo[0].ANOBaseFees = data["data"][0].ANOBaseFees;
         this.displayCartInfo[0].ANOCommissionFees =
           data["data"][0].ANOCommissionFees;
@@ -401,20 +415,33 @@ export class CartComponent implements OnInit {
     );
   }
 
-  getCartData() {
-    this.shopService.getCartDetail().subscribe((data) => {
-      this.cartInfo = data["data"];
-      console.log(this.cartInfo);
-    });
-  }
+  // getCartData() {
+  //   this.shopService.getCartDetail().subscribe((data) => {
+  //     this.cartInfo = data["data"];
+  //     console.log(this.cartInfo);
+  //   });
+  // }
   getTimeAccoedingToDate() {
+    this.timeList = [];
     let getTimeObj = {
       durating: 60,
       shopId: this.shop[0].id,
       date: this.placeOrder.date,
     };
     this.shopService.getTimeByDate(getTimeObj).subscribe((data) => {
-      this.timeList = data["data"];
+      this.today = new Date();
+      let hh = this.today.getHours();
+      let mm = this.today.getMinutes();
+      console.log(hh, mm);
+      console.log(data["data"]);
+      data["data"].forEach((element) => {
+        var hour = new Date("1970-01-01 " + element.startTime);
+        if (hour.getHours() > hh) {
+          this.timeList.push(element);
+        }
+        console.log(hour.getHours());
+      });
+      console.log(this.timeList);
     });
   }
   setTime(event) {
@@ -469,70 +496,13 @@ export class CartComponent implements OnInit {
     );
     this.displayCartInfo.forEach((element, index) => {
       if (element.id == event) {
+        this.totalCartAmount -= element.total_amount;
         this.displayCartInfo.splice(index, 1);
       }
     });
     console.log(this.displayCartInfo);
     console.log(event);
   }
-
-  // onSelect(event, id) {
-  //   console.log(event);
-  //   console.log(id);
-  //   this.cartInfo.forEach((element) => {
-  //     if (element.id == id) {
-  //       element.image = event.addedFiles;
-  //       console.log("added Image", element.image);
-  //     }
-  //   });
-  //   console.log(this.cartInfo);
-  //   this.files.push(...event.addedFiles);
-  //   this.files.forEach((element) => {
-  //     this.upload(element);
-  //     console.log(element);
-  //   });
-  //   console.log(this.files);
-  //   let imgUrl = this.storeTokenService.get("ImgUrl");
-  //   console.log(imgUrl);
-  //   this.uploadService.imageLocationUrl.subscribe((x) => {
-  //     console.log("Subscribed Url", x);
-  //     this.currentImageUrl = x;
-  //     console.log("Current Image Url", this.currentImageUrl);
-  //   });
-  //   console.log("on select CurrentUrl ", this.currentImageUrl);
-
-  //   this.cartInfo.forEach((element) => {
-  //     if (element.id == id) {
-  //       element.image = imgUrl;
-  //       this.placeOrder.details.push({
-  //         image: this.currentImageUrl,
-  //         device_id: element.device_id,
-  //         brand_id: element.brand_id,
-  //         problem_id: element.problem_id,
-  //         price: element.price,
-  //       });
-  //     }
-  //   });
-  //   this.imageUploaded.push({ id: id, imgUrl: imgUrl });
-  //   console.log(this.imageUploaded);
-  //   this.imageEditFlag = false;
-
-  //   // console.log("Location Url", this.imageLocationUrl);
-  //   this.subscription = this.uploadService.imageLocationUrl;
-  //   console.log(this.subscription);
-  // }
-  // async upload(file) {
-  //   // const file = this.selectedFiles.item(0);
-  //   console.log("upload file function called");
-  //   await this.uploadService.uploadFile(file);
-  //   //this.uploadService.uploadfile(file);
-  // }
-
-  // onRemove(event) {
-  //   console.log(event);
-  //   this.files.splice(this.files.indexOf(event), 1);
-  // }
-
   proceed() {
     //to calculate total cart amount
     let totalCartAmount = 0;
