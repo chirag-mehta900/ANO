@@ -1,6 +1,6 @@
 <div>
     <form #Repair="ngForm">
-        <div>
+        <div class="all-adv-add">
             <div class="select-brand">
                 <h2>Add Device</h2>
                 <div class="optionselect">
@@ -17,7 +17,6 @@
                         Select Device
                     </div>
                 </div>
-
             </div>
             <div class="select-device">
                 <div class="optionselect">
@@ -36,17 +35,13 @@
                         Select Device
                     </div>
                 </div>
-
+            </div>
+            <div class="price-part">
+                <p>Expected Price:<span>{{bookRepair.price}}</span></p>
+            </div>
+            <div class="add-device-btn">
+                <button type="submit" (click)="addDevice()">Add Device</button>
             </div>
         </div>
-
-        <div>
-            Expected Price:<span>{{bookRepair.price}}</span>
-        </div>
-        <div>
-            <button type="submit" (click)="addDevice()">Add Device</button>
-        </div>
-
-
     </form>
 </div>

@@ -1,4 +1,9 @@
 <section class="cart">
+    <div class="bg-map">
+        <agm-map [latitude]="21.175265" [longitude]="72.831855" [zoom]="17">
+            <agm-marker [latitude]="21.175265" [longitude]="72.831855"></agm-marker>
+        </agm-map>
+    </div>
     <div class="container">
         <div class="shop-det">
             <div class="shop-dettt">
@@ -47,11 +52,13 @@
                                 <p>Expected price : <span>${{info.total_amount}}</span></p>
 
                                 <ng-template #HtmlContent>
-                                    <h5>Pricing Factors</h5>
-                                    <div>-Base Fee : <span>${{info.price}}</span></div>
-                                    <div>- ANO’s Commission Fee : <span>${{info.ANOCommissionFees}}</span></div>
-                                    <div>- Repair Shop Commission Fee : <span></span></div>
-                                    <div>- Part Price Based on ANO’s Parts Lists (Price Scale)</div>
+                                    <div class="pricing-fact">
+                                        <h5>Pricing Factors</h5>
+                                        <p>-Base Fee : <span>${{info.price}}</span></p>
+                                        <p>- ANO’s Commission Fee : <span>${{info.ANOCommissionFees}}</span></p>
+                                        <p>- Repair Shop Commission Fee : <span></span></p>
+                                        <p>- Part Price Based on ANO’s Parts Lists (Price Scale)</p>
+                                    </div>
                                 </ng-template>
                                 <img [tooltip]="HtmlContent" content-type="template" placement="right" theme="light"
                                     src="../../assets/images/checkout/outline.svg" alt="">
@@ -65,8 +72,13 @@
                 <div class="col-md-3">
                     <div class="add-product-service">
                         <button><img class="img-fluid" src="../../assets/images/checkout/addproduct.svg" alt=""
-                                (click)="addRepairDevice()"></button>
-                        <p>Add More</p>
+                                (click)="addRepairDevice()">
+                            <p>Add More</p>
+                        </button>
+                        <div class="total-total">
+                            <p>Total</p>
+                            <h2>$146:00</h2>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -82,7 +94,7 @@
                         <div class="selectdate-time">
                             <input type="date" name="distance" [(ngModel)]="placeOrder.date"
                                 (input)="getTimeAccoedingToDate()" [min]="today">
-                            <select name="time" (change)="setTime($event)" placeholder="select time">
+                            <select class="rig-no" name="time" (change)="setTime($event)" placeholder="select time">
                                 <option>Select Time</option>
                                 <option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} -
                                     {{time.endTime}}
@@ -101,6 +113,37 @@
                         </div>
                         <div class="mail-product">
                             <p>Please drop in your devices </p>
+                        </div>
+                    </label><br>
+                </div>
+            </div>
+            <div class="deliver-system drop-off-slot">
+                <div class="deliver-cab radio">
+                    <input class="deliver-radio" type="radio" id="drop-off-opt" name="deliver-system"
+                        value="drop-off-opt">
+                    <label for="drop-off-opt" class="radio-label">
+                        <div class="selectdate-time">
+                            <input type="date" name="distance" [(ngModel)]="placeOrder.date"
+                                (input)="getTimeAccoedingToDate()" [min]="today">
+                            <select name="time" (change)="setTime($event)" placeholder="select time">
+                                <option>Select Time</option>
+                                <option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} -
+                                    {{time.endTime}}
+                                </option>
+                            </select>
+                            <input type="text" name="drop-off" id="drop-off" placeholder="Drop up Address">
+                        </div>
+                    </label><br>
+                </div>
+                <div class="deliver-mail radio">
+                    <input class="deliver-radio" type="radio" id="pick-up" name="deliver-system" value="pick-up">
+                    <label for="pick-up" class="radio-label radio-labell">
+                        <div class="mail-product">
+                            <img src="../../assets/images/checkout/mail.svg" alt="">
+                            <h3>Pick-up Device</h3>
+                        </div>
+                        <div class="mail-product">
+                            <p>I will pick up the device from the store</p>
                         </div>
                     </label><br>
                 </div>
