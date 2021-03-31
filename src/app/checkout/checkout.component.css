@@ -1,5 +1,6 @@
 .checkout{
     margin-top: 30px;
+    margin-bottom: 40px;
 }
 .booking-detail{
     display: flex;
@@ -25,8 +26,22 @@
     font-size: 30px;
     font-family: 'Poppins-SemiBold';
 }
+.booking-sho-prices{
+    display: flex;
+    align-items: baseline;
+}
+.booking-sho-prices h2{
+    font-size: 30px;
+    font-family: 'Poppins-SemiBold';
+    margin-right: 15px;
+}
+.booking-sho-prices h3{
+    font-size: 20px;
+    font-family: 'Poppins-Regular';
+    text-decoration: line-through #D80606;
+}
 .booking-device{
-    height: 160px;
+    height: 120px;
 }
 .booking-device-box{
     background: #FFF3D9;
@@ -75,12 +90,12 @@
     padding: 10px;
 }
 .destroy-system-img{
-    height: 235px;
+    height: 130px;
     width: auto;
 }
 .destroy-system-img img{
-    height: 320px;
-    width: auto;
+    height: 207px;
+    width: 100%;
     border-radius: 10px;
 }
 .destroy-system-det h2{
@@ -101,9 +116,10 @@
 }
 .destroy-system-btn button{
     border: none;
-    width: 98%;
+    width: 100%;
     border-radius: 10px;
     background: #000000;
+    padding: 10px;
 }
 .alt-number{
     margin-top: 20px;
@@ -121,7 +137,6 @@
 .alt-number-inp input{
     padding: 10px;
     border: 1px solid #D3D8E0;
-    margin-bottom: 20px;
     border-radius: 10px;
     font-family: 'Poppins-Regular'; 
     width: 100%;
@@ -399,4 +414,29 @@
     background-color: #000000;
     margin-left: 20px;
     border-radius: 5px;
+}
+.pick-up{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 95%;
+    margin: auto;
+    margin-top: 20px !important;
+}
+.pick-up h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 25px;
+    margin-bottom: 0px;
+}
+.pick-up p{
+    font-family: 'Poppins-Regular';
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+.deliver-system{
+    margin-top: 20px;
+}
+.mar-bot{
+    margin-bottom: -25px;
+    margin-top: 20px;
 }
