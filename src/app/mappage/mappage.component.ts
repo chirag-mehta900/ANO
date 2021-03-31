@@ -281,20 +281,18 @@ export class MappageComponent implements OnInit {
       console.log('location not found');
     }
 
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.Location.lat = position.coords.latitude;
-      this.Location.lng = position.coords.longitude;
+    // navigator.geolocation.getCurrentPosition((position) => {
+    //   this.Location.lat = position.coords.latitude;
+    //   this.Location.lng = position.coords.longitude;
 
-      console.log(this.Location);
+    //   console.log(this.Location);
 
-      localStorage.setItem('Location', JSON.stringify(this.Location));
-      this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
-      this.Lat = this.Location.lat;
-      this.Lng = this.Location.lng;
+    //   localStorage.setItem('Location', JSON.stringify(this.Location));
+    //   this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+    //   this.Lat = this.Location.lat;
+    //   this.Lng = this.Location.lng;
 
-      console.log(this.Lat);
-      console.log(this.Lng);
-    });
+    // });
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
     this.Lat = this.Location.lat;
     this.Lng = this.Location.lng;
