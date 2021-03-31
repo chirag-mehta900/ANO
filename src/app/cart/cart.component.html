@@ -81,7 +81,7 @@
                     <label for="deliver-cab" class="radio-label">
                         <div class="selectdate-time">
                             <input type="date" name="distance" [(ngModel)]="placeOrder.date"
-                                (input)="getTimeAccoedingToDate()">
+                                (input)="getTimeAccoedingToDate()" [min]="today">
                             <select name="time" (change)="setTime($event)" placeholder="select time">
                                 <option>Select Time</option>
                                 <option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} -

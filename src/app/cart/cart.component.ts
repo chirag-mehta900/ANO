@@ -297,6 +297,8 @@ export class CartComponent implements OnInit {
       deviceId: null,
     },
   ];
+  today;
+  modifiedToday;
   constructor(
     config: NgbRatingConfig,
     private route: ActivatedRoute,
@@ -335,16 +337,19 @@ export class CartComponent implements OnInit {
     this.setPreviouslyAddedDeviceIssue();
   }
 
+  getCurrentDate() {
+    this.today = new Date();
+    var dd = String(this.today.getDate()).padStart(2, "0");
+    var mm = String(this.today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = this.today.getFullYear();
+    this.today = yyyy + "/" + mm + "/" + dd;
+    this.modifiedToday = dd + "/" + mm + "/" + yyyy;
+  }
   addRepairDevice() {
     const modalRef = this.modalService.open(AddProductComponent);
-    //   modalRef.componentInstance.shopId = this.storeId.id;
     modalRef.result.then((result) => {
       console.log(result);
       this.displayCartInfo.push(result);
-      // this.cartInfo = result;
-      // console.log(this.cartInfo);
-      // this.storeTokenService.set("cart_id", result.cart_id);
-      // this.getCartData();
     });
     console.log(this.displayCartInfo);
   }
@@ -529,47 +534,28 @@ export class CartComponent implements OnInit {
   // }
 
   proceed() {
-    console.log("set");
-    console.log(this.displayCartInfo);
-    console.log(this.placeOrder);
-    let obj = {
-      device_id: null,
-      problem_id: null,
-      price: null,
-      image: [],
-    };
-    Object.keys(this.placeOrder.details).forEach((key) => {
-      console.log((this.placeOrder.details[key].device_id = 1));
-      console.log((this.placeOrder.details[key].problem_id = 3));
-      console.log(this.placeOrder.details[key]);
-    });
-    //   let Total_price: Number = 0;
-    //   this.cartInfo.forEach((element) => {
-    //     Total_price = Total_price + element.price;
-    //     // this.placeOrder.details.push({
-    //     //   device_id: element.device_id,
-    //     //   brand_id: element.brand_id,
-    //     //   problem_id: element.problem_id,
-    //     //   price: element.price,
-    //     // });
-    //   });
-    //   this.placeOrder.Total_Price = Total_price;
-    //   this.shopService.placeOrder(this.placeOrder).subscribe((data) => {
-    //     console.log(data["data"]);
-    //   });
-    //   console.log("total price", Total_price);
-    //   console.log(this.cartInfo);
-    //   console.log(this.placeOrder);
+    //to calculate total cart amount
+    let totalCartAmount = 0;
 
-    // this.placeOrder.details.forEach((element, index) => {
-    //   this.cartInfo.forEach((ele, index) => {
-    //     element[index].device_id = ele[index].device_id;
-    //   });
-    // });
-    // let copyCartInfo: any[];
-    // this.cartInfo.forEach((element) => {
-    //   copyCartInfo.push(element.device_id);
-    // });
-    // console.log("copy ", copyCartInfo);
+    //Add product in cart
+    this.displayCartInfo.forEach((element) => {
+      this.placeOrder.details.push({
+        device_id: element.deviceId,
+        problem_id: element.problemId,
+        price: element.total_amount,
+        image: element.images,
+      });
+    });
+    this.placeOrder.details.splice(0, 1);
+
+    //calculating cart amount
+    this.placeOrder.details.forEach((element) => {
+      totalCartAmount = +element.price;
+    });
+    this.placeOrder.Total_Price = totalCartAmount;
+    console.log(this.placeOrder);
+
+    localStorage.setItem("PlaceOrder", this.placeOrder);
+    this.router.navigate(["/checkout"]);
   }
 }
