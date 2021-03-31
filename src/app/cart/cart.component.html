@@ -2,7 +2,7 @@
     <div class="container">
         <div class="shop-det">
             <div class="shop-dettt">
-                <h2>Shop Name</h2>
+                <h2>{{shop[0].shopName}}</h2>
                 <div class="cont">
                     <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true">
                     </ngx-star-rating>
@@ -11,11 +11,11 @@
             <div class="detail-name2">
                 <div class="dis-f">
                     <img src="../../assets/images/Call.svg" alt="">
-                    <p>+1 (855)-766-3835</p>
+                    <p>{{shop[0].mobileNumber}}</p>
                 </div>
                 <div class="dis-f">
                     <img src="../../assets/images/location.svg" alt="">
-                    <p>2464 Royal Ln. Mesa, New Jersey 45463</p>
+                    <p>{{shop[0].addressLine1}} , {{shop[0].addressLine2}}</p>
                 </div>
             </div>
         </div>
@@ -23,37 +23,49 @@
         <div class="service-added">
             <h3>Services Added</h3>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3" *ngFor="let info of displayCartInfo">
                     <div class="add-pro">
                         <div class="add-pro-img">
-                            <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)">
+                            <div id="info.id" class="custom-dropzone" ngx-dropzone [accept]="'image/*'"
+                                (change)="onSelect($event,info.id)">
                                 <ngx-dropzone-label>
                                     <div class="addd-btnn">
                                         <img src="../../assets/images/checkout/addproduct.svg" alt="">
                                     </div>
                                 </ngx-dropzone-label>
-                                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files"
-                                    [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                    *ngFor="let f of info.imageFiles" [file]="f" [removable]="true"
+                                    (removed)="onRemove(f,info.id)">
                                     <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
                                 </ngx-dropzone-image-preview>
                             </div>
                         </div>
                         <div class="add-pro-dett">
-                            <h2>LG Monitor</h2>
-                            <p>Repair Master, Repair</p>
+                            <h2>{{info.deviceName}}</h2>
+                            <p>{{info.problemName}}</p>
                             <div class="add-pro-price">
-                                <p>Expected price : <span>$45.00</span></p>
-                                <img src="../../assets/images/checkout/outline.svg" alt="">
+                                <p>Expected price : <span>${{info.total_amount}}</span></p>
+
+                                <ng-template #HtmlContent>
+                                    <h5>Pricing Factors</h5>
+                                    <div>-Base Fee : <span>${{info.price}}</span></div>
+                                    <div>- ANO’s Commission Fee : <span>${{info.ANOCommissionFees}}</span></div>
+                                    <div>- Repair Shop Commission Fee : <span></span></div>
+                                    <div>- Part Price Based on ANO’s Parts Lists (Price Scale)</div>
+                                </ng-template>
+                                <img [tooltip]="HtmlContent" content-type="template" placement="right" theme="light"
+                                    src="../../assets/images/checkout/outline.svg" alt="">
                             </div>
                             <div class="add-pro-btn">
-                                <button>Delete</button>
+                                <button (click)="deleteCartProduct(info.id)">Delete</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="add-product-service">
-                        <button><img class="img-fluid" src="../../assets/images/checkout/addproduct.svg" alt="" (click)="addRepairDevice()"></button>
+                        <button><img class="img-fluid" src="../../assets/images/checkout/addproduct.svg" alt=""
+                                (click)="addRepairDevice()"></button>
                         <p>Add More</p>
                     </div>
                 </div>
@@ -64,19 +76,24 @@
             <h3>Booking Made Easy</h3>
             <div class="deliver-system">
                 <div class="deliver-cab radio">
-                    <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab" checked>
+                    <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab"
+                        checked>
                     <label for="deliver-cab" class="radio-label">
                         <div class="selectdate-time">
-                            <input type="date" name="distance" [(ngModel)]="placeOrder.date" (input)="getTimeAccoedingToDate()">
-                            <select name="time" (change)="setTime($event)">
-                                <option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} - {{time.endTime}}
+                            <input type="date" name="distance" [(ngModel)]="placeOrder.date"
+                                (input)="getTimeAccoedingToDate()" [min]="today">
+                            <select name="time" (change)="setTime($event)" placeholder="select time">
+                                <option>Select Time</option>
+                                <option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} -
+                                    {{time.endTime}}
                                 </option>
                             </select>
                         </div>
                     </label><br>
                 </div>
                 <div class="deliver-mail radio">
-                    <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system" value="deliver-mail">
+                    <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system"
+                        value="deliver-mail">
                     <label for="deliver-mail" class="radio-label radio-labell">
                         <div class="mail-product">
                             <img src="../../assets/images/checkout/mail.svg" alt="">
@@ -89,7 +106,7 @@
                 </div>
             </div>
             <div class="proceed-btn">
-                <button>Proceed</button>
+                <button (click)="proceed()">Proceed</button>
             </div>
         </div>
     </div>
