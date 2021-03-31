@@ -469,6 +469,9 @@ MIT
 ng-otp-input
 MIT
 
+ng2-tooltip-directive
+MIT
+
 ngx-dropzone
 MIT
 
