@@ -66,8 +66,9 @@
     margin-bottom: 20px;
 }
 .access-display {
-    max-width: 840px;
-    margin: auto;
+    /* max-width: 840px; */
+    /* margin: auto; */
+    margin-top: 60px;
     overflow: hidden;
     filter: blur(10px);
 
@@ -106,4 +107,14 @@
     background-color: #000000;
     margin-left: 20px;
     border-radius: 5px;
+}
+.about-ano{
+    margin-bottom: 35px;
+}
+.aboutus {
+    margin-top: -90px;
+}
+.display-acc {
+    display: flex;
+    justify-content: center;
 }
