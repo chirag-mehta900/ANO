@@ -23,6 +23,7 @@ import { CartComponent } from "./cart/cart.component";
 import { AgmDirectionModule } from "agm-direction";
 import { AddProductComponent } from "./cart/add-product/add-product.component";
 import { ContactComponent } from "./contact/contact.component";
+import { PolicyComponent } from './policy/policy.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ContactComponent } from "./contact/contact.component";
     CartComponent,
     AddProductComponent,
     ContactComponent,
+    PolicyComponent,
   ],
   imports: [
     BrowserModule,

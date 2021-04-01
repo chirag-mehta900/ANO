@@ -5,6 +5,7 @@ import { CartComponent } from "./cart/cart.component";
 import { CheckoutComponent } from "./checkout/checkout.component";
 import { ContactComponent } from "./contact/contact.component";
 import { MappageComponent } from "./mappage/mappage.component";
+import { PolicyComponent } from "./policy/policy.component";
 import { ShopComponent } from "./shop/shop.component";
 import { TrackingComponent } from "./tracking/tracking.component";
 import { TrackingmapComponent } from "./trackingmap/trackingmap.component";
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: "trackmap", component: TrackingmapComponent },
   { path: "cart", component: CartComponent },
   { path: "contact", component: ContactComponent },
+  { path: "term", component: PolicyComponent },
 
   {
     path: "",
