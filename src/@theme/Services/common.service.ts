@@ -15,8 +15,8 @@ export class CommonService {
     return 'https://ano-apis.herokuapp.com/api/';
   }
 
-  getpublickey() {
-    return this.http.get(this.url + 'stripe-key');
+  pay(data) {
+    return this.http.post(this.url + 'pay', data);
   }
   userUrl(data: any) {
     return this.http.post(this.URL + 'users', data);
