@@ -24,6 +24,7 @@ import { AgmDirectionModule } from 'agm-direction';
 import { AddProductComponent } from './cart/add-product/add-product.component';
 import { ContactComponent } from './contact/contact.component';
 import { NgxStripeModule } from 'ngx-stripe';
+import { PolicyComponent } from './policy/policy.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NgxStripeModule } from 'ngx-stripe';
     CartComponent,
     AddProductComponent,
     ContactComponent,
+    PolicyComponent,
   ],
   imports: [
     BrowserModule,

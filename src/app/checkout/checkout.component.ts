@@ -53,6 +53,9 @@ export class CheckoutComponent implements OnInit {
   paymentID: any;
   payresponse: any;
   ID: any;
+  orderDetails;
+  shopDetails;
+  productDisplay: any[] = [];
 
   constructor(
     private header: HeaderService,
@@ -80,6 +83,33 @@ export class CheckoutComponent implements OnInit {
       (error) => {}
     );
     this.getData();
+    this.getOrderAndShopData();
+    this.setProductToDisplay();
+  }
+
+  getOrderAndShopData() {
+    this.orderDetails = JSON.parse(localStorage.getItem('PlaceOrder'));
+    this.shopDetails = JSON.parse(localStorage.getItem('Shop'));
+  }
+
+  setProductToDisplay() {
+    this.orderDetails.details.forEach((element) => {
+      let obj = {
+        device_id: element.device_id,
+      };
+      this.header.getIssueListById(obj).subscribe((data) => {
+        data['data'].forEach((element1) => {
+          if (element.problem_id == element1.problem.id) {
+            this.productDisplay.push({
+              problem_name: element1.problem.problemName,
+              price: element.price,
+              images: element.image,
+            });
+          }
+        });
+      });
+    });
+    console.log(this.productDisplay);
   }
 
   getData() {
