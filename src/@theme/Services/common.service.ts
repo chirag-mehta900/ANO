@@ -9,10 +9,15 @@ export class CommonService {
   constructor(private http: HttpClient) {}
   URL = 'https://stripenodefoodito.herokuapp.com/';
 
+  url = 'http://localhost:3000/new/';
+
   envUrl() {
     return 'https://ano-apis.herokuapp.com/api/';
   }
 
+  pay(data) {
+    return this.http.post(this.url + 'pay', data);
+  }
   userUrl(data: any) {
     return this.http.post(this.URL + 'users', data);
   }

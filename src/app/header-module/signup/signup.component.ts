@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { HeaderService } from "src/@theme/Services/header.service";
-import { StoreTokenService } from "src/@theme/Services/store-token.service";
-import { LoginComponent } from "../login/login.component";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderService } from 'src/@theme/Services/header.service';
+import { StoreTokenService } from 'src/@theme/Services/store-token.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
-  selector: "app-signup",
-  templateUrl: "./signup.component.html",
-  styleUrls: ["./signup.component.css"],
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
   nameSignUpFilled: boolean = false;
@@ -20,6 +20,17 @@ export class SignupComponent implements OnInit {
   signUpForm: FormGroup;
   userAddres: FormGroup;
   userName: any;
+  sId: any;
+
+  verification = {
+    email: '',
+    mobileNumber: '',
+  };
+
+  confirmOTP = {
+    mobileNumber: '',
+    otp: null,
+  };
   email: any;
   mobile: any;
   formSubmitted: boolean = false;
@@ -46,7 +57,7 @@ export class SignupComponent implements OnInit {
       ]),
       mobileNumber: new FormControl(null),
       password: new FormControl(null, Validators.required),
-      role: new FormControl("user"),
+      role: new FormControl('user'),
     });
     this.userAddres = new FormGroup({
       email: new FormControl(null, Validators.required),
@@ -69,7 +80,7 @@ export class SignupComponent implements OnInit {
     };
     this.headerService.checkEmail(emailObj).subscribe(
       (data) => {
-        if (data["data"] == 1) {
+        if (data['data'] == 1) {
           this.emailExist = true;
         }
       },
@@ -86,6 +97,8 @@ export class SignupComponent implements OnInit {
     ) {
       this.signUpNameFlag = false;
       this.signUpMobileFlag = true;
+
+      localStorage.setItem('signUp', JSON.stringify(this.signUpForm.value));
     } else {
       return;
     }
@@ -105,29 +118,46 @@ export class SignupComponent implements OnInit {
     if (this.signUpForm.valid) {
       this.email = this.signUpForm.value.email;
       this.mobile = this.signUpForm.value.mobileNumber;
-      this.headerService.signUp(this.signUpForm.value).subscribe(
-        (data) => {
-          if (data["status"] == 200) {
-            this.storeTokenService.set("token", data["data"].access_token);
-            this.setUserName();
-          }
-        },
-        (error) => {}
-      );
+
+      console.log(this.signUpForm.value);
+
+      localStorage.setItem('signUp', JSON.stringify(this.signUpForm.value));
+
+      this.verification.email = this.signUpForm.value.email;
+      this.verification.mobileNumber = this.signUpForm.value.mobileNumber;
+
+      console.log(this.verification);
+
+      this.headerService
+        .generateOTP(this.verification)
+        .subscribe((response) => {
+          console.log('get otp ', response);
+          this.sId = response['data']['sId'];
+        });
+
       this.signUpMobileFlag = false;
       this.signUpConformationFlag = true;
     } else {
       return;
     }
   }
-  signUpConfirmationComplete() {
-    this.signUpConformationFlag = false;
-    this.signUpEmailFlag = true;
+  signUpConfirmationComplete(otp: any) {
+    this.confirmOTP.mobileNumber = this.verification.mobileNumber;
+    this.confirmOTP.otp = otp;
+
+    this.headerService.verifyOTP(this.confirmOTP).subscribe((response) => {
+      console.log('verify', response);
+
+      if (response['status'] == 200) {
+        this.signUpConformationFlag = false;
+        this.signUpEmailFlag = true;
+      }
+    });
   }
   setUserName() {
     this.headerService.getUserName().subscribe(
       (data) => {
-        this.userName = data["data"].name;
+        this.userName = data['data'].name;
       },
       (error) => {}
     );
@@ -139,9 +169,26 @@ export class SignupComponent implements OnInit {
   signUpEmailComplete() {
     this.userAddres.value.email = this.email;
     this.userAddres.value.phoneNumber = this.mobile;
-    this.headerService.userAddress(this.userAddres.value).subscribe(
+
+    console.log(this.signUpForm.value);
+
+    this.headerService.signUp(this.signUpForm.value).subscribe(
       (data) => {
-        this.activeModal.close(this.userName);
+        console.log(data);
+        if (data['status'] == 200) {
+          this.storeTokenService.set('token', data['data'].access_token);
+          this.setUserName();
+
+          console.log(this.userAddres.value);
+          this.headerService.userAddress(this.userAddres.value).subscribe(
+            (data) => {
+              console.log(data);
+
+              this.activeModal.close(this.userName);
+            },
+            (error) => {}
+          );
+        }
       },
       (error) => {}
     );

@@ -6,10 +6,26 @@
     <title>ANO</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript">
+        function callAngularFunction() {
+            window.angularComponentReference.zone.run(() => {
+                window.angularComponentReference.loadAngularFunction();
+            });
+        }
+    </script>
+    <!-- <script type="text/javascript">
+        function callAngularFunction() {
+            window.angularComponent.zone.run(() => {
+                window.angularComponentReference.loadAngular();
+            });
+        }
+    </script> -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="/script.js" defer></script>
 </head>
 
 <body>
