@@ -58,7 +58,8 @@
                         <p>02:30 PM</p>
                     </div>
                     <div class="deliver-cab radio">
-                        <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab">
+                        <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system"
+                            value="deliver-cab">
                         <label for="deliver-cab" class="">
                             <div>
                                 <img src="../../assets/images/checkout/pickup.svg" alt="">
@@ -78,7 +79,8 @@
                         <p>02:30 PM</p>
                     </div>
                     <div class="deliver-mail deliver-cab radio">
-                        <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system" value="deliver-mail">
+                        <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system"
+                            value="deliver-mail">
                         <label for="deliver-mail" class=" radio-labell">
                             <div>
                                 <img src="../../assets/images/Location-white.svg" alt="">
@@ -105,7 +107,8 @@
                                 <p>Add Card Details</p>
                                 <div class="card-name">
 
-                                    <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+                                    <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions">
+                                    </ngx-stripe-card>
 
                                 </div>
                                 <!-- <div class="card-noo">
@@ -119,15 +122,21 @@
                             </div>
                             <div class="card-name">
                                 <p>Name on card</p>
-                                <input type="text" name="card-name" id="card-name" class="form-control" formControlName="cardholdername" placeholder="Card Holder Name" required>
+                                <input type="text" name="card-name" id="card-name" class="form-control"
+                                    formControlName="cardholdername" placeholder="Card Holder Name" required>
                             </div>
                             <div class="payment-country">
-                                <input type="text" name="country-zip" id="country-zip" class="form-control" maxlength="6" formControlName="zip" placeholder="ZIP" required>
+                                <input type="text" name="country-zip" id="country-zip" class="form-control"
+                                    maxlength="6" formControlName="zip" placeholder="ZIP" required>
                             </div>
-                            <!-- <div class="policy">
-                                <input type="checkbox" name="policy" id="policy">
-                                <p>I accept all terms and condition.</p>
-                            </div> -->
+                            <div class="policy">
+                                <div class="squaredOne">
+                                    <input type="checkbox" value="None" id="squaredOne" name="check" />
+                                    <label for="squaredOne">
+                                        <p>I accept all <a href="term" target="_blank"> terms and condition.</a></p>
+                                    </label>
+                                </div>
+                            </div>
                             <div class="payment-btns">
                                 <div class="pay-card">
                                     <button (click)="pay()" type="submit">Pay ${{total}}</button>
@@ -139,15 +148,18 @@
                 <div class="payment-done" *ngIf="isPaid">
                     <div class="payment-done-mess">
                         <h2>Thank you for choosing us</h2>
-                        <p>Your Order Is Is <span>#63486587923</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc odio in et, lectus sit lorem id integer.</p>
+                        <p>Your Order Is Is <span>#63486587923</span> Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Nunc odio in et, lectus sit lorem id integer.</p>
                         <button>Back to home</button>
                     </div>
                     <div class="payment-done-feedback">
                         <h2>Feed us back</h2>
                         <p>Help us know you better, so that we can serve you better.</p>
-                        <p>Information provided herein will be used solely for research purposes and will not be sold to any third parties.</p>
+                        <p>Information provided herein will be used solely for research purposes and will not be sold to
+                            any third parties.</p>
                         <div class="feedback-input">
-                            <textarea name="feedback" id="feedback" cols="10" rows="2" placeholder="Your Feedback..."></textarea>
+                            <textarea name="feedback" id="feedback" cols="10" rows="2"
+                                placeholder="Your Feedback..."></textarea>
                             <button><img src="../../assets/images/checkout/send.svg" alt=""></button>
                         </div>
                     </div>
