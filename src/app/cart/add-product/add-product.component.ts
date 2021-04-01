@@ -42,6 +42,7 @@ export class AddProductComponent implements OnInit {
     problemId: null,
     deviceId: null,
   };
+  estimatedRepairTime;
   constructor(
     private headerService: HeaderService,
     private uploadService: UploadService,
@@ -59,16 +60,6 @@ export class AddProductComponent implements OnInit {
   getBrandList() {
     this.deviceList = JSON.parse(localStorage.getItem("deviceList"));
   }
-
-  // getDeviceList(event) {
-  //   this.headerService.getDeviceList(event).subscribe(
-  //     (data) => {
-  //       console.log(data["data"]);
-  //       this.deviceList = data["data"];
-  //     },
-  //     (error) => {}
-  //   );
-  // }
 
   getIssueList(event) {
     if (this.bookRepair.device_id && this.bookRepair.problem_id) {
@@ -108,11 +99,27 @@ export class AddProductComponent implements OnInit {
         this.addedDeviceProblemToDisplayInCart.ANOCommissionFees =
           data["data"][0].ANOCommissionFees;
         this.addedDeviceProblemToDisplayInCart.price = data["data"][0].price;
+        this.estimatedRepairTime = data["data"][0].estimatedRepaidTime;
+        this.setEstimatedTime();
       },
       (error) => {}
     );
   }
-
+  setEstimatedTime() {
+    console.log(this.estimatedRepairTime);
+    var time = new Date("1970-01-01 " + this.estimatedRepairTime);
+    console.log(time.getHours());
+    if (localStorage.getItem("estimatedTime")) {
+      let previousEstimatedTime = JSON.parse(
+        localStorage.getItem("estimatedTime")
+      );
+      if (previousEstimatedTime >= time.getHours()) {
+        localStorage.setItem("estimatedTime", JSON.stringify(time.getHours()));
+      }
+    } else {
+      localStorage.setItem("estimatedTime", JSON.stringify(time.getHours()));
+    }
+  }
   addDevice() {
     //check user is log in if log in then set user id
     this.bookRepair.user_id = JSON.parse(localStorage.getItem("user_id"));
@@ -151,62 +158,4 @@ export class AddProductComponent implements OnInit {
     console.log(this.bookRepair);
     this.activeModal.close(this.addedDeviceProblemToDisplayInCart);
   }
-  // onSelect(event) {
-  //   console.log(event);
-  //   this.files.push(...event.addedFiles);
-  //   this.files.forEach((element) => {
-  //     //this.upload(element);
-  //     console.log(element);
-  //   });
-  // }
-  // upload(file) {
-  //   // const file = this.selectedFiles.item(0);
-  //   console.log("upload file function called");
-  //   let q = this.uploadService.uploadFile(file).subscribe((response) => {
-  //     console.log(response);
-  //   });
-  //   console.log("From Calling", q);
-  //   //this.uploadService.uploadfile(file);
-  // }
-
-  // onRemove(event) {
-  //   console.log(event);
-  //   this.files.splice(this.files.indexOf(event), 1);
-  // }
-
-  // getExpectedPrice() {
-  //   this.expectedPrice = "";
-  //   let obj = {
-  //     device: this.bookRepair.device_id,
-  //     brand: this.bookRepair.brand_id,
-  //     problem: this.bookRepair.problem_id,
-  //     shop_id: this.shopId,
-  //   };
-  //   this.bookRepair.shop_id = this.shopId;
-  //   this.shopService.getExpectedPrice(obj).subscribe((data) => {
-  //     data["data"].forEach((element) => {
-  //       if (element.shop_id == this.shopId) {
-  //         this.expectedPrice = element.TotalAmount;
-  //       }
-  //     });
-  //   });
-  // }
-  // addToCart(addCart) {
-  //   this.formSubmitted = true;
-  //   if (addCart.valid) {
-  //     this.bookRepair.price = this.expectedPrice;
-  //     this.bookRepair.cart_id = this.storeTokenService.get("cart_id");
-  //     console.log(addCart);
-  //     console.log(this.bookRepair);
-  //     this.shopService.addCartData(this.bookRepair).subscribe(
-  //       (data) => {
-  //         console.log(data["data"]);
-  //         this.activeModal.close(data["data"]);
-  //       },
-  //       (error) => {}
-  //     );
-  //   } else {
-  //     return;
-  //   }
-  // }
 }

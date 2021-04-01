@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonService } from 'src/@theme/Services/common.service';
-import { HeaderService } from 'src/@theme/Services/header.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Component, OnInit } from "@angular/core";
+import { CommonService } from "src/@theme/Services/common.service";
+import { HeaderService } from "src/@theme/Services/header.service";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css'],
+  selector: "app-checkout",
+  templateUrl: "./checkout.component.html",
+  styleUrls: ["./checkout.component.css"],
 })
 export class CheckoutComponent implements OnInit {
   isPaid: boolean = false;
@@ -23,17 +23,47 @@ export class CheckoutComponent implements OnInit {
   cardID: any;
   paymentID: any;
   ID: any;
+  orderDetails;
+  shopDetails;
+  productDisplay: any[] = [];
 
   constructor(private header: HeaderService, private common: CommonService) {}
 
   ngOnInit() {
     this.header.getEmail().subscribe(
       (data) => {
-        this.Email = data['data'].email;
+        this.Email = data["data"].email;
       },
       (error) => {}
     );
     this.getData();
+    this.getOrderAndShopData();
+    this.setProductToDisplay();
+  }
+
+  getOrderAndShopData() {
+    this.orderDetails = JSON.parse(localStorage.getItem("PlaceOrder"));
+    this.shopDetails = JSON.parse(localStorage.getItem("Shop"));
+  }
+
+  setProductToDisplay() {
+    this.orderDetails.details.forEach((element) => {
+      let obj = {
+        device_id: element.device_id,
+      };
+      this.header.getIssueListById(obj).subscribe((data) => {
+        data["data"].forEach((element1) => {
+          if (element.problem_id == element1.problem.id) {
+            this.productDisplay.push({
+              problem_name: element1.problem.problemName,
+              price: element.price,
+              images: element.image,
+            });
+          }
+        });
+      });
+    });
+    console.log(this.productDisplay);
   }
 
   getData() {
@@ -48,16 +78,16 @@ export class CheckoutComponent implements OnInit {
   }
 
   cardnum(card: string) {
-    this.CARD = card.split(' ').join('');
+    this.CARD = card.split(" ").join("");
     if (this.CARD.length >= 3) {
-      this.CARD = this.CARD.match(new RegExp('.{1,4}', 'g')).join(' ');
+      this.CARD = this.CARD.match(new RegExp(".{1,4}", "g")).join(" ");
     }
   }
 
   expiry(exp: any) {
-    this.Expiry = exp.split(' ').join('');
+    this.Expiry = exp.split(" ").join("");
     if (this.Expiry.length > 2) {
-      this.Expiry = this.Expiry.match(new RegExp('.{1,2}', 'g')).join(' ');
+      this.Expiry = this.Expiry.match(new RegExp(".{1,2}", "g")).join(" ");
       // this.Expiry = this.Expiry.replace(' ', '/');
     }
   }
@@ -65,8 +95,8 @@ export class CheckoutComponent implements OnInit {
   pay() {
     this.detail = {
       email: this.Email,
-      first_name: '',
-      last_name: '',
+      first_name: "",
+      last_name: "",
     };
     this.common.userUrl(this.detail).subscribe(
       (response) => {
@@ -115,7 +145,7 @@ export class CheckoutComponent implements OnInit {
   payment() {
     this.Payment = {
       amount: this.total * 100,
-      currency: 'usd',
+      currency: "usd",
       user_id: this.custID,
       source_id: this.cardID,
       receipt_email: this.Email,
