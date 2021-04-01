@@ -29,16 +29,20 @@ export class HeaderService {
   }
 
   getBrandList() {
-    return this.httpClient.get(this.commonService.envUrl() + 'brand');
+    return this.httpClient.get(this.commonService.envUrl() + 'models');
   }
   getDeviceList(id) {
     return this.httpClient.get(
-      this.commonService.envUrl() + 'device/filter/' + id
+      this.commonService.envUrl() + 'problem/filter' + id
     );
   }
-  getIssueListById(id) {
-    return this.httpClient.get(this.commonService.envUrl() + 'problem/' + id);
+  getIssueListById(data) {
+    return this.httpClient.post(
+      this.commonService.envUrl() + 'problem/filter',
+      data
+    );
   }
+
   searchStore(data) {
     return this.httpClient.post(
       this.commonService.envUrl() + 'store/search',
@@ -59,5 +63,9 @@ export class HeaderService {
       this.commonService.envUrl() + 'emailValidate',
       data
     );
+  }
+
+  slider() {
+    return this.httpClient.get(this.commonService.envUrl() + 'slider');
   }
 }

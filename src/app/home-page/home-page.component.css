@@ -9,19 +9,30 @@
 h2 {
     font-family: "Poppins-SemiBold";
     font-size: 72px;
-    max-width: 610px;
+    max-width: 498px;
+    color: #ffffff;
+    padding-top: 25px;
+    margin-bottom: 0px;
 }
-
+.banner-detail{
+    display: grid;
+    margin-bottom: 30px;
+}
 .banner-detail p {
     font-size: 15px;
     font-family: "Poppins-regular";
     max-width: 600px;
+    color: #ffffff;
+    padding-top: 25px;
+    margin-top: -25px;
+    margin-bottom: -3px
 }
 
 .repair-btn {
     width: 20% !important;
     font-family: 'Poppins-SemiBold';
     color: #000000;
+
 }
 
 .banner-service {
@@ -45,9 +56,10 @@ h2 {
 }
 
 .service-box img {
-    height: 120px;
-    width: auto;
-    border-radius: 20px;
+    height: 150px !important;
+    width: auto !important;
+    border-radius: 5px !important;
+    box-shadow: 0 0 3px #e9e9e9;
 }
 
 .service-box h2 {
@@ -100,8 +112,13 @@ h2 {
 }
 .whyuslist {
     display: flex;
+    align-items: center;
+}
+.listdisplay{
+    display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 .whyuslist-detailll {
     height: 100px;
@@ -131,7 +148,6 @@ h2 {
 .whyus-detail {
     text-align: left !important;
     margin-right: 10px;
-    width: 200px;
 }
 
 .service-detail img {
@@ -349,6 +365,10 @@ carousel.carousel {
     width: auto;
     margin-bottom: 20px;
 }
+.service-detail p{
+    max-width: 150px;
+    margin: auto;
+}
 .about-img-12 {
     display: flex;
 }
@@ -378,3 +398,344 @@ carousel.carousel {
 .about-img-34 {
     display: flex;
 }
+.home-banner {
+    width: 100%;
+    padding-top: 60px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* height: 50vh; */
+}
+.home-banner .row{
+    margin-right: 0px;
+}
+.select-dervice-car{
+    width: 80%;
+    position: relative;
+    right: -15%;
+    cursor: pointer !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ````````````````````````````````````````````````
+
+animatiom
+
+`````````````````````````````````````````````` */
+
+.banner-detail h2 {
+    width: 100%;
+    float: left;
+    color: #ffffff;
+    transform: translateY(-50px);
+    opacity: 0;
+    animation-name: titleAnimation;
+    animation-timing-function: ease;
+    animation-duration: 3s;
+  }
+  .banner-detail p{
+    width: 100%;
+    float: left;
+    color: #ffffff;
+    transform: translateY(-50px);
+    opacity: 0;
+    animation-name: titleAnimation;
+    animation-timing-function: ease;
+    animation-duration: 3s;
+  }
+  .banner-detail div{
+    float: left;
+    opacity: 0;
+    animation-name: titleAnimation;
+    animation-timing-function: ease;
+    animation-duration: 3s;
+  }
+
+.banner-detail h2 {
+    animation-delay: 0.6s;
+    -webkit-animation-fill-mode: forwards;
+  }
+  .banner-detail p {
+    animation-delay: .9s;
+    -webkit-animation-fill-mode: forwards;
+  }
+  .banner-detail div{
+    animation-delay: 1.4s;
+    -webkit-animation-fill-mode: forwards;
+  }
+
+  @keyframes titleAnimation {
+    0% {
+      transform: translateY(-50px);
+      opacity: 0;
+      -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%);
+    }
+    20% {
+      transform: translateY(0);
+      opacity: 1;
+      -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 15%);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 15%);
+    }
+    80% {
+      transform: translateY(0);
+      opacity: 1;
+      -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 15%);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 15%);
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+      -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 15%);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 15%);
+    }
+  }
+
+
+  .anim_one{
+    animation: pulse 1s linear infinite alternate;
+  }
+.anim_three {
+    -webkit-animation: updown 5s linear infinite;
+            animation: updown 5s linear infinite;
+  }
+
+
+  .anim_four {
+    -webkit-animation: leftright 5s linear infinite;
+            animation: leftright 5s linear infinite;
+  }
+
+  .anim_seven{
+    animation: fltleftright 3s linear infinite;
+  }
+
+
+  @-webkit-keyframes pulse {
+    100% {
+      transform: scale(1.3);
+    }
+  }
+  
+  @keyframes pulse {
+    100% {
+      transform: scale(1.3);
+    }
+  }
+  @-webkit-keyframes rotate {
+    0% {
+      transform: translatez(0) rotate(0);
+    }
+    100% {
+      transform: translatez(0) rotate(360deg);
+    }
+  }
+  @keyframes rotate {
+    0% {
+      transform: translatez(0) rotate(0);
+    }
+    100% {
+      transform: translatez(0) rotate(360deg);
+    }
+  }
+  @-webkit-keyframes updown {
+    0%, 100% {
+      transform: translateY(-40px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes updown {
+    0%, 100% {
+      transform: translateY(-40px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @-webkit-keyframes leftright {
+    0%, 100% {
+      transform: translateX(-50px);
+    }
+    50% {
+      transform: translateX(-10px);
+    }
+  }
+  @keyframes leftright {
+    0%, 100% {
+      transform: translateX(-50px);
+    }
+    50% {
+      transform: translateX(-10px);
+    }
+  }
+  @-webkit-keyframes anim_five {
+    0% {
+      transform: translate(0px, 0px) rotate(0deg);
+    }
+    20% {
+      transform: translate(73px, -1px) rotate(36deg);
+    }
+    40% {
+      transform: translate(141px, -20px) rotate(72deg);
+    }
+    60% {
+      transform: translate(83px, -60px) rotate(108deg);
+    }
+    80% {
+      transform: translate(-40px, 72px) rotate(144deg);
+    }
+    100% {
+      transform: translate(0px, 0px) rotate(0deg);
+    }
+  }
+  @keyframes anim_five {
+    0% {
+      transform: translate(0px, 0px) rotate(0deg);
+    }
+    20% {
+      transform: translate(73px, -1px) rotate(36deg);
+    }
+    40% {
+      transform: translate(141px, -20px) rotate(72deg);
+    }
+    60% {
+      transform: translate(83px, -60px) rotate(108deg);
+    }
+    80% {
+      transform: translate(-40px, 72px) rotate(144deg);
+    }
+    100% {
+      transform: translate(0px, 0px) rotate(0deg);
+    }
+  }
+  @-webkit-keyframes fltmovetwo {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    21% {
+      transform: translate(4px, -20px) rotate(38deg);
+    }
+    41% {
+      transform: translate(-50px, -60px) rotate(74deg);
+    }
+    60% {
+      transform: translate(-20px, -30px) rotate(108deg);
+    }
+    80% {
+      transform: translate(-195px, -49px) rotate(144deg);
+    }
+    100% {
+      transform: translate(-1px, 0px) rotate(180deg);
+    }
+  }
+  @keyframes fltmovetwo {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    21% {
+      transform: translate(4px, -20px) rotate(38deg);
+    }
+    41% {
+      transform: translate(-50px, -60px) rotate(74deg);
+    }
+    60% {
+      transform: translate(-20px, -30px) rotate(108deg);
+    }
+    80% {
+      transform: translate(-195px, -49px) rotate(144deg);
+    }
+    100% {
+      transform: translate(-1px, 0px) rotate(180deg);
+    }
+  }
+  @-webkit-keyframes fltleftright {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(10px, -5px) rotate(0deg);
+    }
+    100% {
+      transform: translate(0px, 0px) rotate(0deg);
+    }
+  }
+  @keyframes fltleftright {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(10px, -5px) rotate(0deg);
+    }
+    100% {
+      transform: translate(0px, 0px) rotate(0deg);
+    }
+  }
+
+
+
+
+
+
+
+  /* `````````````````````````````````
+
+  Reaponsive
+
+
+  ````````````````````````````````` */
+
+  @media only screen and (max-width: 991px){
+    .listdisplay{
+        display: grid;
+    }
+    .whyus-detail{
+        text-align: center !important;
+    }
+    .whyimg{
+        justify-content: center;
+    }
+    .hexagon {
+        width: 165% !important;
+    }
+  }
+  @media only screen and (max-width: 768px){
+      .banner-detail{
+          margin-left: 20px;
+      }
+      .about-img.col-md-6 {
+        display: grid;
+        justify-content: end;
+        margin-top: 40px;
+    }
+  }
+
+  @media only screen and (max-width: 1200px){
+    .select-dervice-car{
+        position: inherit !important;
+        margin: auto;
+    }
+  }

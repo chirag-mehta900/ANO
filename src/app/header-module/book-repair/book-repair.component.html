@@ -2,17 +2,16 @@
     <form #Repair="ngForm">
         <div *ngIf="selectBrandFlag">
             <div class="select-brand">
-                <h2>Select Brand</h2>
-                <p>BRAND</p>
-                <div>
-                    <ng-select class="custom" name="brand" [(ngModel)]="bookRepair.brand"
-                        (change)="getDeviceList($event)" placeholder="Select Brand" #device1="ngModel" [ngClass]="{
+                <h2>Select Device</h2>
+                <p>Device Name</p>
+                <div class="optionselect">
+                    <select class="custom" name="brand" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)" placeholder="Select Brand" #device1="ngModel" [ngClass]="{
                 'is-invalid':
                 device1.invalid &&
                 (formSubmitted || device1.touched) 
                 }">
-                        <ng-option *ngFor="let brand of brandList" [value]="brand.id">{{brand.brandName}}</ng-option>
-                    </ng-select>
+                        <option *ngFor="let brand of deviceList" [value]="brand.id">{{brand.full_name}}</option>
+                    </select>
                     <div class="text-danger" *ngIf="device1.invalid &&
                 (formSubmitted || device1.touched)">
                         Select Device
@@ -33,18 +32,17 @@
         <!--Select Device-->
         <div *ngIf="selectDeviceFlag">
             <div class="select-device">
-                <h2>Select Device</h2>
-                <p>DEVICE</p>
-                <div>
-                    <ng-select name="device" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)"
-                        placeholder="Select Device" #device1="ngModel" [ngClass]="{
+                <h2>Select Problem</h2>
+                <p>Issue</p>
+                <div class="optionselect">
+                    <select class="custom" name="device" [(ngModel)]="bookRepair.problem" placeholder="Select Device" #device1="ngModel" [ngClass]="{
                 'is-invalid':
                 device1.invalid &&
                 (formSubmitted || device1.touched) 
                 }">
-                        <ng-option *ngFor="let device of deviceList" [value]="device.id">{{device.modelName}}
-                        </ng-option>
-                    </ng-select>
+                        <option *ngFor="let device of issueList" [value]="device.problem.id">{{device.problem.problemName}}
+                        </option>
+                    </select>
                     <div class="text-danger" *ngIf="device1.invalid &&
                 (formSubmitted || device1.touched)">
                         Select Device
@@ -56,20 +54,23 @@
                             < Previous</button>
                     </div>
                     <div class="next">
-                        <button (click)="goToIssue()">Next</button>
+                        <button (click)="addRepair(Repair)">Done</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!--Select Issues-->
-        <div *ngIf="selectIssueFlag">
+        <!-- <div *ngIf="selectIssueFlag">
             <div class="select-problem">
                 <h2>{{selectedDeviceName}}</h2>
                 <p>PROBLEM</p>
-                <ng-select name="problem" [(ngModel)]="bookRepair.problem" placeholder="Select Problem">
-                    <ng-option *ngFor="let issue of issueList" [value]="issue.id">{{issue.problemName}}</ng-option>
-                </ng-select>
+                <div class="optionselect">
+                    <select class="custom" name="problem" [(ngModel)]="bookRepair.problem" placeholder="Select Problem">
+                        <option *ngFor="let issue of issueList" [value]="issue.problem.id">{{issue.problem.problemName}}
+                        </option>
+                    </select>
+                </div>
                 <div class="sub-btn">
                     <div class="previou">
                         <button (click)="goToDeviceBack()">
@@ -80,6 +81,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </form>
 </div>

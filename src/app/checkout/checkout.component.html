@@ -10,17 +10,21 @@
                         </div>
                         <div class="booking-sho-price">
                             <p>Total</p>
-                            <h2>$ {{total}}</h2>
+                            <div class="booking-sho-prices">
+                                <h2>$ {{total}}</h2>
+                                <h3>$ {{total + 7}}</h3>
+                            </div>
                         </div>
                     </div>
                     <div class="booking-device">
                         <div class="booking-device-box">
-                            <p>Device #: <span>3</span></p>
-                            <p>Category: <span>Repair</span></p>
-                            <p>Services: <span>Repair</span></p>
                             <div class="booking-date">
-                                <p>Expected Date</p>
-                                <h2>December 21, 2020+</h2>
+                                <p>Expected Repair Date</p>
+                                <h2>December 21, 2020</h2>
+                            </div>
+                            <div class="booking-date">
+                                <p>Expected Drop up Date</p>
+                                <h2>April 07, 21, 2020</h2>
                             </div>
                         </div>
                     </div>
@@ -34,7 +38,7 @@
                             <h2>${{total}}</h2>
                             <p>Screen Replacement</p>
                             <div class="destroy-system-btn">
-                                <button><img src="../../assets/images/checkout/trash_full.svg" alt=""></button>
+                                <button><img src="../../assets/images/edit.svg" alt=""></button>
                             </div>
                         </div>
                     </div>
@@ -46,7 +50,7 @@
                             <h2>${{total}}</h2>
                             <p>Screen Replacement</p>
                             <div class="destroy-system-btn">
-                                <button><img src="../../assets/images/checkout/trash_full.svg" alt=""></button>
+                                <button><img src="../../assets/images/edit.svg" alt=""></button>
                             </div>
                         </div>
                     </div>
@@ -58,7 +62,7 @@
                             <h2>$ {{total}}</h2>
                             <p>Screen Replacement</p>
                             <div class="destroy-system-btn">
-                                <button><img src="../../assets/images/checkout/trash_full.svg" alt=""></button>
+                                <button><img src="../../assets/images/edit.svg" alt=""></button>
                             </div>
                         </div>
                     </div>
@@ -71,24 +75,43 @@
                     </div>
                 </div>
                 <div class="deliver-system">
+                    <div class="pick-up">
+                        <h2>Pick up Address</h2>
+                        <p>March, 31, 2021 </p>
+                        <p>02:30 PM</p>
+                    </div>
                     <div class="deliver-cab radio">
-                        <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab" checked>
-                        <label for="deliver-cab" class="radio-label">
+                        <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system"
+                            value="deliver-cab">
+                        <label for="deliver-cab" class="">
                             <div>
                                 <img src="../../assets/images/checkout/pickup.svg" alt="">
                             </div>
                             <div style="width: 100%;">
-                                <input type="text" name="shop-address" id="shop-address" placeholder="shop-address">
+                                <input type="text" name="shop-address" id="shop-address" placeholder="shop-address"
+                                    disabled value="Shop Location">
                                 <hr>
                                 <input type="text" name="receive-address" id="receive-address"
-                                    placeholder="receive-address">
+                                    placeholder="receive-address" disabled value="User Location">
                             </div>
                         </label><br>
                     </div>
-                    <div class="deliver-mail radio">
-                        <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system" value="deliver-mail">
-                        <label for="deliver-mail" class="radio-label radio-labell">
-                            <button>Mail-in Repair</button>
+                    <div class="pick-up">
+                        <h2>Pick up Address</h2>
+                        <p>March, 31, 2021 </p>
+                        <p>02:30 PM</p>
+                    </div>
+                    <div class="deliver-mail deliver-cab radio">
+                        <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system"
+                            value="deliver-mail">
+                        <label for="deliver-mail" class=" radio-labell">
+                            <div>
+                                <img src="../../assets/images/Location-white.svg" alt="">
+                            </div>
+                            <div style="width: 100%;">
+                                <input type="text" name="drop-off-address" id="drop-off-address"
+                                    placeholder="drop-off-address" disabled value="Drop off Location">
+                            </div>
                         </label><br>
                     </div>
                 </div>
@@ -105,20 +128,28 @@
                             <div class="card-number">
                                 <p>Add Card Details</p>
                                 <div class="card-noo">
-                                    <input type="text" name="card-no" class="form-control" [ngClass]="card_number" id="card-no" (keyup)="cardnum($event.target.value)" formControlName="card_number" maxlength="19" type="tel" placeholder="1234 4567 8901 2345" value="{{CARD}}" required>
+                                    <input type="text" name="card-no" class="form-control" [ngClass]="card_number"
+                                        id="card-no" (keyup)="cardnum($event.target.value)"
+                                        formControlName="card_number" maxlength="19" type="tel"
+                                        placeholder="1234 4567 8901 2345" value="{{CARD}}" required>
                                     <img src="../../assets/images/checkout/Cards.svg" alt="">
                                 </div>
                                 <div class="card-exp-cvc">
-                                    <input class="border-left" type="text" class="form-control" name="card-exp" (keyup)="expiry($event.target.value)" formControlName="exp_month" id="card-exp" maxlength="5" type="tel" placeholder="MM/YY" value="{{Expiry}}" required>
-                                    <input class="border-righ" type="text" class="form-control" name="cvv" id="cvc" formControlName="cvc" maxlength="3" placeholder="CVC">
+                                    <input class="border-left" type="text" class="form-control" name="card-exp"
+                                        (keyup)="expiry($event.target.value)" formControlName="exp_month" id="card-exp"
+                                        maxlength="5" type="tel" placeholder="MM/YY" value="{{Expiry}}" required>
+                                    <input class="border-righ" type="text" class="form-control" name="cvv" id="cvc"
+                                        formControlName="cvc" maxlength="3" placeholder="CVC">
                                 </div>
                             </div>
                             <div class="card-name">
                                 <p>Name on card</p>
-                                <input type="text" name="card-name" id="card-name" class="form-control" formControlName="cardholdername" placeholder="Card Holder Name" required>
+                                <input type="text" name="card-name" id="card-name" class="form-control"
+                                    formControlName="cardholdername" placeholder="Card Holder Name" required>
                             </div>
                             <div class="payment-country">
-                                <input type="text" name="country-zip" id="country-zip" class="form-control" maxlength="6" formControlName="zip" placeholder="ZIP" required>
+                                <input type="text" name="country-zip" id="country-zip" class="form-control"
+                                    maxlength="6" formControlName="zip" placeholder="ZIP" required>
                             </div>
                             <div class="payment-btns">
                                 <div class="pay-card">
@@ -131,15 +162,18 @@
                 <div class="payment-done" *ngIf="isPaid">
                     <div class="payment-done-mess">
                         <h2>Thank you for choosing us</h2>
-                        <p>Your Order Is Is <span>#63486587923</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc odio in et, lectus sit lorem id integer.</p>
+                        <p>Your Order Is Is <span>#63486587923</span> Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Nunc odio in et, lectus sit lorem id integer.</p>
                         <button>Back to home</button>
                     </div>
                     <div class="payment-done-feedback">
                         <h2>Feed us back</h2>
                         <p>Help us know you better, so that we can serve you better.</p>
-                        <p>Information provided herein will be used solely for research purposes and will not be sold to any third parties.</p>
+                        <p>Information provided herein will be used solely for research purposes and will not be sold to
+                            any third parties.</p>
                         <div class="feedback-input">
-                            <textarea name="feedback" id="feedback" cols="10" rows="2" placeholder="Your Feedback..."></textarea>
+                            <textarea name="feedback" id="feedback" cols="10" rows="2"
+                                placeholder="Your Feedback..."></textarea>
                             <button><img src="../../assets/images/checkout/send.svg" alt=""></button>
                         </div>
                     </div>

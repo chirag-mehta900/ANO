@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MapService } from 'src/@theme/Services/map.service';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-trackingmap',
   templateUrl: './trackingmap.component.html',
-  styleUrls: ['./trackingmap.component.css']
+  styleUrls: ['./trackingmap.component.css'],
 })
 export class TrackingmapComponent implements OnInit {
   lat: any;
@@ -32,6 +32,180 @@ export class TrackingmapComponent implements OnInit {
     lat: 0,
     lng: 0,
   };
+
+  styles = [
+    {
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#f5f5f5',
+        },
+      ],
+    },
+    {
+      elementType: 'labels.icon',
+      stylers: [
+        {
+          visibility: 'off',
+        },
+      ],
+    },
+    {
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#616161',
+        },
+      ],
+    },
+    {
+      elementType: 'labels.text.stroke',
+      stylers: [
+        {
+          color: '#f5f5f5',
+        },
+      ],
+    },
+    {
+      featureType: 'administrative.land_parcel',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#bdbdbd',
+        },
+      ],
+    },
+    {
+      featureType: 'poi',
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#eeeeee',
+        },
+      ],
+    },
+    {
+      featureType: 'poi',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#757575',
+        },
+      ],
+    },
+    {
+      featureType: 'poi.park',
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#e5e5e5',
+        },
+      ],
+    },
+    {
+      featureType: 'poi.park',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#9e9e9e',
+        },
+      ],
+    },
+    {
+      featureType: 'road',
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#ffffff',
+        },
+      ],
+    },
+    {
+      featureType: 'road.arterial',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#757575',
+        },
+      ],
+    },
+    {
+      featureType: 'road.highway',
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#dadada',
+        },
+      ],
+    },
+    {
+      featureType: 'road.highway',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#616161',
+        },
+      ],
+    },
+    {
+      featureType: 'road.local',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#9e9e9e',
+        },
+      ],
+    },
+    {
+      featureType: 'transit.line',
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#e5e5e5',
+        },
+      ],
+    },
+    {
+      featureType: 'transit.line',
+      elementType: 'labels.text',
+      stylers: [
+        {
+          color: '#afa655',
+        },
+        {
+          visibility: 'on',
+        },
+      ],
+    },
+    {
+      featureType: 'transit.station',
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#eeeeee',
+        },
+      ],
+    },
+    {
+      featureType: 'water',
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#c9c9c9',
+        },
+      ],
+    },
+    {
+      featureType: 'water',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#9e9e9e',
+        },
+      ],
+    },
+  ];
+
   constructor(
     private config: NgbRatingConfig,
     private mapService: MapService,
@@ -44,7 +218,7 @@ export class TrackingmapComponent implements OnInit {
 
   ngOnInit() {
     if (!navigator.geolocation) {
-      console.log("location not found");
+      console.log('location not found');
     }
 
     navigator.geolocation.getCurrentPosition((position) => {
@@ -93,6 +267,6 @@ export class TrackingmapComponent implements OnInit {
       this.Lng = this.Location.lng;
     });
 
-    this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get("storeData"));
+    this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get('storeData'));
   }
 }
