@@ -1,6 +1,6 @@
 <section class="map-booking">
     <div class="bg-map">
-        <agm-map [latitude]="Lat" [longitude]="Lng" [zoom]="14" [styles]="styles">
+        <agm-map [latitude]="Lat" [longitude]="Lng" [zoom]="13" [styles]="styles">
             <agm-marker [latitude]="Lat" [longitude]="Lng" [iconUrl]="Location.Icon"></agm-marker>
             <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude" [label]="m.price" [iconUrl]="m.icon"></agm-marker>
             <!-- [label]="m.price" -->

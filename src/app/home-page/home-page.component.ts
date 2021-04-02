@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonService } from 'src/@theme/Services/common.service';
 import { HeaderService } from 'src/@theme/Services/header.service';
@@ -14,6 +15,7 @@ export class HomePageComponent implements OnInit {
   Data: any[] = [];
   slider: any[] = [];
   display: any[] = [];
+  driveForm: FormGroup;
 
   selectedImg = [
     'http://placehold.it/350x150/000000',
@@ -50,6 +52,13 @@ export class HomePageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.driveForm = new FormGroup({
+      first_name: new FormControl(null, Validators.required),
+      last_name: new FormControl(null, Validators.required),
+      email: new FormControl(null, Validators.required),
+      mobileNumber: new FormControl(null, Validators.required),
+    });
+
     localStorage.setItem('Location', JSON.stringify(this.Location));
 
     if (!navigator.geolocation) {
@@ -88,6 +97,14 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  DriverReq() {
+    console.log(this.driveForm.value);
+
+    this.header.driverReq(this.driveForm.value).subscribe((response) => {
+      console.log(response);
+      console.log('submit Succussfully');
+    });
+  }
   bookRepair() {
     const modalRef = this.modalService.open(BookRepairComponent);
   }

@@ -30,47 +30,29 @@ export class CartComponent implements OnInit {
     lng: 0,
     Icon: {},
   };
+  dropLocation = {
+    lat: 0,
+    lng: 0,
+  };
+
+  pickupLocation = {
+    lat: 0,
+    lng: 0,
+  };
 
   ourmark = {
     icon: {
       url:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shopmark.png?alt=media&token=a88b489d-4f6d-470a-9aa4-211f82ce6976',
+        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/pin.svg?alt=media&token=6de944f2-889f-4658-8d86-f6fce983ac5c',
       scaledSize: {
-        width: 135,
-        height: 115,
-      },
-    },
-  };
-
-  shopmark = {
-    icon: {
-      url:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
-      scaledSize: {
-        width: 90,
-        height: 70,
+        width: 40,
+        height: 60,
       },
     },
   };
 
   renderOptions = {
     suppressMarkers: true,
-  };
-
-  markerOptions = {
-    origin: {
-      icon:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shopmark.png?alt=media&token=a88b489d-4f6d-470a-9aa4-211f82ce6976',
-      draggable: true,
-    },
-    destination: {
-      icon:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
-      label: '$00',
-      color: 'white',
-      fontWeight: '500',
-      fontSize: '20px',
-    },
   };
 
   origin = { lat: 0, lng: 0 };
@@ -338,6 +320,7 @@ export class CartComponent implements OnInit {
     //get priously selected problem device
     this.setPreviouslyAddedDeviceIssue();
     this.getCurrentDate();
+    this.getTimeAccoedingToDate();
   }
 
   getCurrentDate() {
@@ -533,7 +516,19 @@ export class CartComponent implements OnInit {
     this.placeOrder.Total_Price = totalCartAmount;
     console.log(this.placeOrder);
 
+    this.pickupLocation.lat = this.Location.lat;
+    this.pickupLocation.lng = this.Location.lng;
+
+    this.dropLocation.lat = this.shop[0].latitude;
+    this.dropLocation.lng = this.shop[0].longitude;
+
+    console.log(this.pickupLocation);
+    console.log(this.dropLocation);
+
+    this.placeOrder.pickupLocation = this.pickupLocation;
+    this.placeOrder.dropLocation = this.dropLocation;
+    console.log(this.placeOrder);
+
     localStorage.setItem('PlaceOrder', JSON.stringify(this.placeOrder));
-    this.router.navigate(['/checkout']);
   }
 }

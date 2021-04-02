@@ -21,7 +21,15 @@ export class SignupComponent implements OnInit {
   userAddres: FormGroup;
   userName: any;
   sId: any;
+  // Checkotp:any;
+  counter: number = 11;
+  emptyOtpFlag: boolean = false;
+  validOtpFlag: boolean = false;
+  resendOtpFlag: boolean = false;
 
+  Resend = {
+    mobileNumber: '',
+  };
   verification = {
     email: '',
     mobileNumber: '',
@@ -114,45 +122,91 @@ export class SignupComponent implements OnInit {
     this.signUpMobileFlag = false;
   }
   signUpMobileComplete() {
-    this.formSubmitted = true;
-    if (this.signUpForm.valid) {
-      this.email = this.signUpForm.value.email;
-      this.mobile = this.signUpForm.value.mobileNumber;
+    this.email = this.signUpForm.value.email;
+    this.mobile = this.signUpForm.value.mobileNumber;
 
-      console.log(this.signUpForm.value);
+    console.log(this.signUpForm.value);
 
-      localStorage.setItem('signUp', JSON.stringify(this.signUpForm.value));
+    localStorage.setItem('signUp', JSON.stringify(this.signUpForm.value));
 
-      this.verification.email = this.signUpForm.value.email;
-      this.verification.mobileNumber = this.signUpForm.value.mobileNumber;
+    this.verification.email = this.signUpForm.value.email;
+    this.verification.mobileNumber = this.signUpForm.value.mobileNumber;
 
-      console.log(this.verification);
+    console.log(this.verification);
 
-      this.headerService
-        .generateOTP(this.verification)
-        .subscribe((response) => {
-          console.log('get otp ', response);
-          this.sId = response['data']['sId'];
-        });
+    this.headerService.generateOTP(this.verification).subscribe((response) => {
+      console.log('get otp ', response);
+      this.sId = response['data']['sId'];
+    });
 
-      this.signUpMobileFlag = false;
-      this.signUpConformationFlag = true;
+    this.signUpMobileFlag = false;
+    this.signUpConformationFlag = true;
+
+    if (this.signUpConformationFlag) {
+      this.startCountdown(this.counter);
     } else {
       return;
     }
   }
+
+  resend() {
+    if (this.resendOtpFlag) {
+      this.Resend.mobileNumber = this.verification.mobileNumber;
+      console.log(this.Resend);
+
+      this.headerService.resend(this.Resend).subscribe((response) => {
+        console.log('resend otp', response);
+      });
+    } else {
+      console.log('wait for a while');
+    }
+  }
+  startCountdown(seconds) {
+    this.counter = seconds;
+
+    const interval = setInterval(() => {
+      console.log(this.counter);
+      this.counter--;
+
+      if (this.counter < 1) {
+        clearInterval(interval);
+
+        this.resendOtpFlag = true;
+      }
+    }, 1000);
+  }
+
+  // checkotp(otp){
+
+  //   this.Checkotp = otp
+  // }
+
   signUpConfirmationComplete(otp: any) {
+    console.log(otp);
+
     this.confirmOTP.mobileNumber = this.verification.mobileNumber;
     this.confirmOTP.otp = otp;
 
-    this.headerService.verifyOTP(this.confirmOTP).subscribe((response) => {
-      console.log('verify', response);
+    console.log(this.confirmOTP.otp.length);
 
-      if (response['status'] == 200) {
-        this.signUpConformationFlag = false;
-        this.signUpEmailFlag = true;
+    if (this.confirmOTP.otp.length < 4) {
+      if (this.confirmOTP.otp.length == 0) {
+        this.emptyOtpFlag = true;
+        this.validOtpFlag = false;
+      } else {
+        this.emptyOtpFlag = false;
+        this.validOtpFlag = true;
       }
-    });
+    } else {
+      this.headerService.verifyOTP(this.confirmOTP).subscribe((response) => {
+        console.log('verify', response);
+
+        if (response['status'] == 200) {
+          this.signUpConformationFlag = false;
+          this.signUpEmailFlag = true;
+        }
+      });
+    }
   }
   setUserName() {
     this.headerService.getUserName().subscribe(
