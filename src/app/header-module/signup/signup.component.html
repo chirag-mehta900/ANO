@@ -77,7 +77,9 @@
         <!--Sign up conformation-->
         <div *ngIf="signUpConformationFlag">
             <div class="signup-form">
-                <p>Confirmation Code</p>
+                <div class="change-number">
+                    <p>Confirmation Code <span>Edit Mobile#</span></p>
+                </div>
                 <div class="signup-inp">
                     <input type="text" name="otp" maxlength="4" id="otp"
                         (change)="signUpConfirmationComplete($event.target.value)"
@@ -90,16 +92,8 @@
                     Enter valid otp
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <button class="previous" type="submit" (click)="s"> <span></span>
-                        Previous</button>
-                </div>
-                <div class="col-md-6">
                     <button class="next" type="submit" (click)="signUpConfirmationComplete($event.target.value)">Confirm
                         Code</button>
-                </div>
-            </div>
             <div class="signup-det">
                 <h2> <span (click)="resend()">Resend</span> Code in <span>00 : {{counter}}</span></h2>
             </div>

@@ -90,3 +90,13 @@
   border: none;
   background-color: transparent;
 }
+.change-number p{
+  font-size: 12px;
+  font-family: "Poppins-SemiBold";
+  color: #000000;
+}
+.change-number p span{
+  margin-left: 5px;
+  cursor: pointer;
+  color: #ffc542;
+}
