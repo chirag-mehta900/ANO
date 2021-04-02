@@ -34,6 +34,9 @@ export class ShopService {
   placeOrder(data) {
     return this.httpClient.post(this.commonService.envUrl() + "order", data);
   }
+  getOrder(id) {
+    return this.httpClient.get(this.commonService.envUrl() + "order/" + id);
+  }
   getAnoFee() {
     return this.httpClient.get(
       this.commonService.envUrl() + "lookup?key=ANO_FEE"

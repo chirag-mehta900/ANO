@@ -4,11 +4,12 @@ import { HeaderService } from 'src/@theme/Services/header.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
-
+import { ActivatedRoute } from '@angular/router';
 import {
   StripeCardElementOptions,
   StripeElementsOptions,
 } from '@stripe/stripe-js';
+import { ShopService } from 'src/@theme/Services/shop.service';
 
 @Component({
   selector: 'app-checkout',
@@ -61,7 +62,9 @@ export class CheckoutComponent implements OnInit {
     private header: HeaderService,
     private common: CommonService,
     private STRIPE: StripeService,
-    private ngZone: NgZone
+    private shopService: ShopService,
+    private ngZone: NgZone,
+    private route: ActivatedRoute
   ) {
     window['angularComponentReference'] = {
       component: this,
@@ -110,6 +113,12 @@ export class CheckoutComponent implements OnInit {
       });
     });
     console.log(this.productDisplay);
+    debugger
+      let id = this.route.snapshot.params.id;
+      this.shopService.getOrder(id).subscribe(
+        (data) => {
+          console.log(data,"orderby id")
+        })
   }
 
   getData() {

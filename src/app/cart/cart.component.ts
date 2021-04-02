@@ -7,6 +7,8 @@ import { UploadService } from "src/@theme/Services/upload.service";
 import { MapService } from "src/@theme/Services/map.service";
 import { AddProductComponent } from "./add-product/add-product.component";
 import { HeaderService } from "src/@theme/Services/header.service";
+import { LoginComponent } from '../header-module/login/login.component';
+import { time } from "node:console";
 // import { AddproductComponent } from './addproduct/addproduct.component';
 
 @Component({
@@ -16,6 +18,7 @@ import { HeaderService } from "src/@theme/Services/header.service";
 })
 export class CartComponent implements OnInit {
   rating3;
+  userName: any = '';
   shop: any[] = [];
   lat: any;
   lng: any;
@@ -258,6 +261,8 @@ export class CartComponent implements OnInit {
     endTime: null,
     date: null,
     pickupLocation: null,
+    repairedDate:null,
+    expectedDelivery:null,
     dropLocation: null,
     Total_Price: null,
     details: [
@@ -338,6 +343,12 @@ export class CartComponent implements OnInit {
     //get priously selected problem device
     this.setPreviouslyAddedDeviceIssue();
     this.getCurrentDate();
+    this.getTimeAccoedingToDate();
+    var dt = new Date();
+    dt.setHours( dt.setHours(3,0,0));
+    console.log(dt,"time");
+    
+    
   }
 
   getCurrentDate() {
@@ -394,7 +405,7 @@ export class CartComponent implements OnInit {
           }
         });
       },
-      (error) => {}
+      (error) => { }
     );
     //set Expected Price
     let getExpectedPrice = {
@@ -405,16 +416,18 @@ export class CartComponent implements OnInit {
     this.shopService.getExpectedPrice(getExpectedPrice).subscribe(
       (data) => {
         console.log(data["data"]);
+        this.placeOrder.repairedDate = this.getCurrentDate();
+        this.placeOrder.expectedDelivery = data['data'].estimatedRepaidTime;
         this.totalCartAmount = this.displayCartInfo[0].total_amount =
           data["data"][0].TotalAmount;
         this.displayCartInfo[0].ANOBaseFees = data["data"][0].ANOBaseFees;
         this.displayCartInfo[0].ANOCommissionFees =
           data["data"][0].ANOCommissionFees;
         this.displayCartInfo[0].ShopCommissionFees = data["data"][0].ShopCommissionFees;
-        
+
         this.displayCartInfo[0].price = data["data"][0].price;
       },
-      (error) => {}
+      (error) => { }
     );
   }
 
@@ -427,7 +440,7 @@ export class CartComponent implements OnInit {
   getTimeAccoedingToDate() {
     this.timeList = [];
     let getTimeObj = {
-      durating: 60,
+      durating: 30,
       shopId: this.shop[0].id,
       date: this.placeOrder.date,
     };
@@ -435,16 +448,16 @@ export class CartComponent implements OnInit {
       this.today = new Date();
       let hh = this.today.getHours();
       let mm = this.today.getMinutes();
-      console.log(hh, mm);
-      console.log(data["data"]);
+      // console.log(hh, mm);
+      // console.log(data["data"]);
       data["data"].forEach((element) => {
         var hour = new Date("1970-01-01 " + element.startTime);
         if (hour.getHours() > hh) {
           this.timeList.push(element);
         }
-        console.log(hour.getHours());
-      });
-      console.log(this.timeList);
+      }); 
+      this.placeOrder.startTime = this.timeList[0]['startTime'];
+      this.placeOrder.endTime = this.timeList[0]['endTime'];
     });
   }
   setTime(event) {
@@ -494,8 +507,8 @@ export class CartComponent implements OnInit {
 
   deleteCartProduct(event) {
     this.shopService.deleteCartData(event).subscribe(
-      (data) => {},
-      (error) => {}
+      (data) => { },
+      (error) => { }
     );
     this.displayCartInfo.forEach((element, index) => {
       if (element.id == event) {
@@ -508,27 +521,48 @@ export class CartComponent implements OnInit {
   }
   proceed() {
     //to calculate total cart amount
-    let totalCartAmount = 0;
-
-    //Add product in cart
-    this.displayCartInfo.forEach((element) => {
-      this.placeOrder.details.push({
-        device_id: element.deviceId,
-        problem_id: element.problemId,
-        price: element.total_amount,
-        image: element.images,
+    let isLogedIn = localStorage.getItem("token");
+    if (isLogedIn === null) {
+      this.userName = null;
+      if (this.modalService.hasOpenModals()) {
+        this.modalService.dismissAll();
+      }
+      const modalRef = this.modalService.open(LoginComponent);
+      modalRef.result.then((result) => {
+        this.headerService.getUserName().subscribe(
+          (data) => {
+            this.userName = data['data'].name;
+            this.storeTokenService.set('user_id', data['data'].id);
+            window.location.reload();
+          })
       });
-    });
-    this.placeOrder.details.splice(0, 1);
+    } else {
+      let totalCartAmount = 0;
 
-    //calculating cart amount
-    this.placeOrder.details.forEach((element) => {
-      totalCartAmount += element.price;
-    });
-    this.placeOrder.Total_Price = totalCartAmount;
-    console.log(this.placeOrder);
+      //Add product in cart
+      this.displayCartInfo.forEach((element) => {
+        this.placeOrder.details.push({
+          device_id: element.deviceId,
+          problem_id: element.problemId,
+          price: element.total_amount,
+          image: element.images,
+        });
+      });
+      this.placeOrder.details.splice(0, 1);
 
-    localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
-    this.router.navigate(["/checkout"]);
+      //calculating cart amount
+      this.placeOrder.details.forEach((element) => {
+        totalCartAmount += element.price;
+      });
+      this.placeOrder.Total_Price = totalCartAmount;
+      console.log(this.placeOrder);
+      this.shopService.placeOrder(this.placeOrder).subscribe((data) => {
+        console.log(data,"placeOrder")
+        //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
+        var orderId = data['data'].id;
+        this.router.navigate(["/checkout/",{id: orderId}]);
+      })
+    }
   }
+
 }

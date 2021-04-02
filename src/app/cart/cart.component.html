@@ -95,7 +95,6 @@
                             <input type="date" name="date" [(ngModel)]="placeOrder.date"
                                 (input)="getTimeAccoedingToDate()" [min]="today" [value]="placeOrder.date">
                             <select class="rig-no" name="time" (change)="setTime($event)" placeholder="select time">
-                                <option>Select Time</option>
                                 <option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} -
                                     {{time.endTime }}
                                 </option>
