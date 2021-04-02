@@ -24,8 +24,18 @@ export class MappageComponent implements OnInit {
   Lat: any;
   Lng: any;
   area: any;
+  Configs: any[] = [];
+  prolist: any[] = [];
+  devicelist: any[] = [];
+
   shopmarker: object = {};
   autocomplete: any;
+  display = [
+    {
+      Device: null,
+      problem: null,
+    },
+  ];
   location: any;
   Marker: any[] = [];
   searchshop = {
@@ -270,6 +280,45 @@ export class MappageComponent implements OnInit {
     // this.searchshop = JSON.parse(localStorage.getItem('deviceProblem') || '[]');
     // console.log(this.searchshop);
 
+    this.Configs = JSON.parse(localStorage.getItem('deviceProblem') || '[]');
+    console.log(this.Configs['device']);
+    console.log(this.Configs['problem']);
+
+    this.prolist = JSON.parse(localStorage.getItem('issues') || '[]');
+    console.log(this.prolist);
+
+    this.devicelist = JSON.parse(localStorage.getItem('deviceList') || '[]');
+    console.log(this.devicelist[this.Configs['device']]);
+
+    this.display[0].Device = this.devicelist[this.Configs['device']].full_name;
+
+    for (var i = 0; i < this.prolist.length; i++) {
+      if (this.prolist[i].problemId == this.Configs['problem']) {
+        console.log(this.prolist[i]);
+        this.display[0].problem = this.prolist[i].problem;
+      }
+    }
+
+    // this.deviceList.forEach((e) => {
+    //   console.log(e);
+
+    //   console.log(e.id);
+    //   console.log(this.Configs['device']);
+    //   console.log(e.full_name);
+
+    //   if (e.id == this.Configs['device']) {
+    //     this.display.Device = e.full_name;
+    //   }
+    // });
+
+    // this.prolist.forEach((e) => {
+    //   if (e.id == this.Configs['problem']) {
+    //     console.log(e);
+    //   }
+    // });
+
+    console.log(this.display);
+
     this.Marker = JSON.parse(localStorage.getItem('shopmarker') || '[]');
     console.log(this.Marker);
 
@@ -301,6 +350,8 @@ export class MappageComponent implements OnInit {
       .getArea(this.Location.lat, this.Location.lng)
       .subscribe((data: any) => {
         this.area = data.results[0].formatted_address;
+        localStorage.setItem('Address', JSON.stringify(this.area));
+
         console.log(this.area);
       });
     const input = document.getElementById('pac-input') as HTMLInputElement;
@@ -313,6 +364,8 @@ export class MappageComponent implements OnInit {
     this.Marker.length = 0;
     console.log(address);
     this.area = address;
+    localStorage.removeItem('Address');
+    localStorage.setItem('Address', JSON.stringify(this.area));
 
     await this.mapService.getlatlong(this.area).subscribe((data: any) => {
       console.log(data);

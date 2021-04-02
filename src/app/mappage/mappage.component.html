@@ -12,12 +12,12 @@
                 <input type="text" name="mapshop" id="shop" placeholder="Search Shop">
                 <button (click)="filter()"><img src="../../assets/images/Sliders.svg" alt=""></button>
             </div>
-            <div class="select-problem">
+            <div class="select-problem" *ngFor="let d of display">
                 <div class="select-device">
-                    <h3>IPhone12Pro</h3>
+                    <h3>{{d.Device}}</h3>
                 </div>
                 <div class="select-issue">
-                    <h3>Damage Screen</h3>
+                    <h3>{{d.problem}}</h3>
                 </div>
             </div>
             <!--Filer Pop up-->
