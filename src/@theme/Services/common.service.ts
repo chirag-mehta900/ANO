@@ -9,7 +9,7 @@ export class CommonService {
   constructor(private http: HttpClient) {}
   URL = 'https://stripenodefoodito.herokuapp.com/';
 
-  url = 'http://localhost:3000/new/';
+  url = 'https://stripe-node-api.herokuapp.com/new/';
 
   envUrl() {
     return 'https://ano-apis.herokuapp.com/api/';

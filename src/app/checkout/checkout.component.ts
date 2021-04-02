@@ -43,7 +43,7 @@ export class CheckoutComponent implements OnInit {
   Email: any;
   CARD: any;
   Expiry: any;
-  total: any = 100;
+  total: any;
   detail: object = {};
   Card: object = {};
   Payment: object = {};
@@ -82,9 +82,12 @@ export class CheckoutComponent implements OnInit {
       },
       (error) => {}
     );
+
     this.getData();
     this.getOrderAndShopData();
     this.setProductToDisplay();
+
+    this.total = Math.round(this.orderDetails.Total_Price);
   }
 
   getOrderAndShopData() {
@@ -167,7 +170,7 @@ export class CheckoutComponent implements OnInit {
     var orderData = {
       currency: 'usd',
       paymentMethodId: '',
-      amount: this.total,
+      amount: this.total * 100,
       paymentIntentId: '',
     };
 
