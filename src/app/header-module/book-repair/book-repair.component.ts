@@ -22,6 +22,7 @@ export class BookRepairComponent implements OnInit {
   Data: any[] = [];
   Marker: any[] = [];
   issues: any[] = [];
+
   Location = {
     lat: 0,
     lng: 0,
@@ -74,6 +75,10 @@ export class BookRepairComponent implements OnInit {
         (error) => {}
       );
     }
+  }
+
+  close() {
+    this.activeModal.close();
   }
 
   // getDeviceList(event) {

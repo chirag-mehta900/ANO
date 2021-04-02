@@ -22,7 +22,7 @@ export class SignupComponent implements OnInit {
   userName: any;
   sId: any;
   // Checkotp:any;
-  counter: number = 11;
+  counter: number = 59;
   emptyOtpFlag: boolean = false;
   validOtpFlag: boolean = false;
   resendOtpFlag: boolean = false;
@@ -149,13 +149,21 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  close() {
+    this.activeModal.close();
+  }
+
   resend() {
     if (this.resendOtpFlag) {
       this.Resend.mobileNumber = this.verification.mobileNumber;
       console.log(this.Resend);
+      this.counter = 59;
+      this.startCountdown(this.counter);
 
       this.headerService.resend(this.Resend).subscribe((response) => {
-        console.log('resend otp', response);
+        if (response['status']) {
+          console.log('resend otp', response);
+        }
       });
     } else {
       console.log('wait for a while');
