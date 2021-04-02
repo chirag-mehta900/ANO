@@ -253,7 +253,7 @@ export class CartComponent implements OnInit {
 
   placeOrder: any = {
     shop_id: null,
-    transactionId: "QQughobhhIuMTop",
+    transactionId: null,
     startTime: null,
     endTime: null,
     date: null,
@@ -289,6 +289,7 @@ export class CartComponent implements OnInit {
       problemName: null,
       total_amount: null,
       ANOBaseFees: null,
+      ShopCommissionFees: null,
       ANOCommissionFees: null,
       price: null,
       images: null,
@@ -395,6 +396,8 @@ export class CartComponent implements OnInit {
         this.displayCartInfo[0].ANOBaseFees = data["data"][0].ANOBaseFees;
         this.displayCartInfo[0].ANOCommissionFees =
           data["data"][0].ANOCommissionFees;
+        this.displayCartInfo[0].ShopCommissionFees = data["data"][0].ShopCommissionFees;
+        
         this.displayCartInfo[0].price = data["data"][0].price;
       },
       (error) => {}
