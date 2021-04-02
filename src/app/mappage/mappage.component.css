@@ -315,3 +315,28 @@ agm-map {
     justify-content: center;
     border-radius: 5px;
 }
+.select-problem{
+    width: 100%;
+    display: flex;
+    margin-bottom: 20px;
+}
+.select-problem h3{
+    color: #ffffff;
+    font-size: 12px;
+    margin-bottom: 0px;
+    text-align: center;
+    padding: 7px;
+}
+.select-device{
+    font-family: 'Poppins-SemiBold';
+    background-color: #000000;
+    border-radius: 5px;
+    width: 50%;
+    margin-right: 10px;
+}
+.select-issue{
+    font-family: 'Poppins-SemiBold';
+    background-color: #000000;
+    border-radius: 5px;
+    width: 50%;
+}

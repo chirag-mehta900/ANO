@@ -1,17 +1,27 @@
 <div class="signup-module">
-    <h2>Sign Up</h2>
+    <div class="close-side">
+        <h2>Sign Up</h2>
+        <button><img src="../../../assets/images/close.svg" alt=""></button>
+    </div>
     <form [formGroup]="signUpForm">
         <!--Sign up Name-->
         <div *ngIf="signUpNameFlag">
             <div class="signup-form">
                 <p>User Details</p>
                 <div class="signup-inp">
-                    <input type="text" name="name" id="name" formControlName="name" placeholder="Name" [ngClass]="{'is-invalid':(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled )}" required>
-                    <div class="text-dangerr" *ngIf="(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled )">
+                    <input type="text" name="name" id="name" formControlName="name" placeholder="Name"
+                        [ngClass]="{'is-invalid':(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled )}"
+                        required>
+                    <div class="text-dangerr"
+                        *ngIf="(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled )">
                         Name is required.
                     </div>
-                    <input type="email" name="email" id="email" formControlName="email" placeholder="Email" (change)="checkEmail()" [ngClass]="{'is-invalid':(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled )}" required>
-                    <div class="text-dangerr" *ngIf="(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled )">
+                    <input type="email" name="email" id="email" formControlName="email" placeholder="Email"
+                        (change)="checkEmail()"
+                        [ngClass]="{'is-invalid':(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled )}"
+                        required>
+                    <div class="text-dangerr"
+                        *ngIf="(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled )">
                         Email is required.
                     </div>
                     <div class="text-dangerr" *ngIf="emailExist">
@@ -20,8 +30,12 @@
                     <div class="text-dangerr" *ngIf="signUpForm.get('email').errors?.pattern">
                         Enter valid email.
                     </div>
-                    <input type="password" name="password" id="password" formControlName="password" placeholder="Password" [ngClass]="{'is-invalid':(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled )}" required>
-                    <div class="text-dangerr" *ngIf="(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled)">
+                    <input type="password" name="password" id="password" formControlName="password"
+                        placeholder="Password"
+                        [ngClass]="{'is-invalid':(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled )}"
+                        required>
+                    <div class="text-dangerr"
+                        *ngIf="(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled)">
                         Password is required.
                     </div>
                 </div>
@@ -37,7 +51,10 @@
             <div class="signup-form">
                 <p>Enter Phone</p>
                 <div class="signup-inp">
-                    <input type="text" name="txtInput" id="bar" formControlName="mobileNumber" placeholder="Example: (xxx)-xxx-xxxx" [ngClass]="{'is-invalid':(signUpForm.get('mobileNumber').invalid)&&(formSubmitted)}" required onkeydown="javascript:backspacerDOWN(this,event);"
+                    <input type="text" name="txtInput" id="bar" formControlName="mobileNumber"
+                        placeholder="Example: (xxx)-xxx-xxxx"
+                        [ngClass]="{'is-invalid':(signUpForm.get('mobileNumber').invalid)&&(formSubmitted)}" required
+                        onkeydown="javascript:backspacerDOWN(this,event);"
                         onkeyup="javascript:backspacerUP(this,event);">
 
                     <div class="text-dangerr" *ngIf="(signUpForm.get('mobileNumber').invalid)&&(formSubmitted )">
@@ -62,7 +79,9 @@
             <div class="signup-form">
                 <p>Confirmation Code</p>
                 <div class="signup-inp">
-                    <input type="text" name="otp" maxlength="4" id="otp" (change)="signUpConfirmationComplete($event.target.value)" placeholder="Enter Confirmation Code">
+                    <input type="text" name="otp" maxlength="4" id="otp"
+                        (change)="signUpConfirmationComplete($event.target.value)"
+                        placeholder="Enter Confirmation Code">
                 </div>
                 <div class="text-dangerr" *ngIf="emptyOtpFlag">
                     Enter your otp
@@ -71,7 +90,16 @@
                     Enter valid otp
                 </div>
             </div>
-            <button class="next" type="submit" (click)="signUpConfirmationComplete($event.target.value)">Confirm Code</button>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="previous" type="submit" (click)="s"> <span></span>
+                        Previous</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="next" type="submit" (click)="signUpConfirmationComplete($event.target.value)">Confirm
+                        Code</button>
+                </div>
+            </div>
             <div class="signup-det">
                 <h2> <span (click)="resend()">Resend</span> Code in <span>00 : {{counter}}</span></h2>
             </div>
@@ -84,7 +112,8 @@
             <div class="signup-form">
                 <p>User Details</p>
                 <div class="signup-inp">
-                    <textarea name="address" id="address" cols="10" rows="2" formControlName="addressLine" placeholder="Address"></textarea>
+                    <textarea name="address" id="address" cols="10" rows="2" formControlName="addressLine"
+                        placeholder="Address"></textarea>
                     <input type="text" name="city" id="city" formControlName="city" placeholder="City">
                     <input type="text" name="state" id="state" formControlName="state" placeholder="State">
                     <input type="number" name="zip" id="zip" formControlName="zipCode" placeholder="Zip Code">
