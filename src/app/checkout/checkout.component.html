@@ -6,13 +6,13 @@
                     <div class="booking-shop">
                         <div class="booking-shop-img">
                             <img src="../../assets/images/checkout/shopimg.png" alt="">
-                            <h2>Shop name</h2>
+                            <h2>{{shopDetails.shopName}}</h2>
                         </div>
                         <div class="booking-sho-price">
                             <p>Total</p>
                             <div class="booking-sho-prices">
-                                <h2>$ {{total}}</h2>
-                                <h3>$ {{total + 7}}</h3>
+                                <h2>$ {{orderDetails.Total_Price}}</h2>
+                                <h3>$ {{orderDetails.Total_Price + 17}}</h3>
                             </div>
                         </div>
                     </div>
@@ -30,39 +30,16 @@
                     </div>
                 </div>
                 <div class="destroy-system">
-                    <div class="destroy-system-box">
+                    <div class="destroy-system-box" *ngFor="let details of productDisplay">
                         <div class="destroy-system-img">
-                            <img src="../../assets/images/checkout/destroy phone.png" alt="">
+                            <img src={{details.images}} alt="">
                         </div>
                         <div class="destroy-system-det">
-                            <h2>${{total}}</h2>
-                            <p>Screen Replacement</p>
+                            <h2>${{details.price}}</h2>
+                            <p>{{details.problem_name}}</p>
                             <div class="destroy-system-btn">
-                                <button><img src="../../assets/images/edit.svg" alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="destroy-system-box">
-                        <div class="destroy-system-img">
-                            <img src="../../assets/images/checkout/destroy phone.png" alt="">
-                        </div>
-                        <div class="destroy-system-det">
-                            <h2>${{total}}</h2>
-                            <p>Screen Replacement</p>
-                            <div class="destroy-system-btn">
-                                <button><img src="../../assets/images/edit.svg" alt=""></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="destroy-system-box">
-                        <div class="destroy-system-img">
-                            <img src="../../assets/images/checkout/destroy phone.png" alt="">
-                        </div>
-                        <div class="destroy-system-det">
-                            <h2>$ {{total}}</h2>
-                            <p>Screen Replacement</p>
-                            <div class="destroy-system-btn">
-                                <button><img src="../../assets/images/edit.svg" alt=""></button>
+                                <button [routerLink]="['/cart']"><img src="../../assets/images/edit.svg"
+                                        alt=""></button>
                             </div>
                         </div>
                     </div>
@@ -126,21 +103,22 @@
                     <div class="card-payment">
                         <form [formGroup]="CardInfo">
                             <div class="card-number">
+
                                 <p>Add Card Details</p>
-                                <div class="card-noo">
-                                    <input type="text" name="card-no" class="form-control" [ngClass]="card_number"
-                                        id="card-no" (keyup)="cardnum($event.target.value)"
-                                        formControlName="card_number" maxlength="19" type="tel"
-                                        placeholder="1234 4567 8901 2345" value="{{CARD}}" required>
+                                <div class="card-name">
+
+                                    <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions">
+                                    </ngx-stripe-card>
+
+                                </div>
+                                <!-- <div class="card-noo">
+                                    <input type="text" name="card-no" class="form-control" [ngClass]="card_number" id="card-no" (keyup)="cardnum($event.target.value)" formControlName="card_number" maxlength="19" type="tel" placeholder="1234 4567 8901 2345" value="{{CARD}}" required>
                                     <img src="../../assets/images/checkout/Cards.svg" alt="">
                                 </div>
                                 <div class="card-exp-cvc">
-                                    <input class="border-left" type="text" class="form-control" name="card-exp"
-                                        (keyup)="expiry($event.target.value)" formControlName="exp_month" id="card-exp"
-                                        maxlength="5" type="tel" placeholder="MM/YY" value="{{Expiry}}" required>
-                                    <input class="border-righ" type="text" class="form-control" name="cvv" id="cvc"
-                                        formControlName="cvc" maxlength="3" placeholder="CVC">
-                                </div>
+                                    <input class="border-left" type="text" class="form-control" name="card-exp" (keyup)="expiry($event.target.value)" formControlName="exp_month" id="card-exp" maxlength="5" type="tel" placeholder="MM/YY" value="{{Expiry}}" required>
+                                    <input class="border-righ" type="text" class="form-control" name="cvv" id="cvc" formControlName="cvc" maxlength="3" placeholder="CVC">
+                                </div> -->
                             </div>
                             <div class="card-name">
                                 <p>Name on card</p>
@@ -150,6 +128,14 @@
                             <div class="payment-country">
                                 <input type="text" name="country-zip" id="country-zip" class="form-control"
                                     maxlength="6" formControlName="zip" placeholder="ZIP" required>
+                            </div>
+                            <div class="policy">
+                                <div class="squaredOne">
+                                    <input type="checkbox" value="None" id="squaredOne" name="check" />
+                                    <label for="squaredOne">
+                                        <p>I accept all <a href="term" target="_blank"> terms and condition.</a></p>
+                                    </label>
+                                </div>
                             </div>
                             <div class="payment-btns">
                                 <div class="pay-card">
