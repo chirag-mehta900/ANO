@@ -5,7 +5,7 @@
                 <div class="booking-detail">
                     <div class="booking-shop">
                         <div class="booking-shop-img">
-                            <img src="../../assets/images/checkout/shopimg.png" alt="">
+                            <img src={{shopDetails.image}} alt="">
                             <h2>{{shopDetails.shopName}}</h2>
                         </div>
                         <div class="booking-sho-price">
@@ -30,16 +30,16 @@
                     </div>
                 </div>
                 <div class="destroy-system">
-                    <div class="destroy-system-box" *ngFor="let details of productDisplay">
-                        <div class="destroy-system-img">
-                            <img src={{details.images}} alt="">
+                    <div class="destroy-system-box" *ngFor="let details of orderDetails">
+                        <div class="destroy-system-img" *ngFor="let d of details">
+                            <img src={{d.image}} alt="">
                         </div>
                         <div class="destroy-system-det">
                             <h2>${{details.price}}</h2>
                             <p>{{details.problem_name}}</p>
                             <div class="destroy-system-btn">
-                                <button [routerLink]="['/cart']"><img src="../../assets/images/edit.svg"
-                                        alt=""></button>
+                                <!-- <button [routerLink]="['/cart']"><img src="../../assets/images/edit.svg"
+                                        alt=""></button> -->
                             </div>
                         </div>
                     </div>
