@@ -254,7 +254,7 @@ export class CartComponent implements OnInit {
       {
         device_id: null,
         problem_id: null,
-        image: [],
+        image: []=[],
         price: null,
       },
     ],
@@ -268,6 +268,7 @@ export class CartComponent implements OnInit {
   timeList: any[] = [];
   cartInfo: any = {};
   files: File[] = [];
+  temp: File[] = [];
   issues: any[] = [];
   imageUploaded: any[] = [];
   imageEditFlag: boolean = false;
@@ -579,6 +580,10 @@ export class CartComponent implements OnInit {
       this.placeOrder.dropLocation = JSON.parse(localStorage.getItem('Address'));
       console.log(this.placeOrder,"object");
 
+      console.log(this.placeOrder.details[0].image)
+      if(this.placeOrder.details[0].image == null){
+        this.placeOrder.details[0].image = []
+      }
       this.shopService.placeOrder(this.placeOrder).subscribe((response) => {
         console.log(response['status'], "placeOrder")
         
