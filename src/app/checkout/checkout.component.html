@@ -20,11 +20,11 @@
                         <div class="booking-device-box">
                             <div class="booking-date">
                                 <p>Expected Repair Date</p>
-                                <h2>December 21, 2020</h2>
+                                <h2>{{orderDetails.repairedDate}}</h2>
                             </div>
                             <div class="booking-date">
                                 <p>Expected Drop up Date</p>
-                                <h2>April 07, 21, 2020</h2>
+                                <h2>{{orderDetails.repairedDate}}</h2>
                             </div>
                         </div>
                     </div>
@@ -47,47 +47,45 @@
                 <div class="alt-number">
                     <p>Alternate Mobile Number</p>
                     <div class="alt-number-inp">
-                        <input type="number" name="alt-no" id="alt-no" placeholder="">
+                        <input type="number" name="alt-no" id="alt-no" placeholder="" value={{orderDetails.user.mobileNumber}} disabled>
                         <button><img src="../../assets/images/checkout/FloppyDisk.svg" alt=""></button>
                     </div>
                 </div>
                 <div class="deliver-system">
                     <div class="pick-up">
                         <h2>Pick up Address</h2>
-                        <p>March, 31, 2021 </p>
-                        <p>02:30 PM</p>
+                        <p>{{orderDetails.date}} </p>
+                        <p>{{orderDetails.startTime}}</p>
                     </div>
                     <div class="deliver-cab radio">
-                        <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system"
-                            value="deliver-cab">
+                        <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab">
                         <label for="deliver-cab" class="">
                             <div>
                                 <img src="../../assets/images/checkout/pickup.svg" alt="">
                             </div>
                             <div style="width: 100%;">
                                 <input type="text" name="shop-address" id="shop-address" placeholder="shop-address"
-                                    disabled value="Shop Location">
+                                    disabled value={{shopDetails.addressLine1}}>
                                 <hr>
                                 <input type="text" name="receive-address" id="receive-address"
-                                    placeholder="receive-address" disabled value="User Location">
+                                    placeholder="receive-address" disabled value={{orderDetails.pickupLocation}}>
                             </div>
                         </label><br>
                     </div>
                     <div class="pick-up">
-                        <h2>Pick up Address</h2>
-                        <p>March, 31, 2021 </p>
-                        <p>02:30 PM</p>
+                        <h2>Drop up Address</h2>
+                        <p>{{orderDetails.repairedDate}} </p>
+                        <p>{{orderDetails.expectedDelivery}}</p>
                     </div>
                     <div class="deliver-mail deliver-cab radio">
-                        <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system"
-                            value="deliver-mail">
+                        <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system" value="deliver-mail">
                         <label for="deliver-mail" class=" radio-labell">
                             <div>
                                 <img src="../../assets/images/Location-white.svg" alt="">
                             </div>
                             <div style="width: 100%;">
                                 <input type="text" name="drop-off-address" id="drop-off-address"
-                                    placeholder="drop-off-address" disabled value="Drop off Location">
+                                    placeholder="drop-off-address" disabled value={{orderDetails.dropLocation}}>
                             </div>
                         </label><br>
                     </div>
@@ -122,12 +120,10 @@
                             </div>
                             <div class="card-name">
                                 <p>Name on card</p>
-                                <input type="text" name="card-name" id="card-name" class="form-control"
-                                    formControlName="cardholdername" placeholder="Card Holder Name" required>
+                                <input type="text" name="card-name" id="card-name" class="form-control" formControlName="cardholdername" placeholder="Card Holder Name" required>
                             </div>
                             <div class="payment-country">
-                                <input type="text" name="country-zip" id="country-zip" class="form-control"
-                                    maxlength="6" formControlName="zip" placeholder="ZIP" required>
+                                <input type="text" name="country-zip" id="country-zip" class="form-control" maxlength="6" formControlName="zip" placeholder="ZIP" required>
                             </div>
                             <div class="policy">
                                 <div class="squaredOne">
@@ -139,7 +135,7 @@
                             </div>
                             <div class="payment-btns">
                                 <div class="pay-card">
-                                    <button (click)="pay()" type="submit">Pay ${{total}}</button>
+                                    <button (click)="pay()" type="submit">Pay ${{orderDetails.Total_Price}}</button>
                                 </div>
                             </div>
                         </form>
@@ -148,18 +144,15 @@
                 <div class="payment-done" *ngIf="isPaid">
                     <div class="payment-done-mess">
                         <h2>Thank you for choosing us</h2>
-                        <p>Your Order Is Is <span>#63486587923</span> Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Nunc odio in et, lectus sit lorem id integer.</p>
+                        <p>Your Order Is Is <span>#63486587923</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc odio in et, lectus sit lorem id integer.</p>
                         <button>Back to home</button>
                     </div>
                     <div class="payment-done-feedback">
                         <h2>Feed us back</h2>
                         <p>Help us know you better, so that we can serve you better.</p>
-                        <p>Information provided herein will be used solely for research purposes and will not be sold to
-                            any third parties.</p>
+                        <p>Information provided herein will be used solely for research purposes and will not be sold to any third parties.</p>
                         <div class="feedback-input">
-                            <textarea name="feedback" id="feedback" cols="10" rows="2"
-                                placeholder="Your Feedback..."></textarea>
+                            <textarea name="feedback" id="feedback" cols="10" rows="2" placeholder="Your Feedback..."></textarea>
                             <button><img src="../../assets/images/checkout/send.svg" alt=""></button>
                         </div>
                     </div>
