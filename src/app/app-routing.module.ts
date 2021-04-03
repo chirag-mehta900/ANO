@@ -13,7 +13,7 @@ import { TrackingmapComponent } from "./trackingmap/trackingmap.component";
 const routes: Routes = [
   { path: "map", component: MappageComponent },
   { path: "shop", component: ShopComponent },
-  { path: "checkout", component: CheckoutComponent },
+  { path: "checkout/:id", component: CheckoutComponent },
   { path: "about", component: AboutComponent },
   { path: "tracking", component: TrackingComponent },
   { path: "trackmap", component: TrackingmapComponent },

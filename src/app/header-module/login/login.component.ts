@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   formSubmitted: boolean = false;
   disableButton: boolean = false;
   invalidUserLog: boolean = false;
+  userName : any ;
   constructor(
     private headerService: HeaderService,
     private modalService: NgbModal,
@@ -59,6 +60,7 @@ export class LoginComponent implements OnInit {
         (data) => {
           if (data['status'] == 200) {
             this.storeTokenService.set('token', data['data'].access_token);
+            this.setUserName();
             this.activeModal.close(data['data'].access_token);
           }
           this.disableButton = false;
@@ -73,5 +75,14 @@ export class LoginComponent implements OnInit {
       this.disableButton = false;
       return;
     }
+  }
+  setUserName() {
+    this.headerService.getUserName().subscribe(
+      (data) => {
+        this.userName = data['data'].name;
+        this.storeTokenService.set('user_id', data['data'].id);
+      },
+      (error) => {}
+    );
   }
 }
