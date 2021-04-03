@@ -271,6 +271,7 @@ export class CartComponent implements OnInit {
   temp: File[] = [];
   issues: any[] = [];
   imageUploaded: any[] = [];
+  Address: any
   imageEditFlag: boolean = false;
   currentImageUrl: any = '';
   addedDeviceProblem;
@@ -310,6 +311,9 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+
+    this.Address = JSON.parse(localStorage.getItem('Address') || '[]');
+
     console.log(this.Location);
     this.lat = this.Location.lat;
     this.lng = this.Location.lng;
@@ -483,10 +487,12 @@ export class CartComponent implements OnInit {
     this.files.forEach((element) => {
       this.upload(element);
     });
+    let arr = [];
     this.uploadService.imageLocationUrl.subscribe((x) => {
       this.displayCartInfo.forEach((element) => {
+        arr.push(x)
         if (element.id == id) {
-          element.images = x;
+          element.images = arr;
           element.imageFiles = event.addedFiles;
         }
       });
@@ -585,12 +591,12 @@ export class CartComponent implements OnInit {
         this.placeOrder.details[0].image = []
       }
       this.shopService.placeOrder(this.placeOrder).subscribe((response) => {
-        console.log(response['status'], "placeOrder")
+        console.log(response, "placeOrder")
         
         //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
         var id = response['data'].id;
         console.log(id,"id")
-        this.router.navigate(["/checkout/", id]);
+       // this.router.navigate(["/checkout/", id]);
       })
 
       localStorage.setItem('PlaceOrder', JSON.stringify(this.placeOrder));
