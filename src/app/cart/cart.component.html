@@ -86,6 +86,9 @@
         <div class="pic-booking-date">
             <h3>Booking Made Easy</h3>
             <div class="deliver-system">
+                <div class="pick-ups">
+                    <h4>Device(s) Pick up Slot</h4>
+                </div>
                 <div class="deliver-cab radio">
                     <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab" checked>
                     <label for="deliver-cab" class="radio-label">
@@ -97,9 +100,12 @@
                                     {{time.endTime }}
                                 </option>
                             </select>
+                            <input type="text" name="pick-off" id="pick-off" placeholder="Pick-up up Address">
                         </div>
                     </label><br>
                 </div>
+
+
                 <div class="deliver-mail radio">
                     <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system" value="deliver-mail">
                     <label for="deliver-mail" class="radio-label radio-labell">
@@ -113,7 +119,12 @@
                     </label><br>
                 </div>
             </div>
+
+
             <div class="deliver-system drop-off-slot">
+                <div class="pick-ups">
+                    <h4>Device(s) Return Slot</h4>
+                </div>
                 <div class="deliver-cab radio">
                     <input class="deliver-radio" type="radio" id="drop-off-opt" name="deliver-system" value="drop-off-opt">
                     <label for="drop-off-opt" class="radio-label">
