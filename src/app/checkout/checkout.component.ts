@@ -93,6 +93,8 @@ export class CheckoutComponent implements OnInit {
   getOrderAndShopData() {
     this.orderDetails = JSON.parse(localStorage.getItem('PlaceOrder'));
     this.shopDetails = JSON.parse(localStorage.getItem('Shop'));
+    console.log(this.shopDetails);
+    
   }
 
   setProductToDisplay() {
