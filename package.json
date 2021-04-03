@@ -32,6 +32,7 @@
         "fine-uploader": "^5.16.2",
         "jquery": "^3.6.0",
         "jwt-decode": "^3.1.2",
+        "moment": "^2.29.1",
         "ng-circle-progress": "^1.6.0",
         "ng-otp-input": "^1.7.1",
         "ng2-tooltip-directive": "^2.9.22",
