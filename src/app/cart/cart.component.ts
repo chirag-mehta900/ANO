@@ -588,8 +588,9 @@ export class CartComponent implements OnInit {
         console.log(response['status'], "placeOrder")
         
         //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
-        // var orderId = data['data'].id;
-        // this.router.navigate(["/checkout/", { id: orderId }]);
+        var id = response['data'].id;
+        console.log(id,"id")
+        this.router.navigate(["/checkout/", id]);
       })
 
       localStorage.setItem('PlaceOrder', JSON.stringify(this.placeOrder));
