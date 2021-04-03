@@ -123,6 +123,8 @@ export class CheckoutComponent implements OnInit {
       console.log(data['data'].shop, 'orderby id shop details');
       this.shopDetails = data['data'].shop;
       this.orderDetails = data['data'];
+      console.log(this.orderDetails);
+
       console.log(data['data'], 'orderby id order details');
     });
   }
@@ -169,6 +171,7 @@ export class CheckoutComponent implements OnInit {
       } else {
         this.orderComplete(paymentData['clientSecret']);
         console.log('order Complete');
+        this.isPaid = true;
       }
     });
   }

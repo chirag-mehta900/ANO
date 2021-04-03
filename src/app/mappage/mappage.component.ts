@@ -4,6 +4,7 @@ import { MapService } from 'src/@theme/Services/map.service';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'src/@theme/Services/header.service';
+import { BookRepairComponent } from '../header-module/book-repair/book-repair.component';
 
 type ResponseType = {
   data: [
@@ -26,6 +27,7 @@ export class MappageComponent implements OnInit {
   area: any;
   Configs: any[] = [];
   prolist: any[] = [];
+  issues: any[] = [];
   devicelist: any[] = [];
 
   shopmarker: object = {};
@@ -252,11 +254,19 @@ export class MappageComponent implements OnInit {
     Icon: {},
   };
   filterFlag: boolean = false;
+  formSubmitted: boolean = false;
+
   deviceList: any[] = [];
   issueList: any[] = [];
   brandList: [];
+  bookRepair = {
+    device: null,
+    problem: null,
+    latitude: null,
+    longitude: null,
+    distanceMile: 10,
+  };
   filterData = {
-    brand_id: null,
     device_id: null,
     problem_id: null,
   };
@@ -269,7 +279,8 @@ export class MappageComponent implements OnInit {
     private storeTokenService: StoreTokenService,
     private route: ActivatedRoute,
     private router: Router,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private modalService: NgbModal
   ) {
     config.max = 5;
     config.readonly = true;
@@ -471,40 +482,123 @@ export class MappageComponent implements OnInit {
     this.router.navigate(['/shop', { id: JSON.stringify(shopDetail) }]);
   }
   getBrandList() {
-    this.headerService.getBrandList().subscribe(
-      (data) => {
-        this.brandList = data['data'];
-      },
-      (error) => {}
-    );
+    if (this.deviceList.length == 0) {
+      this.headerService.getBrandList().subscribe(
+        (data) => {
+          console.log(data);
+
+          this.deviceList = data['data'];
+          console.log(this.deviceList);
+          localStorage.setItem('deviceList', JSON.stringify(this.deviceList));
+        },
+        (error) => {}
+      );
+    }
   }
 
-  getDeviceList(event) {
-    this.headerService.getDeviceList(event.target.value).subscribe(
-      (data) => {
-        this.deviceList = data['data'];
-      },
-      (error) => {}
-    );
-  }
+  // getDeviceList(event) {
+  //   this.headerService.getDeviceList(event.target.value).subscribe(
+  //     (data) => {
+  //       this.deviceList = data['data'];
+  //     },
+  //     (error) => {}
+  //   );
+  // }
 
   getIssueList(event) {
     let obj = {
-      brand_id: this.filterData.brand_id,
-      device_id: event,
+      device_id: event.target.value,
     };
     console.log(obj);
     this.headerService.getIssueListById(obj).subscribe(
       (data) => {
+        console.log(data);
+
         this.issueList = data['data'];
       },
       (error) => {}
     );
   }
   filter() {
-    this.filterFlag = true;
+    // this.filterFlag = true;
+
+    this.modalService.open(BookRepairComponent);
   }
-  applyFilter() {
+  applyFilter(Repair) {
+    console.log(Repair);
+
     this.filterFlag = false;
+
+    localStorage.removeItem('issues');
+    console.log(this.bookRepair);
+    this.issueList.forEach((e) => {
+      var obj = {
+        problemId: e.problem.id,
+        problem: e.problem.problemName,
+      };
+      this.issues.push(obj);
+    });
+    localStorage.setItem('issues', JSON.stringify(this.issues));
+
+    this.formSubmitted = true;
+    if (Repair.valid) {
+      this.bookRepair.latitude = this.Location.lat;
+      this.bookRepair.longitude = this.Location.lng;
+      console.log(JSON.stringify(this.bookRepair));
+
+      localStorage.setItem('deviceProblem', JSON.stringify(this.bookRepair));
+      console.log(this.bookRepair);
+
+      this.headerService.searchStore(this.bookRepair).subscribe(
+        (response: ResponseType) => {
+          console.log(response);
+
+          response.data.forEach((e) => {
+            if (e.pricing.length) {
+              this.Data.push(e);
+            }
+          });
+          console.log(this.Data);
+          localStorage.removeItem('Shoplist');
+          localStorage.setItem('Shoplist', JSON.stringify(this.Data));
+
+          for (var i = 0; i < this.Data.length; i++) {
+            // console.log(this.Data[i].pricing[0].price);
+            this.shopmarker = {
+              latitude: this.Data[i].latitude,
+              longitude: this.Data[i].longitude,
+              price: {
+                text: this.Data[i].pricing[0].price.toString(),
+                color: 'white',
+                fontWeight: '500',
+                fontSize: '20px',
+              },
+              icon: {
+                url:
+                  'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+                scaledSize: {
+                  width: 100,
+                  height: 70,
+                },
+              },
+            };
+
+            this.Marker.push(this.shopmarker);
+          }
+
+          localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
+
+          console.log(this.Marker);
+          window.location.reload();
+          // this.router.navigate([
+          //   '/map',
+          //   { storeData: JSON.stringify(response['data']) },
+          // ]);
+        },
+        (error) => {}
+      );
+    } else {
+      return;
+    }
   }
 }

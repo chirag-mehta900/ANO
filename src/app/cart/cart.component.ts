@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { NgbModal, NgbRatingConfig } from "@ng-bootstrap/ng-bootstrap";
-import { ShopService } from "src/@theme/Services/shop.service";
-import { StoreTokenService } from "src/@theme/Services/store-token.service";
-import { UploadService } from "src/@theme/Services/upload.service";
-import { MapService } from "src/@theme/Services/map.service";
-import { AddProductComponent } from "./add-product/add-product.component";
-import { HeaderService } from "src/@theme/Services/header.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ShopService } from 'src/@theme/Services/shop.service';
+import { StoreTokenService } from 'src/@theme/Services/store-token.service';
+import { UploadService } from 'src/@theme/Services/upload.service';
+import { MapService } from 'src/@theme/Services/map.service';
+import { AddProductComponent } from './add-product/add-product.component';
+import { HeaderService } from 'src/@theme/Services/header.service';
 import { LoginComponent } from '../header-module/login/login.component';
-import { time } from "node:console";
+import { time } from 'node:console';
 import * as moment from 'moment';
 // import { AddproductComponent } from './addproduct/addproduct.component';
 
@@ -23,8 +23,8 @@ export class CartComponent implements OnInit {
   shop: any[] = [];
   lat: any;
   lng: any;
-  expecteddate:any;
-  expectedtime:any;
+  expecteddate: any;
+  expectedtime: any;
   price: {} = {
     text: '$00',
     color: 'white',
@@ -51,8 +51,8 @@ export class CartComponent implements OnInit {
       url:
         'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/pin.svg?alt=media&token=6de944f2-889f-4658-8d86-f6fce983ac5c',
       scaledSize: {
-        width: 40,
-        height: 60,
+        width: 30,
+        height: 30,
       },
     },
   };
@@ -254,7 +254,7 @@ export class CartComponent implements OnInit {
       {
         device_id: null,
         problem_id: null,
-        image: []=[],
+        image: ([] = []),
         price: null,
       },
     ],
@@ -271,7 +271,7 @@ export class CartComponent implements OnInit {
   temp: File[] = [];
   issues: any[] = [];
   imageUploaded: any[] = [];
-  Address: any
+  Address: any;
   imageEditFlag: boolean = false;
   currentImageUrl: any = '';
   addedDeviceProblem;
@@ -338,27 +338,23 @@ export class CartComponent implements OnInit {
     this.getTimeAccoedingToDate();
     this.getrepairtime(36);
 
-
     // var finaldate =  new Date(this.new)
     // console.log(finaldate);
 
     // var newdate = Date.now(this.new + 36*)
 
-
-
     // console.log(moment().add(3, 'days').calendar(),"time");
-
   }
 
   getrepairtime(h) {
     this.new = Date.now() + h * 60 * 60 * 1000;
     console.log(this.new);
 
-     this.expecteddate = moment(this.new).format("YYYY-MM-DD")
-     this.expectedtime = moment(this.new).format("HH:mm:ss")
-     
-    this.placeOrder.repairedDate = this.expecteddate ;
-    this.placeOrder.expectedDelivery = moment(this.new).format("HH:mm:ss");
+    this.expecteddate = moment(this.new).format('YYYY-MM-DD');
+    this.expectedtime = moment(this.new).format('HH:mm:ss');
+
+    this.placeOrder.repairedDate = this.expecteddate;
+    this.placeOrder.expectedDelivery = moment(this.new).format('HH:mm:ss');
   }
 
   getCurrentDate() {
@@ -416,7 +412,7 @@ export class CartComponent implements OnInit {
           }
         });
       },
-      (error) => { }
+      (error) => {}
     );
     //set Expected Price
     let getExpectedPrice = {
@@ -426,18 +422,19 @@ export class CartComponent implements OnInit {
     };
     this.shopService.getExpectedPrice(getExpectedPrice).subscribe(
       (data) => {
-        console.log(data["data"]);
-        
+        console.log(data['data']);
+
         this.totalCartAmount = this.displayCartInfo[0].total_amount =
           data['data'][0].TotalAmount;
         this.displayCartInfo[0].ANOBaseFees = data['data'][0].ANOBaseFees;
         this.displayCartInfo[0].ANOCommissionFees =
-          data["data"][0].ANOCommissionFees;
-        this.displayCartInfo[0].ShopCommissionFees = data["data"][0].ShopCommissionFees;
+          data['data'][0].ANOCommissionFees;
+        this.displayCartInfo[0].ShopCommissionFees =
+          data['data'][0].ShopCommissionFees;
 
-        this.displayCartInfo[0].price = data["data"][0].price;
+        this.displayCartInfo[0].price = data['data'][0].price;
       },
-      (error) => { }
+      (error) => {}
     );
   }
 
@@ -454,14 +451,16 @@ export class CartComponent implements OnInit {
       shopId: this.shop[0].id,
       date: this.placeOrder.date,
     };
+    console.log(getTimeObj);
+
     this.shopService.getTimeByDate(getTimeObj).subscribe((data) => {
       this.today = new Date();
       let hh = this.today.getHours();
       let mm = this.today.getMinutes();
       // console.log(hh, mm);
       // console.log(data["data"]);
-      data["data"].forEach((element) => {
-        var hour = new Date("1970-01-01 " + element.startTime);
+      data['data'].forEach((element) => {
+        var hour = new Date('1970-01-01 ' + element.startTime);
         if (hour.getHours() > hh) {
           this.timeList.push(element);
         }
@@ -490,7 +489,7 @@ export class CartComponent implements OnInit {
     let arr = [];
     this.uploadService.imageLocationUrl.subscribe((x) => {
       this.displayCartInfo.forEach((element) => {
-        arr.push(x)
+        arr.push(x);
         if (element.id == id) {
           element.images = arr;
           element.imageFiles = event.addedFiles;
@@ -518,8 +517,8 @@ export class CartComponent implements OnInit {
 
   deleteCartProduct(event) {
     this.shopService.deleteCartData(event).subscribe(
-      (data) => { },
-      (error) => { }
+      (data) => {},
+      (error) => {}
     );
     this.displayCartInfo.forEach((element, index) => {
       if (element.id == event) {
@@ -532,7 +531,7 @@ export class CartComponent implements OnInit {
   }
   proceed() {
     //to calculate total cart amount
-    let isLogedIn = localStorage.getItem("token");
+    let isLogedIn = localStorage.getItem('token');
     if (isLogedIn === null) {
       this.userName = null;
       if (this.modalService.hasOpenModals()) {
@@ -540,12 +539,11 @@ export class CartComponent implements OnInit {
       }
       const modalRef = this.modalService.open(LoginComponent);
       modalRef.result.then((result) => {
-        this.headerService.getUserName().subscribe(
-          (data) => {
-            this.userName = data['data'].name;
-            this.storeTokenService.set('user_id', data['data'].id);
-            window.location.reload();
-          })
+        this.headerService.getUserName().subscribe((data) => {
+          this.userName = data['data'].name;
+          this.storeTokenService.set('user_id', data['data'].id);
+          window.location.reload();
+        });
       });
     } else {
       let totalCartAmount = 0;
@@ -566,7 +564,7 @@ export class CartComponent implements OnInit {
           price: element.total_amount,
           image: element.images,
         });
-      })
+      });
       this.placeOrder.details.splice(0, 1);
 
       //calculating cart amount
@@ -582,27 +580,28 @@ export class CartComponent implements OnInit {
       this.dropLocation.lat = this.shop[0].latitude;
       this.dropLocation.lng = this.shop[0].longitude;
 
-      this.placeOrder.pickupLocation = JSON.parse(localStorage.getItem('Address'));
-      this.placeOrder.dropLocation = JSON.parse(localStorage.getItem('Address'));
-      console.log(this.placeOrder,"object");
+      this.placeOrder.pickupLocation = JSON.parse(
+        localStorage.getItem('Address')
+      );
+      this.placeOrder.dropLocation = JSON.parse(
+        localStorage.getItem('Address')
+      );
+      console.log(this.placeOrder, 'object');
 
-      console.log(this.placeOrder.details[0].image)
-      if(this.placeOrder.details[0].image == null){
-        this.placeOrder.details[0].image = []
+      console.log(this.placeOrder.details[0].image);
+      if (this.placeOrder.details[0].image == null) {
+        this.placeOrder.details[0].image = [];
       }
       this.shopService.placeOrder(this.placeOrder).subscribe((response) => {
-        console.log(response, "placeOrder")
-        
+        console.log(response, 'placeOrder');
+
         //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
         var id = response['data'].id;
-        console.log(id,"id")
-        this.router.navigate(["/checkout/", id]);
-      })
+        console.log(id, 'id');
+        this.router.navigate(['/checkout/', id]);
+      });
 
       localStorage.setItem('PlaceOrder', JSON.stringify(this.placeOrder));
-
     }
   }
-
-
 }

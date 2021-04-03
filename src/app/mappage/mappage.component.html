@@ -1,6 +1,6 @@
 <section class="map-booking">
     <div class="bg-map">
-        <agm-map [latitude]="Lat" [longitude]="Lng" [zoom]="13" [styles]="styles">
+        <agm-map [latitude]="Lat" [longitude]="Lng" [zoom]="12" [styles]="styles">
             <agm-marker [latitude]="Lat" [longitude]="Lng" [iconUrl]="Location.Icon"></agm-marker>
             <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude" [label]="m.price" [iconUrl]="m.icon"></agm-marker>
             <!-- [label]="m.price" -->
@@ -22,37 +22,39 @@
             </div>
             <!--Filer Pop up-->
             <div *ngIf="filterFlag">
-                <div class="filter-popup">
-                    <h2>Filter</h2>
-                    <p>BRAND</p>
-                    <div class="optionselect">
-                        <select class="custom" name="brand" [(ngModel)]="filterData.brand_id" (change)="getDeviceList($event)" placeholder="Select Brand" #device1="ngModel">
-                            <option *ngFor="let brand of brandList" [value]="brand.id">{{brand.brandName}}</option>
+                <form #Repair="ngForm">
+                    <div class="filter-popup">
+                        <h2>Filter</h2>
+                        <p>DEVICE</p>
+                        <div class="optionselect">
+                            <select class="custom" name="brand" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)" placeholder="Select Brand" #device1="ngModel">
+                            <option *ngFor="let brand of deviceList" [value]="brand.id">{{brand.full_name}}</option>
                         </select>
-                        <div class="text-danger" *ngIf="device1.invalid &&
+                            <div class="text-danger" *ngIf="device1.invalid &&
                 (formSubmitted || device1.touched)">
-                            Select Device
+                                Select Device
+                            </div>
                         </div>
-                    </div>
-                    <p>DEVICE</p>
-                    <div class="optionselect">
-                        <select class="custom" name="device" [(ngModel)]="filterData.device_id" (change)="getIssueList($event)" placeholder="Select Device" #device1="ngModel">
-                            <option *ngFor="let device of deviceList" [value]="device.id">{{device.modelName}}
+                        <p>PROBLEM</p>
+                        <div class="optionselect">
+                            <select class="custom" name="device" [(ngModel)]="bookRepair.problem" placeholder="Select Device" #device1="ngModel">
+                            <option *ngFor="let device of issueList" [value]="device.id">{{device.problem.problemName}}
                             </option>
                         </select>
-                    </div>
-                    <p>PROBLEM</p>
+                        </div>
+                        <!-- <p>PROBLEM</p>
                     <div class="optionselect">
                         <select class="custom" name="problem" [(ngModel)]="filterData.problem_id" placeholder="Select Problem">
                             <option *ngFor="let issue of issueList" [value]="issue.id">{{issue.problem.problemName}}
                             </option>
                         </select>
+                    </div> -->
+                        <div class="filter-popup-btn">
+                            <button (click)="applyFilter(Repair)">Apply Filter</button>
+                            <button>Close</button>
+                        </div>
                     </div>
-                    <div class="filter-popup-btn">
-                        <button>Apply Filter</button>
-                        <button (click)="applyFilter()">Close</button>
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="shop-come">
                 <div class="shop-box" *ngFor="let store of Shoplist" (click)="shopDetail(store.id,store)">
