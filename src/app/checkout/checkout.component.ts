@@ -118,8 +118,9 @@ export class CheckoutComponent implements OnInit {
       });
     });
     console.log(this.productDisplay);
-    debugger
       let id = this.route.snapshot.params.id;
+      console.log(id);
+      
       this.shopService.getOrder(id).subscribe(
         (data) => {
           console.log(data,"orderby id")

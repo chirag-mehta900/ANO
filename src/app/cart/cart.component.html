@@ -119,8 +119,8 @@
                     <label for="drop-off-opt" class="radio-label">
                         <div class="selectdate-time">
                             <input type="date" name="distance" [(ngModel)]="placeOrder.date"
-                                (input)="getTimeAccoedingToDate()" [min]="today">
-                            <select name="time" (change)="setTime($event)" placeholder="select time">
+                                (input)="getTimeAccoedingToDate()" [min]="today" disabled>
+                            <select name="time" (change)="setTime($event)" placeholder="select time" disabled>
                                 <option>Select Time</option>
                                 <option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} -
                                     {{time.endTime}}
