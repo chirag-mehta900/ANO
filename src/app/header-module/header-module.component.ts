@@ -160,6 +160,8 @@ export class HeaderModuleComponent implements OnInit {
 
   logout() {
     this.storeTokenService.remove('token');
+    this.storeTokenService.remove('user_id');
+
     this.isopenDropdown = !this.isopenDropdown;
     this.userName = null;
     this.router.navigate(['home']);

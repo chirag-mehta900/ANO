@@ -124,14 +124,12 @@
                 </div>
                 <div class="about-img col-md-6">
                     <div class="about-img-12">
-                        <img class="img-fluid about-img-1 anim_three" src="../../assets/images/about/Image 1.png"
-                            alt="">
+                        <img class="img-fluid about-img-1 anim_three" src="../../assets/images/about/Image 1.png" alt="">
                         <img class="img-fluid about-img-2 anim_four" src="../../assets/images/about/Image 2.png" alt="">
                     </div>
                     <div class="about-img-34">
                         <img class="img-fluid about-img-3 anim_four" src="../../assets/images/about/Image 3.png" alt="">
-                        <img class="img-fluid about-img-4 anim_seven" src="../../assets/images/about/Image 4.png"
-                            alt="">
+                        <img class="img-fluid about-img-4 anim_seven" src="../../assets/images/about/Image 4.png" alt="">
                     </div>
                 </div>
             </div>
@@ -149,17 +147,19 @@
                     </div>
                 </div>
                 <div class="requestform col-md-6">
-                    <div class="name">
-                        <input type="text" name="first" id="first" placeholder="First Name">
-                        <input type="text" name="last" id="last" placeholder="Last Name">
-                    </div>
-                    <div class="contact">
-                        <input type="text" name="email" id="email" placeholder="Email">
-                        <input type="text" name="mobile" id="mobile" placeholder="Mobile No">
-                    </div>
-                    <div class="req-btn">
-                        <button>Request</button>
-                    </div>
+                    <form [formGroup]="driveForm">
+                        <div class="name">
+                            <input type="text" formControlName="first_name" name="first" id="first" placeholder="First Name">
+                            <input type="text" formControlName="last_name" name="last" id="last" placeholder="Last Name">
+                        </div>
+                        <div class="contact">
+                            <input type="text" formControlName="email" name="email" id="email" placeholder="Email">
+                            <input type="text" maxlength="10" formControlName="mobileNumber" name="mobile" id="mobile" placeholder="Mobile No">
+                        </div>
+                        <div class="req-btn">
+                            <button (click)="DriverReq()">Request</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

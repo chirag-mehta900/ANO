@@ -12,9 +12,9 @@ import { time } from "node:console";
 // import { AddproductComponent } from './addproduct/addproduct.component';
 
 @Component({
-  selector: "app-cart",
-  templateUrl: "./cart.component.html",
-  styleUrls: ["./cart.component.css"],
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
   rating3;
@@ -23,35 +23,33 @@ export class CartComponent implements OnInit {
   lat: any;
   lng: any;
   price: {} = {
-    text: "$00",
-    color: "white",
-    fontWeight: "500",
-    fontSize: "20px",
+    text: '$00',
+    color: 'white',
+    fontWeight: '500',
+    fontSize: '20px',
   };
   Location = {
     lat: 0,
     lng: 0,
     Icon: {},
   };
+  dropLocation = {
+    lat: 0,
+    lng: 0,
+  };
+
+  pickupLocation = {
+    lat: 0,
+    lng: 0,
+  };
 
   ourmark = {
     icon: {
       url:
-        "https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shopmark.png?alt=media&token=a88b489d-4f6d-470a-9aa4-211f82ce6976",
+        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/pin.svg?alt=media&token=6de944f2-889f-4658-8d86-f6fce983ac5c',
       scaledSize: {
-        width: 135,
-        height: 115,
-      },
-    },
-  };
-
-  shopmark = {
-    icon: {
-      url:
-        "https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e",
-      scaledSize: {
-        width: 90,
-        height: 70,
+        width: 40,
+        height: 60,
       },
     },
   };
@@ -60,193 +58,177 @@ export class CartComponent implements OnInit {
     suppressMarkers: true,
   };
 
-  markerOptions = {
-    origin: {
-      icon:
-        "https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shopmark.png?alt=media&token=a88b489d-4f6d-470a-9aa4-211f82ce6976",
-      draggable: true,
-    },
-    destination: {
-      icon:
-        "https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e",
-      label: "$00",
-      color: "white",
-      fontWeight: "500",
-      fontSize: "20px",
-    },
-  };
-
   origin = { lat: 0, lng: 0 };
   destination = { lat: 0, lng: 0 };
 
   styles = [
     {
-      elementType: "geometry",
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#f5f5f5",
+          color: '#f5f5f5',
         },
       ],
     },
     {
-      elementType: "labels.icon",
+      elementType: 'labels.icon',
       stylers: [
         {
-          visibility: "off",
+          visibility: 'off',
         },
       ],
     },
     {
-      elementType: "labels.text.fill",
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#616161",
+          color: '#616161',
         },
       ],
     },
     {
-      elementType: "labels.text.stroke",
+      elementType: 'labels.text.stroke',
       stylers: [
         {
-          color: "#f5f5f5",
+          color: '#f5f5f5',
         },
       ],
     },
     {
-      featureType: "administrative.land_parcel",
-      elementType: "labels.text.fill",
+      featureType: 'administrative.land_parcel',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#bdbdbd",
+          color: '#bdbdbd',
         },
       ],
     },
     {
-      featureType: "poi",
-      elementType: "geometry",
+      featureType: 'poi',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#eeeeee",
+          color: '#eeeeee',
         },
       ],
     },
     {
-      featureType: "poi",
-      elementType: "labels.text.fill",
+      featureType: 'poi',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#757575",
+          color: '#757575',
         },
       ],
     },
     {
-      featureType: "poi.park",
-      elementType: "geometry",
+      featureType: 'poi.park',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#e5e5e5",
+          color: '#e5e5e5',
         },
       ],
     },
     {
-      featureType: "poi.park",
-      elementType: "labels.text.fill",
+      featureType: 'poi.park',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#9e9e9e",
+          color: '#9e9e9e',
         },
       ],
     },
     {
-      featureType: "road",
-      elementType: "geometry",
+      featureType: 'road',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#ffffff",
+          color: '#ffffff',
         },
       ],
     },
     {
-      featureType: "road.arterial",
-      elementType: "labels.text.fill",
+      featureType: 'road.arterial',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#757575",
+          color: '#757575',
         },
       ],
     },
     {
-      featureType: "road.highway",
-      elementType: "geometry",
+      featureType: 'road.highway',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#dadada",
+          color: '#dadada',
         },
       ],
     },
     {
-      featureType: "road.highway",
-      elementType: "labels.text.fill",
+      featureType: 'road.highway',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#616161",
+          color: '#616161',
         },
       ],
     },
     {
-      featureType: "road.local",
-      elementType: "labels.text.fill",
+      featureType: 'road.local',
+      elementType: 'labels.text.fill',
       stylers: [
         {
-          color: "#9e9e9e",
+          color: '#9e9e9e',
         },
       ],
     },
     {
-      featureType: "transit.line",
-      elementType: "geometry",
+      featureType: 'transit.line',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#e5e5e5",
+          color: '#e5e5e5',
         },
       ],
     },
     {
-      featureType: "transit.line",
-      elementType: "labels.text",
+      featureType: 'transit.line',
+      elementType: 'labels.text',
       stylers: [
         {
-          color: "#afa655",
+          color: '#afa655',
         },
         {
-          visibility: "on",
-        },
-      ],
-    },
-    {
-      featureType: "transit.station",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#eeeeee",
+          visibility: 'on',
         },
       ],
     },
     {
-      featureType: "water",
-      elementType: "geometry",
+      featureType: 'transit.station',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#c9c9c9",
+          color: '#eeeeee',
         },
       ],
     },
     {
-      featureType: "water",
-      elementType: "labels.text.fill",
+      featureType: 'water',
+      elementType: 'geometry',
       stylers: [
         {
-          color: "#9e9e9e",
+          color: '#c9c9c9',
+        },
+      ],
+    },
+    {
+      featureType: 'water',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#9e9e9e',
         },
       ],
     },
@@ -274,18 +256,19 @@ export class CartComponent implements OnInit {
       },
     ],
   };
-  title = "My first AGM project";
+  title = 'My first AGM project';
 
-  colorTone = "#000";
+  colorTone = '#000';
   per = 78;
   storeId: any;
   storeInfo: any[] = [];
   timeList: any[] = [];
   cartInfo: any = {};
   files: File[] = [];
+  issues: any[] = [];
   imageUploaded: any[] = [];
   imageEditFlag: boolean = false;
-  currentImageUrl: any = "";
+  currentImageUrl: any = '';
   addedDeviceProblem;
   displayCartInfo = [
     {
@@ -321,14 +304,14 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.Location = JSON.parse(localStorage.getItem("Location") || "[]");
+    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
     console.log(this.Location);
     this.lat = this.Location.lat;
     this.lng = this.Location.lng;
     this.origin.lat = this.Location.lat;
     this.origin.lng = this.Location.lng;
     console.log(this.origin);
-    this.shop.push(JSON.parse(localStorage.getItem("Shop") || "[]"));
+    this.shop.push(JSON.parse(localStorage.getItem('Shop') || '[]'));
     this.destination.lat = this.shop[0].latitude;
     this.destination.lng = this.shop[0].longitude;
     console.log(this.destination);
@@ -353,12 +336,12 @@ export class CartComponent implements OnInit {
 
   getCurrentDate() {
     this.today = new Date();
-    var dd = String(this.today.getDate()).padStart(2, "0");
-    var mm = String(this.today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var dd = String(this.today.getDate()).padStart(2, '0');
+    var mm = String(this.today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = this.today.getFullYear();
-    this.today = yyyy + "-" + mm + "-" + dd;
+    this.today = yyyy + '-' + mm + '-' + dd;
     this.placeOrder.date = this.today;
-    this.modifiedToday = mm + "/" + dd + "/" + yyyy;
+    this.modifiedToday = mm + '/' + dd + '/' + yyyy;
   }
   addRepairDevice() {
     const modalRef = this.modalService.open(AddProductComponent);
@@ -383,13 +366,14 @@ export class CartComponent implements OnInit {
     //set static id for priously selected device problem
     this.displayCartInfo[0].id = 1;
     //get priously selected problem device
-    this.addedDeviceProblem = JSON.parse(localStorage.getItem("deviceProblem"));
+    this.addedDeviceProblem = JSON.parse(localStorage.getItem('deviceProblem'));
     console.log(this.addedDeviceProblem);
     //set Device Name
-    JSON.parse(localStorage.getItem("deviceList")).forEach((element) => {
+    JSON.parse(localStorage.getItem('deviceList')).forEach((element) => {
       if (element.id == this.addedDeviceProblem.device) {
         this.displayCartInfo[0].deviceId = element.id;
         this.displayCartInfo[0].deviceName = element.full_name;
+        this.displayCartInfo[0].problemId = this.addedDeviceProblem.problem;
       }
     });
     //set Problem Name
@@ -398,7 +382,7 @@ export class CartComponent implements OnInit {
     };
     this.headerService.getIssueListById(getProblemList).subscribe(
       (data) => {
-        data["data"].forEach((element) => {
+        data['data'].forEach((element) => {
           if (element.id == this.addedDeviceProblem.problem) {
             this.displayCartInfo[0].problemName = element.problem.problemName;
             this.displayCartInfo[0].problemId = element.id;
@@ -419,8 +403,8 @@ export class CartComponent implements OnInit {
         this.placeOrder.repairedDate = this.getCurrentDate();
         this.placeOrder.expectedDelivery = data['data'].estimatedRepaidTime;
         this.totalCartAmount = this.displayCartInfo[0].total_amount =
-          data["data"][0].TotalAmount;
-        this.displayCartInfo[0].ANOBaseFees = data["data"][0].ANOBaseFees;
+          data['data'][0].TotalAmount;
+        this.displayCartInfo[0].ANOBaseFees = data['data'][0].ANOBaseFees;
         this.displayCartInfo[0].ANOCommissionFees =
           data["data"][0].ANOCommissionFees;
         this.displayCartInfo[0].ShopCommissionFees = data["data"][0].ShopCommissionFees;
@@ -468,7 +452,6 @@ export class CartComponent implements OnInit {
       }
     });
     console.log(this.placeOrder);
-    console.log(this.displayCartInfo);
   }
 
   onSelect(event, id) {
@@ -486,12 +469,12 @@ export class CartComponent implements OnInit {
         }
       });
       this.currentImageUrl = x;
-      console.log("Current Image Url", this.currentImageUrl);
+      console.log('Current Image Url', this.currentImageUrl);
     });
     console.log(this.displayCartInfo);
   }
   async upload(file) {
-    console.log("upload file function called");
+    console.log('upload file function called');
     await this.uploadService.uploadFile(file);
   }
   onRemove(event, id) {
@@ -538,6 +521,14 @@ export class CartComponent implements OnInit {
       });
     } else {
       let totalCartAmount = 0;
+      this.issues = JSON.parse(localStorage.getItem('issues') || '[]');
+
+      this.issues.forEach((e) => {
+        if (e.problemId == this.displayCartInfo[0].problemId) {
+          this.displayCartInfo[0].problemName = e.problem;
+        }
+      });
+      console.log(this.displayCartInfo);
 
       //Add product in cart
       this.displayCartInfo.forEach((element) => {
@@ -547,7 +538,7 @@ export class CartComponent implements OnInit {
           price: element.total_amount,
           image: element.images,
         });
-      });
+      })
       this.placeOrder.details.splice(0, 1);
 
       //calculating cart amount
@@ -556,6 +547,18 @@ export class CartComponent implements OnInit {
       });
       this.placeOrder.Total_Price = totalCartAmount;
       console.log(this.placeOrder);
+      
+      this.pickupLocation.lat = this.Location.lat;
+      this.pickupLocation.lng = this.Location.lng;
+  
+      this.dropLocation.lat = this.shop[0].latitude;
+      this.dropLocation.lng = this.shop[0].longitude;
+  
+      this.placeOrder.pickupLocation = this.pickupLocation;
+      this.placeOrder.dropLocation = this.dropLocation;
+      console.log(this.placeOrder);
+  
+      localStorage.setItem('PlaceOrder', JSON.stringify(this.placeOrder));
       this.shopService.placeOrder(this.placeOrder).subscribe((data) => {
         console.log(data,"placeOrder")
         //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
@@ -564,5 +567,6 @@ export class CartComponent implements OnInit {
       })
     }
   }
+  
 
 }

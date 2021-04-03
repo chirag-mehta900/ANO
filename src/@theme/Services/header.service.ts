@@ -72,6 +72,20 @@ export class HeaderService {
     );
   }
 
+  resend(data) {
+    return this.httpClient.post(
+      this.commonService.envUrl() + 'resendOTP',
+      data
+    );
+  }
+
+  driverReq(data) {
+    return this.httpClient.post(
+      this.commonService.envUrl() + 'driverSignUpConfirmationEmail',
+      data
+    );
+  }
+
   verifyOTP(data) {
     return this.httpClient.put(this.commonService.envUrl() + 'verifyOTP', data);
   }

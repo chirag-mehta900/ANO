@@ -1,5 +1,8 @@
 <div class="signup-module">
-    <h2>Sign Up</h2>
+    <div class="close-side">
+        <h2>Sign Up</h2>
+        <button><img (click)="close()" src="../../../assets/images/close.svg" alt=""></button>
+    </div>
     <form [formGroup]="signUpForm">
         <!--Sign up Name-->
         <div *ngIf="signUpNameFlag">
@@ -50,6 +53,7 @@
                     <button class="previous" type="submit" (click)="signUpMobilePrevious()"> <span></span>
                         Previous</button>
                 </div>
+
                 <div class="col-md-6">
                     <button class="next" type="submit" (click)="signUpMobileComplete()">Get Code</button>
                 </div>
@@ -59,14 +63,29 @@
         <!--Sign up conformation-->
         <div *ngIf="signUpConformationFlag">
             <div class="signup-form">
-                <p>Confirmation Code<span>Edit Mobile#</span></p>
+                <p>Confirmation Code</p>
                 <div class="signup-inp">
-                    <input type="number" name="otp" id="otp" (change)="signUpConfirmationComplete($event.target.value)" placeholder="Enter Confirmation Code">
+                    <input type="text" name="otp" maxlength="4" id="otp" (change)="signUpConfirmationComplete($event.target.value)" placeholder="Enter Confirmation Code">
+                </div>
+                <div class="text-dangerr" *ngIf="emptyOtpFlag">
+                    Enter your otp
+                </div>
+                <div class="text-dangerr" *ngIf="validOtpFlag">
+                    Enter valid otp
                 </div>
             </div>
-            <button class="next" type="submit" (click)="signUpConfirmationComplete($event.target.value)">Confirm Code</button>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="previous" type="submit" (click)="s"> <span></span>
+                        Previous</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="next" type="submit" (click)="signUpConfirmationComplete($event.target.value)">Confirm
+                        Code</button>
+                </div>
+            </div>
             <div class="signup-det">
-                <h2>Resend Code in <span>00:53</span></h2>
+                <h2> <span (click)="resend()">Resend</span> Code in <span>00 : {{counter}}</span></h2>
             </div>
         </div>
     </form>

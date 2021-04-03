@@ -2,7 +2,10 @@
     <form #Repair="ngForm">
         <div class="all-adv-add">
             <div class="select-brand">
-                <h2>Add Device</h2>
+                <div class="close-side">
+                    <h2>Add Device</h2>
+                    <button><img src="../../../assets/images/close.svg" alt=""></button>
+                </div>
                 <div class="optionselect">
                     <select class="custom" name="brand" [(ngModel)]="bookRepair.device_id"
                         (change)="getIssueList($event)" placeholder="Select Brand" #device1="ngModel" [ngClass]="{

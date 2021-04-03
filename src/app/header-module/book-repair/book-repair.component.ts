@@ -21,6 +21,8 @@ export class BookRepairComponent implements OnInit {
   tempData: [] = [];
   Data: any[] = [];
   Marker: any[] = [];
+  issues: any[] = [];
+
   Location = {
     lat: 0,
     lng: 0,
@@ -75,6 +77,10 @@ export class BookRepairComponent implements OnInit {
     }
   }
 
+  close() {
+    this.activeModal.close();
+  }
+
   // getDeviceList(event) {
   //   console.log(event);
   //   let obj = {
@@ -98,6 +104,8 @@ export class BookRepairComponent implements OnInit {
     console.log(obj);
     this.headerService.getIssueListById(obj).subscribe(
       (data) => {
+        console.log(data);
+
         this.issueList = data['data'];
       },
       (error) => {}
@@ -124,7 +132,16 @@ export class BookRepairComponent implements OnInit {
     this.selectIssueFlag = false;
   }
   addRepair(Repair) {
+    localStorage.removeItem('issues');
     console.log(this.bookRepair);
+    this.issueList.forEach((e) => {
+      var obj = {
+        problemId: e.problem.id,
+        problem: e.problem.problemName,
+      };
+      this.issues.push(obj);
+    });
+    localStorage.setItem('issues', JSON.stringify(this.issues));
 
     this.formSubmitted = true;
     if (Repair.valid) {

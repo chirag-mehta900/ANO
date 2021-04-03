@@ -2,7 +2,10 @@
     <form #Repair="ngForm">
         <div *ngIf="selectBrandFlag">
             <div class="select-brand">
-                <h2>Select Device</h2>
+                <div class="close-side">
+                    <h2>Select Device</h2>
+                    <button><img (click)="close()" src="../../../assets/images/close.svg" alt=""></button>
+                </div>
                 <p>Device Name</p>
                 <div class="optionselect">
                     <select class="custom" name="brand" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)" placeholder="Select Brand" #device1="ngModel" [ngClass]="{
@@ -32,7 +35,10 @@
         <!--Select Device-->
         <div *ngIf="selectDeviceFlag">
             <div class="select-device">
-                <h2>Select Problem</h2>
+                <div class="close-side">
+                    <h2>Select Problem</h2>
+                    <button><img src="../../../assets/images/close.svg" alt=""></button>
+                </div>
                 <p>Issue</p>
                 <div class="optionselect">
                     <select class="custom" name="device" [(ngModel)]="bookRepair.problem" placeholder="Select Device" #device1="ngModel" [ngClass]="{
@@ -40,7 +46,8 @@
                 device1.invalid &&
                 (formSubmitted || device1.touched) 
                 }">
-                        <option *ngFor="let device of issueList" [value]="device.problem.id">{{device.problem.problemName}}
+                        <option *ngFor="let device of issueList" [value]="device.problem.id">
+                            {{device.problem.problemName}}
                         </option>
                     </select>
                     <div class="text-danger" *ngIf="device1.invalid &&

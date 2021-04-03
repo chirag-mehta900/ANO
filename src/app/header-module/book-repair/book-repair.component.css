@@ -85,3 +85,12 @@
   border-radius: 5px;
   margin-bottom: 25px;
 }
+.close-side{
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+.close-side button{
+  border: none;
+  background-color: transparent;
+}

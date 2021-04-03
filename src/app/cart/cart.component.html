@@ -1,7 +1,10 @@
 <section class="cart">
     <div class="bg-map">
-        <agm-map [latitude]="21.175265" [longitude]="72.831855" [zoom]="17">
-            <agm-marker [latitude]="21.175265" [longitude]="72.831855"></agm-marker>
+        <!-- <agm-map [latitude]="21.175265" [longitude]="72.831855" [zoom]="17">
+            <agm-marker [latitude]="21.175265" [longitude]="72.831855"></agm-marker> -->
+
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12" [styles]="styles">
+            <agm-marker *ngFor="let s of shop" [latitude]="s.latitude" [longitude]="s.longitude" [iconUrl]="ourmark.icon"></agm-marker>
         </agm-map>
     </div>
     <div class="container">
@@ -31,16 +34,13 @@
                 <div class="col-md-3" *ngFor="let info of displayCartInfo">
                     <div class="add-pro">
                         <div class="add-pro-img">
-                            <div id="info.id" class="custom-dropzone" ngx-dropzone [accept]="'image/*'"
-                                (change)="onSelect($event,info.id)">
+                            <div id="info.id" class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event,info.id)">
                                 <ngx-dropzone-label>
                                     <div class="addd-btnn">
                                         <img src="../../assets/images/checkout/addproduct.svg" alt="">
                                     </div>
                                 </ngx-dropzone-label>
-                                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
-                                    *ngFor="let f of info.imageFiles" [file]="f" [removable]="true"
-                                    (removed)="onRemove(f,info.id)">
+                                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of info.imageFiles" [file]="f" [removable]="true" (removed)="onRemove(f,info.id)">
                                     <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
                                 </ngx-dropzone-image-preview>
                             </div>
@@ -60,8 +60,7 @@
                                         <p>- Part Price Based on ANO’s Parts Lists (Price Scale)</p>
                                     </div>
                                 </ng-template>
-                                <img [tooltip]="HtmlContent" content-type="template" placement="right" theme="light"
-                                    src="../../assets/images/checkout/outline.svg" alt="">
+                                <img [tooltip]="HtmlContent" content-type="template" placement="right" theme="light" src="../../assets/images/checkout/outline.svg" alt="">
                             </div>
                             <div class="add-pro-btn">
                                 <button (click)="deleteCartProduct(info.id)">Delete</button>
@@ -88,8 +87,7 @@
             <h3>Booking Made Easy</h3>
             <div class="deliver-system">
                 <div class="deliver-cab radio">
-                    <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab"
-                        checked>
+                    <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab" checked>
                     <label for="deliver-cab" class="radio-label">
                         <div class="selectdate-time">
                             <input type="date" name="date" [(ngModel)]="placeOrder.date"
@@ -103,8 +101,7 @@
                     </label><br>
                 </div>
                 <div class="deliver-mail radio">
-                    <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system"
-                        value="deliver-mail">
+                    <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system" value="deliver-mail">
                     <label for="deliver-mail" class="radio-label radio-labell">
                         <div class="mail-product">
                             <img src="../../assets/images/checkout/mail.svg" alt="">
@@ -118,8 +115,7 @@
             </div>
             <div class="deliver-system drop-off-slot">
                 <div class="deliver-cab radio">
-                    <input class="deliver-radio" type="radio" id="drop-off-opt" name="deliver-system"
-                        value="drop-off-opt">
+                    <input class="deliver-radio" type="radio" id="drop-off-opt" name="deliver-system" value="drop-off-opt">
                     <label for="drop-off-opt" class="radio-label">
                         <div class="selectdate-time">
                             <input type="date" name="distance" [(ngModel)]="placeOrder.date"
