@@ -9,6 +9,7 @@ import { AddProductComponent } from "./add-product/add-product.component";
 import { HeaderService } from "src/@theme/Services/header.service";
 import { LoginComponent } from '../header-module/login/login.component';
 import { time } from "node:console";
+import * as moment from 'moment';
 // import { AddproductComponent } from './addproduct/addproduct.component';
 
 @Component({
@@ -22,6 +23,8 @@ export class CartComponent implements OnInit {
   shop: any[] = [];
   lat: any;
   lng: any;
+  expecteddate:any;
+  expectedtime:any;
   price: {} = {
     text: '$00',
     color: 'white',
@@ -243,15 +246,15 @@ export class CartComponent implements OnInit {
     endTime: null,
     date: null,
     pickupLocation: null,
-    repairedDate:null,
-    expectedDelivery:null,
+    repairedDate: null,
+    expectedDelivery: null,
     dropLocation: null,
     Total_Price: null,
     details: [
       {
         device_id: null,
         problem_id: null,
-        image: [],
+        image: []=[],
         price: null,
       },
     ],
@@ -265,6 +268,7 @@ export class CartComponent implements OnInit {
   timeList: any[] = [];
   cartInfo: any = {};
   files: File[] = [];
+  temp: File[] = [];
   issues: any[] = [];
   imageUploaded: any[] = [];
   imageEditFlag: boolean = false;
@@ -287,6 +291,7 @@ export class CartComponent implements OnInit {
     },
   ];
   today;
+  new;
   modifiedToday;
   totalCartAmount = 0;
   constructor(
@@ -327,11 +332,29 @@ export class CartComponent implements OnInit {
     this.setPreviouslyAddedDeviceIssue();
     this.getCurrentDate();
     this.getTimeAccoedingToDate();
-    var dt = new Date();
-    dt.setHours( dt.setHours(3,0,0));
-    console.log(dt,"time");
-    
-    
+    this.getrepairtime(36);
+
+
+    // var finaldate =  new Date(this.new)
+    // console.log(finaldate);
+
+    // var newdate = Date.now(this.new + 36*)
+
+
+
+    // console.log(moment().add(3, 'days').calendar(),"time");
+
+  }
+
+  getrepairtime(h) {
+    this.new = Date.now() + h * 60 * 60 * 1000;
+    console.log(this.new);
+
+     this.expecteddate = moment(this.new).format("YYYY-MM-DD")
+     this.expectedtime = moment(this.new).format("HH:mm:ss")
+     
+    this.placeOrder.repairedDate = this.expecteddate ;
+    this.placeOrder.expectedDelivery = moment(this.new).format("HH:mm:ss");
   }
 
   getCurrentDate() {
@@ -400,8 +423,7 @@ export class CartComponent implements OnInit {
     this.shopService.getExpectedPrice(getExpectedPrice).subscribe(
       (data) => {
         console.log(data["data"]);
-        this.placeOrder.repairedDate = this.getCurrentDate();
-        this.placeOrder.expectedDelivery = data['data'].estimatedRepaidTime;
+        
         this.totalCartAmount = this.displayCartInfo[0].total_amount =
           data['data'][0].TotalAmount;
         this.displayCartInfo[0].ANOBaseFees = data['data'][0].ANOBaseFees;
@@ -439,7 +461,7 @@ export class CartComponent implements OnInit {
         if (hour.getHours() > hh) {
           this.timeList.push(element);
         }
-      }); 
+      });
       this.placeOrder.startTime = this.timeList[0]['startTime'];
       this.placeOrder.endTime = this.timeList[0]['endTime'];
     });
@@ -534,7 +556,7 @@ export class CartComponent implements OnInit {
       this.displayCartInfo.forEach((element) => {
         this.placeOrder.details.push({
           device_id: element.deviceId,
-          problem_id: element.problemId,
+          problem_id: Number(element.problemId),
           price: element.total_amount,
           image: element.images,
         });
@@ -547,26 +569,33 @@ export class CartComponent implements OnInit {
       });
       this.placeOrder.Total_Price = totalCartAmount;
       console.log(this.placeOrder);
-      
+
       this.pickupLocation.lat = this.Location.lat;
       this.pickupLocation.lng = this.Location.lng;
-  
+
       this.dropLocation.lat = this.shop[0].latitude;
       this.dropLocation.lng = this.shop[0].longitude;
-  
-      this.placeOrder.pickupLocation = this.pickupLocation;
-      this.placeOrder.dropLocation = this.dropLocation;
-      console.log(this.placeOrder);
-  
-      localStorage.setItem('PlaceOrder', JSON.stringify(this.placeOrder));
-      this.shopService.placeOrder(this.placeOrder).subscribe((data) => {
-        console.log(data,"placeOrder")
+
+      this.placeOrder.pickupLocation = JSON.parse(localStorage.getItem('Address'));
+      this.placeOrder.dropLocation = JSON.parse(localStorage.getItem('Address'));
+      console.log(this.placeOrder,"object");
+
+      console.log(this.placeOrder.details[0].image)
+      if(this.placeOrder.details[0].image == null){
+        this.placeOrder.details[0].image = []
+      }
+      this.shopService.placeOrder(this.placeOrder).subscribe((response) => {
+        console.log(response['status'], "placeOrder")
+        
         //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
-        var orderId = data['data'].id;
-        this.router.navigate(["/checkout/",{id: orderId}]);
+        // var orderId = data['data'].id;
+        // this.router.navigate(["/checkout/", { id: orderId }]);
       })
+
+      localStorage.setItem('PlaceOrder', JSON.stringify(this.placeOrder));
+
     }
   }
-  
+
 
 }
