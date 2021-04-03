@@ -97,7 +97,6 @@ export class CheckoutComponent implements OnInit {
     this.orderDetails = JSON.parse(localStorage.getItem('PlaceOrder'));
     this.shopDetails = JSON.parse(localStorage.getItem('Shop'));
     console.log(this.shopDetails);
-    
   }
 
   setProductToDisplay() {
@@ -118,12 +117,14 @@ export class CheckoutComponent implements OnInit {
       });
     });
     console.log(this.productDisplay);
-    debugger
-      let id = this.route.snapshot.params.id;
-      this.shopService.getOrder(id).subscribe(
-        (data) => {
-          console.log(data,"orderby id")
-        })
+
+    let id = this.route.snapshot.params.id;
+    this.shopService.getOrder(id).subscribe((data) => {
+      console.log(data['data'].shop, 'orderby id shop details');
+      this.shopDetails = data['data'].shop;
+      this.orderDetails = data['data'];
+      console.log(data['data'], 'orderby id order details');
+    });
   }
 
   getData() {
