@@ -23,6 +23,8 @@ export class CartComponent implements OnInit {
   shop: any[] = [];
   lat: any;
   lng: any;
+  expecteddate:any;
+  expectedtime:any;
   price: {} = {
     text: '$00',
     color: 'white',
@@ -329,7 +331,7 @@ export class CartComponent implements OnInit {
     this.setPreviouslyAddedDeviceIssue();
     this.getCurrentDate();
     this.getTimeAccoedingToDate();
-    this.getrepairtime(2);
+    this.getrepairtime(36);
 
 
     // var finaldate =  new Date(this.new)
@@ -347,10 +349,10 @@ export class CartComponent implements OnInit {
     this.new = Date.now() + h * 60 * 60 * 1000;
     console.log(this.new);
 
-    // console.log(moment(this.new).format("MM DD YY"));
-    // console.log(moment(this.new).format("HH mm"));
-
-    this.placeOrder.repairedDate = moment(this.new).format("YYYY-MM-DD") ;
+     this.expecteddate = moment(this.new).format("YYYY-MM-DD")
+     this.expectedtime = moment(this.new).format("HH:mm:ss")
+     
+    this.placeOrder.repairedDate = this.expecteddate ;
     this.placeOrder.expectedDelivery = moment(this.new).format("HH:mm:ss");
   }
 
@@ -553,7 +555,7 @@ export class CartComponent implements OnInit {
       this.displayCartInfo.forEach((element) => {
         this.placeOrder.details.push({
           device_id: element.deviceId,
-          problem_id: element.problemId,
+          problem_id: Number(element.problemId),
           price: element.total_amount,
           image: element.images,
         });
@@ -573,17 +575,20 @@ export class CartComponent implements OnInit {
       this.dropLocation.lat = this.shop[0].latitude;
       this.dropLocation.lng = this.shop[0].longitude;
 
-      this.placeOrder.pickupLocation = this.pickupLocation;
-      this.placeOrder.dropLocation = this.dropLocation;
-      console.log(this.placeOrder);
+      this.placeOrder.pickupLocation = JSON.parse(localStorage.getItem('Address'));
+      this.placeOrder.dropLocation = JSON.parse(localStorage.getItem('Address'));
+      console.log(this.placeOrder,"object");
+
+      this.shopService.placeOrder(this.placeOrder).subscribe((response) => {
+        console.log(response['status'], "placeOrder")
+        
+        //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
+        // var orderId = data['data'].id;
+        // this.router.navigate(["/checkout/", { id: orderId }]);
+      })
 
       localStorage.setItem('PlaceOrder', JSON.stringify(this.placeOrder));
-      this.shopService.placeOrder(this.placeOrder).subscribe((data) => {
-        console.log(data, "placeOrder")
-        //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
-        var orderId = data['data'].id;
-        this.router.navigate(["/checkout/", { id: orderId }]);
-      })
+
     }
   }
 

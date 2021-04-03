@@ -129,14 +129,16 @@
                     <input class="deliver-radio" type="radio" id="drop-off-opt" name="deliver-system" value="drop-off-opt">
                     <label for="drop-off-opt" class="radio-label">
                         <div class="selectdate-time">
-                            <input type="date" name="distance" [(ngModel)]="placeOrder.date"
-                                (input)="getTimeAccoedingToDate()" [min]="today" disabled>
-                            <select name="time" (change)="setTime($event)" placeholder="select time" disabled>
+                            <!-- <input type="date" name="distance" [(ngModel)]="placeOrder.date"
+                                (input)="getTimeAccoedingToDate()" [value]="expecteddate"  disabled> -->
+                                <input type="date" name="distance" [value]="expecteddate"  disabled>
+                                <input type="text" name="time" [value]="expectedtime"  disabled>
+                            <!-- <select name="time" (change)="setTime($event)" placeholder="select time" disabled>
                                 <option>Select Time</option>
                                 <option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} -
                                     {{time.endTime}}
                                 </option>
-                            </select>
+                            </select> -->
                             <input type="text" name="drop-off" id="drop-off" placeholder="Drop up Address">
                         </div>
                     </label><br>
