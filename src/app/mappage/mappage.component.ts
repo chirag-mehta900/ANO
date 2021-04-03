@@ -471,31 +471,38 @@ export class MappageComponent implements OnInit {
     this.router.navigate(['/shop', { id: JSON.stringify(shopDetail) }]);
   }
   getBrandList() {
-    this.headerService.getBrandList().subscribe(
-      (data) => {
-        this.brandList = data['data'];
-      },
-      (error) => {}
-    );
+    if (this.deviceList.length == 0) {
+      this.headerService.getBrandList().subscribe(
+        (data) => {
+          console.log(data);
+
+          this.deviceList = data['data'];
+          console.log(this.deviceList);
+          localStorage.setItem('deviceList', JSON.stringify(this.deviceList));
+        },
+        (error) => {}
+      );
+    }
   }
 
-  getDeviceList(event) {
-    this.headerService.getDeviceList(event.target.value).subscribe(
-      (data) => {
-        this.deviceList = data['data'];
-      },
-      (error) => {}
-    );
-  }
+  // getDeviceList(event) {
+  //   this.headerService.getDeviceList(event.target.value).subscribe(
+  //     (data) => {
+  //       this.deviceList = data['data'];
+  //     },
+  //     (error) => {}
+  //   );
+  // }
 
   getIssueList(event) {
     let obj = {
-      brand_id: this.filterData.brand_id,
-      device_id: event,
+      device_id: event.target.value,
     };
     console.log(obj);
     this.headerService.getIssueListById(obj).subscribe(
       (data) => {
+        console.log(data);
+
         this.issueList = data['data'];
       },
       (error) => {}

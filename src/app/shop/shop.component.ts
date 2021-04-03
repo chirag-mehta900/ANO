@@ -34,8 +34,8 @@ export class ShopComponent implements OnInit {
       url:
         'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shopmark.png?alt=media&token=a88b489d-4f6d-470a-9aa4-211f82ce6976',
       scaledSize: {
-        width: 135,
-        height: 115,
+        width: 13,
+        height: 11,
       },
     },
   };
@@ -60,8 +60,8 @@ export class ShopComponent implements OnInit {
       icon:
         'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/pin.svg?alt=media&token=6de944f2-889f-4658-8d86-f6fce983ac5c',
       draggable: true,
-      scaledSize: {
-        width: 40,
+      size: {
+        width: 47,
         height: 60,
       },
     },
