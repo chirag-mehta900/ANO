@@ -121,6 +121,11 @@ export class SignupComponent implements OnInit {
     this.signUpNameFlag = true;
     this.signUpMobileFlag = false;
   }
+
+  signUpMobilePreviouss() {
+    this.signUpMobileFlag = true;
+    this.signUpConformationFlag = false;
+  }
   signUpMobileComplete() {
     this.email = this.signUpForm.value.email;
     this.mobile = this.signUpForm.value.mobileNumber;
