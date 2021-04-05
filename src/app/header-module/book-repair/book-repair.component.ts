@@ -171,7 +171,7 @@ export class BookRepairComponent implements OnInit {
               latitude: this.Data[i].latitude,
               longitude: this.Data[i].longitude,
               price: {
-                text: this.Data[i].pricing[0].price.toString(),
+                text: '$' + '' + this.Data[i].pricing[0].price.toString(),
                 color: 'white',
                 fontWeight: '500',
                 fontSize: '20px',
