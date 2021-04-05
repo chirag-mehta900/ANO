@@ -13,7 +13,6 @@ import { UploadService } from 'src/@theme/Services/upload.service';
 export class AddProductComponent implements OnInit {
   @Input() shopId;
   bookRepair = {
-    brand_id: null,
     device_id: null,
     problem_id: null,
     price: null,
@@ -36,6 +35,7 @@ export class AddProductComponent implements OnInit {
     total_amount: null,
     ANOBaseFees: null,
     ANOCommissionFees: null,
+    ShopCommissionFees: null,
     price: null,
     images: null,
     imageFiles: File,
@@ -49,7 +49,7 @@ export class AddProductComponent implements OnInit {
     private shopService: ShopService,
     private activeModal: NgbActiveModal,
     private storeTokenService: StoreTokenService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.shop = JSON.parse(localStorage.getItem('Shop'));
@@ -69,17 +69,23 @@ export class AddProductComponent implements OnInit {
     if (this.bookRepair.device_id && this.bookRepair.problem_id) {
       this.getExpectedPrice();
     }
-    let obj = {
-      device_id: event.target.value,
-    };
 
-    console.log(obj);
-    this.headerService.getIssueListById(obj).subscribe(
-      (data) => {
-        this.issueList = data['data'];
-      },
-      (error) => {}
-    );
+    
+      let obj = {
+        device_id: event.target.value,
+      };
+
+      console.log(obj);
+      this.headerService.getIssueListById(obj).subscribe(
+        (data) => {
+          this.issueList = data['data'];
+          console.log(this.issueList, "issuelistss");
+          this.getExpectedPrice();
+
+        },
+        (error) => { }
+      );
+    
   }
 
   getExpectedPrice() {
@@ -102,11 +108,23 @@ export class AddProductComponent implements OnInit {
           data['data'][0].ANOBaseFees;
         this.addedDeviceProblemToDisplayInCart.ANOCommissionFees =
           data['data'][0].ANOCommissionFees;
+        this.addedDeviceProblemToDisplayInCart.ShopCommissionFees =
+          data['data'][0].ShopCommissionFees;
+
+
+        this.issueList.forEach((element) => {
+          if (element.id == this.bookRepair.problem_id) {
+            this.addedDeviceProblemToDisplayInCart.problemName =
+              element.problem.problemName;
+            this.addedDeviceProblemToDisplayInCart.problemId = element.id;
+          }
+        });
+
         this.addedDeviceProblemToDisplayInCart.price = data['data'][0].price;
         this.estimatedRepairTime = data['data'][0].estimatedRepaidTime;
         this.setEstimatedTime();
       },
-      (error) => {}
+      (error) => { }
     );
   }
   setEstimatedTime() {
@@ -125,6 +143,8 @@ export class AddProductComponent implements OnInit {
     }
   }
   addDevice() {
+    console.log(this.bookRepair);
+    
     //check user is log in if log in then set user id
     this.bookRepair.user_id = JSON.parse(localStorage.getItem('user_id'));
 
@@ -151,10 +171,10 @@ export class AddProductComponent implements OnInit {
     this.shopService.addCartData(this.bookRepair).subscribe(
       (data) => {
         console.log(data['data']);
-        localStorage.setItem('cart_id', data['data'].cart_id);
-        this.addedDeviceProblemToDisplayInCart.id = data['data'].id;
+        console.log(data['data'].id)
+        localStorage.setItem('cart_id', data['data'].id);
       },
-      (error) => {}
+      (error) => { }
     );
 
     console.log(this.bookRepair.cart_id);

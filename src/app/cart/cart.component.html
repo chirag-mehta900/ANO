@@ -96,8 +96,8 @@
                             <input type="date" name="date" [(ngModel)]="placeOrder.date"
                                 (input)="getTimeAccoedingToDate()" [min]="today" [value]="placeOrder.date">
                             <select name="time" (change)="setTime($event)" placeholder="select time">
-                                <option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} -
-                                    {{time.endTime }}
+                                <option *ngFor="let time of timeList" [value]=time.id>{{tConvert(time.startTime)}} -
+                                    {{tConvert(time.endTime) }} 
                                 </option>
                             </select>
                             <input type="text" name="pick-off" id="pick-off" [value]="Address" placeholder="Pick-up up Address">
@@ -132,7 +132,7 @@
                             <!-- <input type="date" name="distance" [(ngModel)]="placeOrder.date"
                                 (input)="getTimeAccoedingToDate()" [value]="expecteddate"  disabled> -->
                                 <input type="date" name="distance" [value]="expecteddate"  disabled>
-                                <input class="middle-inp" type="text" name="time" [value]="expectedtime"  disabled>
+                                <input class="middle-inp" type="text" name="time" [value]="tConvert(expectedtime)"  disabled>
                             <!-- <select name="time" (change)="setTime($event)" placeholder="select time" disabled>
                                 <option>Select Time</option>
                                 <option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} -

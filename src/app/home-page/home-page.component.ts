@@ -5,6 +5,8 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonService } from 'src/@theme/Services/common.service';
 import { HeaderService } from 'src/@theme/Services/header.service';
 import { BookRepairComponent } from '../header-module/book-repair/book-repair.component';
+import { DriverComponent } from '../home-page/driver/driver.component';
+
 
 @Component({
   selector: 'app-home-page',
@@ -48,7 +50,8 @@ export class HomePageComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private header: HeaderService,
-    private router: Router
+    private router: Router,
+
   ) {}
 
   ngOnInit() {
@@ -56,7 +59,7 @@ export class HomePageComponent implements OnInit {
       first_name: new FormControl(null, Validators.required),
       last_name: new FormControl(null, Validators.required),
       email: new FormControl(null, Validators.required),
-      mobileNumber: new FormControl(null, Validators.required),
+      mobile_number: new FormControl(null, Validators.required),
     });
 
     localStorage.setItem('Location', JSON.stringify(this.Location));
@@ -98,11 +101,19 @@ export class HomePageComponent implements OnInit {
   }
 
   DriverReq() {
-    console.log(typeof this.driveForm.value);
+    
     var obj = this.driveForm.value;
     this.header.driverReq(obj).subscribe((response) => {
       console.log(response);
-      console.log('submit Succussfully');
+      console.log(response['status']);
+      
+      if(response['status']){
+        this.modalService.open(DriverComponent);
+      }else{
+        console.log("some fields are invalid");
+        
+      }
+      
     });
   }
   bookRepair() {
