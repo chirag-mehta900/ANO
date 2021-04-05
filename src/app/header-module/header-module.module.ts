@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { SharedModule } from 'src/@theme/shared.module';
 import { BookRepairComponent } from './book-repair/book-repair.component';
+import { ForgotComponent } from './forgot/forgot.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { BookRepairComponent } from './book-repair/book-repair.component';
     LoginComponent,
     SignupComponent,
     BookRepairComponent,
+    ForgotComponent,
   ],
   imports: [CommonModule, HeaderModuleRoutingModule, SharedModule],
   exports: [HeaderModuleComponent],
