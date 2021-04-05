@@ -57,6 +57,7 @@ export class CheckoutComponent implements OnInit {
   orderDetails;
   shopDetails;
   productDisplay: any[] = [];
+  details :any;
 
   constructor(
     private header: HeaderService,
@@ -123,6 +124,7 @@ export class CheckoutComponent implements OnInit {
       console.log(data['data'].shop, 'orderby id shop details');
       this.shopDetails = data['data'].shop;
       this.orderDetails = data['data'];
+      this.detail = data['data'].details;
       console.log(this.orderDetails);
 
       console.log(data['data'], 'orderby id order details');
