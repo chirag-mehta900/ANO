@@ -30,13 +30,13 @@
                     </div>
                 </div>
                 <div class="destroy-system">
-                    <div class="destroy-system-box" *ngFor="let details of orderDetails">
+                    <div class="destroy-system-box" *ngFor="let details of detail">
                         <div class="destroy-system-img">
                             <img src={{details.image}} alt="">
                         </div>
                         <div class="destroy-system-det">
-                            <h2>${{d.price}}</h2>
-                            <p>{{d.problem_name}}</p>
+                            <h2>${{details.price}}</h2>
+                            <p>{{details.problem_id}}</p>
                             <div class="destroy-system-btn">
                                 <!-- <button [routerLink]="['/cart']"><img src="../../assets/images/edit.svg"
                                         alt=""></button> -->
