@@ -41,13 +41,19 @@ export class CheckoutComponent implements OnInit {
 
   isPaid: boolean = false;
   CardInfo: FormGroup;
+  productdetail = [
+    {
+      problem: null,
+    },
+  ];
+  productDetail: any[] = [];
   Email: any;
   CARD: any;
   Expiry: any;
   total: any;
-  detail: object = {};
   Card: object = {};
   Payment: object = {};
+  prolist: any[] = [];
   custID: any;
   cardID: any;
   clientSecret: any;
@@ -57,7 +63,7 @@ export class CheckoutComponent implements OnInit {
   orderDetails;
   shopDetails;
   productDisplay: any[] = [];
-  details :any;
+  detail: any[] = [];
 
   constructor(
     private header: HeaderService,
@@ -87,6 +93,8 @@ export class CheckoutComponent implements OnInit {
       (error) => {}
     );
 
+    this.prolist = JSON.parse(localStorage.getItem('issues') || '[]');
+    console.log(this.prolist);
     this.getData();
     this.getOrderAndShopData();
     this.setProductToDisplay();
@@ -97,7 +105,7 @@ export class CheckoutComponent implements OnInit {
   getOrderAndShopData() {
     this.orderDetails = JSON.parse(localStorage.getItem('PlaceOrder'));
     this.shopDetails = JSON.parse(localStorage.getItem('Shop'));
-    console.log(this.shopDetails);
+    // console.log(this.shopDetails);
   }
 
   setProductToDisplay() {
@@ -117,18 +125,30 @@ export class CheckoutComponent implements OnInit {
         });
       });
     });
-    console.log(this.productDisplay);
+    // console.log(this.productDisplay);
 
     let id = this.route.snapshot.params.id;
     this.shopService.getOrder(id).subscribe((data) => {
+      console.log(data);
+
       console.log(data['data'].shop, 'orderby id shop details');
       this.shopDetails = data['data'].shop;
       this.orderDetails = data['data'];
       this.detail = data['data'].details;
       console.log(this.orderDetails);
+      console.log(this.detail);
 
       console.log(data['data'], 'orderby id order details');
     });
+
+    for (var i = 0; i < this.detail.length; i++) {
+      for (var j = 0; j < this.prolist.length; j++) {
+        if (this.prolist[j].problemId == this.detail[i].problem_id) {
+        }
+      }
+      console.log(this.productDetail, 'display');
+      console.log(this.detail);
+    }
   }
 
   getData() {
