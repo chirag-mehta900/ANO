@@ -37,6 +37,9 @@ export class ShopService {
   getOrder(id) {
     return this.httpClient.get(this.commonService.envUrl() + "order/" + id);
   }
+  updateOrder(id,data) {
+    return this.httpClient.get(this.commonService.envUrl() + "order/" + id, data);
+  }
   getAnoFee() {
     return this.httpClient.get(
       this.commonService.envUrl() + "lookup?key=ANO_FEE"

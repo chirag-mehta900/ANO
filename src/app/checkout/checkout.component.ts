@@ -58,6 +58,9 @@ export class CheckoutComponent implements OnInit {
   shopDetails;
   productDisplay: any[] = [];
   details :any;
+  isTermsAndCondition: boolean =  false;
+  isTermsAndConditionValidate: boolean = false;
+  isLoading = false;
 
   constructor(
     private header: HeaderService,
@@ -172,63 +175,79 @@ export class CheckoutComponent implements OnInit {
         // showError(paymentData['error']);
       } else {
         this.orderComplete(paymentData['clientSecret']);
+        // let id = this.route.snapshot.params.id;
+        //   const data = {
+        //     "transactionId": paymentData['clientSecret']
+        //   }
+        //   this.shopService.updateOrder(id,data).subscribe((data) => {
+        //     console.log(data)
+        //   })
         console.log('order Complete');
+        this.isLoading = false;
         this.isPaid = true;
       }
     });
   }
 
+  setisTermsAndCondition(event){
+    this.isTermsAndCondition = event;
+    this.isTermsAndConditionValidate = false;
+  }
   // payapis(data) {
   //   this.common.pay(data).subscribe((response) => {
   //     console.log(response);
   //   });
   // }
   pay() {
-    var orderData = {
-      currency: 'usd',
-      paymentMethodId: '',
-      amount: this.total * 100,
-      paymentIntentId: '',
-    };
+    if(this.isTermsAndCondition){
+      this.isLoading = true;
+      var orderData = {
+        currency: 'usd',
+        paymentMethodId: '',
+        amount: this.total * 100,
+        paymentIntentId: '',
+      };
 
-    var cardholderName = this.CardInfo.value.cardholdername;
-    var data = {
-      billing_details: {},
-    };
+      var cardholderName = this.CardInfo.value.cardholdername;
+      var data = {
+        billing_details: {},
+      };
 
-    if (cardholderName) {
-      data['billing_details']['name'] = cardholderName;
-    }
-
-    this.STRIPE.createPaymentMethod({
-      type: 'card',
-      card: this.card.element,
-      billing_details: {
-        name: cardholderName,
-      },
-    }).subscribe((result) => {
-      if (result.error) {
-        showError(result.error.message);
-        console.log(result.error);
-      } else {
-        orderData.paymentMethodId = result.paymentMethod.id;
-
-        console.log(result);
-        console.log(orderData);
-
-        window['angularComponentReference'].loadAngularFunction(orderData);
+      if (cardholderName) {
+        data['billing_details']['name'] = cardholderName;
       }
-    });
 
-    var showError = function (errorMsgText) {
-      var errorMsg = document.querySelector('.sr-field-error');
-      console.log(errorMsg);
+      this.STRIPE.createPaymentMethod({
+        type: 'card',
+        card: this.card.element,
+        billing_details: {
+          name: cardholderName,
+        },
+      }).subscribe((result) => {
+        if (result.error) {
+          showError(result.error.message);
+          console.log(result.error);
+        } else {
+          orderData.paymentMethodId = result.paymentMethod.id;
+          console.log(result,"result");
+          console.log(orderData,"orderData");
 
-      errorMsg.textContent = errorMsgText;
-      setTimeout(function () {
-        errorMsg.textContent = '';
-      }, 4000);
-    };
+          window['angularComponentReference'].loadAngularFunction(orderData);
+        }
+      });
+
+      var showError = function (errorMsgText) {
+        var errorMsg = document.querySelector('.sr-field-error');
+        console.log(errorMsg);
+
+        errorMsg.textContent = errorMsgText;
+        setTimeout(function () {
+          errorMsg.textContent = '';
+        }, 4000);
+      };
+    }else{
+      this.isTermsAndConditionValidate = true
+    }
     // let inter = setInterval(() => {
     //   if (this.clientSecret !== undefined) {
     //     clearInterval(inter);
