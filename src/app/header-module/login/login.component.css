@@ -71,4 +71,12 @@
   .close-side button{
     border: none;
     background-color: transparent;
-  }
+}
+.forgot-pass{
+    padding-top: 4px;
+}
+.forgot-pass h3{
+    font-family: 'Poppins-SemiBold';
+    font-size: 12px;
+    cursor: pointer;
+}

@@ -11,11 +11,12 @@
 }
 .text-dangerr {
     font-family: "Poppins-Regular";
-    margin-top: -20px;
+    margin-top: 3px;
     padding-bottom: 10px;
-    padding-left: 12px;
+    padding-left: 0px;
     font-size: 10px;
     color: #e64e5d;
+    width: 500%;
 }
 .booking-shop-img img{
     height: 60px;
@@ -130,7 +131,7 @@
     padding: 10px;
 }
 .alt-number{
-    margin-top: 20px;
+    margin-top: 40px;
 }
 .alt-number p{
     font-size: 15px;
