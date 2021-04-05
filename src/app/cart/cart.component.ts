@@ -272,6 +272,8 @@ export class CartComponent implements OnInit {
   issues: any[] = [];
   imageUploaded: any[] = [];
   Address: any;
+  pickupAddress : any;
+  dropAddress : any;
   imageEditFlag: boolean = false;
   currentImageUrl: any = '';
   addedDeviceProblem;
@@ -313,6 +315,8 @@ export class CartComponent implements OnInit {
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
 
     this.Address = JSON.parse(localStorage.getItem('Address') || '[]');
+    this.pickupAddress = this.Address;
+    this.dropAddress = this.Address;
 
     console.log(this.Location);
     this.lat = this.Location.lat;
@@ -481,6 +485,17 @@ export class CartComponent implements OnInit {
     console.log(this.placeOrder);
   }
 
+  setpickupAddress(event) {
+    this.pickupAddress = event;
+    console.log(this.pickupAddress);
+    
+  }
+
+  setdropAddress(event) {
+    this.dropAddress = event;
+    console.log(this.dropAddress);
+  }
+
   onSelect(event, id) {
     console.log(event);
     console.log(id);
@@ -582,12 +597,8 @@ export class CartComponent implements OnInit {
       this.dropLocation.lat = this.shop[0].latitude;
       this.dropLocation.lng = this.shop[0].longitude;
 
-      this.placeOrder.pickupLocation = JSON.parse(
-        localStorage.getItem('Address')
-      );
-      this.placeOrder.dropLocation = JSON.parse(
-        localStorage.getItem('Address')
-      );
+      this.placeOrder.pickupLocation = this.pickupAddress;
+      this.placeOrder.dropLocation = this.dropAddress;
       console.log(this.placeOrder, 'object');
 
       console.log(this.placeOrder.details[0].image);
