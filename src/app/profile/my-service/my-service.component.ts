@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-service.component.css']
 })
 export class MyServiceComponent implements OnInit {
+  rating3 = 3;
+  rating0 = 0;
+
 
   constructor() { }
 

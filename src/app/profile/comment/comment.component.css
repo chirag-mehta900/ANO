@@ -1,5 +1,6 @@
 .checkout{
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 .booking-detail{
     display: flex;
@@ -250,4 +251,10 @@
     background-color: #000000;
     margin-left: 20px;
     border-radius: 5px;
+}
+
+
+.addstar{
+    float: left;
+    margin-bottom: 10px;
 }

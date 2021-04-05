@@ -70,7 +70,9 @@
                 <p>Delivered on Marech, 12</p>
                 <div class="review-star-view">
                     <div class="subm-whwn-no-star">
-                        <img src="../../../assets/images/shop/stars.svg" alt="">
+                        <div class="cont">
+                            <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
+                        </div>
                     </div>
                     <button>View Details > </button>
                 </div>
@@ -126,7 +128,9 @@
                 <p>Delivered on Marech, 12</p>
                 <div class="review-star-view">
                     <div class="subm-whwn-no-star">
-                        <img src="../../../assets/images/shop/no-star.svg" alt="">
+                        <div class="cont">
+                            <ngx-star-rating class="rating" [(ngModel)]="rating0" [id]="'rating0'" [disabled]="true"></ngx-star-rating>
+                        </div>
                         <button>Submit</button>
                     </div>
                     <button>View Details > </button>

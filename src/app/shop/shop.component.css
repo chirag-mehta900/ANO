@@ -322,3 +322,8 @@ agm-map {
     margin-top: 0px;
     margin-bottom: 15px;
 }
+.reviews h2{
+    font-family: 'Poppins-SemiBold';
+    font-size: 30px;
+    margin-bottom: 25px;
+}

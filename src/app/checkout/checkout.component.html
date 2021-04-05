@@ -31,8 +31,8 @@
                 </div>
                 <div class="destroy-system">
                     <div class="destroy-system-box" *ngFor="let details of orderDetails">
-                        <div class="destroy-system-img" *ngFor="let d of details">
-                            <img src={{d.image}} alt="">
+                        <div class="destroy-system-img">
+                            <img src={{details.image}} alt="">
                         </div>
                         <div class="destroy-system-det">
                             <h2>${{d.price}}</h2>
@@ -103,7 +103,7 @@
                             <div class="card-number">
 
                                 <p>Add Card Details</p>
-                                <div class="card-name">
+                                <div class="card-name card-num-ng">
 
                                     <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions">
                                     </ngx-stripe-card>

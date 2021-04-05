@@ -1,5 +1,6 @@
 .all-services{
     margin-top: 50px;
+    margin-bottom: 50px;
 }
 .title-filter{
     display: flex;
@@ -108,7 +109,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
-    align-items: baseline;
+    align-items: center;
 }
 .review-star-view img{
     height: 25px;
@@ -133,4 +134,8 @@
     border-radius: 5px;
     margin-left: 30px;
     width: 110px;
+}
+.subm-whwn-no-star {
+    display: flex;
+    align-items: center;
 }
