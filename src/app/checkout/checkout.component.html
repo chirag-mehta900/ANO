@@ -127,15 +127,19 @@
                             </div>
                             <div class="policy">
                                 <div class="squaredOne">
-                                    <input type="checkbox" value="None" id="squaredOne" name="check" />
+                                    <input #squaredOne type="checkbox" value="hello" id="squaredOne" name="check" (change)="setisTermsAndCondition(squaredOne.checked)"/>
                                     <label for="squaredOne">
                                         <p>I accept all <a href="term" target="_blank"> terms and condition.</a></p>
                                     </label>
+                                    <div class="text-dangerr" *ngIf="isTermsAndConditionValidate">
+                                        Please Accept out t&c.
+                                    </div>
                                 </div>
                             </div>
                             <div class="payment-btns">
                                 <div class="pay-card">
                                     <button (click)="pay()" type="submit">Pay ${{orderDetails.Total_Price}}</button>
+                                    <img *ngIf="isLoading" src="../../assets/images/loader.gif" />
                                 </div>
                             </div>
                         </form>
