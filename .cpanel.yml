@@ -1,4 +1,4 @@
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/ksxh0wa8uazb/public_html/
-    - /bin/cp -R * $DEPLOYPATH
+    - export DEPLOYPATH=/home/ksxh0wa8uazb/public_html/new
+    - /bin/cp -R dist/ANO $DEPLOYPATH
