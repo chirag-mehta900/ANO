@@ -15,6 +15,10 @@ export class ForgotComponent implements OnInit {
 
   ngOnInit() {}
 
+  close() {
+    this.activeModal.close();
+  }
+
   login() {
     this.activeModal.close();
     this.modalService.open(LoginComponent);
