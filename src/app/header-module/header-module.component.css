@@ -10,7 +10,7 @@
 .hea-ano{
     display: flex;
     justify-content: space-around;
-    align-items: baseline;
+    align-items: flex-end;
     padding-top: 15px;
     padding-bottom: 10px;
 }
@@ -109,6 +109,8 @@
     cursor: pointer;
 }
 .ano-logo{
+    display: flex;
+    align-items: center;
     cursor: pointer;
 }
 .header-mobile {
@@ -118,4 +120,15 @@
     width: 400px;
     top: 0%;
     left: 0%;
+}
+.address-display{
+    display: flex;
+    align-items: baseline;
+    margin-left: 30px;
+}
+.address-display p{
+    font-family: 'Poppins-SemiBold';
+    font-size: 12px;
+    margin-left: 5px;
+    margin-bottom: 0px;
 }

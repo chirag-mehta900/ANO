@@ -103,12 +103,18 @@
     font-family: 'Poppins-Medium';
     color: #217D00;
     font-size: 12px;
+    margin-bottom: 5px;
+}
+.review-part h6{
+    font-family: 'Poppins-SemiBold';
+    font-size: 15px;
+    cursor: pointer;
     margin-bottom: 0px;
 }
 .review-star-view{
     display: flex;
     justify-content: space-between;
-    margin-top: 15px;
+    margin-top: 5px;
     align-items: center;
 }
 .review-star-view img{

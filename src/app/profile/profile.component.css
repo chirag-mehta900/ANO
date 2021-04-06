@@ -11,6 +11,7 @@
 .profile-detail{
     display: flex;
     align-items: flex-end;
+    justify-content: space-between;
 }
 .profile-detail h2{
     font-family: 'Poppins-SemiBold';
@@ -100,4 +101,16 @@
     display: flex;
     color: #ffffff;
     font-family: 'Poppins-SemiBold';
+}
+.user-profile-detail h6{
+    font-family: 'Poppins-SemiBold';
+    font-size: 12px;
+    color: #FFC542;
+    margin-left: 15px;
+    cursor: pointer;
+}
+.gmail-chag-pass{
+    display: flex;
+    align-items: baseline;
+    text-align: center;
 }
