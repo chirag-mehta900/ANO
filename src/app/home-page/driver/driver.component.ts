@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-driver',
   templateUrl: './driver.component.html',
-  styleUrls: ['./driver.component.css']
+  styleUrls: ['./driver.component.css'],
 })
 export class DriverComponent implements OnInit {
+  constructor(private activeModal: NgbActiveModal) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit(): void {
+  close() {
+    this.activeModal.close();
   }
-
 }

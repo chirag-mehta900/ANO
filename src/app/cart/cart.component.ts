@@ -272,8 +272,8 @@ export class CartComponent implements OnInit {
   issues: any[] = [];
   imageUploaded: any[] = [];
   Address: any;
-  pickupAddress : any;
-  dropAddress : any;
+  pickupAddress: any;
+  dropAddress: any;
   imageEditFlag: boolean = false;
   currentImageUrl: any = '';
   addedDeviceProblem;
@@ -352,8 +352,6 @@ export class CartComponent implements OnInit {
 
   getrepairtime(h) {
     this.new = Date.now() + h * 60 * 60 * 1000;
-    console.log(this.new);
-
     this.expecteddate = moment(this.new).format('YYYY-MM-DD');
     this.expectedtime = moment(this.new).format('HH:mm:ss');
 
@@ -379,7 +377,7 @@ export class CartComponent implements OnInit {
       this.displayCartInfo.push(result);
     });
     //this.recalculateTotalCartAmount();
-    console.log(this.displayCartInfo, "new");
+    console.log(this.displayCartInfo, 'new');
   }
 
   recalculateTotalCartAmount() {
@@ -390,8 +388,13 @@ export class CartComponent implements OnInit {
   }
 
   setPreviouslyAddedDeviceIssue() {
+    for (var i = 0; i < this.displayCartInfo.length; i++) {
+      this.displayCartInfo[i].id = i + 1;
+    }
+
+    console.log(this.displayCartInfo);
     //set static id for priously selected device problem
-    this.displayCartInfo[0].id = 1;
+
     //get priously selected problem device
     this.addedDeviceProblem = JSON.parse(localStorage.getItem('deviceProblem'));
     console.log(this.addedDeviceProblem);
@@ -403,21 +406,29 @@ export class CartComponent implements OnInit {
         this.displayCartInfo[0].problemId = this.addedDeviceProblem.problem;
       }
     });
+
+    JSON.parse(localStorage.getItem('issues')).forEach((element) => {
+      if (element.problemId == this.displayCartInfo[0].problemId) {
+        this.displayCartInfo[0].problemName = element.problem;
+      }
+    });
+
+    console.log(this.displayCartInfo);
     //set Problem Name
-    let getProblemList = {
-      device_id: this.addedDeviceProblem.device,
-    };
-    this.headerService.getIssueListById(getProblemList).subscribe(
-      (data) => {
-        data['data'].forEach((element) => {
-          if (element.id == this.addedDeviceProblem.problem) {
-            this.displayCartInfo[0].problemName = element.problem.problemName;
-            this.displayCartInfo[0].problemId = element.id;
-          }
-        });
-      },
-      (error) => {}
-    );
+    // let getProblemList = {
+    //   device_id: this.addedDeviceProblem.device,
+    // };
+    // this.headerService.getIssueListById(getProblemList).subscribe(
+    //   (data) => {
+    //     data['data'].forEach((element) => {
+    //       if (element.id == this.addedDeviceProblem.problem) {
+    //         this.displayCartInfo[0].problemName = element.problem.problemName;
+    //         this.displayCartInfo[0].problemId = element.id;
+    //       }
+    //     });
+    //   },
+    //   (error) => {}
+    // );
     //set Expected Price
     let getExpectedPrice = {
       device: this.addedDeviceProblem.device,
@@ -440,8 +451,7 @@ export class CartComponent implements OnInit {
       },
       (error) => {}
     );
-    console.log(this.displayCartInfo , "cart info");
-    
+    console.log(this.displayCartInfo, 'cart info');
   }
 
   // getCartData() {
@@ -457,7 +467,7 @@ export class CartComponent implements OnInit {
       shopId: this.shop[0].id,
       date: this.placeOrder.date,
     };
-    console.log(getTimeObj);
+    // console.log(getTimeObj);
 
     this.shopService.getTimeByDate(getTimeObj).subscribe((data) => {
       this.today = new Date();
@@ -488,7 +498,6 @@ export class CartComponent implements OnInit {
   setpickupAddress(event) {
     this.pickupAddress = event;
     console.log(this.pickupAddress);
-    
   }
 
   setdropAddress(event) {
@@ -624,15 +633,15 @@ export class CartComponent implements OnInit {
       time = time
         .toString()
         .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
-  
+
       if (time.length > 1) {
         // If time format correct
         time = time.slice(1); // Remove full string match value
-        time[5] = +time[0] < 12 ? " AM" : " PM"; // Set AM/PM
+        time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
         time[0] = +time[0] % 12 || 12; // Adjust hours
       }
-  
-      var newTime = "";
+
+      var newTime = '';
       time.forEach((item, index) => {
         if (index !== 3) {
           newTime = newTime + item;

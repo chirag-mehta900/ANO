@@ -331,7 +331,8 @@ export class ShopComponent implements OnInit {
     this.origin.lng = this.Location.lng;
     console.log(this.origin);
     this.shop.push(JSON.parse(localStorage.getItem('Shop') || '[]'));
-    this.markerOptions.destination.label.text = this.shop[0].pricing[0].price.toString();
+    this.markerOptions.destination.label.text =
+      '$' + this.shop[0].pricing[0].price.toString();
     console.log(this.markerOptions);
 
     this.destination.lat = this.shop[0].latitude;

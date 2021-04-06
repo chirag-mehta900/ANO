@@ -7,7 +7,6 @@ import { HeaderService } from 'src/@theme/Services/header.service';
 import { BookRepairComponent } from '../header-module/book-repair/book-repair.component';
 import { DriverComponent } from '../home-page/driver/driver.component';
 
-
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -50,8 +49,7 @@ export class HomePageComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private header: HeaderService,
-    private router: Router,
-
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -101,29 +99,31 @@ export class HomePageComponent implements OnInit {
   }
 
   DriverReq() {
-    
     var obj = this.driveForm.value;
+
+    console.log(obj);
+
     this.header.driverReq(obj).subscribe((response) => {
       console.log(response);
       console.log(response['status']);
-      
-      if(response['status']){
+
+      if (response['status']) {
         this.modalService.open(DriverComponent);
-      }else{
-        console.log("some fields are invalid");
-        
+      } else {
+        console.log('some fields are invalid');
       }
-      
+
+      this.driveForm.reset();
     });
   }
   bookRepair() {
     const modalRef = this.modalService.open(BookRepairComponent);
   }
 
-  call() {
-    const modalRef = this.modalService.open(BookRepairComponent);
-    this.router.navigate(['']);
-  }
+  // call() {
+  //   const modalRef = this.modalService.open(BookRepairComponent);
+  //   this.router.navigate(['']);
+  // }
   OnChange(obj: any) {
     this.display.pop();
     console.log(obj);
