@@ -1,13 +1,16 @@
 <div class="forgot-pass">
     <div class="close-side">
-        <h2>Login</h2>
-        <button><img (click)="close()" src="../../../assets/images/close.svg" alt=""></button>
-    </div>
-    <p>Enter your email id</p>
-    <div class="login-form">
-        <input type="text" name="email" id="email" placeholder="Email Id">
-    </div>
-    <div class="submit-btn">
-        <button (click)="login()">Send</button>
-    </div>
+        <h2>Forgot Password</h2>
+        <button><img (click)="close()" src="../../../assets/images/close.svg"  alt=""></button>
+    </div> 
+        <p>Enter your email id</p>
+        <div class="login-form">
+            <input type="text" name="email" id="email" (keyup)="setEmail($event.target.value)" placeholder="Email Id">
+            <div class="text-dangerr" *ngIf="isError">
+                Please Enter valid Email id
+            </div>
+        </div>
+        <div class="submit-btn">
+            <button (click)="login()">Send</button>
+        </div>
 </div>

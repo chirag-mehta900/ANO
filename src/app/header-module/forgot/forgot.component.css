@@ -10,6 +10,15 @@
     border: none;
     background-color: transparent;
 }
+.text-dangerr {
+    font-family: "Poppins-Regular";
+    margin-top: 3px;
+    padding-bottom: 10px;
+    padding-left: 0px;
+    font-size: 10px;
+    color: #e64e5d;
+    width: 500%;
+}
 .forgot-pass h2{
     font-size: 30px;
     font-family: 'Poppins-SemiBold';
