@@ -128,7 +128,7 @@ export class CheckoutComponent implements OnInit {
         });
       });
     });
-    // console.log(this.productDisplay);
+    console.log(this.productDisplay, 'productdisplay');
 
     let id = this.route.snapshot.params.id;
     this.shopService.getOrder(id).subscribe((data) => {
@@ -414,6 +414,7 @@ export class CheckoutComponent implements OnInit {
       // document.querySelector("pre").textContent = paymentIntentJson;
 
       console.log(paymentIntentJson);
+      console.log(result);
     });
   }
 }

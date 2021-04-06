@@ -9,14 +9,20 @@ import { AddAddressComponent } from './add-address/add-address.component';
 import { MyServiceComponent } from './my-service/my-service.component';
 import { CommentComponent } from './comment/comment.component';
 import { SharedModule } from 'src/@theme/shared.module';
-
+import { AddReviewComponent } from './my-service/add-review/add-review.component';
+import { ChangePswComponent } from './change-psw/change-psw.component';
 
 @NgModule({
-  declarations: [ProfileComponent, AddressComponent, EditUserComponent, AddAddressComponent, MyServiceComponent, CommentComponent],
-  imports: [
-    CommonModule,
-    ProfileRoutingModule,
-    SharedModule
-  ]
+  declarations: [
+    ProfileComponent,
+    AddressComponent,
+    EditUserComponent,
+    AddAddressComponent,
+    MyServiceComponent,
+    CommentComponent,
+    AddReviewComponent,
+    ChangePswComponent,
+  ],
+  imports: [CommonModule, ProfileRoutingModule, SharedModule],
 })
-export class ProfileModule { }
+export class ProfileModule {}

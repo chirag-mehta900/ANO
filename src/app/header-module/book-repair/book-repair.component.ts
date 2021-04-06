@@ -44,6 +44,9 @@ export class BookRepairComponent implements OnInit {
   issueList: any[] = [];
   brandList: [];
   isSelected: boolean = false;
+  danger1: boolean = false;
+  danger2: boolean = false;
+
   lat;
   lng;
   constructor(
@@ -98,18 +101,24 @@ export class BookRepairComponent implements OnInit {
   // }
 
   getIssueList(event) {
-    let obj = {
-      device_id: event.target.value,
-    };
-    console.log(obj);
-    this.headerService.getIssueListById(obj).subscribe(
-      (data) => {
-        console.log(data);
+    console.log(event);
 
-        this.issueList = data['data'];
-      },
-      (error) => {}
-    );
+    if (event.target.value == null) {
+      this.danger1 = true;
+    } else {
+      let obj = {
+        device_id: event.target.value,
+      };
+      console.log(obj);
+      this.headerService.getIssueListById(obj).subscribe(
+        (data) => {
+          console.log(data);
+
+          this.issueList = data['data'];
+        },
+        (error) => {}
+      );
+    }
   }
 
   goToBrand() {
@@ -122,7 +131,9 @@ export class BookRepairComponent implements OnInit {
     this.selectIssueFlag = true;
   }
 
-  goToDevice() {
+  goToDevice(event) {
+    console.log(event);
+
     this.selectBrandFlag = false;
     this.selectDeviceFlag = true;
   }

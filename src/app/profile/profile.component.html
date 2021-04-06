@@ -8,10 +8,13 @@
                 <div class="profile-detail">
                     <h2>Darrell Keward</h2>
                     <button>
-                        <img src="../../assets/images/edit.svg" alt="">
+                        <img (click)="editAddress()"src="../../assets/images/edit.svg" alt="">
                     </button>
                 </div>
                 <p>(629) 555-0129</p>
+                <p>darrellkeward@gmail.com</p>
+                <h6 (click)="Changepsw()">Change Password</h6>
+
             </div>
         </div>
         <hr class="profile-line">
@@ -25,13 +28,13 @@
                 </div>
                 <button>
                     <img src="../../assets/images/edit-yellow.svg" alt="">
-                    <p>View 8 More</p>
+                    <p (click)="checkAddress()">View 8 More</p>
                 </button>
             </div>
         </div>
         <div class="service-review">
             <h2>My Services & My Reviews</h2>
-            <button>View all</button>
+            <button (click)="checkOrder()">View all</button>
         </div>
     </div>
-</section>  
+</section>

@@ -15,8 +15,7 @@
                 }">
                         <option *ngFor="let brand of deviceList" [value]="brand.id">{{brand.full_name}}</option>
                     </select>
-                    <div class="text-danger" *ngIf="device1.invalid &&
-                (formSubmitted || device1.touched)">
+                    <div class="text-danger" *ngIf="danger1">
                         Select Device
                     </div>
                 </div>
@@ -26,7 +25,7 @@
                             < Previous</button>
                     </div>
                     <div class="next">
-                        <button (click)="goToDevice()">Next</button>
+                        <button (click)="goToDevice($event.target.value)">Next</button>
                     </div>
                 </div>
             </div>
@@ -50,9 +49,8 @@
                             {{device.problem.problemName}}
                         </option>
                     </select>
-                    <div class="text-danger" *ngIf="device1.invalid &&
-                (formSubmitted || device1.touched)">
-                        Select Device
+                    <div class="text-danger" *ngIf="danger2">
+                        Select Problem
                     </div>
                 </div>
                 <div class="sub-btn">

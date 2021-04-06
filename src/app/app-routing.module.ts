@@ -6,6 +6,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ContactComponent } from './contact/contact.component';
 import { MappageComponent } from './mappage/mappage.component';
 import { PolicyComponent } from './policy/policy.component';
+import { ProfileComponent } from './profile/profile.component';
 import { ShopComponent } from './shop/shop.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { TrackingmapComponent } from './trackingmap/trackingmap.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'term', component: PolicyComponent },
+  { path: 'profile', component: ProfileComponent },
 
   {
     path: '',

@@ -49,16 +49,20 @@ export class AddProductComponent implements OnInit {
     private shopService: ShopService,
     private activeModal: NgbActiveModal,
     private storeTokenService: StoreTokenService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.shop = JSON.parse(localStorage.getItem('Shop'));
     this.bookRepair.shop_id = this.shop.id;
     this.getBrandList();
+    this.getissuesList();
   }
 
   getBrandList() {
     this.deviceList = JSON.parse(localStorage.getItem('deviceList'));
+  }
+  getissuesList() {
+    this.issueList = JSON.parse(localStorage.getItem('issues'));
   }
 
   close() {
@@ -70,22 +74,21 @@ export class AddProductComponent implements OnInit {
       this.getExpectedPrice();
     }
 
-    
-      let obj = {
-        device_id: event.target.value,
-      };
+    let obj = {
+      device_id: event.target.value,
+    };
 
-      console.log(obj);
-      this.headerService.getIssueListById(obj).subscribe(
-        (data) => {
-          this.issueList = data['data'];
-          console.log(this.issueList, "issuelistss");
-          this.getExpectedPrice();
+    console.log(obj);
+    this.headerService.getIssueListById(obj).subscribe(
+      (data) => {
+        console.log(data, 'isssulistresponse');
 
-        },
-        (error) => { }
-      );
-    
+        this.issueList = data['data'];
+        console.log(this.issueList, 'issuelistss');
+        this.getExpectedPrice();
+      },
+      (error) => {}
+    );
   }
 
   getExpectedPrice() {
@@ -111,7 +114,6 @@ export class AddProductComponent implements OnInit {
         this.addedDeviceProblemToDisplayInCart.ShopCommissionFees =
           data['data'][0].ShopCommissionFees;
 
-
         this.issueList.forEach((element) => {
           if (element.id == this.bookRepair.problem_id) {
             this.addedDeviceProblemToDisplayInCart.problemName =
@@ -124,7 +126,7 @@ export class AddProductComponent implements OnInit {
         this.estimatedRepairTime = data['data'][0].estimatedRepaidTime;
         this.setEstimatedTime();
       },
-      (error) => { }
+      (error) => {}
     );
   }
   setEstimatedTime() {
@@ -144,7 +146,7 @@ export class AddProductComponent implements OnInit {
   }
   addDevice() {
     console.log(this.bookRepair);
-    
+
     //check user is log in if log in then set user id
     this.bookRepair.user_id = JSON.parse(localStorage.getItem('user_id'));
 
@@ -171,10 +173,10 @@ export class AddProductComponent implements OnInit {
     this.shopService.addCartData(this.bookRepair).subscribe(
       (data) => {
         console.log(data['data']);
-        console.log(data['data'].id)
+        console.log(data['data'].id);
         localStorage.setItem('cart_id', data['data'].id);
       },
-      (error) => { }
+      (error) => {}
     );
 
     console.log(this.bookRepair.cart_id);

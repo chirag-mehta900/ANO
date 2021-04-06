@@ -9,15 +9,15 @@ import { ProfileComponent } from './profile.component';
 
 const routes: Routes = [
   { path: '', component: ProfileComponent },
-  { path: "address", component: AddressComponent },
-  { path: "edit-user", component: EditUserComponent },
-  { path: "add-address", component: AddAddressComponent },
-  { path: "comment", component: CommentComponent },
-  { path: "service", component: MyServiceComponent },
+  { path: 'address', component: AddressComponent },
+  { path: 'edit-user', component: EditUserComponent },
+  { path: 'add-address', component: AddAddressComponent },
+  { path: 'comment', component: CommentComponent },
+  { path: 'service', component: MyServiceComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ProfileRoutingModule { }
+export class ProfileRoutingModule {}
