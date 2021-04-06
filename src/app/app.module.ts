@@ -25,6 +25,8 @@ import { AddProductComponent } from './cart/add-product/add-product.component';
 import { ContactComponent } from './contact/contact.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { PolicyComponent } from './policy/policy.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { PolicyComponent } from './policy/policy.component';
     HeaderModuleModule,
     GooglePlaceModule,
     SharedModule,
+    MatAutocompleteModule,
     AgmDirectionModule,
     NgxStripeModule.forRoot(
       'pk_test_51IGOW4BLH39xDdN7OvD7mbgNfZjZmmF9PkfpNzm3aPOpwJyp6woCqN7rFK4GrpbSiKZnhf15m6EF7TxZEtHRjWpX00dv9LITNC'
@@ -64,6 +67,7 @@ import { PolicyComponent } from './policy/policy.component';
       innerStrokeColor: '#C7E596',
       animationDuration: 300,
     }),
+    BrowserAnimationsModule,
   ],
   providers: [
     {

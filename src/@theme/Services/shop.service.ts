@@ -16,6 +16,9 @@ export class ShopService {
   getStoreDetailById(id) {
     return this.httpClient.get(this.commonService.envUrl() + "storeById/" + id);
   }
+  getStoreByStoreName(data) {
+    return this.httpClient.get(this.commonService.envUrl() + "store?shopName=" + data);
+  }
   getExpectedPrice(data) {
     return this.httpClient.post(
       this.commonService.envUrl() + "addDevice",

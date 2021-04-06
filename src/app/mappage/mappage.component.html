@@ -9,7 +9,16 @@
     <div class="filter">
         <div class="shop-filter shop-in-box">
             <div class="shop-filt-inp">
-                <input type="text" name="mapshop" id="shop" placeholder="Search Shop">
+                <input type="text" name="mapshop" id="shop" placeholder="Search Shop" (keyup)="onshopNameChnage($event.target.value)">
+                <!-- <mat-form-field>
+                    <input type="text" placeholder="Enter Location" matInput [formControl]="myControl"
+                         [matAutocomplete]="auto">
+                       <mat-autocomplete #auto="matAutocomplete">
+                         <mat-option *ngFor="let option of options" [value]="option">
+                           {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                 </mat-form-field> -->
                 <button (click)="filter()"><img src="../../assets/images/Sliders.svg" alt=""></button>
             </div>
             <div class="select-problem" *ngFor="let d of display">

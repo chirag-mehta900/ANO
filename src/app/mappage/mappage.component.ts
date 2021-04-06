@@ -5,6 +5,7 @@ import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'src/@theme/Services/header.service';
 import { BookRepairComponent } from '../header-module/book-repair/book-repair.component';
+import { ShopService } from 'src/@theme/Services/shop.service';
 
 type ResponseType = {
   data: [
@@ -50,6 +51,7 @@ export class MappageComponent implements OnInit {
   shop: any;
   Data: any[] = [];
   Shoplist: any[] = [];
+  shopName : any;
 
   price: {} = {
     text: '',
@@ -280,6 +282,7 @@ export class MappageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private headerService: HeaderService,
+    private shopService: ShopService,
     private modalService: NgbModal
   ) {
     config.max = 5;
@@ -463,6 +466,14 @@ export class MappageComponent implements OnInit {
         this.route.snapshot.paramMap.get('storeData')
       );
     });
+  }
+
+  onshopNameChnage(event){
+    this.shopService.getStoreByStoreName(event).subscribe((response)=>{
+      console.log(response,"api response");
+      
+    })
+    
   }
 
   shopDetail(id, shop) {
