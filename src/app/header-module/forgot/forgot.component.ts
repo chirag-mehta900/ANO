@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderService } from 'src/@theme/Services/header.service';
 import { LoginComponent } from '../login/login.component';
 
 @Component({
@@ -10,17 +11,40 @@ import { LoginComponent } from '../login/login.component';
 export class ForgotComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
-    private activeModal: NgbActiveModal
-  ) {}
+    private activeModal: NgbActiveModal,
+    private headerService: HeaderService
+  ) { }
 
-  ngOnInit() {}
+  email: any;
+  isError: boolean = false;
+
+  ngOnInit() { }
 
   close() {
     this.activeModal.close();
   }
 
+  setEmail(event) {
+    this.email = event;
+  }
+
   login() {
-    this.activeModal.close();
-    this.modalService.open(LoginComponent);
+    if (this.email === undefined || this.email === "") {
+      this.isError = true;
+    } else {
+      const data = {
+        "email": this.email
+      }
+      this.headerService.forgotpassword(data).subscribe((response) => {
+        console.log(response, "forgot response");
+        this.activeModal.close();
+        this.modalService.open(LoginComponent);
+      },(error) =>{
+        console.log(error,"Error");
+        if (error['message'] === "Undefined offset: 0") {
+          this.isError = true;
+        }
+      });
+    }
   }
 }
