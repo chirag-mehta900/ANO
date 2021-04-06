@@ -28,6 +28,12 @@
         <span class="text-dangerr" *ngIf="invalidUserLog">
             Invalid Email or password
         </span>
+
+        <div class="forgot-pass">
+            <h3 (click)="forgot()">Forgot password?</h3>
+        </div>
+
+
         <button class="next" type="submit" (click)="logIn()" [disabled]="disableButton">Login</button>
     </form>
 </div>

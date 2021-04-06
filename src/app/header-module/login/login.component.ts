@@ -6,6 +6,7 @@ import { HeaderService } from 'src/@theme/Services/header.service';
 import { JwtTokenService } from 'src/@theme/services/jwt-token.service';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { SignupComponent } from '../signup/signup.component';
+import { ForgotComponent } from '../forgot/forgot.component';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   formSubmitted: boolean = false;
   disableButton: boolean = false;
   invalidUserLog: boolean = false;
-  userName : any ;
+  userName: any;
   constructor(
     private headerService: HeaderService,
     private modalService: NgbModal,
@@ -50,6 +51,11 @@ export class LoginComponent implements OnInit {
   signUp() {
     this.activeModal.close();
     this.modalService.open(SignupComponent);
+  }
+
+  forgot() {
+    this.activeModal.close();
+    this.modalService.open(ForgotComponent);
   }
   logIn() {
     this.formSubmitted = true;
