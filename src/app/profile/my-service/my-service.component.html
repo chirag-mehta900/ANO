@@ -21,127 +21,47 @@
             </div>
             <hr class="title-filter-hr">
         </div>
-        <div class="all-service-display">
+        <div class="all-service-display" *ngFor="let order of orderList">
             <div class="order-id-date">
-                <h2>ID: #65876909465</h2>
-                <h2>Created on: March, 01, 21</h2>
+                <h2>ID: #{{order.id}}</h2>
+                <h2>Created on: {{order.created_at}}</h2>
             </div>
             <div class="shop-service">
-                <div class="shop-deti">
-                    <img src="../../../assets/images/checkout/shopimg.png" alt="">
-                    <h3>Shop Img</h3>
-                    <p>total</p>
-                    <h2>$ 65.00</h2>
-                </div>
-                <div class="shop-ser">
+                <!-- <div class="shop-deti" *ngFor="let s of shops">
+                    <img src="{{s.image}}" alt="">
+                    <h3>{{s.shopName}}</h3>
+                    <p>Total</p>
+                    <h2>$ {{order.Total_Price}}</h2>
+                </div> -->
+                <div class="shop-ser" *ngFor="let product of order.orderdetails">
                     <div class="shop-ser-box">
                         <div class="shop-ser-box-img">
-                            <img src="../../../assets/images/checkout/image 9.png" alt="">
+                            <img src="{{product.image}}" alt="">
                         </div>
                         <div class="shop-ser-box-det">
-                            <h2>$ 65.00</h2>
-                            <p>Screen Replacement</p>
-                            <h3>IPhone 11 Pro</h3>
+                            <h2>$ {{product.price}}</h2>
+                            <p *ngFor="let p of product.problem_id">{{p.problemName}}</p>
+                            <h3 *ngFor="let d of product.device_id">{{d.modelName}}</h3>
                         </div>
                     </div>
-                </div>
-                <div class="shop-ser-box">
-                    <div class="shop-ser-box-img">
-                        <img src="../../../assets/images/checkout/image 9.png" alt="">
-                    </div>
-                    <div class="shop-ser-box-det">
-                        <h2>$ 65.00</h2>
-                        <p>Screen Replacement</p>
-                        <h3>IPhone 11 Pro</h3>
-                    </div>
-                </div>
-                <div class="shop-ser-box">
-                    <div class="shop-ser-box-img">
-                        <img src="../../../assets/images/checkout/image 9.png" alt="">
-                    </div>
-                    <div class="shop-ser-box-det">
-                        <h2>$ 65.00</h2>
-                        <p>Screen Replacement</p>
-                        <h3>IPhone 11 Pro</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="review-part">
-                <p>Delivered on Marech, 12</p>
-                <h6 (click)="addreview()">Review Services</h6>
-                <div class="review-star-view">
-                    <div class="subm-whwn-no-star">
-                        <div class="cont">
-                            <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true">
-                            </ngx-star-rating>
-                        </div>
-                    </div>
-                    <button>View Details > </button>
                 </div>
 
-            </div>
-            <hr class="end-hr">
-        </div>
-        <div class="all-service-display">
-            <div class="order-id-date">
-                <h2>ID: #65876909465</h2>
-                <h2>Created on: March, 01, 21</h2>
-            </div>
-            <div class="shop-service">
-                <div class="shop-deti">
-                    <img src="../../../assets/images/checkout/shopimg.png" alt="">
-                    <h3>Shop Img</h3>
-                    <p>total</p>
-                    <h2>$ 65.00</h2>
-                </div>
-                <div class="shop-ser">
-                    <div class="shop-ser-box">
-                        <div class="shop-ser-box-img">
-                            <img src="../../../assets/images/checkout/image 9.png" alt="">
+                <div class="review-part">
+                    <p>Delivered on {{order.repairedDate}}</p>
+                    <h6 (click)="addreview()">Review Services</h6>
+                    <div class="review-star-view">
+                        <div class="subm-whwn-no-star">
+                            <div class="cont">
+                                <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true">
+                                </ngx-star-rating>
+                            </div>
                         </div>
-                        <div class="shop-ser-box-det">
-                            <h2>$ 65.00</h2>
-                            <p>Screen Replacement</p>
-                            <h3>IPhone 11 Pro</h3>
-                        </div>
+                        <button>View Details > </button>
                     </div>
-                </div>
-                <div class="shop-ser-box">
-                    <div class="shop-ser-box-img">
-                        <img src="../../../assets/images/checkout/image 9.png" alt="">
-                    </div>
-                    <div class="shop-ser-box-det">
-                        <h2>$ 65.00</h2>
-                        <p>Screen Replacement</p>
-                        <h3>IPhone 11 Pro</h3>
-                    </div>
-                </div>
-                <div class="shop-ser-box">
-                    <div class="shop-ser-box-img">
-                        <img src="../../../assets/images/checkout/image 9.png" alt="">
-                    </div>
-                    <div class="shop-ser-box-det">
-                        <h2>$ 65.00</h2>
-                        <p>Screen Replacement</p>
-                        <h3>IPhone 11 Pro</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="review-part">
-                <p>Delivered on Marech, 12</p>
-                <h6 (click)="addreview()">Review Services</h6>
-                <div class="review-star-view">
-                    <div class="subm-whwn-no-star">
-                        <div class="cont">
-                            <ngx-star-rating class="rating" [(ngModel)]="rating0" [id]="'rating0'" [disabled]="true">
-                            </ngx-star-rating>
-                        </div>
-                    </div>
-                    <button>View Details > </button>
-                </div>
 
+                </div>
+                <hr class="end-hr">
             </div>
-            <hr class="end-hr">
         </div>
     </div>
 </section>

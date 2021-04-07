@@ -59,6 +59,7 @@ export class CheckoutComponent implements OnInit {
   clientSecret: any;
   paymentID: any;
   payresponse: any;
+  url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/background.svg?alt=media&token=63b82c04-0515-47bc-a0ba-735de5faeb9c';
   ID: any;
   orderDetails;
   shopDetails;
@@ -141,17 +142,14 @@ export class CheckoutComponent implements OnInit {
       console.log(this.orderDetails);
       console.log(this.detail);
 
+      this.detail.forEach((e) => {
+        if (e.image == undefined) {
+          e.image = this.url;
+        }
+      });
+
       console.log(data['data'], 'orderby id order details');
     });
-
-    for (var i = 0; i < this.detail.length; i++) {
-      for (var j = 0; j < this.prolist.length; j++) {
-        if (this.prolist[j].problemId == this.detail[i].problem_id) {
-        }
-      }
-      console.log(this.productDetail, 'display');
-      console.log(this.detail);
-    }
   }
 
   getData() {
