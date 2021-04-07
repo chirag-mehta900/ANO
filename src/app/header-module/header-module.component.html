@@ -45,7 +45,7 @@
                                         </div> -->
                                         <div class="profile-list">
                                             <img src="../../assets/images/profile/services.svg" alt="">
-                                            <h3 (click)="cart()">My Services</h3>
+                                            <h3 (click)="service()">My Services</h3>
                                         </div>
                                         <div class="profile-list">
                                             <img src="../../assets/images/profile/log_out.svg" alt="">
@@ -82,8 +82,7 @@
                         <li *ngIf="!userName" class="nav-item"><button class="login-btn" (click)="logIn()">Log
                                 In</button></li>
                         <div>
-                            <li *ngIf="userName"><button #userProfile (click)="openDropdown()"
-                                    class="welcom-btn">{{userName}} <img
+                            <li *ngIf="userName"><button #userProfile (click)="openDropdown()" class="welcom-btn">{{userName}} <img
                                         src="../../assets/images/profile/caret_down.svg" alt=""></button></li>
                             <div *ngIf="isopenDropdown" #drop>
                                 <div class="user-drop">
