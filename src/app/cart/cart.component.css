@@ -302,12 +302,17 @@
 .rig-no {
     margin-right: 0px !important;
 }
-
+.pick-ups{
+    display: flex;
+    justify-content: space-between;
+    width: 82%;
+}
 .pick-ups h4 {
     font-family: "Poppins-SemiBold";
-    font-size: 22px;
+    font-size: 15px;
     margin-bottom: 0px;
     padding-left: 3%;
+    width: 80%;
 }
 
 .bg-map,
@@ -358,4 +363,36 @@ agm-map {
 .middle-inp{
     margin-right: 40px;
     margin-left: 40px;
+}
+.base-fee{
+    margin-top: 30px;
+}
+.base-fee-detail{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.base-fee-name h3{
+    font-family: 'Poppins-Regular';
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+.base-fee-name h2{
+    font-size: 25px;
+}
+.base-fee-price h3{
+    font-family: 'Poppins-Regular';
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+.base-fee-price h2{
+    font-size: 25px;
+}
+.base-fee hr{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 2px solid #FFC542;
 }

@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-review.component.css']
 })
 export class AddReviewComponent implements OnInit {
-
+  rating3 = 3;
+  
   constructor() { }
 
   ngOnInit(): void {

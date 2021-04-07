@@ -14,4 +14,10 @@ export class FooterComponent implements OnInit {
   onabout() {
     this.router.navigate(['about']);
   }
+  onpolicy(){
+    this.router.navigate(['policy']);
+  }
+  ontrack(){
+    this.router.navigate(['tracking']);
+  }
 }

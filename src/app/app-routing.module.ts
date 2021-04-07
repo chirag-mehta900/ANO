@@ -8,6 +8,7 @@ import { MappageComponent } from './mappage/mappage.component';
 import { PolicyComponent } from './policy/policy.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ShopComponent } from './shop/shop.component';
+import { TermComponent } from './term/term.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { TrackingmapComponent } from './trackingmap/trackingmap.component';
 
@@ -20,8 +21,10 @@ const routes: Routes = [
   { path: 'trackmap', component: TrackingmapComponent },
   { path: 'cart', component: CartComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'term', component: PolicyComponent },
+  { path: 'policy', component: PolicyComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'term', component: TermComponent },
+
 
   {
     path: '',

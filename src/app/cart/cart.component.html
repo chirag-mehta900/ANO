@@ -88,6 +88,8 @@
             <div class="deliver-system">
                 <div class="pick-ups">
                     <h4>Device(s) Pick up Slot</h4>
+                    <h4>Slot</h4>
+                    <h4>Pick up Address</h4>
                 </div>
                 <div class="deliver-cab radio">
                     <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab" checked>
@@ -124,6 +126,8 @@
             <div class="deliver-system drop-off-slot">
                 <div class="pick-ups">
                     <h4>Device(s) Return Slot</h4>
+                    <h4>Slot</h4>
+                    <h4>Return Address</h4>
                 </div>
                 <div class="deliver-cab radio">
                     <input class="deliver-radio" type="radio" id="drop-off-opt" name="deliver-system1" value="drop-off-opt">
@@ -155,6 +159,26 @@
                         </div>
                     </label><br>
                 </div>
+            </div>
+            <div class="base-fee">
+                <hr>
+                <div class="base-fee-detail">
+                    <div class="base-fee-name">
+                        <h3>Base fee</h3>
+                        <h3>ANO’s Commission Fee: 20%</h3>
+                        <h3>Repair Charge</h3>
+                        <h3>Delivery</h3>
+                        <h2>Total to pay</h2>
+                    </div>
+                    <div class="base-fee-price">
+                        <h3>$45.00</h3>
+                        <h3>$45.00</h3>
+                        <h3>$45.00</h3>
+                        <h3>$45.00</h3>
+                        <h2>639.00$</h2>
+                    </div>
+                </div>
+                <hr>
             </div>
             <div class="proceed-btn">
                 <button (click)="proceed()">Proceed</button>

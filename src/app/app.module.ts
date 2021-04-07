@@ -25,6 +25,7 @@ import { AddProductComponent } from './cart/add-product/add-product.component';
 import { ContactComponent } from './contact/contact.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { PolicyComponent } from './policy/policy.component';
+import { TermComponent } from './term/term.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { PolicyComponent } from './policy/policy.component';
     AddProductComponent,
     ContactComponent,
     PolicyComponent,
+    TermComponent,
     
   ],
   imports: [
