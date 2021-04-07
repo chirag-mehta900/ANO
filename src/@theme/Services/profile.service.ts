@@ -21,4 +21,8 @@ export class ProfileService {
   getOrderlist() {
     return this.http.get(this.commonService.envUrl() + 'orderList');
   }
+
+  changepassword(data) {
+    return this.http.post(this.commonService.envUrl() + 'changePassword', data);
+  }
 }

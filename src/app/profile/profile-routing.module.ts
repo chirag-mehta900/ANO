@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'add-address', component: AddAddressComponent },
   { path: 'comment', component: CommentComponent },
   { path: 'service', component: MyServiceComponent },
+  { path: 'profile/service', component: MyServiceComponent },
 ];
 
 @NgModule({

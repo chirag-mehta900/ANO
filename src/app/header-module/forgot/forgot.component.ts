@@ -9,16 +9,18 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./forgot.component.css'],
 })
 export class ForgotComponent implements OnInit {
+  msg: any;
   constructor(
     private modalService: NgbModal,
     private activeModal: NgbActiveModal,
     private headerService: HeaderService
-  ) { }
+  ) {}
 
   email: any;
   isError: boolean = false;
+  changebutton = false;
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   close() {
     this.activeModal.close();
@@ -29,22 +31,32 @@ export class ForgotComponent implements OnInit {
   }
 
   login() {
-    if (this.email === undefined || this.email === "") {
+    if (this.email === undefined || this.email === '') {
       this.isError = true;
     } else {
       const data = {
-        "email": this.email
-      }
-      this.headerService.forgotpassword(data).subscribe((response) => {
-        console.log(response, "forgot response");
-        this.activeModal.close();
-        this.modalService.open(LoginComponent);
-      },(error) =>{
-        console.log(error,"Error");
-        if (error['message'] === "Undefined offset: 0") {
-          this.isError = true;
+        email: this.email,
+      };
+      this.headerService.forgotpassword(data).subscribe(
+        (response) => {
+          console.log(response, 'forgot response');
+          this.msg = response['message'];
+          this.changebutton = true;
+          // this.activeModal.close();
+          // this.modalService.open(LoginComponent);
+        },
+        (error) => {
+          console.log(error, 'Error');
+          if (error['message'] === 'Undefined offset: 0') {
+            this.isError = true;
+          }
         }
-      });
+      );
     }
+  }
+
+  gotologin() {
+    this.activeModal.close();
+    this.modalService.open(LoginComponent);
   }
 }

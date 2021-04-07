@@ -151,6 +151,11 @@ export class HeaderModuleComponent implements OnInit {
 
     this.router.navigate(['cart']);
   }
+  service() {
+    this.isopenDropdown = !this.isopenDropdown;
+
+    this.router.navigate(['profile/service']);
+  }
   onabout() {
     this.router.navigate(['about']);
   }
