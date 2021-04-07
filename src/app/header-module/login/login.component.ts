@@ -7,6 +7,7 @@ import { JwtTokenService } from 'src/@theme/services/jwt-token.service';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { SignupComponent } from '../signup/signup.component';
 import { ForgotComponent } from '../forgot/forgot.component';
+import { ProfileService } from 'src/@theme/Services/profile.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ import { ForgotComponent } from '../forgot/forgot.component';
 export class LoginComponent implements OnInit {
   loginInfo: FormGroup;
   formSubmitted: boolean = false;
+  orderList = [];
   disableButton: boolean = false;
   invalidUserLog: boolean = false;
   userName: any;
@@ -25,7 +27,8 @@ export class LoginComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private router: Router,
     private jwtToken: JwtTokenService,
-    private storeTokenService: StoreTokenService
+    private storeTokenService: StoreTokenService,
+    private profile: ProfileService
   ) {}
 
   ngOnInit(): void {
@@ -92,5 +95,12 @@ export class LoginComponent implements OnInit {
       },
       (error) => {}
     );
+
+    this.profile.getOrderlist().subscribe((data) => {
+      console.log(data['data']);
+
+      this.orderList = data['data'];
+      localStorage.setItem('orderList', JSON.stringify(this.orderList));
+    });
   }
 }
