@@ -93,8 +93,10 @@ export class HeaderService {
     return this.httpClient.get(this.commonService.envUrl() + 'slider');
   }
 
-  forgotpassword(data){
-    return this.httpClient.post(this.commonService.envUrl() + 'forgotPassword' ,data);
+  forgotpassword(data) {
+    return this.httpClient.post(
+      this.commonService.envUrl() + 'forgotPassword',
+      data
+    );
   }
-  
 }

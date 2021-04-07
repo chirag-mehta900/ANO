@@ -25,4 +25,11 @@ export class ProfileService {
   changepassword(data) {
     return this.http.post(this.commonService.envUrl() + 'changePassword', data);
   }
+
+  SubmitReview(data, id) {
+    return this.http.post(
+      this.commonService.envUrl() + 'store' + '/' + id + '/' + 'ratings',
+      data
+    );
+  }
 }
