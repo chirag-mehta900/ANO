@@ -46,6 +46,7 @@
 .shop-deti img{
     height: 60px;
     width: auto;
+    border-radius: 5px;
 }
 .shop-deti h3{
     font-size: 12px;

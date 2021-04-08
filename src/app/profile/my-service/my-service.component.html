@@ -46,22 +46,21 @@
                     </div>
                 </div>
 
-                <div class="review-part">
-                    <p>Delivered on {{order.repairedDate}}</p>
-                    <h6 (click)="addreview()">Review Services</h6>
-                    <div class="review-star-view">
-                        <div class="subm-whwn-no-star">
-                            <div class="cont">
-                                <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true">
-                                </ngx-star-rating>
-                            </div>
-                        </div>
-                        <button>View Details > </button>
-                    </div>
-
-                </div>
-                <hr class="end-hr">
             </div>
+            <div class="review-part">
+                <p>Delivered on {{order.repairedDate}}</p>
+                <h6 (click)="addreview()">Review Services</h6>
+                <div class="review-star-view">
+                    <div class="subm-whwn-no-star">
+                        <div class="cont">
+                            <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true">
+                            </ngx-star-rating>
+                        </div>
+                    </div>
+                    <button>View Details > </button>
+                </div>
+            </div>
+            <hr class="end-hr">
         </div>
     </div>
 </section>

@@ -145,7 +145,7 @@
 
 .selectdate-time {
     display: flex;
-    width: 80%;
+    width: 100%;
 }
 
 .deliver-cab {
@@ -296,7 +296,7 @@
     background-color: #ffc542;
     padding: 10px;
     border-radius: 5px;
-    width: 80%;
+    width: 100%;
 }
 
 .rig-no {
@@ -305,7 +305,7 @@
 .pick-ups{
     display: flex;
     justify-content: space-between;
-    width: 82%;
+    width: 100%;
 }
 .pick-ups h4 {
     font-family: "Poppins-SemiBold";
