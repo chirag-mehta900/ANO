@@ -27,12 +27,12 @@
                 <h2>Created on: {{order.created_at}}</h2>
             </div>
             <div class="shop-service">
-                <!-- <div class="shop-deti" *ngFor="let s of shops">
+                <div class="shop-deti" *ngFor="let s of order.shop_id">
                     <img src="{{s.image}}" alt="">
                     <h3>{{s.shopName}}</h3>
                     <p>Total</p>
                     <h2>$ {{order.Total_Price}}</h2>
-                </div> -->
+                </div>
                 <div class="shop-ser" *ngFor="let product of order.orderdetails">
                     <div class="shop-ser-box">
                         <div class="shop-ser-box-img">
