@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { CommonService } from "./common.service";
-import { StoreTokenService } from "./store-token.service";
-import { threadId } from "node:worker_threads";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonService } from './common.service';
+import { StoreTokenService } from './store-token.service';
+import { threadId } from 'node:worker_threads';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class ShopService {
   constructor(
@@ -14,43 +14,46 @@ export class ShopService {
   ) {}
 
   getStoreDetailById(id) {
-    return this.httpClient.get(this.commonService.envUrl() + "storeById/" + id);
+    return this.httpClient.get(this.commonService.envUrl() + 'storeById/' + id);
   }
   getExpectedPrice(data) {
     return this.httpClient.post(
-      this.commonService.envUrl() + "addDevice",
+      this.commonService.envUrl() + 'addDevice',
       data
     );
   }
   getTimeByDate(data) {
-    return this.httpClient.post(this.commonService.envUrl() + "slots", data);
+    return this.httpClient.post(this.commonService.envUrl() + 'slots', data);
   }
   addCartData(data) {
-    return this.httpClient.post(this.commonService.envUrl() + "cart", data);
+    return this.httpClient.post(this.commonService.envUrl() + 'cart', data);
   }
   getCartDetail() {
-    return this.httpClient.get(this.commonService.envUrl() + "cart");
+    return this.httpClient.get(this.commonService.envUrl() + 'cart');
   }
   placeOrder(data) {
-    return this.httpClient.post(this.commonService.envUrl() + "order", data);
+    return this.httpClient.post(this.commonService.envUrl() + 'order', data);
   }
   getOrder(id) {
-    return this.httpClient.get(this.commonService.envUrl() + "order/" + id);
+    return this.httpClient.get(this.commonService.envUrl() + 'order/' + id);
   }
-  updateOrder(id,data) {
-    return this.httpClient.get(this.commonService.envUrl() + "order/" + id, data);
+  updateOrder(id, data) {
+    return this.httpClient.get(
+      this.commonService.envUrl() + 'order/' + id,
+      data
+    );
   }
   getAnoFee() {
     return this.httpClient.get(
-      this.commonService.envUrl() + "lookup?key=ANO_FEE"
+      this.commonService.envUrl() + 'lookup?key=ANO_FEE'
     );
   }
   getBaseFee() {
     return this.httpClient.get(
-      this.commonService.envUrl() + "lookup?key=BASE_FEE"
+      this.commonService.envUrl() + 'lookup?key=BASE_FEE'
     );
   }
   deleteCartData(id) {
-    return this.httpClient.delete(this.commonService.envUrl() + "cart/" + id);
+    return this.httpClient.delete(this.commonService.envUrl() + 'cart/' + id);
   }
 }

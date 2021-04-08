@@ -11,6 +11,8 @@ import { ProfileService } from 'src/@theme/Services/profile.service';
 export class ChangePswComponent implements OnInit {
   changepsw: FormGroup;
   notmatch: boolean = false;
+  empty: boolean = false;
+
   msg: any;
   constructor(
     private activeModal: NgbActiveModal,
@@ -29,27 +31,37 @@ export class ChangePswComponent implements OnInit {
     this.activeModal.close();
   }
   Changepsw() {
-    if (this.changepsw.value.password == this.changepsw.value.confpassword) {
+    if (
+      this.changepsw.value.password == null ||
+      this.changepsw.value.confpassword == null ||
+      this.changepsw.value.old_password == null
+    ) {
+      this.empty = true;
       this.notmatch = false;
-      console.log(this.changepsw.value);
-      const obj = {
-        old_password: this.changepsw.value.old_password,
-        password: this.changepsw.value.password,
-      };
-
-      this.profile.changepassword(obj).subscribe((data) => {
-        console.log(data);
-        if (data['status'] == 200) {
-          // this.activeModal.close();
-          this.changepsw.reset();
-          this.msg = data['message'];
-        }
-      }),
-        (error) => {
-          console.log(error);
-        };
     } else {
-      this.notmatch = true;
+      if (this.changepsw.value.password == this.changepsw.value.confpassword) {
+        this.notmatch = false;
+        console.log(this.changepsw.value);
+        const obj = {
+          old_password: this.changepsw.value.old_password,
+          password: this.changepsw.value.password,
+        };
+
+        this.profile.changepassword(obj).subscribe((data) => {
+          console.log(data);
+          if (data['status'] == 200) {
+            // this.activeModal.close();
+            this.changepsw.reset();
+            this.msg = data['message'];
+          }
+        }),
+          (error) => {
+            console.log(error);
+          };
+      } else {
+        this.notmatch = true;
+        this.empty = false;
+      }
     }
   }
 }

@@ -21,8 +21,10 @@ export class AddProductComponent implements OnInit {
     cart_id: null,
     user_id: null,
   };
+
   brandList: any[];
   deviceList: any[];
+
   issueList: any[];
   formSubmitted: boolean = false;
   expectedPrice: any = '';
@@ -51,18 +53,39 @@ export class AddProductComponent implements OnInit {
     private storeTokenService: StoreTokenService
   ) {}
 
-  ngOnInit(): void {
-    this.shop = JSON.parse(localStorage.getItem('Shop'));
-    this.bookRepair.shop_id = this.shop.id;
-    this.getBrandList();
-    this.getissuesList();
-  }
+  ngOnInit() {
+    console.log('hello');
 
-  getBrandList() {
-    this.deviceList = JSON.parse(localStorage.getItem('deviceList'));
+    this.shop = JSON.parse(localStorage.getItem('Shop'));
+    console.log(this.shop);
+
+    this.bookRepair.shop_id = this.shop.id;
+    console.log(this.shop.id);
+
+    // console.log(this.issueobj);
+    this.Getdevices(this.shop.id);
   }
-  getissuesList() {
-    this.issueList = JSON.parse(localStorage.getItem('issues'));
+  Getdevices(id) {
+    var obj = {
+      shop_id: id,
+    };
+    console.log(obj);
+    this.headerService.filterDevice(obj).subscribe(
+      (data) => {
+        console.log(data);
+        this.deviceList = data['data'];
+        console.log(this.deviceList);
+
+        // this.deviceLists.forEach((e) => {
+        //   if (e != null) {
+        //     this.deviceList.push(e);
+        //   }
+        // });
+        // debugger;
+        // console.log(this.deviceList);
+      },
+      (error) => {}
+    );
   }
 
   close() {
@@ -70,25 +93,42 @@ export class AddProductComponent implements OnInit {
   }
 
   getIssueList(event) {
-    if (this.bookRepair.device_id && this.bookRepair.problem_id) {
-      this.getExpectedPrice();
-    }
-
-    let obj = {
-      device_id: event.target.value,
+    var issueobj = {
+      shop_id: this.shop.id,
+      device_id: this.bookRepair.device_id,
     };
 
-    console.log(obj);
-    this.headerService.getIssueListById(obj).subscribe(
+    console.log(issueobj);
+
+    this.headerService.filterProblem(issueobj).subscribe(
       (data) => {
         console.log(data, 'isssulistresponse');
 
         this.issueList = data['data'];
         console.log(this.issueList, 'issuelistss');
-        this.getExpectedPrice();
       },
       (error) => {}
     );
+
+    // if (this.bookRepair.device_id && this.bookRepair.problem_id) {
+    //   this.getExpectedPrice();
+    // }
+
+    // let obj = {
+    //   device_id: event.target.value,
+    // };
+
+    // console.log(obj);
+    // this.headerService.getIssueListById(obj).subscribe(
+    //   (data) => {
+    //     console.log(data, 'isssulistresponse');
+
+    //     this.issueList = data['data'];
+    //     console.log(this.issueList, 'issuelistss');
+    //     this.getExpectedPrice();
+    //   },
+    //   (error) => {}
+    // );
   }
 
   getExpectedPrice() {
@@ -156,8 +196,9 @@ export class AddProductComponent implements OnInit {
     //set device name in display object
     this.deviceList.forEach((element) => {
       if (element.id == this.bookRepair.device_id) {
-        this.addedDeviceProblemToDisplayInCart.deviceName = element.full_name;
-        this.addedDeviceProblemToDisplayInCart.deviceId = element.id;
+        this.addedDeviceProblemToDisplayInCart.deviceName =
+          element.device.modelName;
+        this.addedDeviceProblemToDisplayInCart.deviceId = element.device_id;
       }
     });
 
@@ -166,7 +207,7 @@ export class AddProductComponent implements OnInit {
       if (element.id == this.bookRepair.problem_id) {
         this.addedDeviceProblemToDisplayInCart.problemName =
           element.problem.problemName;
-        this.addedDeviceProblemToDisplayInCart.problemId = element.id;
+        this.addedDeviceProblemToDisplayInCart.problemId = element.problem.id;
       }
     });
 
