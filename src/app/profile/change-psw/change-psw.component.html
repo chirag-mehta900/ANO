@@ -1,7 +1,7 @@
 <div class="change-pass">
     <form [formGroup]="changepsw">
         <div class="close-side">
-            <h2>Forgot Password</h2>
+            <h2>Change Password</h2>
             <button><img (click)="close()"src="../../../assets/images/close.svg" alt=""></button>
         </div>
         <div>{{msg}}</div>
@@ -22,6 +22,9 @@
             <input type="password" formControlName="confpassword" name="conf-password" id="conf-password" placeholder="Confirm Password">
             <div class="text-dangerr" *ngIf="notmatch">
                 Please Enter same password
+            </div>
+            <div class="text-dangerr" *ngIf="empty">
+                Please fill all the value
             </div>
         </div>
         <div class="submit-btn">

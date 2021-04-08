@@ -49,6 +49,21 @@ export class HeaderService {
       data
     );
   }
+
+  filterDevice(data) {
+    return this.httpClient.post(
+      this.commonService.envUrl() + 'filter/device/Shop',
+      data
+    );
+  }
+
+  filterProblem(data) {
+    return this.httpClient.post(
+      this.commonService.envUrl() + 'filter/problem/Shop',
+      data
+    );
+  }
+
   signUp(data) {
     return this.httpClient.post(this.commonService.envUrl() + 'register', data);
   }

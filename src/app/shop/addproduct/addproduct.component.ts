@@ -1,14 +1,14 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { HeaderService } from "src/@theme/Services/header.service";
-import { ShopService } from "src/@theme/Services/shop.service";
-import { StoreTokenService } from "src/@theme/Services/store-token.service";
-import { UploadService } from "src/@theme/Services/upload.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderService } from 'src/@theme/Services/header.service';
+import { ShopService } from 'src/@theme/Services/shop.service';
+import { StoreTokenService } from 'src/@theme/Services/store-token.service';
+import { UploadService } from 'src/@theme/Services/upload.service';
 
 @Component({
-  selector: "app-addproduct",
-  templateUrl: "./addproduct.component.html",
-  styleUrls: ["./addproduct.component.css"],
+  selector: 'app-addproduct',
+  templateUrl: './addproduct.component.html',
+  styleUrls: ['./addproduct.component.css'],
 })
 export class AddproductComponent implements OnInit {
   @Input() shopId;
@@ -25,7 +25,7 @@ export class AddproductComponent implements OnInit {
   deviceList: any[];
   issueList: any[];
   formSubmitted: boolean = false;
-  expectedPrice: any = "";
+  expectedPrice: any = '';
   files: File[] = [];
   constructor(
     private headerService: HeaderService,
@@ -42,7 +42,7 @@ export class AddproductComponent implements OnInit {
   getBrandList() {
     this.headerService.getBrandList().subscribe(
       (data) => {
-        this.brandList = data["data"];
+        this.brandList = data['data'];
       },
       (error) => {}
     );
@@ -51,8 +51,8 @@ export class AddproductComponent implements OnInit {
   getDeviceList(event) {
     this.headerService.getDeviceList(event).subscribe(
       (data) => {
-        console.log(data["data"]);
-        this.deviceList = data["data"];
+        console.log(data['data']);
+        this.deviceList = data['data'];
       },
       (error) => {}
     );
@@ -66,7 +66,7 @@ export class AddproductComponent implements OnInit {
     console.log(obj);
     this.headerService.getIssueListById(obj).subscribe(
       (data) => {
-        this.issueList = data["data"];
+        this.issueList = data['data'];
       },
       (error) => {}
     );
@@ -96,7 +96,7 @@ export class AddproductComponent implements OnInit {
   // }
 
   getExpectedPrice() {
-    this.expectedPrice = "";
+    this.expectedPrice = '';
     let obj = {
       device: this.bookRepair.device_id,
       brand: this.bookRepair.brand_id,
@@ -105,7 +105,7 @@ export class AddproductComponent implements OnInit {
     };
     this.bookRepair.shop_id = this.shopId;
     this.shopService.getExpectedPrice(obj).subscribe((data) => {
-      data["data"].forEach((element) => {
+      data['data'].forEach((element) => {
         if (element.shop_id == this.shopId) {
           this.expectedPrice = element.TotalAmount;
         }
@@ -116,13 +116,13 @@ export class AddproductComponent implements OnInit {
     this.formSubmitted = true;
     if (addCart.valid) {
       this.bookRepair.price = this.expectedPrice;
-      this.bookRepair.cart_id = this.storeTokenService.get("cart_id");
+      this.bookRepair.cart_id = this.storeTokenService.get('cart_id');
       console.log(addCart);
       console.log(this.bookRepair);
       this.shopService.addCartData(this.bookRepair).subscribe(
         (data) => {
-          console.log(data["data"]);
-          this.activeModal.close(data["data"]);
+          console.log(data['data']);
+          this.activeModal.close(data['data']);
         },
         (error) => {}
       );
