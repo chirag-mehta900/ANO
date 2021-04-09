@@ -4,16 +4,16 @@
             <div class="user-profile-img">
                 <img src="../../assets/images/shop/user-profile.png" alt="">
             </div>
-            <div class="user-profile-detail">
+            <div class="user-profile-detail" *ngFor="let info of Details">
                 <div class="profile-detail">
-                    <h2>Darrell Keward</h2>
+                    <h2>{{info.name}}</h2>
                     <button>
-                        <img (click)="editAddress()" src="../../assets/images/edit.svg" alt="">
+                        <img (click)="editName()" src="../../assets/images/edit.svg" alt="">
                     </button>
                 </div>
-                <p>(629) 555-0129</p>
+                <p>{{info.mobileNumber}}</p>
                 <div class="gmail-chag-pass">
-                    <p>darrellkeward@gmail.com</p>
+                    <p>{{info.email}}</p>
                     <h6 (click)="Changepsw()">Change Password</h6>
                 </div>
             </div>

@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   loginInfo: FormGroup;
   formSubmitted: boolean = false;
   orderList = [];
+  userdetail: any;
   disableButton: boolean = false;
   invalidUserLog: boolean = false;
   userName: any;
@@ -73,6 +74,10 @@ export class LoginComponent implements OnInit {
             this.storeTokenService.set('token', data['data'].access_token);
             this.setUserName();
             this.activeModal.close(data['data'].access_token);
+            this.userdetail = data['data'].userDetails;
+            console.log(this.userdetail);
+
+            localStorage.setItem('users', JSON.stringify(this.userdetail));
           }
           this.disableButton = false;
         },
@@ -101,6 +106,11 @@ export class LoginComponent implements OnInit {
 
       this.orderList = data['data'];
       localStorage.setItem('orderList', JSON.stringify(this.orderList));
+    });
+
+    this.profile.getAlladdress().subscribe((data) => {
+      console.log(data['data']);
+      localStorage.setItem('UserAddress', JSON.stringify(data['data']));
     });
   }
 }

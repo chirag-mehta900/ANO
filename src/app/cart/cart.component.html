@@ -54,10 +54,11 @@
                                 <ng-template #HtmlContent>
                                     <div class="pricing-fact">
                                         <h5>Pricing Factors</h5>
-                                        <p>- Base Fee : <span>${{info.price}}</span></p>
+                                        <p>- Part Price Based on ANO’s Parts Lists (Price Scale) : <span>${{info.price}}</span></p>
+                                        <p>- Base Fee : <span>${{info.ANOBaseFees}}</span></p>
                                         <p>- ANO’s Commission Fee : <span>${{info.ANOCommissionFees}}</span></p>
                                         <p>- Repair Shop Commission Fee :<span>${{info.ShopCommissionFees}} </span></p>
-                                        <p>- Part Price Based on ANO’s Parts Lists (Price Scale)</p>
+
                                     </div>
                                 </ng-template>
                                 <img [tooltip]="HtmlContent" content-type="template" placement="right" theme="light" src="../../assets/images/checkout/outline.svg" alt="">
@@ -74,10 +75,10 @@
                                 (click)="addRepairDevice()">
                             <p>Add More</p>
                         </button>
-                        <div class="total-total">
+                        <!-- <div class="total-total">
                             <p>Total</p>
                             <h2>${{totalCartAmount}}</h2>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -171,11 +172,11 @@
                         <h2>Total to pay</h2>
                     </div>
                     <div class="base-fee-price">
-                        <h3>$45.00</h3>
-                        <h3>$45.00</h3>
-                        <h3>$45.00</h3>
-                        <h3>$45.00</h3>
-                        <h2>639.00$</h2>
+                        <h3>${{ANOBaseFees}}</h3>
+                        <h3>${{ANOCommissionFees}}</h3>
+                        <h3>${{Price}}</h3>
+                        <h3>-</h3>
+                        <h2>${{totalCartAmount}}</h2>
                     </div>
                 </div>
                 <hr>
