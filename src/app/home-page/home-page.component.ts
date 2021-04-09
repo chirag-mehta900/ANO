@@ -17,6 +17,7 @@ export class HomePageComponent implements OnInit {
   slider: any[] = [];
   display: any[] = [];
   driveForm: FormGroup;
+  invalidData: boolean = false;
 
   selectedImg = [
     'http://placehold.it/350x150/000000',
@@ -56,7 +57,12 @@ export class HomePageComponent implements OnInit {
     this.driveForm = new FormGroup({
       first_name: new FormControl(null, Validators.required),
       last_name: new FormControl(null, Validators.required),
-      email: new FormControl(null, Validators.required),
+      email: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(
+          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/
+        ),
+      ]),
       mobile_number: new FormControl(null, Validators.required),
     });
 
@@ -102,19 +108,23 @@ export class HomePageComponent implements OnInit {
     var obj = this.driveForm.value;
 
     console.log(obj);
+    if (this.driveForm.valid) {
+      this.header.driverReq(obj).subscribe((response) => {
+        console.log(response);
+        console.log(response['status']);
 
-    this.header.driverReq(obj).subscribe((response) => {
-      console.log(response);
-      console.log(response['status']);
+        if (response['status']) {
+          this.modalService.open(DriverComponent);
+        } else {
+          console.log('some fields are invalid');
+        }
 
-      if (response['status']) {
-        this.modalService.open(DriverComponent);
-      } else {
-        console.log('some fields are invalid');
-      }
-
-      this.driveForm.reset();
-    });
+        this.driveForm.reset();
+        this.invalidData = false;
+      });
+    } else {
+      this.invalidData = true;
+    }
   }
   bookRepair() {
     const modalRef = this.modalService.open(BookRepairComponent);

@@ -1,12 +1,15 @@
 <section class="select-address">
     <div class="container">
-        <div class="sec-add">
-            <h2 for="address1">202 Wayne St, Durand, MI, 48429</h2>
+        <div class="sec-add" *ngFor="let a of Address">
+            <h2 for="address1">{{a.addressLine}}</h2>
             <div class="address-radio">
-                <input type="radio" id="address1" name="address" value="address1">
+                <input type="radio" id="address1" [checked]="a.isDefault" name="address" value="address1">
             </div>
         </div>
-        <div class="sec-add">
+
+
+
+        <!-- <div class="sec-add">
             <h2 for="address2">202 Wayne St, Durand, MI, 48429</h2>
             <div class="address-radio">
                 <input type="radio" id="address2" name="address" value="address2">
@@ -17,7 +20,7 @@
             <div class="address-radio">
                 <input type="radio" id="address3" name="address" value="address3">
             </div>
-        </div>
+        </div> -->
         <div class="add-addr">
             <button (click)="Addadress()">Add New Address</button>
         </div>

@@ -12,6 +12,7 @@ import { SignupComponent } from './signup/signup.component';
 import { BookRepairComponent } from './book-repair/book-repair.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
+import { MapService } from 'src/@theme/Services/map.service';
 
 @Component({
   selector: 'app-header-module',
@@ -28,7 +29,12 @@ export class HeaderModuleComponent implements OnInit {
   @ViewChild('drop') drop: ElementRef;
   userName: any = '';
   isModalOpen: boolean = false;
-
+  Location = {
+    lat: null,
+    lng: null,
+  };
+  area: any;
+  area2: any;
   isMobile;
   constructor(
     private modalService: NgbModal,
@@ -37,7 +43,8 @@ export class HeaderModuleComponent implements OnInit {
     private storeTokenService: StoreTokenService,
     public router: Router,
     private renderer: Renderer2,
-    private _eref: ElementRef
+    private _eref: ElementRef,
+    private mapService: MapService
   ) {
     this.renderer.listen('window', 'click', (e: Event) => {
       if (
@@ -77,6 +84,25 @@ export class HeaderModuleComponent implements OnInit {
       },
       (error) => {}
     );
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.Location.lat = position.coords.latitude;
+      this.Location.lng = position.coords.longitude;
+      console.log(this.Location);
+
+      localStorage.setItem('Location', JSON.stringify(this.Location));
+      this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+
+      this.mapService
+        .getArea(this.Location.lat, this.Location.lng)
+        .subscribe((data: any) => {
+          this.area = data.results[0].formatted_address;
+          this.area2 = this.area.slice(0, 35);
+          localStorage.setItem('Address', JSON.stringify(this.area));
+
+          console.log(this.area);
+        });
+    });
   }
   // formatDevice() {
   //   this.expandPanel = this.isTablet = this.isMobile = this.isCollapsed=false;

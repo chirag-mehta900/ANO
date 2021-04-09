@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProfileService } from 'src/@theme/Services/profile.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -7,11 +9,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./edit-user.component.css'],
 })
 export class EditUserComponent implements OnInit {
-  constructor(public router: Router) {}
+  editprofile: FormGroup;
+  Details: any;
 
-  ngOnInit() {}
+  constructor(public router: Router, private profile: ProfileService) {}
+
+  ngOnInit() {
+    this.editprofile = new FormGroup({
+      name: new FormControl(null, Validators.required),
+    });
+
+    this.Details = JSON.parse(localStorage.getItem('users') || '[]');
+    console.log(this.Details);
+  }
 
   Cancel() {
     this.router.navigate(['profile']);
+  }
+
+  save() {
+    console.log(this.editprofile.value.name);
+
+    this.profile.changeDetail(this.editprofile.value).subscribe((response) => {
+      console.log(response);
+    });
   }
 }

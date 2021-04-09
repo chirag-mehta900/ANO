@@ -32,4 +32,11 @@ export class ProfileService {
       data
     );
   }
+
+  getAlladdress() {
+    return this.http.get(this.commonService.envUrl() + 'user/address');
+  }
+  changeDetail(data) {
+    return this.http.put(this.commonService.envUrl() + 'profile', data);
+  }
 }

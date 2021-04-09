@@ -23,6 +23,11 @@ export class CartComponent implements OnInit {
   shop: any[] = [];
   lat: any;
   lng: any;
+
+  ANOBaseFees: number = 0;
+  ANOCommissionFees: number = 0;
+  Price: number = 0;
+
   expecteddate: any;
   expectedtime: any;
   price: {} = {
@@ -377,6 +382,9 @@ export class CartComponent implements OnInit {
 
       for (var i = 0; i < this.displayCartInfo.length; i++) {
         this.displayCartInfo[i].id = i + 1;
+        this.ANOBaseFees += this.displayCartInfo[i].ANOBaseFees;
+        this.ANOCommissionFees += this.displayCartInfo[i].ANOCommissionFees;
+        this.Price += this.displayCartInfo[i].price;
       }
 
       console.log(this.displayCartInfo, 'new');
@@ -396,6 +404,11 @@ export class CartComponent implements OnInit {
 
     //get priously selected problem device
     this.addedDeviceProblem = JSON.parse(localStorage.getItem('deviceProblem'));
+
+    this.ANOBaseFees = this.addedDeviceProblem.ANOBaseFees;
+    this.ANOCommissionFees = this.addedDeviceProblem.ANOCommissionFees;
+    this.Price = this.addedDeviceProblem.price;
+
     console.log(this.addedDeviceProblem);
     //set Device Name
     JSON.parse(localStorage.getItem('deviceList')).forEach((element) => {
@@ -440,13 +453,17 @@ export class CartComponent implements OnInit {
 
         this.totalCartAmount = this.displayCartInfo[0].total_amount =
           data['data'][0].TotalAmount;
-        this.displayCartInfo[0].ANOBaseFees = data['data'][0].ANOBaseFees;
-        this.displayCartInfo[0].ANOCommissionFees =
+
+        this.ANOBaseFees = this.displayCartInfo[0].ANOBaseFees =
+          data['data'][0].ANOBaseFees;
+
+        this.ANOCommissionFees = this.displayCartInfo[0].ANOCommissionFees =
           data['data'][0].ANOCommissionFees;
+
         this.displayCartInfo[0].ShopCommissionFees =
           data['data'][0].ShopCommissionFees;
 
-        this.displayCartInfo[0].price = data['data'][0].price;
+        this.Price = this.displayCartInfo[0].price = data['data'][0].price;
       },
       (error) => {}
     );

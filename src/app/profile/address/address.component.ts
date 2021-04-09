@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProfileService } from 'src/@theme/Services/profile.service';
 
 @Component({
   selector: 'app-address',
@@ -7,9 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./address.component.css'],
 })
 export class AddressComponent implements OnInit {
-  constructor(public router: Router) {}
+  Address: any;
+  constructor(public router: Router, private profile: ProfileService) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.Address = JSON.parse(localStorage.getItem('UserAddress') || '[]');
+    console.log(this.Address);
+  }
 
   Addadress() {
     this.router.navigate(['profile/add-address']);

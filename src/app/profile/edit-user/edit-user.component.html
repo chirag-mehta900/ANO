@@ -1,19 +1,24 @@
 <section class="profile">
     <div class="container">
-        <div class="user-profile">
-            <div class="user-profile-img">
-                <img src="../../assets/images/shop/user-profile.png" alt="">
-            </div>
-            <div class="user-profile-detail">
-                <div class="profile-detail">
-                    <input type="text" name="user-name" id="user-name" placeholder="Enter new Name">
+
+        <form [formGroup]="editprofile">
+
+            <div class="user-profile">
+                <div class="user-profile-img">
+                    <img src="../../assets/images/shop/user-profile.png" alt="">
                 </div>
-                <p>(629) 555-0129</p>
+                <div class="user-profile-detail">
+                    <div class="profile-detail">
+                        <input type="text" formControlName="name" name="user-name" id="user-name" placeholder="Enter new Name">
+                    </div>
+                    <p>(629) 555-0129</p>
+                </div>
             </div>
-        </div>
-        <div class="profile-save">
-            <button class="cancel-btn" (click)="Cancel()">Cancel</button>
-            <button class="save-btn">Save</button>
-        </div>
+            <div class="profile-save">
+                <button class="cancel-btn" (click)="Cancel()">Cancel</button>
+                <button class="save-btn" (click)="save()">Save</button>
+            </div>
+        </form>
+
     </div>
 </section>

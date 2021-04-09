@@ -156,6 +156,9 @@
                             <input type="text" formControlName="email" name="email" id="email" placeholder="Email">
                             <input type="text" maxlength="13" formControlName="mobile_number" required onkeydown="javascript:backspacerDOWN(this,event);" onkeyup="javascript:backspacerUP(this,event);" name="mobile" id="mobile" placeholder="Mobile No">
                         </div>
+                        <div class="text-dangerr" *ngIf="invalidData">
+                            Invalid Data
+                        </div>
                         <div class="req-btn">
                             <button (click)="DriverReq()">Request</button>
                         </div>

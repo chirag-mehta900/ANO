@@ -121,6 +121,8 @@ export class BookRepairComponent implements OnInit {
     }
   }
 
+  filter() {}
+
   goToBrand() {
     this.selectBrandFlag = true;
     this.selectDeviceFlag = false;

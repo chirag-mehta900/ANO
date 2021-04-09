@@ -9,15 +9,18 @@ import { ChangePswComponent } from './change-psw/change-psw.component';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
+  Details: any;
   constructor(private modalService: NgbModal, public router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.Details = JSON.parse(localStorage.getItem('users') || '[]');
+  }
 
   Changepsw() {
     this.modalService.open(ChangePswComponent);
   }
 
-  editAddress() {
+  editName() {
     this.router.navigate(['profile/edit-user']);
   }
 
