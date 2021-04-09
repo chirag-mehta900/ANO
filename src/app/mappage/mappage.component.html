@@ -14,10 +14,10 @@
             </div>
             <div class="select-problem" *ngFor="let d of display">
                 <div class="select-device">
-                    <h3>{{d.Device}}</h3>
+                    <h3 (click)="filter()">{{d.Device}}</h3>
                 </div>
                 <div class="select-issue">
-                    <h3>{{d.problem}}</h3>
+                    <h3 (click)="filter()">{{d.problem}}</h3>
                 </div>
             </div>
             <!--Filer Pop up-->
