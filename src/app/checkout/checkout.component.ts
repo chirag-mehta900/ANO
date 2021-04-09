@@ -143,7 +143,7 @@ export class CheckoutComponent implements OnInit {
       console.log(this.detail);
 
       this.detail.forEach((e) => {
-        if (e.image == undefined) {
+        if (e.image == '') {
           e.image = this.url;
         }
       });

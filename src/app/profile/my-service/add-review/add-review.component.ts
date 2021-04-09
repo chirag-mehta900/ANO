@@ -38,9 +38,9 @@ export class AddReviewComponent implements OnInit {
 
   submit() {
     if (
-      !this.form.value.rating ||
-      !this.form.value.title ||
-      !this.form.value.commet
+      this.form.value.rating == null ||
+      this.form.value.title == null ||
+      this.form.value.commet == null
     ) {
       if (!this.form.value.rating) {
         this.Rating = true;

@@ -372,12 +372,16 @@ export class CartComponent implements OnInit {
     const modalRef = this.modalService.open(AddProductComponent);
     modalRef.result.then((result) => {
       console.log(result);
-      console.log(result.price);
       this.totalCartAmount += result.total_amount;
       this.displayCartInfo.push(result);
+
+      for (var i = 0; i < this.displayCartInfo.length; i++) {
+        this.displayCartInfo[i].id = i + 1;
+      }
+
+      console.log(this.displayCartInfo, 'new');
     });
     //this.recalculateTotalCartAmount();
-    console.log(this.displayCartInfo, 'new');
   }
 
   recalculateTotalCartAmount() {
@@ -388,11 +392,6 @@ export class CartComponent implements OnInit {
   }
 
   setPreviouslyAddedDeviceIssue() {
-    for (var i = 0; i < this.displayCartInfo.length; i++) {
-      this.displayCartInfo[i].id = i + 1;
-    }
-
-    console.log(this.displayCartInfo);
     //set static id for priously selected device problem
 
     //get priously selected problem device
@@ -481,6 +480,8 @@ export class CartComponent implements OnInit {
           this.timeList.push(element);
         }
       });
+      console.log(this.timeList);
+
       this.placeOrder.startTime = this.timeList[0]['startTime'];
       this.placeOrder.endTime = this.timeList[0]['endTime'];
     });

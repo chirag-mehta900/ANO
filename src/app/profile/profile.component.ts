@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   }
 
   checkAddress() {
-    this.router.navigate(['profile/add-address']);
+    this.router.navigate(['profile/address']);
   }
 
   checkOrder() {

@@ -20,7 +20,9 @@ export class ForgotComponent implements OnInit {
   isError: boolean = false;
   changebutton = false;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.msg = '';
+  }
 
   close() {
     this.activeModal.close();
@@ -40,14 +42,15 @@ export class ForgotComponent implements OnInit {
       this.headerService.forgotpassword(data).subscribe(
         (response) => {
           console.log(response, 'forgot response');
-          this.msg = response['message'];
+          this.msg =
+            'If an account is associated with this email id, a temporary password will be emailed to it.';
           this.changebutton = true;
           // this.activeModal.close();
           // this.modalService.open(LoginComponent);
         },
         (error) => {
           console.log(error, 'Error');
-          if (error['message'] === 'Undefined offset: 0') {
+          if (error['status'] == 400) {
             this.isError = true;
           }
         }
