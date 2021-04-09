@@ -22,12 +22,14 @@
                 <span>Password is required. </span>
             </div>
         </div>
+
+        <div class="text-dangerr" *ngIf="invalidUserLog">
+            Invalid Email or password
+        </div>
+
         <div class="login-det">
             <h2>Don't Have An Account? <span (click)="signUp()">Get started</span></h2>
         </div>
-        <span class="text-dangerr" *ngIf="invalidUserLog">
-            Invalid Email or password
-        </span>
 
         <div class="forgot-pass">
             <h3 (click)="forgot()">Forgot password?</h3>

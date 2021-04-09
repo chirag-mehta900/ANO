@@ -7,9 +7,9 @@
     <div class="login-form">
         <input type="text" name="email" id="email" (keyup)="setEmail($event.target.value)" placeholder="Email Id">
         <div class="text-dangerr" *ngIf="isError">
-            Please Enter valid Email id
+            Sorry, No account is associated with this email id.
         </div>
-        <div class="text-dangerr">
+        <div>
             {{msg}} </div>
     </div>
     <div class="submit-btn" *ngIf="!changebutton">

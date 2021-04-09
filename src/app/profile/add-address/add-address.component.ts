@@ -12,6 +12,6 @@ export class AddAddressComponent implements OnInit {
   ngOnInit() {}
 
   Cancel() {
-    this.router.navigate(['profile']);
+    this.router.navigate(['profile/address']);
   }
 }

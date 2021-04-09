@@ -39,7 +39,7 @@ export class AddProductComponent implements OnInit {
     ANOCommissionFees: null,
     ShopCommissionFees: null,
     price: null,
-    images: null,
+    images: [],
     imageFiles: File,
     problemId: null,
     deviceId: null,
@@ -195,7 +195,7 @@ export class AddProductComponent implements OnInit {
 
     //set device name in display object
     this.deviceList.forEach((element) => {
-      if (element.id == this.bookRepair.device_id) {
+      if (element.device.id == this.bookRepair.device_id) {
         this.addedDeviceProblemToDisplayInCart.deviceName =
           element.device.modelName;
         this.addedDeviceProblemToDisplayInCart.deviceId = element.device_id;
@@ -204,12 +204,13 @@ export class AddProductComponent implements OnInit {
 
     //set problem name in display object
     this.issueList.forEach((element) => {
-      if (element.id == this.bookRepair.problem_id) {
+      if (element.problem.id == this.bookRepair.problem_id) {
         this.addedDeviceProblemToDisplayInCart.problemName =
           element.problem.problemName;
         this.addedDeviceProblemToDisplayInCart.problemId = element.problem.id;
       }
     });
+    console.log(this.bookRepair);
 
     this.shopService.addCartData(this.bookRepair).subscribe(
       (data) => {
