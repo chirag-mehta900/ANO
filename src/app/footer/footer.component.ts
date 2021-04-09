@@ -20,4 +20,7 @@ export class FooterComponent implements OnInit {
   ontrack(){
     this.router.navigate(['tracking']);
   }
+  onContact() {
+    this.router.navigate(['contact']);
+  }
 }
