@@ -90,7 +90,7 @@ export class BookRepairComponent implements OnInit {
     if (this.deviceList.length == 0) {
       this.headerService.getBrandList().subscribe(
         (data) => {
-          console.log(data);
+          console.log(data);  
 
           this.deviceList = data['data'];
           console.log(this.deviceList);
@@ -122,13 +122,15 @@ export class BookRepairComponent implements OnInit {
   // }
 
   getIssueList(event) {
-    console.log(event);
+    console.log(event.target.value);
+    console.log(this.bookRepair);
+    
 
     if (event.target.value == null) {
       this.danger1 = true;
     } else {
       let obj = {
-        device_id: event.target.value,
+        device_id: this.bookRepair.device,
       };
       console.log(obj);
       this.headerService.getIssueListById(obj).subscribe(
@@ -142,7 +144,6 @@ export class BookRepairComponent implements OnInit {
     }
   }
 
-  filter() {}
 
   goToBrand() {
     this.selectBrandFlag = true;
@@ -154,8 +155,7 @@ export class BookRepairComponent implements OnInit {
     this.selectIssueFlag = true;
   }
 
-  goToDevice(event) {
-    console.log(event);
+  goToDevice() {
 
     this.selectBrandFlag = false;
     this.selectDeviceFlag = true;

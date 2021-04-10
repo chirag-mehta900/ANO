@@ -40,6 +40,8 @@
   font-display: swap;
 }
 
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
 .login-btn {
   background-color: #ffe7b1;
   border: none;
@@ -95,7 +97,27 @@ select:focus{
   outline: 0 !important;
 }
 
-
+.ng-select .ng-select-container .ng-value-container {
+  padding: 0em 0 !important;
+  padding-left: 10px !important;
+  border-top: 0em solid transparent !important;
+}
+.ng-select.ng-select-single .ng-select-container .ng-clear-wrapper {
+  bottom: 2px;
+}
+.ng-select.ng-select-single .ng-select-container .ng-arrow-wrapper {
+  bottom: 4px;
+}
+.ng-select.ng-select-single .ng-select-container {
+  height: 36px;
+  font-family: "Poppins-SemiBold";
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+}
+.ng-select, .ng-select div, .ng-select input, .ng-select span {
+  font-family: "Poppins-SemiBold";
+}
 
 
 
@@ -146,4 +168,21 @@ select:focus{
 }
 dp-date-picker.dp-material{
   width: 100%;
+}
+
+@media only screen and (max-width: 567px){
+  .carousel-arrows-outside .carousel-arrow-next{
+      right: -50px !important;
+  }
+  .carousel-arrows-outside .carousel-arrow-prev{
+    left: -41px !important;
+}
+}
+@media only screen and (max-width: 415px){
+  .carousel-arrows-outside .carousel-arrow-next{
+      right: -30px !important;
+  }
+  .carousel-arrows-outside .carousel-arrow-prev{
+    left: -33px !important;
+}
 }

@@ -747,6 +747,7 @@ animatiom
     }
     .whyus-detail {
         text-align: center !important;
+        margin-bottom: 25px;
     }
     .whyimg {
         justify-content: center;
@@ -759,6 +760,7 @@ animatiom
 @media only screen and (max-width: 768px) {
     .banner-detail {
         margin-left: 20px;
+        margin-top: -60px;
     }
     .about-img.col-md-6 {
         display: grid;
@@ -771,5 +773,82 @@ animatiom
     .select-dervice-car {
         position: inherit !important;
         margin: auto;
+    }
+}
+
+@media only screen and (max-width: 520px){
+    .counts{
+        display: grid;
+        justify-content: center;
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 415px){
+    .banner-detail h2{
+        font-size: 55px;
+    }
+    .about-img-12 .about-img-1{
+        height: 160px;
+    position: relative;
+    bottom: -37px;
+    }
+    .about-img-12 .about-img-2{
+        height: 160px;
+    }
+    .about-img-34 .about-img-3{
+        height: 105px;
+        position: relative;
+        right: -33px;
+    }
+    .about-img-34 .about-img-4{
+        height: 200px;
+    }
+    .name, .contact{
+        display: grid;
+    }
+    .requestform input {
+        width: 101%;
+        height: 45px;
+        background-color: transparent;
+    }
+    .contact{
+        margin-top: -18px;   
+    }
+    .hexagon{background-size: contain;
+        height: 242px;
+        background-position: center;
+    }
+    .hexagonetext {
+        top: 77px;
+    }
+    .howitwork-title h3, .whyus-title h3, .about-title h3, .count-head h3 {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+    .driver-title h3{
+        font-size: 30px;
+        max-width: 165px;
+    }
+    .client-title h3, .service h3{
+        font-size: 30px;
+        max-width: 260px;
+        margin-bottom: 10px;
+    }
+    .experience-img1 {
+        border-top: 2px solid #000;
+        margin-top: 20px;
+    }
+    .experience-img1 img{
+        top: 0px;
+    }
+    .store button{
+        margin-bottom: 10px;
+    }
+    .aboutus {
+        margin-top: -30px;
+    }
+    .banner-detail p{
+        padding-top: 35px;
     }
 }

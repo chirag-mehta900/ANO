@@ -57,3 +57,14 @@
     font-size: 14px;
     font-family: "Poppins-regular";
 }
+
+
+@media only screen and (max-width: 415px){
+    .nav-bar ul{
+        display: grid;
+        text-align: initial;
+    }
+    .nav-bar ul li{
+        margin-bottom: 10px;
+    }
+}

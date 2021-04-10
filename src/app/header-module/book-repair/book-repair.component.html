@@ -7,21 +7,9 @@
                     <button><img (click)="close()" src="../../../assets/images/close.svg" alt=""></button>
                 </div>
                 <p>Device Name</p>
-
-                <!-- <form class="example-form">
-                    <mat-form-field class="example-full-width">
-                        <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
-                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                {{option}}
-                            </mat-option>
-                        </mat-autocomplete>
-                    </mat-form-field>
-                </form> -->
-
-
-                <div class="optionselect">
-                    <select class="custom" name="brand" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)" placeholder="Select Brand" #device1="ngModel" [ngClass]="{
+                <!-- <div class="optionselect">
+                    <select class="custom" name="brand" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)"
+                        placeholder="Select Brand" #device1="ngModel" [ngClass]="{
                 'is-invalid':
                 device1.invalid &&
                 (formSubmitted || device1.touched) 
@@ -31,17 +19,24 @@
                     <div class="text-danger" *ngIf="danger1">
                         Select Device
                     </div>
+                </div> -->
+                <div>
+                    <ng-select name="brand" [(ngModel)]="bookRepair.device" (focus)="getIssueList($event)"
+                        #device1="ngModel" [ngClass]="{
+            'is-invalid':
+            device1.invalid &&
+            (formSubmitted || device1.touched) 
+            }">
+                        <ng-option *ngFor="let brand of deviceList" (change)="getIssueList($event)" [value]="brand.id">{{brand.full_name}}</ng-option>
+                    </ng-select>
                 </div>
-
-
-
                 <div class="sub-btn">
                     <div class="previous">
                         <button>
                             < Previous</button>
                     </div>
                     <div class="next">
-                        <button (click)="goToDevice($event.target.value)">Next</button>
+                        <button (click)="goToDevice()">Next</button>
                     </div>
                 </div>
             </div>
@@ -56,7 +51,8 @@
                 </div>
                 <p>Issue</p>
                 <div class="optionselect">
-                    <select class="custom" name="device" [(ngModel)]="bookRepair.problem" placeholder="Select Device" #device1="ngModel" [ngClass]="{
+                    <select class="custom" name="device" [(ngModel)]="bookRepair.problem" placeholder="Select Device"
+                        #device1="ngModel" [ngClass]="{
                 'is-invalid':
                 device1.invalid &&
                 (formSubmitted || device1.touched) 

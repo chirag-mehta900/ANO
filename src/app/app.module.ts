@@ -27,6 +27,7 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { PolicyComponent } from './policy/policy.component';
 import { TermComponent } from './term/term.component';
 import { DpDatePickerModule } from "ng2-date-picker";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { DpDatePickerModule } from "ng2-date-picker";
     SharedModule,
     AgmDirectionModule,
     DpDatePickerModule,
+    NgSelectModule,
     NgxStripeModule.forRoot(
       'pk_test_51IGOW4BLH39xDdN7OvD7mbgNfZjZmmF9PkfpNzm3aPOpwJyp6woCqN7rFK4GrpbSiKZnhf15m6EF7TxZEtHRjWpX00dv9LITNC'
     ),
