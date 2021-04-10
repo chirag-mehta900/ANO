@@ -7,9 +7,11 @@
                     <button><img (click)="close()" src="../../../assets/images/close.svg" alt=""></button>
                 </div>
                 <p>Device Name</p>
+
+
                 <!-- <div class="optionselect">
                     <select class="custom" name="brand" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)"
-                        placeholder="Select Brand" #device1="ngModel" [ngClass]="{
+                     placeholder="Select Brand" #device1="ngModel" [ngClass]="{
                 'is-invalid':
                 device1.invalid &&
                 (formSubmitted || device1.touched) 
@@ -21,8 +23,7 @@
                     </div>
                 </div> -->
                 <div>
-                    <ng-select name="brand" [(ngModel)]="bookRepair.device" (focus)="getIssueList($event)"
-                        #device1="ngModel" [ngClass]="{
+                    <ng-select name="brand" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)" #device1="ngModel" [ngClass]="{
             'is-invalid':
             device1.invalid &&
             (formSubmitted || device1.touched) 
@@ -51,8 +52,7 @@
                 </div>
                 <p>Issue</p>
                 <div class="optionselect">
-                    <select class="custom" name="device" [(ngModel)]="bookRepair.problem" placeholder="Select Device"
-                        #device1="ngModel" [ngClass]="{
+                    <select class="custom" name="device" [(ngModel)]="bookRepair.problem" placeholder="Select Device" #device1="ngModel" [ngClass]="{
                 'is-invalid':
                 device1.invalid &&
                 (formSubmitted || device1.touched) 

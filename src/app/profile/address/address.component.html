@@ -1,9 +1,9 @@
 <section class="select-address">
     <div class="container">
         <div class="sec-add" *ngFor="let a of Address">
-            <h2 for="address1">{{a.addressLine}}</h2>
+            <h2 for="address1">{{a.addressLine}} {{a.city}} {{a.state}} {{a.zipCode}} </h2>
             <div class="address-radio">
-                <input type="radio" id="address1" [checked]="a.isDefault" name="address" value="address1">
+                <input type="radio" id="address1" value="a.id" (change)="makedefault(a.id)" [checked]="a.isDefault" name="address" value="address1">
             </div>
         </div>
 
@@ -26,7 +26,7 @@
         </div>
         <div class="profile-save">
             <button class="cancel-btn" (click)="Cancel()">Cancel</button>
-            <button class="save-btn">Save</button>
+            <button class="save-btn" (click)="Save()">Save</button>
         </div>
     </div>
 </section>

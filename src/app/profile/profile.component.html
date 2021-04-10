@@ -23,9 +23,9 @@
             <h3>My Address</h3>
             <hr class="address-line">
             <div class="profile-add">
-                <div class="user-loaction">
+                <div class="user-loaction" *ngFor="let info of defaultAddress">
                     <img src="../../assets/images/tracking/Location.svg" alt="">
-                    <p>2715 Ash Dr. San Jose, South Dakota 83475</p>
+                    <p>{{info.addressLine}} {{info.city}} {{info.state}} {{info.zipCode}}</p>
                 </div>
                 <button>
                     <img src="../../assets/images/edit-yellow.svg" alt="">

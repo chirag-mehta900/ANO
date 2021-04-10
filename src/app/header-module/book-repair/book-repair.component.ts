@@ -53,6 +53,7 @@ export class BookRepairComponent implements OnInit {
   isSelected: boolean = false;
   danger1: boolean = false;
   danger2: boolean = false;
+  href: any;
 
   lat;
   lng;
@@ -63,6 +64,9 @@ export class BookRepairComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.href = this.router.url;
+    console.log(this.href);
+
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value))
@@ -90,7 +94,7 @@ export class BookRepairComponent implements OnInit {
     if (this.deviceList.length == 0) {
       this.headerService.getBrandList().subscribe(
         (data) => {
-          console.log(data);  
+          console.log(data);
 
           this.deviceList = data['data'];
           console.log(this.deviceList);
@@ -122,28 +126,19 @@ export class BookRepairComponent implements OnInit {
   // }
 
   getIssueList(event) {
-    console.log(event.target.value);
-    console.log(this.bookRepair);
-    
+    let obj = {
+      device_id: this.bookRepair.device,
+    };
+    console.log(obj);
+    this.headerService.getIssueListById(obj).subscribe(
+      (data) => {
+        console.log(data);
 
-    if (event.target.value == null) {
-      this.danger1 = true;
-    } else {
-      let obj = {
-        device_id: this.bookRepair.device,
-      };
-      console.log(obj);
-      this.headerService.getIssueListById(obj).subscribe(
-        (data) => {
-          console.log(data);
-
-          this.issueList = data['data'];
-        },
-        (error) => {}
-      );
-    }
+        this.issueList = data['data'];
+      },
+      (error) => {}
+    );
   }
-
 
   goToBrand() {
     this.selectBrandFlag = true;
@@ -156,7 +151,6 @@ export class BookRepairComponent implements OnInit {
   }
 
   goToDevice() {
-
     this.selectBrandFlag = false;
     this.selectDeviceFlag = true;
   }
@@ -226,13 +220,18 @@ export class BookRepairComponent implements OnInit {
           localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
 
           console.log(this.Marker);
-          this.activeModal.close();
+          if (this.href.search('map') === -1) {
+            this.activeModal.close();
 
-          this.router.navigate([
-            '/map',
-            { storeData: JSON.stringify(response['data']) },
-          ]);
+            this.router.navigate([
+              '/map',
+              { storeData: JSON.stringify(response['data']) },
+            ]);
+          } else {
+            window.location.reload();
+          }
         },
+
         (error) => {}
       );
     } else {

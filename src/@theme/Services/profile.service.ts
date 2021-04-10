@@ -71,4 +71,15 @@ export class ProfileService {
       headers: this.getAdminHeaders(),
     });
   }
+
+  makedefault(id) {
+    debugger;
+    console.log(this.commonService.envUrl() + 'user/address/makedefault/' + id);
+    return this.http.put(
+      this.commonService.envUrl() + 'user/address/makedefault/' + id,
+      {
+        headers: this.getAdminHeaders(),
+      }
+    );
+  }
 }
