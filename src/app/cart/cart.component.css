@@ -127,7 +127,7 @@
 }
 
 .add-product-service button p {
-    margin-top: -55px;
+    margin-top: -165px;
 }
 
 .custom-dropzone {
@@ -395,4 +395,13 @@ agm-map {
     margin-bottom: 1rem;
     border: 0;
     border-top: 2px solid #FFC542;
+}
+
+dp-date-picker.dp-material .dp-picker-input {
+    padding: 10px !important;
+    border: 1px solid #000000 !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-radius: 10px !important;
+    font-family: "Poppins-Regular" !important;
 }

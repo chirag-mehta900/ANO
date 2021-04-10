@@ -131,3 +131,19 @@ select:focus{
   .mobile {
     display: none;
   }
+
+  dp-date-picker.dp-material .dp-picker-input {
+    padding: 10px !important;
+    border: 1px solid #000000 !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-radius: 10px !important;
+    font-family: "Poppins-Regular" !important;
+    font-size: initial !important;
+    height: auto !important;
+    outline: none !important;
+  width: 100%;
+}
+dp-date-picker.dp-material{
+  width: 100%;
+}

@@ -96,8 +96,11 @@
                     <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab" checked>
                     <label for="deliver-cab" class="radio-label">
                         <div class="selectdate-time">
-                            <input type="date" name="date" [(ngModel)]="placeOrder.date"
-                                (input)="getTimeAccoedingToDate()" [min]="today" [value]="placeOrder.date">
+                            <!-- <input type="date" name="date" [(ngModel)]="placeOrder.date"
+                                (input)="getTimeAccoedingToDate()" [min]="today" [value]="placeOrder.date"> -->
+                                <dp-date-picker theme="dp-material"  [config]="datePickerConfig"   placeholder={{datePickerConfig.date}} required="true"
+                                (input)="getTimeAccoedingToDate()" >
+                                </dp-date-picker>
                             <select name="time" (change)="setTime($event)" placeholder="select time">
                                 <option *ngFor="let time of timeList" [value]=time.id>{{tConvert(time.startTime)}} -
                                     {{tConvert(time.endTime) }} 

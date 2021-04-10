@@ -10,6 +10,7 @@ import { HeaderService } from 'src/@theme/Services/header.service';
 import { LoginComponent } from '../header-module/login/login.component';
 import { time } from 'node:console';
 import * as moment from 'moment';
+
 // import { AddproductComponent } from './addproduct/addproduct.component';
 
 @Component({
@@ -18,6 +19,13 @@ import * as moment from 'moment';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+
+  datePickerConfig = {
+    format: "DD-MM-YYYY",
+    date : moment().format('L'),
+  };
+
+
   rating3;
   userName: any = '';
   shop: any[] = [];
@@ -277,6 +285,7 @@ export class CartComponent implements OnInit {
   issues: any[] = [];
   imageUploaded: any[] = [];
   Address: any;
+  date:any = '';
   pickupAddress: any;
   dropAddress: any;
   imageEditFlag: boolean = false;
@@ -310,13 +319,18 @@ export class CartComponent implements OnInit {
     private storeTokenService: StoreTokenService,
     private uploadService: UploadService,
     private router: Router,
-    private headerService: HeaderService
-  ) {
+    private headerService: HeaderService,
+  ) { 
     config.max = 5;
     config.readonly = true;
+    this.date = moment().format('L');
+    console.log(this.date);
+    console.log(this.datePickerConfig);
+
   }
 
   ngOnInit(): void {
+
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
 
     this.Address = JSON.parse(localStorage.getItem('Address') || '[]');
