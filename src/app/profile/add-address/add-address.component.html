@@ -1,41 +1,45 @@
 <section class="add-address">
     <div class="container">
-        <div class="addr-title">
-            <h2>Add a New Address</h2>
-        </div>
-        <div class="add-address-form">
-            <div class="form-cont">
-                <p>Full Name</p>
-                <input type="text" name="fulname" id="fulname" placeholder="Full Name">
+        <form [formGroup]="Addaddress">
+
+            <div class="addr-title">
+                <h2>Add a New Address</h2>
             </div>
-            <div class="form-cont">
-                <p>Mobile #</p>
-                <input type="number" name="mobile" id="mobile" placeholder="Mobile #">
+            <div class="add-address-form">
+                <div class="form-cont">
+                    <p>Full Name</p>
+                    <input type="text" formControlName="name" name="fulname" id="fulname" placeholder="Full Name">
+                </div>
+                <div class="form-cont">
+                    <p>Mobile</p>
+                    <input type="text" formControlName="phoneNumber" maxlength="13" required onkeydown="javascript:backspacerDOWN(this,event);" onkeyup="javascript:backspacerUP(this,event);" name="mobile" id="mobile" placeholder="Mobile">
+                </div>
+                <div class="form-cont">
+                    <p>Address (Area and Street)</p>
+                    <input type="text" formControlName="addressLine" name="address" id="address" placeholder="Add Address">
+                </div>
+                <div class="form-cont">
+                    <p>City</p>
+                    <input type="text" formControlName="city" name="city" id="city" placeholder="Enter City">
+                </div>
+                <div class="form-cont">
+                    <p>State</p>
+                    <input type="text" formControlName="state" name="state" id="state" placeholder="Enter State">
+                </div>
+                <div class="form-cont">
+                    <p>Landmark</p>
+                    <input type="text" formControlName="landMark" name="landmark" id="landmark" placeholder="Landmark">
+                </div>
+                <div class="form-cont">
+                    <p>Zip Code</p>
+                    <input type="number" formControlName="zipCode" name="zip" id="zip" placeholder="Enter Zip Code">
+                </div>
             </div>
-            <div class="form-cont">
-                <p>Address (Area and Street)</p>
-                <input type="text" name="address" id="address" placeholder="Add Address">
+
+            <div class="profile-save">
+                <button class="cancle-btn" (click)="Cancel()">Cancel</button>
+                <button class="save-btn" (click)="address()">Save</button>
             </div>
-            <div class="form-cont">
-                <p>City</p>
-                <input type="text" name="city" id="city" placeholder="Enter City">
-            </div>
-            <div class="form-cont">
-                <p>State</p>
-                <input type="text" name="state" id="state" placeholder="Enter State">
-            </div>
-            <div class="form-cont">
-                <p>Landmark</p>
-                <input type="text" name="landmark" id="landmark" placeholder="Landmark">
-            </div>
-            <div class="form-cont">
-                <p>Zip Code</p>
-                <input type="number" name="zip" id="zip" placeholder="Enter Zip Code">
-            </div>
-        </div>
-        <div class="profile-save">
-            <button class="cancle-btn" (click)="Cancel()">Cancel</button>
-            <button class="save-btn">Save</button>
-        </div>
+        </form>
     </div>
 </section>

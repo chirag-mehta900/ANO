@@ -301,7 +301,9 @@ export class MappageComponent implements OnInit {
     this.devicelist = JSON.parse(localStorage.getItem('deviceList') || '[]');
     console.log(this.devicelist[this.Configs['device']]);
 
-    this.display[0].Device = this.devicelist[this.Configs['device']].full_name;
+    this.display[0].Device = this.devicelist[
+      this.Configs['device'] - 1
+    ].full_name;
 
     for (var i = 0; i < this.prolist.length; i++) {
       if (this.prolist[i].problemId == this.Configs['problem']) {
