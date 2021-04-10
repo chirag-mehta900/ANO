@@ -9,8 +9,9 @@
                 <p>Device Name</p>
 
 
-                <div class="optionselect">
-                    <select class="custom" name="brand" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)" placeholder="Select Brand" #device1="ngModel" [ngClass]="{
+                <!-- <div class="optionselect">
+                    <select class="custom" name="brand" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)"
+                     placeholder="Select Brand" #device1="ngModel" [ngClass]="{
                 'is-invalid':
                 device1.invalid &&
                 (formSubmitted || device1.touched) 
@@ -20,17 +21,23 @@
                     <div class="text-danger" *ngIf="danger1">
                         Select Device
                     </div>
+                </div> -->
+                <div>
+                    <ng-select name="brand" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)" #device1="ngModel" [ngClass]="{
+            'is-invalid':
+            device1.invalid &&
+            (formSubmitted || device1.touched) 
+            }">
+                        <ng-option *ngFor="let brand of deviceList" (change)="getIssueList($event)" [value]="brand.id">{{brand.full_name}}</ng-option>
+                    </ng-select>
                 </div>
-
-
-
                 <div class="sub-btn">
                     <div class="previous">
                         <button>
                             < Previous</button>
                     </div>
                     <div class="next">
-                        <button (click)="goToDevice($event.target.value)">Next</button>
+                        <button (click)="goToDevice()">Next</button>
                     </div>
                 </div>
             </div>

@@ -117,7 +117,7 @@
     position: absolute;
     background-color: #ffffff;
     height: 100vh;
-    width: 400px;
+    width: 70%;
     top: 0%;
     left: 0%;
 }
@@ -131,4 +131,31 @@
     font-size: 12px;
     margin-left: 5px;
     margin-bottom: 0px;
+}
+.hea-ano-mobile {
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+.hab-bug{
+    position: absolute;
+    left: 25px;
+    bottom: 25px;
+    height: 25px;
+}
+.hed-cont-pad{
+    display: grid;
+    padding: 30px;
+}
+.hed-cont-pad .ano-logo{
+    justify-content: center;
+}
+.hed-cont-pad ul {
+    margin-top: 30px;
+    list-style: none;
+}
+.hed-cont-pad ul li {
+    margin-bottom: 15px;
+    font-size: 20px;
 }

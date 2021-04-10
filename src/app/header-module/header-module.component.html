@@ -63,18 +63,19 @@
             </nav>
         </div>
     </div>
-    <div class="container mobile">
-        <div class="hea-ano">
-            <button #toggleButton (click)="toggleMenu()">
-                hunbagger
-            </button>
+    <div class="mobile">
+        <div class="hea-ano-mobile">
+            <img class="hab-bug img-fluid" #toggleButton (click)="toggleMenu()" src="../../assets/images/hamb.svg" alt="">
             <div class="ano-logo">
                 <img (click)="onhome()" src="../../assets/images/logo.svg" alt="">
             </div>
         </div>
         <div class="header-mobile" *ngIf="isMenuOpen" #menu>
-            <nav>
+            <nav class="hed-cont-pad">
                 <div>
+                    <div class="ano-logo">
+                        <img (click)="onhome()" src="../../assets/images/logo.svg" alt="">
+                    </div>
                     <ul>
                         <li (click)="onhome()" class="nav-item">Home</li>
                         <li (click)="onContact()" class="nav-item">Contact Us</li>
@@ -82,7 +83,8 @@
                         <li *ngIf="!userName" class="nav-item"><button class="login-btn" (click)="logIn()">Log
                                 In</button></li>
                         <div>
-                            <li *ngIf="userName"><button #userProfile (click)="openDropdown()" class="welcom-btn">{{userName}} <img
+                            <li *ngIf="userName"><button #userProfile (click)="openDropdown()"
+                                    class="welcom-btn">{{userName}} <img
                                         src="../../assets/images/profile/caret_down.svg" alt=""></button></li>
                             <div *ngIf="isopenDropdown" #drop>
                                 <div class="user-drop">

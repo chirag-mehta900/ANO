@@ -126,27 +126,19 @@ export class BookRepairComponent implements OnInit {
   // }
 
   getIssueList(event) {
-    console.log(event);
+    let obj = {
+      device_id: this.bookRepair.device,
+    };
+    console.log(obj);
+    this.headerService.getIssueListById(obj).subscribe(
+      (data) => {
+        console.log(data);
 
-    if (event.target.value == null) {
-      this.danger1 = true;
-    } else {
-      let obj = {
-        device_id: event.target.value,
-      };
-      console.log(obj);
-      this.headerService.getIssueListById(obj).subscribe(
-        (data) => {
-          console.log(data);
-
-          this.issueList = data['data'];
-        },
-        (error) => {}
-      );
-    }
+        this.issueList = data['data'];
+      },
+      (error) => {}
+    );
   }
-
-  filter() {}
 
   goToBrand() {
     this.selectBrandFlag = true;
@@ -158,9 +150,7 @@ export class BookRepairComponent implements OnInit {
     this.selectIssueFlag = true;
   }
 
-  goToDevice(event) {
-    console.log(event);
-
+  goToDevice() {
     this.selectBrandFlag = false;
     this.selectDeviceFlag = true;
   }
