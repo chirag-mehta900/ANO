@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProfileService } from 'src/@theme/Services/profile.service';
@@ -9,7 +9,10 @@ import { ProfileService } from 'src/@theme/Services/profile.service';
   styleUrls: ['./add-review.component.css'],
 })
 export class AddReviewComponent implements OnInit {
+  @Output('shopid') shopid;
+
   rating = 0;
+
   public form: FormGroup;
   Rating: boolean = false;
   Title: boolean = false;
@@ -21,6 +24,8 @@ export class AddReviewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.shopid);
+
     this.Rating = false;
     this.Title = false;
     this.Comment = false;
@@ -58,9 +63,14 @@ export class AddReviewComponent implements OnInit {
         this.Comment = false;
       }
     } else {
-      this.profile.SubmitReview(this.form.value, 1).subscribe((data) => {
-        console.log(data);
-      });
+      this.profile
+        .SubmitReview(this.form.value, this.shopid)
+        .subscribe((data) => {
+          console.log(data);
+          if (data['status'] == 200) {
+            this.activeModal.close();
+          }
+        });
     }
   }
 }
