@@ -13,12 +13,21 @@ export class AddressComponent implements OnInit {
 
   ngOnInit() {
     this.profile.getAlladdress().subscribe((data) => {
-      console.log();
+      console.log(data);
       this.Address = data['data'];
     });
     console.log(this.Address);
   }
 
+  Save() {
+    this.router.navigate(['profile']);
+  }
+  makedefault(event) {
+    console.log(event);
+    this.profile.makedefault(event).subscribe((data) => {
+      console.log(data);
+    });
+  }
   Addadress() {
     this.router.navigate(['profile/add-address']);
   }

@@ -11,6 +11,8 @@ import { ChangePswComponent } from './change-psw/change-psw.component';
 })
 export class ProfileComponent implements OnInit {
   Details: any[] = [];
+  defaultAddress: any[] = [];
+
   constructor(
     private modalService: NgbModal,
     public router: Router,
@@ -22,6 +24,17 @@ export class ProfileComponent implements OnInit {
       console.log(data);
       this.Details.push(data['data']);
       console.log(this.Details);
+    });
+
+    this.profile.getAlladdress().subscribe((data) => {
+      console.log(data);
+      data['data'].filter((x) => {
+        console.log(x);
+        if (x.isDefault) {
+          this.defaultAddress.push(x);
+        }
+      });
+      console.log(this.defaultAddress);
     });
   }
 

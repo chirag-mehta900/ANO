@@ -53,6 +53,7 @@ export class BookRepairComponent implements OnInit {
   isSelected: boolean = false;
   danger1: boolean = false;
   danger2: boolean = false;
+  href: any;
 
   lat;
   lng;
@@ -63,6 +64,9 @@ export class BookRepairComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.href = this.router.url;
+    console.log(this.href);
+
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value))
@@ -226,13 +230,18 @@ export class BookRepairComponent implements OnInit {
           localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
 
           console.log(this.Marker);
-          this.activeModal.close();
+          if (this.href.search('map') === -1) {
+            this.activeModal.close();
 
-          this.router.navigate([
-            '/map',
-            { storeData: JSON.stringify(response['data']) },
-          ]);
+            this.router.navigate([
+              '/map',
+              { storeData: JSON.stringify(response['data']) },
+            ]);
+          } else {
+            window.location.reload();
+          }
         },
+
         (error) => {}
       );
     } else {
