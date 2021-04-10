@@ -27,7 +27,7 @@
                 device1.invalid &&
                 (formSubmitted || device1.touched)  
                 }">
-                        <option  *ngFor="let issue of issueList" (onClick)="getExpectedPrice(issue)" [value]="issue.problem.id">
+                        <option  *ngFor="let issue of issueList" [value]="issue.problem.id">
                             {{issue.problem.problemName}}
                         </option>
                     </select>
@@ -37,8 +37,8 @@
                     </div>
                 </div>
             </div>
-            <div class="price-part" *ngFor="let issue of issueList">
-                <p>Expected Price:<span>{{issue.TotalAmount}}</span></p>
+            <div class="price-part">
+                <p>Expected Price:<span>{{bookRepair.price}}</span></p>
             </div>
             <div class="add-device-btn">
                 <button type="submit" (click)="addDevice()">Add Device</button>

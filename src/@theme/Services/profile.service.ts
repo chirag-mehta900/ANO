@@ -65,4 +65,10 @@ export class ProfileService {
       headers: this.getAdminHeaders(),
     });
   }
+
+  addAddress(data) {
+    return this.http.post(this.commonService.envUrl() + 'user/address', data, {
+      headers: this.getAdminHeaders(),
+    });
+  }
 }
