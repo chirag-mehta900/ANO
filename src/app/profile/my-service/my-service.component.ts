@@ -20,11 +20,21 @@ export class MyServiceComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.orderList = JSON.parse(localStorage.getItem('orderList') || '[]');
-    console.log(this.orderList);
+    this.profile.getOrderlist().subscribe((data) => {
+      console.log(data['data']);
+
+      this.orderList = data['data'];
+      // localStorage.setItem('orderList', JSON.stringify(this.orderList));
+    });
+
+    // this.orderList = JSON.parse(localStorage.getItem('orderList') || '[]');
+    // console.log(this.orderList);
   }
 
-  addreview() {
-    this.modalService.open(AddReviewComponent);
+  addreview(order) {
+    console.log(order[0].id);
+
+    const modalref = this.modalService.open(AddReviewComponent);
+    modalref.componentInstance.shopid = order[0].id;
   }
 }

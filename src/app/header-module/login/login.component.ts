@@ -100,17 +100,5 @@ export class LoginComponent implements OnInit {
       },
       (error) => {}
     );
-
-    this.profile.getOrderlist().subscribe((data) => {
-      console.log(data['data']);
-
-      this.orderList = data['data'];
-      localStorage.setItem('orderList', JSON.stringify(this.orderList));
-    });
-
-    this.profile.getAlladdress().subscribe((data) => {
-      console.log(data['data']);
-      localStorage.setItem('UserAddress', JSON.stringify(data['data']));
-    });
   }
 }

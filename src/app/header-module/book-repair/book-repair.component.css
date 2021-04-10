@@ -1,96 +1,123 @@
 .select-brand {
-  padding: 20px;
+    padding: 20px;
 }
+
 .select-device {
-  padding: 20px;
+    padding: 20px;
 }
+
 .select-problem {
-  padding: 20px;
+    padding: 20px;
 }
+
 .select-brand h2 {
-  font-family: "Poppins-SemiBold";
-  font-size: 30px;
-  margin-bottom: 10px;
+    font-family: "Poppins-SemiBold";
+    font-size: 30px;
+    margin-bottom: 10px;
 }
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
 .select-brand p {
-  font-family: "Poppins-SemiBold";
-  font-size: 15px;
-  margin-bottom: 10px;
-  color: #ffc542;
+    font-family: "Poppins-SemiBold";
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: #ffc542;
 }
+
 .select-device h2 {
-  font-family: "Poppins-SemiBold";
-  font-size: 30px;
-  margin-bottom: 10px;
+    font-family: "Poppins-SemiBold";
+    font-size: 30px;
+    margin-bottom: 10px;
 }
+
 .select-device p {
-  font-family: "Poppins-SemiBold";
-  font-size: 15px;
-  margin-bottom: 10px;
-  color: #ffc542;
+    font-family: "Poppins-SemiBold";
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: #ffc542;
 }
+
 .select-problem h2 {
-  font-family: "Poppins-SemiBold";
-  font-size: 30px;
-  margin-bottom: 10px;
+    font-family: "Poppins-SemiBold";
+    font-size: 30px;
+    margin-bottom: 10px;
 }
+
 .select-problem p {
-  font-family: "Poppins-SemiBold";
-  font-size: 15px;
-  margin-bottom: 10px;
-  color: #ffc542;
+    font-family: "Poppins-SemiBold";
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: #ffc542;
 }
+
 .ng-select.custom .ng-select-container {
-  padding-left: 10px !important;
-  padding-right: 10px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
 }
+
 .ng-select.custom {
-  border: 10px;
-  min-height: 0px;
-  border-radius: 10px;
+    border: 10px;
+    min-height: 0px;
+    border-radius: 10px;
 }
+
 .sub-btn {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
+
 .previous button {
-  border: none;
-  background-color: transparent;
-  color: #d0d1d2;
-  padding: 10px;
-  font-family: "Poppins-SemiBold";
-  width: 110px;
+    border: none;
+    background-color: transparent;
+    color: #d0d1d2;
+    padding: 10px;
+    font-family: "Poppins-SemiBold";
+    width: 110px;
 }
+
 .previou button {
-  border: none;
-  background-color: transparent;
-  color: #000000;
-  padding: 10px;
-  font-family: "Poppins-SemiBold";
-  width: 110px;
+    border: none;
+    background-color: transparent;
+    color: #000000;
+    padding: 10px;
+    font-family: "Poppins-SemiBold";
+    width: 110px;
 }
+
 .next button {
-  border: none;
-  background-color: #ffc542;
-  color: #000000;
-  font-family: "Poppins-SemiBold";
-  padding: 10px;
-  border-radius: 5px;
-  width: 110px;
+    border: none;
+    background-color: #ffc542;
+    color: #000000;
+    font-family: "Poppins-SemiBold";
+    padding: 10px;
+    border-radius: 5px;
+    width: 110px;
 }
+
 .optionselect select {
-  font-family: "Poppins-SemiBold";
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 25px;
+    font-family: "Poppins-SemiBold";
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 25px;
 }
-.close-side{
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
+
+.close-side {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
 }
-.close-side button{
-  border: none;
-  background-color: transparent;
+
+.close-side button {
+    border: none;
+    background-color: transparent;
 }

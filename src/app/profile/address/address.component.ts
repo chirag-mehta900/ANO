@@ -12,7 +12,10 @@ export class AddressComponent implements OnInit {
   constructor(public router: Router, private profile: ProfileService) {}
 
   ngOnInit() {
-    this.Address = JSON.parse(localStorage.getItem('UserAddress') || '[]');
+    this.profile.getAlladdress().subscribe((data) => {
+      console.log();
+      this.Address = data['data'];
+    });
     console.log(this.Address);
   }
 

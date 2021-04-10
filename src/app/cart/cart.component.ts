@@ -483,7 +483,7 @@ export class CartComponent implements OnInit {
       shopId: this.shop[0].id,
       date: this.placeOrder.date,
     };
-    // console.log(getTimeObj);
+    console.log(getTimeObj);
 
     this.shopService.getTimeByDate(getTimeObj).subscribe((data) => {
       this.today = new Date();

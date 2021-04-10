@@ -30,8 +30,16 @@ export class EditUserComponent implements OnInit {
   save() {
     console.log(this.editprofile.value.name);
 
-    this.profile.changeDetail(this.editprofile.value).subscribe((response) => {
-      console.log(response);
-    });
+    this.profile.changeDetail(this.editprofile.value).subscribe(
+      (response) => {
+        console.log(response);
+        if (response['status'] == 200) {
+          this.router.navigate(['profile']);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

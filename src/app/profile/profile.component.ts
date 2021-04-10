@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProfileService } from 'src/@theme/Services/profile.service';
 import { ChangePswComponent } from './change-psw/change-psw.component';
 
 @Component({
@@ -9,11 +10,19 @@ import { ChangePswComponent } from './change-psw/change-psw.component';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  Details: any;
-  constructor(private modalService: NgbModal, public router: Router) {}
+  Details: any[] = [];
+  constructor(
+    private modalService: NgbModal,
+    public router: Router,
+    private profile: ProfileService
+  ) {}
 
   ngOnInit() {
-    this.Details = JSON.parse(localStorage.getItem('users') || '[]');
+    this.profile.getUserDetail().subscribe((data) => {
+      console.log(data);
+      this.Details.push(data['data']);
+      console.log(this.Details);
+    });
   }
 
   Changepsw() {

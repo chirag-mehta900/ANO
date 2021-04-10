@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderService } from 'src/@theme/Services/header.service';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 type ResponseType = {
   data: [
@@ -17,6 +20,10 @@ type ResponseType = {
   styleUrls: ['./book-repair.component.css'],
 })
 export class BookRepairComponent implements OnInit {
+  myControl = new FormControl();
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredOptions: Observable<string[]>;
+
   shopmarker: object = {};
   tempData: [] = [];
   Data: any[] = [];
@@ -56,6 +63,11 @@ export class BookRepairComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value))
+    );
+
     this.deviceList = JSON.parse(localStorage.getItem('deviceList') || '[]');
 
     if (!navigator.geolocation) {
@@ -65,6 +77,15 @@ export class BookRepairComponent implements OnInit {
 
     this.getBrandList();
   }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(
+      (option) => option.toLowerCase().indexOf(filterValue) === 0
+    );
+  }
+
   getBrandList() {
     if (this.deviceList.length == 0) {
       this.headerService.getBrandList().subscribe(
