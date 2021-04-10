@@ -251,7 +251,8 @@ export class CartComponent implements OnInit {
   ];
 
   subscription: any;
-
+  distanceInMiles : any;
+  deliveryPrice :any;
   placeOrder: any = {
     shop_id: null,
     transactionId: null,
@@ -360,7 +361,15 @@ export class CartComponent implements OnInit {
     this.getCurrentDate();
     this.getTimeAccoedingToDate();
     this.getrepairtime(36);
-
+    
+    var lat1 = this.Location.lat;
+    var lon1 = this.Location.lng;
+    var lat2 = this.shop[0].latitude;
+    var lon2 = this.shop[0].longitude;
+    this.distanceInMiles = this.getDistanceFromLatLonInMiles(lat1, lon1, lat2, lon2, 'M');
+    this.distanceInMiles = Number(this.distanceInMiles.toFixed(2));
+    this.deliveryPrice = this.distanceInMiles * 0.6;
+    this.deliveryPrice = Number(this.deliveryPrice.toFixed(2));
     // var finaldate =  new Date(this.new)
     // console.log(finaldate);
 
@@ -368,6 +377,23 @@ export class CartComponent implements OnInit {
 
     // console.log(moment().add(3, 'days').calendar(),"time");
   }
+  
+  getDistanceFromLatLonInMiles(lat1, lon1, lat2, lon2, unit) {
+            var radlat1 = Math.PI * lat1/180
+            var radlat2 = Math.PI * lat2/180
+            var radlon1 = Math.PI * lon1/180
+            var radlon2 = Math.PI * lon2/180
+            var theta = lon1-lon2
+            var radtheta = Math.PI * theta/180
+            var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            dist = Math.acos(dist)
+            dist = dist * 180/Math.PI
+            dist = dist * 60 * 1.1515
+            if (unit=="K") { dist = dist * 1.609344 }
+            if (unit=="N") { dist = dist * 0.8684 }
+            return dist
+  }
+
 
   getrepairtime(h) {
     this.new = Date.now() + h * 60 * 60 * 1000;

@@ -171,15 +171,15 @@
                         <h3>Base fee</h3>
                         <h3>ANO’s Commission Fee: 20%</h3>
                         <h3>Repair Charge</h3>
-                        <h3>Delivery</h3>
+                        <h3>Delivery(distance {{distanceInMiles}})</h3>
                         <h2>Total to pay</h2>
                     </div>
                     <div class="base-fee-price">
                         <h3>${{ANOBaseFees}}</h3>
                         <h3>${{ANOCommissionFees}}</h3>
                         <h3>${{Price}}</h3>
-                        <h3>-</h3>
-                        <h2>${{totalCartAmount}}</h2>
+                        <h3>${{deliveryPrice}}</h3>
+                        <h2>${{totalCartAmount + deliveryPrice}}</h2>
                     </div>
                 </div>
                 <hr>
