@@ -1,8 +1,8 @@
 <section class="map-booking">
     <div class="bg-map">
-        <agm-map [latitude]="Lat" [longitude]="Lng" [zoom]="12" [styles]="styles">
+        <agm-map [latitude]="Lat" [longitude]="Lng" [zoom]="10" [styles]="styles">
             <agm-marker [latitude]="Lat" [longitude]="Lng" [iconUrl]="Location.Icon"></agm-marker>
-            <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude" [label]="m.price" [iconUrl]="m.icon"></agm-marker>
+            <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude" [iconUrl]="m.icon"></agm-marker>
             <!-- [label]="m.price" -->
         </agm-map>
     </div>
@@ -12,16 +12,16 @@
                 <input type="text" name="mapshop" id="shop" placeholder="Search Shop">
                 <button (click)="filter()"><img src="../../assets/images/Sliders.svg" alt=""></button>
             </div>
-            <div class="select-problem" *ngFor="let d of display">
+            <!-- <div class="select-problem" *ngFor="let d of display">
                 <div class="select-device">
                     <h3 (click)="filter()">{{d.Device}}</h3>
                 </div>
                 <div class="select-issue">
                     <h3 (click)="filter()">{{d.problem}}</h3>
                 </div>
-            </div>
+            </div> -->
             <!--Filer Pop up-->
-            <div *ngIf="filterFlag">
+            <!-- <div *ngIf="filterFlag">
                 <form #Repair="ngForm">
                     <div class="filter-popup">
                         <h2>Filter</h2>
@@ -41,23 +41,27 @@
                             <option *ngFor="let device of issueList" [value]="device.id">{{device.problem.problemName}}
                             </option>
                         </select>
-                        </div>
-                        <!-- <p>PROBLEM</p>
+                        </div> -->
+
+
+            <!-- <p>PROBLEM</p>
                     <div class="optionselect">
                         <select class="custom" name="problem" [(ngModel)]="filterData.problem_id" placeholder="Select Problem">
                             <option *ngFor="let issue of issueList" [value]="issue.id">{{issue.problem.problemName}}
                             </option>
                         </select>
                     </div> -->
-                        <div class="filter-popup-btn">
+
+
+            <!-- <div class="filter-popup-btn">
                             <button (click)="applyFilter(Repair)">Apply Filter</button>
                             <button>Close</button>
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> -->
             <div class="shop-come">
-                <div class="shop-box" *ngFor="let store of Shoplist" (click)="shopDetail(store.id,store)">
+                <div class="shop-box" *ngFor="let store of newShop" (click)="shopDetail(store.id,store)">
                     <div class="shop-ing">
                         <img class="img-fluid" src="{{store.image}}" alt="">
                     </div>
@@ -73,10 +77,10 @@
                                 <img src="../../assets/images/Icon awesome-car.svg" alt="">
                                 <p>{{store.distance | number : '1.2-2'}}</p>
                             </div>
-                            <div class="dis-f">
+                            <!-- <div class="dis-f">
                                 <img src="../../assets/images/Icon material-attach-money.svg" alt="">
                                 <p *ngFor="let price of store.pricing">{{price.price}}</p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -99,7 +103,7 @@
                 <h2>Top Shop</h2>
             </div>
             <carousel [height]="245" [cellWidth]="320" [arrowsOutside]="true">
-                <div class="carousel-cell shop-box-carousel" *ngFor="let store of Shoplist" (click)="shopDetail(store.id,store)" [height]="245" [cellWidth]="320">
+                <div class="carousel-cell shop-box-carousel" *ngFor="let store of newShop" (click)="shopDetail(store.id,store)" [height]="245" [cellWidth]="320">
                     <div class="shop-img">
                         <img class="img-fluid" src="{{store.image}}" alt="">
                     </div>
@@ -115,10 +119,10 @@
                                 <img src="../../assets/images/Icon awesome-car.svg" alt="">
                                 <p>{{store.distance | number : '1.2-2'}}</p>
                             </div>
-                            <div class="dis-f">
+                            <!-- <div class="dis-f">
                                 <img src="../../assets/images/Icon material-attach-money.svg" alt="">
                                 <p *ngFor="let price of store.pricing">{{price.price}}</p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

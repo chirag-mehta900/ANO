@@ -6,6 +6,7 @@ import { CommonService } from 'src/@theme/Services/common.service';
 import { HeaderService } from 'src/@theme/Services/header.service';
 import { BookRepairComponent } from '../header-module/book-repair/book-repair.component';
 import { DriverComponent } from '../home-page/driver/driver.component';
+import { MapService } from 'src/@theme/Services/map.service';
 
 @Component({
   selector: 'app-home-page',
@@ -17,6 +18,7 @@ export class HomePageComponent implements OnInit {
   slider: any[] = [];
   display: any[] = [];
   driveForm: FormGroup;
+  area: any;
   invalidData: boolean = false;
 
   selectedImg = [
@@ -50,7 +52,8 @@ export class HomePageComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private header: HeaderService,
-    private router: Router
+    private router: Router,
+    private mapService: MapService
   ) {}
 
   ngOnInit() {
@@ -85,8 +88,8 @@ export class HomePageComponent implements OnInit {
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
 
     if (this.Location.lat == 0 && this.Location.lng == 0) {
-      this.Location.lat = 21.27;
-      this.Location.lng = 72.958;
+      this.Location.lat = 33.448376;
+      this.Location.lng = -112.074036;
 
       this.lat = this.Location.lat;
       this.lng = this.Location.lng;
@@ -102,6 +105,15 @@ export class HomePageComponent implements OnInit {
       console.log(this.slider);
       this.display.push(this.slider[0]);
     });
+
+    this.mapService
+      .getArea(this.Location.lat, this.Location.lng)
+      .subscribe((data: any) => {
+        this.area = data.results[0].formatted_address;
+        localStorage.setItem('Address', JSON.stringify(this.area));
+
+        console.log(this.area);
+      });
   }
 
   DriverReq() {

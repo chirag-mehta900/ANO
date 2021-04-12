@@ -35,7 +35,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
 
       // this.userId = service.getDecodeToken("userId");
       if (request.url.indexOf('googleapis.com') !== 13) {
-        console.log('from if', request.url);
+        // console.log('from if', request.url);
 
         request = request.clone({
           setHeaders: {
