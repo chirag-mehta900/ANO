@@ -1,4 +1,4 @@
-  import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -26,9 +26,9 @@ import { ContactComponent } from './contact/contact.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { PolicyComponent } from './policy/policy.component';
 import { TermComponent } from './term/term.component';
-import { DpDatePickerModule } from "ng2-date-picker";
+import { DpDatePickerModule } from 'ng2-date-picker';
 import { NgSelectModule } from '@ng-select/ng-select';
-
+import { GetAllShopComponent } from './get-all-shop/get-all-shop.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ContactComponent,
     PolicyComponent,
     TermComponent,
-    
+    GetAllShopComponent,
   ],
   imports: [
     BrowserModule,

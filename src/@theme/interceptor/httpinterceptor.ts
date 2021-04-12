@@ -30,8 +30,13 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     const token = localStorage.getItem('token');
     if (token) {
       let service = this.injector.get(JwtTokenService);
+      // console.log(request.url.indexOf('googleapis.com'));
+      // console.log(request.url);
+
       // this.userId = service.getDecodeToken("userId");
       if (request.url.indexOf('googleapis.com') !== 13) {
+        // console.log('from if', request.url);
+
         request = request.clone({
           setHeaders: {
             Authorization: `Bearer ${token}`,

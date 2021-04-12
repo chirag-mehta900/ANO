@@ -56,4 +56,11 @@ export class ShopService {
   deleteCartData(id) {
     return this.httpClient.delete(this.commonService.envUrl() + 'cart/' + id);
   }
+
+  getallstore(data) {
+    return this.httpClient.post(
+      this.commonService.envUrl() + 'filter/shop',
+      data
+    );
+  }
 }

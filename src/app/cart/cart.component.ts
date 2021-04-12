@@ -19,12 +19,10 @@ import * as moment from 'moment';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-
   datePickerConfig = {
-    format: "DD-MM-YYYY",
-    date : moment().format('L'),
+    format: 'DD-MM-YYYY',
+    date: moment().format('L'),
   };
-
 
   rating3;
   userName: any = '';
@@ -251,8 +249,8 @@ export class CartComponent implements OnInit {
   ];
 
   subscription: any;
-  distanceInMiles : any;
-  deliveryPrice :any;
+  distanceInMiles: any;
+  deliveryPrice: any;
   placeOrder: any = {
     shop_id: null,
     transactionId: null,
@@ -286,7 +284,7 @@ export class CartComponent implements OnInit {
   issues: any[] = [];
   imageUploaded: any[] = [];
   Address: any;
-  date:any = '';
+  date: any = '';
   pickupAddress: any;
   dropAddress: any;
   imageEditFlag: boolean = false;
@@ -321,18 +319,16 @@ export class CartComponent implements OnInit {
     private uploadService: UploadService,
     private router: Router,
     private headerService: HeaderService,
-    private mapService : MapService,
-  ) { 
+    private mapService: MapService
+  ) {
     config.max = 5;
     config.readonly = true;
     this.date = moment().format('L');
     console.log(this.date);
     console.log(this.datePickerConfig);
-
   }
 
   ngOnInit(): void {
-
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
 
     this.Address = JSON.parse(localStorage.getItem('Address') || '[]');
@@ -362,18 +358,17 @@ export class CartComponent implements OnInit {
     this.getCurrentDate();
     this.getTimeAccoedingToDate();
     this.getrepairtime(36);
-    
+
     var lat1 = this.Location.lat;
     var lon1 = this.Location.lng;
     var lat2 = this.shop[0].latitude;
     var lon2 = this.shop[0].longitude;
-    var source = lat1.toString() + "," + lon1.toString();
-    var destination = lat2.toString() + "," + lon2.toString();
-    
-    this.mapService.getDistanceInMile(source,destination).subscribe((data)=>{
-      console.log(data,"google api");
-      
-    })
+    var source = lat1.toString() + ',' + lon1.toString();
+    var destination = lat2.toString() + ',' + lon2.toString();
+
+    this.mapService.getDistanceInMile(source, destination).subscribe((data) => {
+      console.log(data, 'google api');
+    });
 
     // var finaldate =  new Date(this.new)
     // console.log(finaldate);
@@ -382,7 +377,7 @@ export class CartComponent implements OnInit {
 
     // console.log(moment().add(3, 'days').calendar(),"time");
   }
-  
+
   getrepairtime(h) {
     this.new = Date.now() + h * 60 * 60 * 1000;
     this.expecteddate = moment(this.new).format('YYYY-MM-DD');

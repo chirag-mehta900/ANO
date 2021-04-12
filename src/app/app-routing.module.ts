@@ -11,6 +11,7 @@ import { ShopComponent } from './shop/shop.component';
 import { TermComponent } from './term/term.component';
 import { TrackingComponent } from './tracking/tracking.component';
 import { TrackingmapComponent } from './trackingmap/trackingmap.component';
+import { GetAllShopComponent } from './get-all-shop/get-all-shop.component';
 
 const routes: Routes = [
   { path: 'map', component: MappageComponent },
@@ -24,7 +25,7 @@ const routes: Routes = [
   { path: 'policy', component: PolicyComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'term', component: TermComponent },
-
+  { path: 'getall', component: GetAllShopComponent },
 
   {
     path: '',
