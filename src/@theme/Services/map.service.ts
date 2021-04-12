@@ -10,7 +10,7 @@ export class MapService {
     'Access-Control-Allow-Origin': '*',
     'content-type': 'application/json',
   });
-
+  // AIzaSyCrr-U8HBzd2cqmW9UpipocVTl9rHjCphY
   url = 'https://maps.googleapis.com/maps/api/geocode/';
   Key = 'AIzaSyCrr-U8HBzd2cqmW9UpipocVTl9rHjCphY';
   constructor(private httpClient: HttpClient) {}
@@ -33,7 +33,7 @@ export class MapService {
     return this.httpClient.get(
       'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' +
         source +
-        '&destinations=side_of_road:' +
+        '&destinations=' +
         destination +
         '&key=' +
         this.Key

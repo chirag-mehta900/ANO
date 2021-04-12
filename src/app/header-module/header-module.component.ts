@@ -78,6 +78,18 @@ export class HeaderModuleComponent implements OnInit {
     }
   }
   ngOnInit() {
+    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+
+    this.mapService
+      .getArea(this.Location.lat, this.Location.lng)
+      .subscribe((data: any) => {
+        this.area = data.results[0].formatted_address;
+        this.area2 = this.area.slice(0, 35);
+        localStorage.setItem('Address', JSON.stringify(this.area));
+
+        console.log(this.area);
+      });
+
     this.headerService.getUserName().subscribe(
       (data) => {
         this.userName = data['data'].name;

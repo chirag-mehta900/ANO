@@ -65,7 +65,6 @@ export class BookRepairComponent implements OnInit {
 
   ngOnInit(): void {
     this.href = this.router.url;
-    console.log(this.href);
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -173,7 +172,7 @@ export class BookRepairComponent implements OnInit {
 
     this.formSubmitted = true;
     if (Repair.valid) {
-      this.bookRepair.distanceMile = 10;
+      this.bookRepair.distanceMile = 30;
       this.bookRepair.latitude = this.Location.lat;
       this.bookRepair.longitude = this.Location.lng;
       console.log(JSON.stringify(this.bookRepair));
