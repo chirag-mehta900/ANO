@@ -411,6 +411,8 @@ export class GetAllShopComponent implements OnInit {
     };
 
     this.Shop.getallstore(obj).subscribe((data) => {
+      console.log(data);
+
       this.newShop = data['data'].shop;
       console.log(this.newShop, 'New Shop');
       this.Marker.length = 0;

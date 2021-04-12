@@ -153,7 +153,10 @@ export class BookRepairComponent implements OnInit {
     this.selectBrandFlag = false;
     this.selectDeviceFlag = true;
   }
-
+  nearby() {
+    this.router.navigate(['getall']);
+    this.activeModal.close();
+  }
   goToDeviceBack() {
     this.selectDeviceFlag = true;
     this.selectIssueFlag = false;
