@@ -31,6 +31,10 @@
                         <ng-option *ngFor="let brand of deviceList" (change)="getIssueList($event)" [value]="brand.id">{{brand.full_name}}</ng-option>
                     </ng-select>
                 </div>
+                <div class="skipdevice">
+                    <p (click)="nearby()">Skip and View Stores</p>
+                </div>
+
                 <div class="sub-btn">
                     <div class="previous">
                         <button>

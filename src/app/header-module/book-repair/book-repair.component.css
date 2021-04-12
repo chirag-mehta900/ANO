@@ -39,11 +39,17 @@
     margin-bottom: 10px;
 }
 
-.select-device p {
+.select-device p,
+.skipdevice p {
     font-family: "Poppins-SemiBold";
     font-size: 15px;
     margin-bottom: 10px;
     color: #ffc542;
+}
+
+.skipdevice p {
+    display: flex;
+    justify-content: center;
 }
 
 .select-problem h2 {
