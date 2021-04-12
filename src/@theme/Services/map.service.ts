@@ -31,4 +31,10 @@ export class MapService {
       this.url + 'json?address=' + address + '&key=' + this.Key
     );
   }
+
+  getDistanceInMile(source,destination){
+    return this.httpClient.get(
+      'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + source + '&destinations=side_of_road:' + destination + '&key=' + this.Key
+    )
+  }
 }
