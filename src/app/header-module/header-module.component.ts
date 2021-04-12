@@ -94,7 +94,7 @@ export class HeaderModuleComponent implements OnInit {
       (data) => {
         this.userName = data['data'].name;
       },
-      (error) => {}
+      (error) => { }
     );
 
     navigator.geolocation.getCurrentPosition((position) => {
@@ -161,7 +161,7 @@ export class HeaderModuleComponent implements OnInit {
         this.userName = data['data'].name;
         this.storeTokenService.set('user_id', data['data'].id);
       },
-      (error) => {}
+      (error) => { }
     );
   }
   signUp() {
@@ -177,9 +177,9 @@ export class HeaderModuleComponent implements OnInit {
   onhome() {
     this.router.navigate(['home']);
   }
-  // onContact() {
-  //   this.router.navigate(['contact']);
-  // }
+  onContact() {
+    this.router.navigate(['contact']);
+  }
 
   nearby() {
     this.router.navigate(['getall']);

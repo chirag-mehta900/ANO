@@ -2,7 +2,8 @@
     <div class="bg-map">
         <agm-map [latitude]="Lat" [longitude]="Lng" [zoom]="10" [styles]="styles">
             <agm-marker [latitude]="Lat" [longitude]="Lng" [iconUrl]="Location.Icon"></agm-marker>
-            <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude" [iconUrl]="m.icon"></agm-marker>
+            <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude" [iconUrl]="m.icon">
+            </agm-marker>
             <!-- [label]="m.price" -->
         </agm-map>
     </div>
@@ -69,7 +70,8 @@
                         <div class="detail-name">
                             <h2>{{store.shopName}}</h2>
                             <div class="cont">
-                                <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
+                                <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'"
+                                    [disabled]="true"></ngx-star-rating>
                             </div>
                         </div>
                         <div class="detail-name2">
@@ -103,7 +105,8 @@
                 <h2>Top Shop</h2>
             </div>
             <carousel [height]="245" [cellWidth]="320" [arrowsOutside]="true">
-                <div class="carousel-cell shop-box-carousel" *ngFor="let store of newShop" (click)="shopDetail(store.id,store)" [height]="245" [cellWidth]="320">
+                <div class="carousel-cell shop-box-carousel" *ngFor="let store of newShop"
+                    (click)="shopDetail(store.id,store)" [height]="245" [cellWidth]="320">
                     <div class="shop-img">
                         <img class="img-fluid" src="{{store.image}}" alt="">
                     </div>
@@ -111,7 +114,8 @@
                         <div class="detail-name">
                             <h2>{{store.shopName}}</h2>
                             <div class="cont">
-                                <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
+                                <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'"
+                                    [disabled]="true"></ngx-star-rating>
                             </div>
                         </div>
                         <div class="detail-name2">
@@ -139,7 +143,8 @@
                     <div class="col-md-6">
                         <div class="experience-detail">
                             <h3>Get Service from your mobile</h3>
-                            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                            <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
+                                consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
                             <h4>Get the App</h4>
                             <div class="store">
                                 <button><img src="../../assets/images/Google Play Badge.svg" alt=""></button>
