@@ -13,7 +13,10 @@ export class MapService {
 
   url = 'https://maps.googleapis.com/maps/api/geocode/';
   Key = 'AIzaSyCrr-U8HBzd2cqmW9UpipocVTl9rHjCphY';
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private commonService: CommonService
+  ) {}
   getArea(Lat, Lng) {
     console.log(
       this.url + 'json?latlng=' + Lat + ',' + Lng + '&key=' + this.Key
@@ -29,14 +32,7 @@ export class MapService {
     );
   }
 
-  getDistanceInMile(source, destination) {
-    return this.httpClient.get(
-      'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' +
-        source +
-        '&destinations=side_of_road:' +
-        destination +
-        '&key=' +
-        this.Key
-    );
+  getDistanceInMile(data) {
+    return this.httpClient.post(this.commonService.envUrl() + 'calculate/distance', data);
   }
 }

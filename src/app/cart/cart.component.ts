@@ -359,15 +359,23 @@ export class CartComponent implements OnInit {
     this.getTimeAccoedingToDate();
     this.getrepairtime(36);
 
-    var lat1 = this.Location.lat;
-    var lon1 = this.Location.lng;
-    var lat2 = this.shop[0].latitude;
-    var lon2 = this.shop[0].longitude;
-    var source = lat1.toString() + ',' + lon1.toString();
-    var destination = lat2.toString() + ',' + lon2.toString();
+    var data = {
+      'toLat' : this.Location.lat,
+      'toLng' : this.Location.lng,
+      'fromLat' : this.shop[0].latitude,
+      'fromLng' : this.shop[0].longitude
+    }
 
-    this.mapService.getDistanceInMile(source, destination).subscribe((data) => {
-      console.log(data, 'google api');
+    this.mapService.getDistanceInMile(data).subscribe((data) => {
+      this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
+      // 1. [+-]?: Optional + or - sign before number
+      // 2. \d+: Match one or more numbers
+      // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
+      // 4. g flag: To get all matches
+      var distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
+      this.deliveryPrice = distance * 0.6;
+      this.deliveryPrice = parseFloat(this.deliveryPrice);
+      
     });
 
     // var finaldate =  new Date(this.new)
