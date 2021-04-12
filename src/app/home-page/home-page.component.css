@@ -851,4 +851,17 @@ animatiom
     .banner-detail p{
         padding-top: 35px;
     }
+    .service-detail h4 {
+        font-size: 15px;
+        font-family: "Poppins-SemiBold";
+    }    
+    .service-detail p{
+        font-size: 12px;
+    }
+    .service-detail, .whyus-detail {
+        height: 200px;
+    }
+    .service-detail-img {
+        height: 100px;
+    }
 }

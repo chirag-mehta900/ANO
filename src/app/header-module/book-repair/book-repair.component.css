@@ -127,3 +127,6 @@
     border: none;
     background-color: transparent;
 }
+.skipdevice{
+    cursor: pointer;
+}

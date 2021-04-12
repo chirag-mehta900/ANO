@@ -333,10 +333,37 @@ agm-map {
     border-radius: 5px;
     width: 50%;
     margin-right: 10px;
+    cursor: pointer;
 }
 .select-issue{
     font-family: 'Poppins-SemiBold';
     background-color: #000000;
     border-radius: 5px;
     width: 50%;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 415px){
+    .top-shop .carousel-arrows-outside .carousel-arrow-next{
+        right: 0px !important;
+    }
+    .search-location{
+        position: absolute;
+        top: 98px;
+        width: 94%;
+        margin-left: 15px;
+    }
+    .filter {
+        display: block;
+        justify-content: space-between;
+        position: inherit;
+        width: 100%;
+        height: fit-content;
+    }
+    .shop-filter{
+        height: 80vh;
+        width: 100% !important;
+        margin-top: 0px;
+        padding-top: 10px;
+    }
 }
