@@ -23,7 +23,7 @@
     border: none;
     background-color: transparent;
     font-family: "Poppins-SemiBold";
-    margin-left: 60px;
+    margin-left: 40px;
 }
 
 .profile-save {
@@ -51,4 +51,23 @@
 .cancel-btn {
     background-color: #000000;
     color: #ffffff;
+}
+
+
+
+
+
+@media only screen and (max-width: 415px){
+    .sec-add h2 {
+        font-size: 15px;
+    }
+    .add-addr {
+        text-align: center;
+    }
+    .add-addr button{
+        margin-left: 0px;
+    }
+    .cancel-btn {
+        margin-right: 10px;
+    }
 }

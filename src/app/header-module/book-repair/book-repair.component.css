@@ -130,3 +130,24 @@
 .skipdevice{
     cursor: pointer;
 }
+
+
+
+
+@media only screen and (max-width: 415px){
+    .select-brand h2{
+        font-size: 20px;
+    }
+    .select-brand p{
+        font-size: 12px;
+    }
+    .skipdevice p{
+        font-size: 12px;
+    }
+    .select-device h2{
+        font-size: 20px;
+    }
+    .select-device p, .skipdevice p{
+        font-size: 12px;
+    }
+}
