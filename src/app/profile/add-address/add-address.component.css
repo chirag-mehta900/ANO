@@ -43,3 +43,13 @@
     background-color: #000000;
     color: #ffffff;
 }
+
+
+
+
+
+@media only screen and (max-width: 415px){
+    .cancle-btn {
+        margin-right: 10px;
+    }
+}

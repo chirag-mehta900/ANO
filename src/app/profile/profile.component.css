@@ -64,7 +64,7 @@
 
 .user-loaction {
     display: flex;
-    align-items: baseline;
+    align-items: center;
 }
 
 .address-line {
@@ -74,6 +74,7 @@
 .profile-add {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .profile-add button {
@@ -133,4 +134,30 @@
     display: flex;
     align-items: baseline;
     text-align: center;
+}
+
+@media only screen and (max-width: 415px){
+    .profile-detail h2{
+        margin: auto;
+    }
+    .gmail-chag-pass{
+        display: grid;
+    }
+    .gmail-chag-pass p{
+        margin-bottom: 10px;
+    }
+    .user-add h3{
+        font-size: 20px;
+    }
+    .service-review h2{
+        font-size: 20px;
+    }
+    .profile-add button p {
+        margin-left: 0px;
+        font-size: 10px;
+        margin-bottom: 0px;
+    }
+    .service-review button{
+        font-size: 10px;
+    }
 }
