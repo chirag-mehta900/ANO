@@ -135,8 +135,8 @@ export class AddProductComponent implements OnInit {
     console.log('gsdfy');
     console.log(this.shop);
     let getExpectedPrice = {
-      device: this.bookRepair.device_id,
-      problem: this.bookRepair.problem_id,
+      device_id: this.bookRepair.device_id,
+      problem_id: this.bookRepair.problem_id,
       shop_id: this.shop.id,
     };
     console.log(this.shop.id);
@@ -147,8 +147,9 @@ export class AddProductComponent implements OnInit {
         this.bookRepair.price = data['data'][0].TotalAmount;
         this.addedDeviceProblemToDisplayInCart.total_amount =
           data['data'][0].TotalAmount;
-        this.addedDeviceProblemToDisplayInCart.ANOBaseFees =
-          data['data'][0].ANOBaseFees;
+        this.addedDeviceProblemToDisplayInCart.ANOBaseFees = Number(
+          data['data'][0].ANOBaseFees
+        );
         this.addedDeviceProblemToDisplayInCart.ANOCommissionFees =
           data['data'][0].ANOCommissionFees;
         this.addedDeviceProblemToDisplayInCart.ShopCommissionFees =
