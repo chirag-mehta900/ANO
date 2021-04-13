@@ -353,18 +353,12 @@ export class CartComponent implements OnInit {
     //rating
     this.rating3 = parseInt(this.shop[0].average_rating);
 
-    //get priously selected problem device
-    this.setPreviouslyAddedDeviceIssue();
-    this.getCurrentDate();
-    this.getTimeAccoedingToDate();
-    this.getrepairtime(36);
-
     var data = {
-      'toLat' : this.Location.lat,
-      'toLng' : this.Location.lng,
-      'fromLat' : this.shop[0].latitude,
-      'fromLng' : this.shop[0].longitude
-    }
+      toLat: this.Location.lat,
+      toLng: this.Location.lng,
+      fromLat: this.shop[0].latitude,
+      fromLng: this.shop[0].longitude,
+    };
 
     this.mapService.getDistanceInMile(data).subscribe((data) => {
       this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
@@ -374,9 +368,15 @@ export class CartComponent implements OnInit {
       // 4. g flag: To get all matches
       var distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
       this.deliveryPrice = distance * 0.6;
-      this.deliveryPrice = parseFloat(this.deliveryPrice);
-      
+      this.deliveryPrice = Number(this.deliveryPrice.toFixed(2));
+      this.setPreviouslyAddedDeviceIssue();
     });
+
+    //get priously selected problem device
+
+    this.getCurrentDate();
+    this.getTimeAccoedingToDate();
+    this.getrepairtime(36);
 
     // var finaldate =  new Date(this.new)
     // console.log(finaldate);
@@ -410,24 +410,36 @@ export class CartComponent implements OnInit {
       console.log(result);
       this.totalCartAmount += result.total_amount;
       this.displayCartInfo.push(result);
+      console.log(this.displayCartInfo, 'new');
 
       for (var i = 0; i < this.displayCartInfo.length; i++) {
         this.displayCartInfo[i].id = i + 1;
-        this.ANOBaseFees += this.displayCartInfo[i].ANOBaseFees;
+        this.ANOBaseFees += Number(
+          this.displayCartInfo[i].ANOBaseFees.toFixed(2)
+        );
         this.ANOCommissionFees += this.displayCartInfo[i].ANOCommissionFees;
         this.Price += this.displayCartInfo[i].price;
       }
-
-      console.log(this.displayCartInfo, 'new');
+      this.recalculateTotalCartAmount();
     });
     //this.recalculateTotalCartAmount();
   }
 
   recalculateTotalCartAmount() {
     this.totalCartAmount = 0;
+    this.ANOBaseFees = 0;
+    this.ANOCommissionFees = 0;
+    this.Price = 0;
     this.displayCartInfo.forEach((element) => {
       this.totalCartAmount += element.total_amount;
+      this.ANOBaseFees += element.ANOBaseFees;
+      this.ANOCommissionFees += element.ANOCommissionFees;
+      this.Price += element.price;
     });
+    this.totalCartAmount += this.deliveryPrice;
+    this.ANOBaseFees = Number(this.ANOBaseFees.toFixed(2));
+    this.totalCartAmount = Number(this.totalCartAmount.toFixed(2));
+    console.log(this.totalCartAmount, 'hey');
   }
 
   setPreviouslyAddedDeviceIssue() {
@@ -436,7 +448,7 @@ export class CartComponent implements OnInit {
     //get priously selected problem device
     this.addedDeviceProblem = JSON.parse(localStorage.getItem('deviceProblem'));
 
-    this.ANOBaseFees = this.addedDeviceProblem.ANOBaseFees;
+    this.ANOBaseFees = Number(this.addedDeviceProblem.ANOBaseFees);
     this.ANOCommissionFees = this.addedDeviceProblem.ANOCommissionFees;
     this.Price = this.addedDeviceProblem.price;
 
@@ -474,8 +486,8 @@ export class CartComponent implements OnInit {
     // );
     //set Expected Price
     let getExpectedPrice = {
-      device: this.addedDeviceProblem.device,
-      problem: this.addedDeviceProblem.problem,
+      device_id: this.addedDeviceProblem.device,
+      problem_id: this.addedDeviceProblem.problem,
       shop_id: this.shop[0].id,
     };
     this.shopService.getExpectedPrice(getExpectedPrice).subscribe(
@@ -485,8 +497,9 @@ export class CartComponent implements OnInit {
         this.totalCartAmount = this.displayCartInfo[0].total_amount =
           data['data'][0].TotalAmount;
 
-        this.ANOBaseFees = this.displayCartInfo[0].ANOBaseFees =
-          data['data'][0].ANOBaseFees;
+        this.ANOBaseFees = this.displayCartInfo[0].ANOBaseFees = Number(
+          data['data'][0].ANOBaseFees
+        );
 
         this.ANOCommissionFees = this.displayCartInfo[0].ANOCommissionFees =
           data['data'][0].ANOCommissionFees;
@@ -495,6 +508,10 @@ export class CartComponent implements OnInit {
           data['data'][0].ShopCommissionFees;
 
         this.Price = this.displayCartInfo[0].price = data['data'][0].price;
+
+        this.displayCartInfo[0].id = 1;
+
+        this.recalculateTotalCartAmount();
       },
       (error) => {}
     );

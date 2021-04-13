@@ -18,7 +18,7 @@
                         Email is required.
                     </div>
                     <div class="text-dangerr" *ngIf="emailExist">
-                        Email already exist.
+                        Email id is already registered.
                     </div>
                     <div class="text-dangerr" *ngIf="signUpForm.get('email').errors?.pattern">
                         Enter valid email.

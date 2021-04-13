@@ -1,24 +1,28 @@
-.profile{
+.profile {
     margin-top: 50px;
     margin-bottom: 50px;
 }
-.user-profile-img img{
+
+.user-profile-img img {
     height: 180px;
     width: auto;
     border: 4px solid #000;
     border-radius: 83%;
 }
-.profile-detail{
+
+.profile-detail {
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: center;
 }
-.profile-detail h2{
-    font-family: 'Poppins-SemiBold';
+
+.profile-detail h2 {
+    font-family: "Poppins-SemiBold";
     font-size: 30px;
     margin-right: 10px;
 }
-.profile-detail button{
+
+.profile-detail button {
     border: none;
     background-color: #000000;
     padding: 10px;
@@ -26,61 +30,73 @@
     height: 50px;
     width: 50px;
 }
-.user-profile-detail p{
-    font-family: 'Poppins-SemiBold';
+
+.user-profile-detail p {
+    font-family: "Poppins-SemiBold";
     font-size: 15px;
     margin-bottom: 0px;
 }
+
 .user-profile {
     display: grid;
     justify-content: center;
     text-align: center;
 }
+
 .profile-line {
     width: 50%;
     border-top: 1px solid #000;
 }
-.user-add{
+
+.user-add {
     background-color: #000000;
     padding: 20px;
     border-radius: 10px;
     color: #ffffff;
     margin-top: 30px;
 }
-.user-add h2{
-    font-family: 'Poppins-SemiBold';
+
+.user-add h2 {
+    font-family: "Poppins-SemiBold";
     color: #ffffff;
     font-size: 30px;
 }
-.user-loaction{
+
+.user-loaction {
     display: flex;
     align-items: baseline;
 }
-.address-line{
+
+.address-line {
     border-top: 2px solid #828282;
 }
-.profile-add{
+
+.profile-add {
     display: flex;
     justify-content: space-between;
 }
-.profile-add button{
+
+.profile-add button {
     border: none;
     background-color: transparent;
     display: flex;
     color: #ffffff;
-    font-family: 'Poppins-SemiBold';
+    font-family: "Poppins-SemiBold";
 }
-.profile-add button p{
+
+.profile-add button p {
     margin-left: 10px;
 }
-.user-loaction p{
-    font-family: 'Poppins-Regular';
+
+.user-loaction p {
+    font-family: "Poppins-Regular";
     color: #ffffff;
     margin-bottom: 0px;
     margin-left: 10px;
     font-size: 15px;
 }
-.service-review{
+
+.service-review {
     background-color: #000000;
     padding: 20px;
     border-radius: 10px;
@@ -90,26 +106,30 @@
     justify-content: space-between;
     align-items: baseline;
 }
-.service-review h2{
-    font-family: 'Poppins-SemiBold';
+
+.service-review h2 {
+    font-family: "Poppins-SemiBold";
     color: #ffffff;
     font-size: 30px;
 }
-.service-review button{
+
+.service-review button {
     border: none;
     background-color: transparent;
     display: flex;
     color: #ffffff;
-    font-family: 'Poppins-SemiBold';
+    font-family: "Poppins-SemiBold";
 }
-.user-profile-detail h6{
-    font-family: 'Poppins-SemiBold';
+
+.user-profile-detail h6 {
+    font-family: "Poppins-SemiBold";
     font-size: 12px;
-    color: #FFC542;
+    color: #ffc542;
     margin-left: 15px;
     cursor: pointer;
 }
-.gmail-chag-pass{
+
+.gmail-chag-pass {
     display: flex;
     align-items: baseline;
     text-align: center;
