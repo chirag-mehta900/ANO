@@ -210,3 +210,7 @@ dp-date-picker.dp-material{
 .without-dis .carousel-cells .carousel-cell{
   position: inherit !important;
 }
+input.star-5:checked ~ label.star:before {
+  color: #fe7;
+  text-shadow: none !important;
+}
