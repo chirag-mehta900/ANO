@@ -96,10 +96,11 @@ export class ProfileService {
       }
     );
   }
-  makedefault(id) {
+  makedefault(id, data) {
     console.log(this.commonService.envUrl() + 'user/address/makedefault/' + id);
     return this.http.put(
       this.commonService.envUrl() + 'user/address/makedefault/' + id,
+      data,
       {
         headers: this.getAdminHeaders(),
       }
