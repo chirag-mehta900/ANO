@@ -8,8 +8,8 @@
             <div class="address-radio radio">
             </div> -->
             <div class="radio">
-                <input type="radio" id="address1" value="a.id" (change)="makedefault(a.id)" [checked]="a.isDefault" name="address" value="address1">
-                <label for="address1" class="radio-label nane-add-phone">
+                <input type="radio" id="{{a.id}}" value="{{a.id}}" (change)="makedefault($event.target.value)" [checked]="a.isDefault" name="adress">
+                <label for="{{a.id}}" class="radio-label nane-add-phone">
                     <div>
                         <h2>{{a.name}}</h2>
                         <p>{{a.addressLine}} {{a.city}} {{a.state}} {{a.zipCode}}</p>
