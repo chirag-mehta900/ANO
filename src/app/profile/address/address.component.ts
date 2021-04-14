@@ -19,6 +19,12 @@ export class AddressComponent implements OnInit {
     console.log(this.Address);
   }
 
+  editaddress(a) {
+    this.profile.getEditId(a.id);
+
+    this.router.navigate(['profile/edit']);
+  }
+
   Save() {
     this.router.navigate(['profile']);
   }

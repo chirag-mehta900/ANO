@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { CommonService } from './common.service';
 import { StoreTokenService } from './store-token.service';
 
@@ -7,6 +8,8 @@ import { StoreTokenService } from './store-token.service';
   providedIn: 'root',
 })
 export class ProfileService {
+  public getaddressid: number = 0;
+
   private adminheader = new HttpHeaders({
     Accept: 'application/json',
     'content-Type': 'application/json',
@@ -16,6 +19,9 @@ export class ProfileService {
     private commonService: CommonService,
     private token: StoreTokenService
   ) {}
+
+  public geteditid = new BehaviorSubject(this.getaddressid);
+  responseeditId = this.geteditid.asObservable();
 
   public isAuthenticated(): boolean {
     const token = this.token.get('token');
@@ -29,6 +35,9 @@ export class ProfileService {
     return this.adminheader;
   }
 
+  getEditId(data) {
+    this.geteditid.next(data);
+  }
   getOrderlist() {
     return this.http.get(this.commonService.envUrl() + 'orderList', {
       headers: this.getAdminHeaders(),
@@ -72,6 +81,21 @@ export class ProfileService {
     });
   }
 
+  getAddressbyID(id) {
+    return this.http.get(this.commonService.envUrl() + 'user/address/' + id, {
+      headers: this.getAdminHeaders(),
+    });
+  }
+
+  putAddressbyID(data, id) {
+    return this.http.put(
+      this.commonService.envUrl() + 'user/address/' + id,
+      data,
+      {
+        headers: this.getAdminHeaders(),
+      }
+    );
+  }
   makedefault(id) {
     console.log(this.commonService.envUrl() + 'user/address/makedefault/' + id);
     return this.http.put(
