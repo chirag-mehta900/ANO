@@ -76,6 +76,12 @@
     border-radius: 10px;
 }
 
+.ng-select span {
+    padding: 5px;
+    color: #ffffff;
+    background-color: #000000;
+}
+
 .sub-btn {
     display: flex;
     justify-content: space-between;
@@ -127,27 +133,26 @@
     border: none;
     background-color: transparent;
 }
-.skipdevice{
+
+.skipdevice {
     cursor: pointer;
 }
 
-
-
-
-@media only screen and (max-width: 415px){
-    .select-brand h2{
+@media only screen and (max-width: 415px) {
+    .select-brand h2 {
         font-size: 20px;
     }
-    .select-brand p{
+    .select-brand p {
         font-size: 12px;
     }
-    .skipdevice p{
+    .skipdevice p {
         font-size: 12px;
     }
-    .select-device h2{
+    .select-device h2 {
         font-size: 20px;
     }
-    .select-device p, .skipdevice p{
+    .select-device p,
+    .skipdevice p {
         font-size: 12px;
     }
 }

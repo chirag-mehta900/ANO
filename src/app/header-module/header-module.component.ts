@@ -92,9 +92,11 @@ export class HeaderModuleComponent implements OnInit {
 
     this.headerService.getUserName().subscribe(
       (data) => {
-        this.userName = data['data'].name;
+        console.log(data, 'newone');
+
+        this.userName = data['data'].fname;
       },
-      (error) => { }
+      (error) => {}
     );
 
     navigator.geolocation.getCurrentPosition((position) => {
@@ -158,10 +160,10 @@ export class HeaderModuleComponent implements OnInit {
   setUserName() {
     this.headerService.getUserName().subscribe(
       (data) => {
-        this.userName = data['data'].name;
+        this.userName = data['data'].fname;
         this.storeTokenService.set('user_id', data['data'].id);
       },
-      (error) => { }
+      (error) => {}
     );
   }
   signUp() {

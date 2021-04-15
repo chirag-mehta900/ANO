@@ -16,7 +16,8 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit() {
     this.editprofile = new FormGroup({
-      name: new FormControl(null, Validators.required),
+      fname: new FormControl(null, Validators.required),
+      lname: new FormControl(null, Validators.required),
     });
 
     this.Details = JSON.parse(localStorage.getItem('users') || '[]');
@@ -28,7 +29,8 @@ export class EditUserComponent implements OnInit {
   }
 
   save() {
-    console.log(this.editprofile.value.name);
+    console.log(this.editprofile.value.fname);
+    console.log(this.editprofile.value.lname);
 
     this.profile.changeDetail(this.editprofile.value).subscribe(
       (response) => {

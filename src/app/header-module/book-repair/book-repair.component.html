@@ -28,9 +28,12 @@
             device1.invalid &&
             (formSubmitted || device1.touched) 
             }">
-                        <ng-option *ngFor="let brand of deviceList" (change)="getIssueList($event)" [value]="brand.id">{{brand.full_name}}</ng-option>
+                        <ng-option *ngFor="let brand of deviceList" (change)="getIssueList($event)" [value]="brand.id"><span>{{brand.categoryName}}</span>-{{brand.full_name}}</ng-option>
                     </ng-select>
                 </div>
+
+
+
                 <div class="skipdevice">
                     <p (click)="nearby()">Skip and View All Stores</p>
                 </div>
@@ -55,7 +58,12 @@
                     <button><img (click)="close()" src="../../../assets/images/close.svg" alt=""></button>
                 </div>
                 <p>Issue</p>
-                <div class="optionselect">
+
+
+
+
+
+                <!-- <div class="optionselect">
                     <select class="custom" name="device" [(ngModel)]="bookRepair.problem" placeholder="Select Device" #device1="ngModel" [ngClass]="{
                 'is-invalid':
                 device1.invalid &&
@@ -68,7 +76,23 @@
                     <div class="text-danger" *ngIf="danger2">
                         Select Problem
                     </div>
+                </div> -->
+
+
+
+                <div>
+                    <ng-select name="device" [(ngModel)]="bookRepair.problem" #device1="ngModel" [ngClass]="{
+            'is-invalid':
+            device1.invalid &&
+            (formSubmitted || device1.touched) 
+            }">
+                        <ng-option *ngFor="let device of issueList" [value]="device.problem.id">{{device.problem.problemName}}</ng-option>
+                    </ng-select>
                 </div>
+
+
+
+
                 <div class="sub-btn">
                     <div class="previou">
                         <button (click)="goToBrand()">
