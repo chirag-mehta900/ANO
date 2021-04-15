@@ -9,10 +9,11 @@
             <div class="signup-form">
                 <p>User Details</p>
                 <div class="signup-inp">
-                    <input type="text" name="name" id="name" formControlName="name" placeholder="Name" [ngClass]="{'is-invalid':(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled )}" required>
+                    <input type="text" name="name" id="name" formControlName="name" placeholder="First Name" [ngClass]="{'is-invalid':(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled )}" required>
                     <div class="text-dangerr" *ngIf="(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled )">
                         Name is required.
                     </div>
+                    <input type="text" name="last-name" id="last-name" placeholder="Last Name">
                     <input type="email" name="email" id="email" formControlName="email" placeholder="Email" (change)="checkEmail()" [ngClass]="{'is-invalid':(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled )}" required>
                     <div class="text-dangerr" *ngIf="(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled )">
                         Email is required.
