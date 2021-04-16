@@ -9,6 +9,7 @@ import { ProfileService } from 'src/@theme/Services/profile.service';
   styleUrls: ['./add-review.component.css'],
 })
 export class AddReviewComponent implements OnInit {
+  @Output('orderid') orderid;
   @Output('shopid') shopid;
 
   rating = 0;
@@ -17,13 +18,21 @@ export class AddReviewComponent implements OnInit {
   Rating: boolean = false;
   Title: boolean = false;
   Comment: boolean = false;
+  order_id: any;
 
+  public data = {
+    commet: null,
+    title: null,
+    rating: null,
+    order_id: null,
+  };
   constructor(
     private activeModal: NgbActiveModal,
     private profile: ProfileService
   ) {}
 
   ngOnInit() {
+    console.log(this.orderid);
     console.log(this.shopid);
 
     this.Rating = false;
@@ -63,14 +72,19 @@ export class AddReviewComponent implements OnInit {
         this.Comment = false;
       }
     } else {
-      this.profile
-        .SubmitReview(this.form.value, this.shopid)
-        .subscribe((data) => {
-          console.log(data);
-          if (data['status'] == 200) {
-            this.activeModal.close();
-          }
-        });
+      this.data.rating = this.form.value.rating;
+      this.data.title = this.form.value.title;
+      this.data.commet = this.form.value.commet;
+      this.data.order_id = this.orderid;
+
+      console.log(this.data);
+
+      this.profile.SubmitReview(this.data, this.shopid).subscribe((data) => {
+        console.log(data);
+        if (data['status'] == 200) {
+          this.activeModal.close();
+        }
+      });
     }
   }
 }

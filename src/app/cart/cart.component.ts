@@ -703,10 +703,10 @@ export class CartComponent implements OnInit {
       //Add product in cart
       this.displayCartInfo.forEach((element) => {
         this.placeOrder.details.push({
-          device_id: element.deviceId,
-          problem_id: Number(element.problemId),
-          price: element.total_amount,
-          image: element.images,
+          device_id: element.device_id,
+          problem_id: element.problem_id,
+          price: element.TotalAmount,
+          image: element.image,
         });
       });
       this.placeOrder.details.splice(0, 1);
@@ -715,7 +715,7 @@ export class CartComponent implements OnInit {
       this.placeOrder.details.forEach((element) => {
         totalCartAmount += element.price;
       });
-      this.placeOrder.Total_Price = totalCartAmount;
+      this.placeOrder.Total_Price = this.totalCartAmounts;
       console.log(this.placeOrder);
 
       this.pickupLocation.lat = this.Location.lat;
@@ -738,10 +738,10 @@ export class CartComponent implements OnInit {
         //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
         var id = response['data'].id;
         console.log(id, 'id');
+        localStorage.setItem('PlaceOrder', JSON.stringify(response['data']));
+
         this.router.navigate(['/checkout/', id]);
       });
-
-      localStorage.setItem('PlaceOrder', JSON.stringify(this.placeOrder));
     }
   }
 
