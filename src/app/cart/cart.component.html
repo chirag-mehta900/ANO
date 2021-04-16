@@ -46,10 +46,10 @@
                             </div>
                         </div>
                         <div class="add-pro-dett">
-                            <h2>{{info.deviceName}}</h2>
+                            <h2>{{info.modelName}}</h2>
                             <p>{{info.problemName}}</p>
                             <div class="add-pro-price">
-                                <p>Expected price : <span>${{info.total_amount}}</span></p>
+                                <p>Expected price : <span>${{info.TotalAmount}}</span></p>
 
                                 <ng-template #HtmlContent>
                                     <div class="pricing-fact">
@@ -170,16 +170,18 @@
                     <div class="base-fee-name">
                         <h3>Base fee</h3>
                         <h3>ANO’s Commission Fee: 20%</h3>
+                        <h3>ShopCommissionFees</h3>
                         <h3>Repair Charge</h3>
                         <h3>Delivery(distance {{distanceInMiles}})</h3>
                         <h2>Total to pay</h2>
                     </div>
                     <div class="base-fee-price">
-                        <h3>${{ANOBaseFees}}</h3>
-                        <h3>${{ANOCommissionFees}}</h3>
-                        <h3>${{Price}}</h3>
-                        <h3>${{deliveryPrice}}</h3>
-                        <h2>${{totalCartAmount}}</h2>
+                        <h3>${{ANOBaseFeess}}</h3>
+                        <h3>${{ANOCommissionFeess}}</h3>
+                        <h3>${{ShopCommissionFeess}}</h3>
+                        <h3>${{Prices}}</h3>
+                        <h3>${{deliveryPrices}}</h3>
+                        <h2>${{totalCartAmounts}}</h2>
                     </div>
                 </div>
                 <hr>

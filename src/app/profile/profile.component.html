@@ -6,7 +6,7 @@
             </div>
             <div class="user-profile-detail" *ngFor="let info of Details">
                 <div class="profile-detail">
-                    <h2>{{info.fname}}</h2>
+                    <h2>{{info.fname}} {{info.lname}}</h2>
                     <button>
                         <img (click)="editName()" src="../../assets/images/edit.svg" alt="">
                     </button>

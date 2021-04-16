@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileService } from 'src/@theme/Services/profile.service';
 import { AddReviewComponent } from './add-review/add-review.component';
@@ -16,6 +17,7 @@ export class MyServiceComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
+    public router: Router,
     private profile: ProfileService
   ) {}
 
@@ -29,6 +31,13 @@ export class MyServiceComponent implements OnInit {
 
     // this.orderList = JSON.parse(localStorage.getItem('orderList') || '[]');
     // console.log(this.orderList);
+  }
+
+  oneOrder(id) {
+    console.log(id);
+    localStorage.removeItem('OneOrder');
+    localStorage.setItem('OneOrder', JSON.stringify(id));
+    this.router.navigate(['profile/comment']);
   }
 
   addreview(order) {

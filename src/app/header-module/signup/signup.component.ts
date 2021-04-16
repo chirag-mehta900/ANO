@@ -56,7 +56,8 @@ export class SignupComponent implements OnInit {
 
   getData() {
     this.signUpForm = new FormGroup({
-      name: new FormControl(null, Validators.required),
+      fname: new FormControl(null, Validators.required),
+      lname: new FormControl(null, Validators.required),
       email: new FormControl(null, [
         Validators.required,
         Validators.pattern(
@@ -99,7 +100,8 @@ export class SignupComponent implements OnInit {
   signUpNameComplete() {
     this.nameSignUpFilled = true;
     if (
-      this.signUpForm.value.name &&
+      this.signUpForm.value.fname &&
+      this.signUpForm.value.lname &&
       this.signUpForm.value.email &&
       this.signUpForm.value.password
     ) {

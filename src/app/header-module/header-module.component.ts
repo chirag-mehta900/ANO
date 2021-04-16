@@ -10,6 +10,8 @@ import { HeaderService } from 'src/@theme/Services/header.service';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { BookRepairComponent } from './book-repair/book-repair.component';
+import { EmptycartComponent } from './emptycart/emptycart.component';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { MapService } from 'src/@theme/Services/map.service';
@@ -43,6 +45,7 @@ export class HeaderModuleComponent implements OnInit {
     private storeTokenService: StoreTokenService,
     public router: Router,
     private renderer: Renderer2,
+
     private _eref: ElementRef,
     private mapService: MapService
   ) {
@@ -191,9 +194,21 @@ export class HeaderModuleComponent implements OnInit {
     this.isopenDropdown = !this.isopenDropdown;
   }
   cart() {
-    this.isopenDropdown = !this.isopenDropdown;
+    var id = JSON.parse(localStorage.getItem('user_id') || '[]');
+    this.headerService.getAllCart(id).subscribe((response) => {
+      console.log(response);
 
-    this.router.navigate(['cart']);
+      if (response['message'] == 'Cart is Empty') {
+        this.modalService.open(EmptycartComponent);
+      } else {
+        this.isopenDropdown = !this.isopenDropdown;
+        this.router.navigate(['cart']);
+      }
+    });
+
+    // this.isopenDropdown = !this.isopenDropdown;
+
+    // this.router.navigate(['cart']);
   }
   service() {
     this.isopenDropdown = !this.isopenDropdown;

@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'edit', component: EditAddressComponent },
   { path: 'add-address', component: AddAddressComponent },
   { path: 'comment', component: CommentComponent },
+  { path: 'profile/comment', component: CommentComponent },
   { path: 'service', component: MyServiceComponent },
 ];
 
