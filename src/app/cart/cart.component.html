@@ -3,8 +3,8 @@
         <!-- <agm-map [latitude]="21.175265" [longitude]="72.831855" [zoom]="17">
             <agm-marker [latitude]="21.175265" [longitude]="72.831855"></agm-marker> -->
 
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12" [styles]="styles">
-            <agm-marker *ngFor="let s of shop" [latitude]="s.latitude" [longitude]="s.longitude" [iconUrl]="ourmark.icon"></agm-marker>
+        <agm-map *ngFor="let s of shop" [latitude]="s.latitude" [longitude]="s.longitude" [zoom]="12" [styles]="styles">
+            <agm-marker [latitude]="s.latitude" [longitude]="s.longitude" [iconUrl]="ourmark.icon"></agm-marker>
         </agm-map>
     </div>
     <div class="container">

@@ -59,8 +59,6 @@ export class AddProductComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('hello');
-
     this.shop = JSON.parse(localStorage.getItem('Shop'));
     console.log(this.shop);
 

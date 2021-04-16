@@ -23,6 +23,22 @@ export class ShopComponent implements OnInit {
     fontWeight: '500',
     fontSize: '20px',
   };
+
+  bookRepair = {
+    device_id: null,
+    brand_id: null,
+    problem_id: null,
+    price: null,
+    ANOBaseFees: null,
+    ANOCommissionFees: null,
+    ShopCommissionFees: null,
+    TotalAmount: null,
+    shop_id: null,
+    image: [],
+    cart_id: null,
+    user_id: null,
+  };
+
   Location = {
     lat: 0,
     lng: 0,
@@ -272,6 +288,8 @@ export class ShopComponent implements OnInit {
   per = 78;
   storeId: any;
   storeInfo: any[] = [];
+
+  deviceproblem: {};
   timeList: any[];
   cartInfo: any = {};
   files: File[] = [];
@@ -302,6 +320,7 @@ export class ShopComponent implements OnInit {
   starValueFour = 4;
   starValueFive = 5;
 
+  expectedresponse: any;
   //Price Factors
   shopCommission;
   baseFee;
@@ -320,6 +339,11 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.deviceproblem = JSON.parse(
+      localStorage.getItem('deviceProblem') || '[]'
+    );
+    console.log(this.deviceproblem, 'problem');
+
     this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
     console.log(this.Location);
@@ -416,7 +440,50 @@ export class ShopComponent implements OnInit {
     });
   }
   goToCart() {
-    this.router.navigate(['/cart']);
+    console.log(this.shop);
+
+    let getExpectedPrice = {
+      device_id: this.deviceproblem['device'],
+      problem_id: this.deviceproblem['problem'],
+      shop_id: this.shop[0]['id'],
+    };
+    console.log(getExpectedPrice);
+    this.shopService.getExpectedPrice(getExpectedPrice).subscribe(
+      (data) => {
+        console.log(data);
+
+        console.log(data['data']);
+        this.expectedresponse = data['data'];
+
+        this.bookRepair.ANOBaseFees = Number(
+          this.expectedresponse[0].ANOBaseFees
+        );
+        this.bookRepair.ANOCommissionFees = this.expectedresponse[0].ANOCommissionFees;
+        this.bookRepair.ShopCommissionFees = this.expectedresponse[0].ShopCommissionFees;
+        this.bookRepair.TotalAmount = this.expectedresponse[0].TotalAmount;
+        this.bookRepair.price = this.expectedresponse[0].price;
+        this.bookRepair.brand_id = this.expectedresponse[0].brand_id;
+        this.bookRepair.user_id = JSON.parse(
+          localStorage.getItem('user_id') || '[]'
+        );
+        this.bookRepair.shop_id = this.expectedresponse[0].shop_id;
+        this.bookRepair.device_id = this.expectedresponse[0].device_id;
+        this.bookRepair.problem_id = this.expectedresponse[0].problem_id;
+
+        console.log(this.bookRepair, 'fresh');
+
+        this.shopService.addCartData(this.bookRepair).subscribe(
+          (data) => {
+            console.log(data);
+            console.log(data['data'][0]);
+
+            this.router.navigate(['/cart']);
+          },
+          (error) => {}
+        );
+      },
+      (error) => {}
+    );
   }
   // addRepairDevice() {
   //   const modalRef = this.modalService.open(AddproductComponent);
