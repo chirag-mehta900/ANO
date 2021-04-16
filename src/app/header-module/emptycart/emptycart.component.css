@@ -1,0 +1,14 @@
+.empty-cart {
+    padding: 20px;
+    display: grid;
+    justify-content: center;
+}
+.empty-cart h2{
+    font-family: "Poppins-SemiBold";
+    font-size: 30px;
+}
+.empty-cart img{
+    height: 170px;
+    width: auto;
+    margin: auto;
+}

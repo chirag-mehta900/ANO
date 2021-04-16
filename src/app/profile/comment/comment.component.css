@@ -76,7 +76,7 @@
     padding: 10px;
 }
 .destroy-system-img{
-    height: 255px;
+    height: 240px;
     width: auto;
 }
 .destroy-system-img img{
@@ -257,4 +257,93 @@
 .addstar{
     float: left;
     margin-bottom: 10px;
+}
+.product-details {
+    width: 85%;
+}
+.product-details h2{
+    font-family: "Poppins-Medium";
+    font-size: 30px;
+    margin-bottom: 0px;
+}
+.product-details hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 3px solid #C4C4C4;
+}
+.product-fee{
+    display: flex;
+    justify-content: space-between;
+    font-family: "Poppins-Regular";
+}
+.product-fee p{
+    font-size: 20px;
+    font-family: "Poppins-Regular";
+    margin-bottom: 10px;
+}
+.total-product{
+    display: flex;
+    justify-content: space-between;
+}
+.total-product h2{
+    font-family: "Poppins-Medium";
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+.total-product h3{
+    font-family: "Poppins-SemiBold";
+    font-size: 25px;
+    margin-bottom: 0px;
+}
+.download-invoice button{
+    display: flex;
+    align-items: end;
+    border: none;
+    background-color: transparent;
+    padding: 5px;
+}
+.download-invoice p{
+    font-family: "Poppins-Regular";
+    color: #0043F0;
+    margin-bottom: 0px;
+    margin-left: 5px;
+}
+.shop-infoo img{
+    height: 180px;
+    width: auto;
+    margin-bottom: 20px;
+}
+.shop-infoo hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 3px solid #C4C4C4;
+    width: 250px;
+    margin-left: 0px;
+}
+.shop-infoo h2{
+    font-family: "Poppins-SemiBold";
+    font-size: 30px;
+}
+.dis-f{
+    display: flex;
+}
+.dis-f img {
+    height: 20px;
+    width: auto;
+    margin-right: 10px;
+}
+.dis-f p {
+    font-family: "Poppins-Regular";
+    font-size: 15px;
+    margin-bottom: 0px;
+}
+.need-help button{
+    border: none;
+    background-color: transparent;
+    color: #0043F0;
+}
+.reviews{
+    margin-top: 40px;
 }
