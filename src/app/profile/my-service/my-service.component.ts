@@ -41,9 +41,9 @@ export class MyServiceComponent implements OnInit {
   }
 
   addreview(order) {
-    console.log(order[0].id);
-
+    console.log(order);
     const modalref = this.modalService.open(AddReviewComponent);
-    modalref.componentInstance.shopid = order[0].id;
+    modalref.componentInstance.orderid = order.id;
+    modalref.componentInstance.shopid = order.shop_id[0].id;
   }
 }

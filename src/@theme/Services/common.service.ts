@@ -29,4 +29,8 @@ export class CommonService {
   paymentsUrl(data: any) {
     return this.http.post(this.URL + 'payments', data);
   }
+
+  getintouch(data) {
+    return this.http.post(this.envUrl() + 'contactUs', data);
+  }
 }
