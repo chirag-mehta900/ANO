@@ -44,6 +44,12 @@ export class ProfileService {
     });
   }
 
+  getsingleOrder(id) {
+    return this.http.get(this.commonService.envUrl() + 'order/' + id, {
+      headers: this.getAdminHeaders(),
+    });
+  }
+
   getUserDetail() {
     return this.http.get(this.commonService.envUrl() + 'user', {
       headers: this.getAdminHeaders(),

@@ -114,4 +114,10 @@ export class HeaderService {
       data
     );
   }
+
+  getAllCart(id) {
+    return this.httpClient.get(
+      this.commonService.envUrl() + 'cart?user_id=' + id
+    );
+  }
 }

@@ -9,11 +9,14 @@
             <div class="signup-form">
                 <p>User Details</p>
                 <div class="signup-inp">
-                    <input type="text" name="name" id="name" formControlName="name" placeholder="First Name" [ngClass]="{'is-invalid':(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled )}" required>
-                    <div class="text-dangerr" *ngIf="(signUpForm.get('name').invalid)&&(formSubmitted ||nameSignUpFilled )">
-                        Name is required.
+                    <input type="text" name="name" id="name" formControlName="fname" placeholder="First Name" [ngClass]="{'is-invalid':(signUpForm.get('fname').invalid)&&(formSubmitted ||nameSignUpFilled )}" required>
+                    <div class="text-dangerr" *ngIf="(signUpForm.get('fname').invalid)&&(formSubmitted ||nameSignUpFilled )">
+                        First Name is required.
                     </div>
-                    <input type="text" name="last-name" id="last-name" placeholder="Last Name">
+                    <input type="text" name="last-name" id="last-name" formControlName="lname" placeholder="Last Name">
+                    <div class="text-dangerr" *ngIf="(signUpForm.get('lname').invalid)&&(formSubmitted ||nameSignUpFilled )">
+                        Last Name is required.
+                    </div>
                     <input type="email" name="email" id="email" formControlName="email" placeholder="Email" (change)="checkEmail()" [ngClass]="{'is-invalid':(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled )}" required>
                     <div class="text-dangerr" *ngIf="(signUpForm.get('email').invalid)&&(formSubmitted ||nameSignUpFilled )">
                         Email is required.
@@ -24,7 +27,7 @@
                     <div class="text-dangerr" *ngIf="signUpForm.get('email').errors?.pattern">
                         Enter valid email.
                     </div>
-                    <input type="password" name="password" id="password" formControlName="password" placeholder="Password" [ngClass]="{'is-invalid':(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled )}" required>
+                    <input type="password" name="password" autocomplete="off" id="password" formControlName="password" placeholder="Password" [ngClass]="{'is-invalid':(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled )}" required>
                     <div class="text-dangerr" *ngIf="(signUpForm.get('password').invalid)&&(formSubmitted ||nameSignUpFilled)">
                         Password is required.
                     </div>

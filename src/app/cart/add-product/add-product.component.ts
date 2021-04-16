@@ -14,8 +14,13 @@ export class AddProductComponent implements OnInit {
   @Input() shopId;
   bookRepair = {
     device_id: null,
+    brand_id: null,
     problem_id: null,
     price: null,
+    ANOBaseFees: null,
+    ANOCommissionFees: null,
+    ShopCommissionFees: null,
+    TotalAmount: null,
     shop_id: null,
     image: [],
     cart_id: null,
@@ -144,7 +149,12 @@ export class AddProductComponent implements OnInit {
     this.shopService.getExpectedPrice(getExpectedPrice).subscribe(
       (data) => {
         console.log(data['data']);
-        this.bookRepair.price = data['data'][0].TotalAmount;
+        this.bookRepair.price = data['data'][0].price;
+        this.bookRepair.ANOBaseFees = Number(data['data'][0].ANOBaseFees);
+        this.bookRepair.ANOCommissionFees = data['data'][0].ANOCommissionFees;
+        this.bookRepair.TotalAmount = data['data'][0].TotalAmount;
+        this.bookRepair.ShopCommissionFees = data['data'][0].ShopCommissionFees;
+
         this.addedDeviceProblemToDisplayInCart.total_amount =
           data['data'][0].TotalAmount;
         this.addedDeviceProblemToDisplayInCart.ANOBaseFees = Number(
@@ -192,7 +202,7 @@ export class AddProductComponent implements OnInit {
     this.bookRepair.user_id = JSON.parse(localStorage.getItem('user_id'));
 
     //set Cart_id if user is not log in
-    this.bookRepair.cart_id = localStorage.getItem('cart_id');
+    // this.bookRepair.cart_id = localStorage.getItem('cart_id');
 
     //set device name in display object
     this.deviceList.forEach((element) => {
@@ -212,19 +222,20 @@ export class AddProductComponent implements OnInit {
       }
     });
     console.log(this.bookRepair);
-
     this.shopService.addCartData(this.bookRepair).subscribe(
       (data) => {
-        console.log(data['data']);
+        console.log(data);
+        console.log(data['data'][0]);
         console.log(data['data'].id);
         localStorage.setItem('cart_id', data['data'].id);
+        this.activeModal.close(data['data'][0]);
       },
       (error) => {}
     );
 
-    console.log(this.bookRepair.cart_id);
-    console.log('obj', this.addedDeviceProblemToDisplayInCart);
-    console.log(this.bookRepair);
-    this.activeModal.close(this.addedDeviceProblemToDisplayInCart);
+    // console.log(this.bookRepair.cart_id);
+    // console.log('obj', this.addedDeviceProblemToDisplayInCart);
+    // console.log(this.bookRepair);
+    // this.activeModal.close(this.addedDeviceProblemToDisplayInCart);
   }
 }

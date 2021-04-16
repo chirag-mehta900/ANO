@@ -1,21 +1,21 @@
 <section class="checkout">
     <div class="container">
-        <div class="row">
+        <div class="row" *ngFor="let o of order">
             <div class="col-md-6">
                 <div class="booking-detail">
                     <div class="booking-shop">
                         <div class="booking-shop-img">
                             <img src="../../assets/images/checkout/shopimg.png" alt="">
-                            <h2>Shop name</h2>
+                            <h2>{{o.shop.shopName}}</h2>
                         </div>
                         <div class="booking-sho-price">
                             <p>Total</p>
-                            <h2>$ 65.22</h2>
+                            <h2>$ {{o.Total_Price}}</h2>
                         </div>
                     </div>
                     <div class="booking-device">
                         <div class="booking-device-box">
-                            <p>Device #: <span>3</span></p>
+                            <p>Device #: <span>{{totaldevice}}</span></p>
                             <p>Category: <span>Repair</span></p>
                             <p>Services: <span>Repair</span></p>
                             <div class="booking-date">
@@ -26,7 +26,17 @@
                     </div>
                 </div>
                 <div class="destroy-system">
-                    <div class="destroy-system-box">
+                    <div class="destroy-system-box" *ngFor="let device of o.details">
+                        <div class="destroy-system-img">
+                            <img src="../../assets/images/checkout/destroy phone.png" alt="">
+                        </div>
+                        <div class="destroy-system-det">
+                            <h2>{{device.modelName}}</h2>
+                            <h2>$ {{device.price}}</h2>
+                            <p>{{device.problem_name}}</p>
+                        </div>
+                    </div>
+                    <!-- <div class="destroy-system-box">
                         <div class="destroy-system-img">
                             <img src="../../assets/images/checkout/destroy phone.png" alt="">
                         </div>
@@ -43,16 +53,7 @@
                             <h2>$ 65.22</h2>
                             <p>Screen Replacement</p>
                         </div>
-                    </div>
-                    <div class="destroy-system-box">
-                        <div class="destroy-system-img">
-                            <img src="../../assets/images/checkout/destroy phone.png" alt="">
-                        </div>
-                        <div class="destroy-system-det">
-                            <h2>$ 65.22</h2>
-                            <p>Screen Replacement</p>
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="deliver-system">
                     <div class="deliver-cab">
@@ -61,9 +62,9 @@
                                 <img src="../../assets/images/checkout/pickup.svg" alt="">
                             </div>
                             <div style="width: 100%;">
-                                <h2>2464 Royal Ln. Mesa, New Jersey 45463</h2>
+                                <h2>{{o.pickupLocation}}</h2>
                                 <hr>
-                                <h2>2715 Ash Dr. San Jose, South Dakota 83475</h2>
+                                <h2>{{o.dropLocation}}</h2>
                             </div>
                         </label>
                     </div>
@@ -82,42 +83,7 @@
                             </div>
                             <div class="revi-detail">
                                 <h2>Darrell Keward</h2>
-                                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                                    officia consequat duis enim velit mollit. Exercitation veniam consequat sunt...</p>
-                                <div class="star-like">
-                                    <div class="cont">
-                                        <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
-                                    </div>
-                                    <img src="../../../assets/images/shop/like-dislike.svg" alt="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="revi-box">
-                            <div class="revi-img">
-                                <img src="../../../assets/images/shop/user-profile.png" alt="">
-                            </div>
-                            <div class="revi-detail">
-                                <h2>Darrell Keward</h2>
-                                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                                    officia consequat duis enim velit mollit. Exercitation veniam consequat sunt...</p>
-                                <div class="star-like">
-                                    <div class="cont">
-                                        <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
-                                    </div>
-                                    <img src="../../../assets/images/shop/like-dislike.svg" alt="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="revi-box">
-                            <div class="revi-img">
-                                <img src="../../../assets/images/shop/user-profile.png" alt="">
-                            </div>
-                            <div class="revi-detail">
-                                <h2>Darrell Keward</h2>
-                                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-                                    officia consequat duis enim velit mollit. Exercitation veniam consequat sunt...</p>
+                                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt...</p>
                                 <div class="star-like">
                                     <div class="cont">
                                         <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
@@ -127,6 +93,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="addcomment">
                         <div class="addstar">
                             <div class="">
@@ -134,8 +101,7 @@
                             </div>
                         </div>
                         <div class="feedback-input">
-                            <textarea name="feedback" id="feedback" cols="10" rows="2"
-                                placeholder="Your Comment..."></textarea>
+                            <textarea name="feedback" id="feedback" cols="10" rows="2" placeholder="Your Comment..."></textarea>
                             <button><img src="../../assets/images/checkout/send.svg" alt=""></button>
                         </div>
                     </div>

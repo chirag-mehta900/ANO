@@ -30,9 +30,10 @@ export class CartComponent implements OnInit {
   lat: any;
   lng: any;
 
-  ANOBaseFees: number = 0;
-  ANOCommissionFees: number = 0;
-  Price: number = 0;
+  ANOBaseFeess: number = 0;
+  ANOCommissionFeess: number = 0;
+  Prices: number = 0;
+  ShopCommissionFeess: number = 0;
 
   expecteddate: any;
   expectedtime: any;
@@ -250,7 +251,7 @@ export class CartComponent implements OnInit {
 
   subscription: any;
   distanceInMiles: any;
-  deliveryPrice: any;
+  deliveryPrices: any;
   placeOrder: any = {
     shop_id: null,
     transactionId: null,
@@ -290,26 +291,11 @@ export class CartComponent implements OnInit {
   imageEditFlag: boolean = false;
   currentImageUrl: any = '';
   addedDeviceProblem;
-  displayCartInfo = [
-    {
-      id: null,
-      deviceName: null,
-      problemName: null,
-      total_amount: null,
-      ANOBaseFees: null,
-      ShopCommissionFees: null,
-      ANOCommissionFees: null,
-      price: null,
-      images: null,
-      imageFiles: File,
-      problemId: null,
-      deviceId: null,
-    },
-  ];
+  displayCartInfo = [];
   today;
   new;
   modifiedToday;
-  totalCartAmount = 0;
+  totalCartAmounts = 0;
   constructor(
     config: NgbRatingConfig,
     private route: ActivatedRoute,
@@ -329,54 +315,125 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+    var id = JSON.parse(localStorage.getItem('user_id') || '[]');
 
-    this.Address = JSON.parse(localStorage.getItem('Address') || '[]');
-    this.pickupAddress = this.Address;
-    this.dropAddress = this.Address;
+    this.headerService.getAllCart(id).subscribe((response) => {
+      console.log(response);
+      this.shop.push(response['data'].shop);
+      localStorage.setItem('Shop', JSON.stringify(this.shop[0]));
+      this.displayCartInfo = response['data'].devices;
 
-    console.log(this.Location);
-    this.lat = this.Location.lat;
-    this.lng = this.Location.lng;
-    this.origin.lat = this.Location.lat;
-    this.origin.lng = this.Location.lng;
-    console.log(this.origin);
-    this.shop.push(JSON.parse(localStorage.getItem('Shop') || '[]'));
-    this.destination.lat = this.shop[0].latitude;
-    this.destination.lng = this.shop[0].longitude;
-    console.log(this.destination);
-    console.log(this.shop);
+      this.ANOBaseFeess = Number(response['data'].grandTotalOfBaseFees);
+      this.ANOCommissionFeess = Number(
+        response['data'].grandTotalOfANOCommissionFees
+      );
+      this.ShopCommissionFeess = Number(
+        response['data'].grandTotalOfShopCommissionFees
+      );
+      this.Prices = Number(response['data'].grandTotalOfPartsFees);
 
-    //set Shop id in place order object
-    this.placeOrder.shop_id = this.shop[0].id;
+      this.totalCartAmounts = response['data'].grandTotal;
 
-    //rating
-    this.rating3 = parseInt(this.shop[0].average_rating);
+      this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
 
-    var data = {
-      toLat: this.Location.lat,
-      toLng: this.Location.lng,
-      fromLat: this.shop[0].latitude,
-      fromLng: this.shop[0].longitude,
-    };
+      this.Address = JSON.parse(localStorage.getItem('Address') || '[]');
+      this.pickupAddress = this.Address;
+      this.dropAddress = this.Address;
 
-    this.mapService.getDistanceInMile(data).subscribe((data) => {
-      this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
-      // 1. [+-]?: Optional + or - sign before number
-      // 2. \d+: Match one or more numbers
-      // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
-      // 4. g flag: To get all matches
-      var distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
-      this.deliveryPrice = distance * 0.6;
-      this.deliveryPrice = Number(this.deliveryPrice.toFixed(2));
-      this.setPreviouslyAddedDeviceIssue();
+      console.log(this.Location);
+      this.lat = this.Location.lat;
+      this.lng = this.Location.lng;
+      this.origin.lat = this.Location.lat;
+      this.origin.lng = this.Location.lng;
+      console.log(this.origin);
+      this.destination.lat = this.shop[0].latitude;
+      this.destination.lng = this.shop[0].longitude;
+      console.log(this.destination);
+      console.log(this.shop);
+
+      //set Shop id in place order object
+      this.placeOrder.shop_id = this.shop[0].id;
+
+      //rating
+      this.rating3 = parseInt(this.shop[0].average_rating);
+
+      var data = {
+        toLat: this.Location.lat,
+        toLng: this.Location.lng,
+        fromLat: this.shop[0].latitude,
+        fromLng: this.shop[0].longitude,
+      };
+      console.log(data, 'distance');
+
+      this.mapService.getDistanceInMile(data).subscribe((data) => {
+        this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
+        // 1. [+-]?: Optional + or - sign before number
+        // 2. \d+: Match one or more numbers
+        // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
+        // 4. g flag: To get all matches
+        var distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
+        this.deliveryPrices = distance * 0.6;
+        this.deliveryPrices = Number(this.deliveryPrices.toFixed(2));
+
+        this.totalCartAmounts += this.deliveryPrices;
+        // this.setPreviouslyAddedDeviceIssue();
+      });
+
+      //get priously selected problem device
+
+      this.getCurrentDate();
+      this.getTimeAccoedingToDate();
+      this.getrepairtime(36);
     });
+
+    // this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+
+    // this.Address = JSON.parse(localStorage.getItem('Address') || '[]');
+    // this.pickupAddress = this.Address;
+    // this.dropAddress = this.Address;
+
+    // console.log(this.Location);
+    // this.lat = this.Location.lat;
+    // this.lng = this.Location.lng;
+    // this.origin.lat = this.Location.lat;
+    // this.origin.lng = this.Location.lng;
+    // console.log(this.origin);
+    // this.destination.lat = this.shop[0].latitude;
+    // this.destination.lng = this.shop[0].longitude;
+    // console.log(this.destination);
+    // console.log(this.shop);
+
+    // //set Shop id in place order object
+    // this.placeOrder.shop_id = this.shop[0].id;
+
+    // //rating
+    // this.rating3 = parseInt(this.shop[0].average_rating);
+
+    // var data = {
+    //   toLat: this.Location.lat,
+    //   toLng: this.Location.lng,
+    //   fromLat: this.shop[0].latitude,
+    //   fromLng: this.shop[0].longitude,
+    // };
+    // console.log(data, 'distance');
+
+    // this.mapService.getDistanceInMile(data).subscribe((data) => {
+    //   this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
+    //   // 1. [+-]?: Optional + or - sign before number
+    //   // 2. \d+: Match one or more numbers
+    //   // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
+    //   // 4. g flag: To get all matches
+    //   var distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
+    //   this.deliveryPrice = distance * 0.6;
+    //   this.deliveryPrice = Number(this.deliveryPrice.toFixed(2));
+    //   this.setPreviouslyAddedDeviceIssue();
+    // });
 
     //get priously selected problem device
 
-    this.getCurrentDate();
-    this.getTimeAccoedingToDate();
-    this.getrepairtime(36);
+    // this.getCurrentDate();
+    // this.getTimeAccoedingToDate();
+    // this.getrepairtime(36);
 
     // var finaldate =  new Date(this.new)
     // console.log(finaldate);
@@ -408,38 +465,32 @@ export class CartComponent implements OnInit {
     const modalRef = this.modalService.open(AddProductComponent);
     modalRef.result.then((result) => {
       console.log(result);
-      this.totalCartAmount += result.total_amount;
+
       this.displayCartInfo.push(result);
       console.log(this.displayCartInfo, 'new');
 
-      for (var i = 0; i < this.displayCartInfo.length; i++) {
-        this.displayCartInfo[i].id = i + 1;
-        this.ANOBaseFees += Number(
-          this.displayCartInfo[i].ANOBaseFees.toFixed(2)
-        );
-        this.ANOCommissionFees += this.displayCartInfo[i].ANOCommissionFees;
-        this.Price += this.displayCartInfo[i].price;
-      }
       this.recalculateTotalCartAmount();
     });
     //this.recalculateTotalCartAmount();
   }
 
   recalculateTotalCartAmount() {
-    this.totalCartAmount = 0;
-    this.ANOBaseFees = 0;
-    this.ANOCommissionFees = 0;
-    this.Price = 0;
+    this.totalCartAmounts = 0;
+    this.ANOBaseFeess = 0;
+    this.ANOCommissionFeess = 0;
+    this.ShopCommissionFeess = 0;
+    this.Prices = 0;
     this.displayCartInfo.forEach((element) => {
-      this.totalCartAmount += element.total_amount;
-      this.ANOBaseFees += element.ANOBaseFees;
-      this.ANOCommissionFees += element.ANOCommissionFees;
-      this.Price += element.price;
+      this.totalCartAmounts += Number(element.TotalAmount.toFixed(2));
+      this.ANOBaseFeess += Number(element.ANOBaseFees.toFixed(2));
+      this.ANOCommissionFeess += Number(element.ANOCommissionFees.toFixed(2));
+      this.ShopCommissionFeess += Number(element.ShopCommissionFees.toFixed(2));
+      this.Prices += Number(element.price.toFixed(2));
     });
-    this.totalCartAmount += this.deliveryPrice;
-    this.ANOBaseFees = Number(this.ANOBaseFees.toFixed(2));
-    this.totalCartAmount = Number(this.totalCartAmount.toFixed(2));
-    console.log(this.totalCartAmount, 'hey');
+    this.totalCartAmounts += this.deliveryPrices;
+    // this.ANOBaseFeess = Number(this.ANOBaseFeess.toFixed(2));
+    this.totalCartAmounts = Number(this.totalCartAmounts.toFixed(2));
+    console.log(this.totalCartAmounts, 'hey');
   }
 
   setPreviouslyAddedDeviceIssue() {
@@ -448,9 +499,9 @@ export class CartComponent implements OnInit {
     //get priously selected problem device
     this.addedDeviceProblem = JSON.parse(localStorage.getItem('deviceProblem'));
 
-    this.ANOBaseFees = Number(this.addedDeviceProblem.ANOBaseFees);
-    this.ANOCommissionFees = this.addedDeviceProblem.ANOCommissionFees;
-    this.Price = this.addedDeviceProblem.price;
+    // this.ANOBaseFeess = Number(this.addedDeviceProblem.ANOBaseFees);
+    // this.ANOCommissionFeess = this.addedDeviceProblem.ANOCommissionFees;
+    // this.Prices = this.addedDeviceProblem.price;
 
     console.log(this.addedDeviceProblem);
     //set Device Name
@@ -494,24 +545,24 @@ export class CartComponent implements OnInit {
       (data) => {
         console.log(data['data']);
 
-        this.totalCartAmount = this.displayCartInfo[0].total_amount =
+        this.totalCartAmounts = this.displayCartInfo[0].total_amount =
           data['data'][0].TotalAmount;
 
-        this.ANOBaseFees = this.displayCartInfo[0].ANOBaseFees = Number(
+        this.ANOBaseFeess = this.displayCartInfo[0].ANOBaseFees = Number(
           data['data'][0].ANOBaseFees
         );
 
-        this.ANOCommissionFees = this.displayCartInfo[0].ANOCommissionFees =
+        this.ANOCommissionFeess = this.displayCartInfo[0].ANOCommissionFees =
           data['data'][0].ANOCommissionFees;
 
         this.displayCartInfo[0].ShopCommissionFees =
           data['data'][0].ShopCommissionFees;
 
-        this.Price = this.displayCartInfo[0].price = data['data'][0].price;
+        this.Prices = this.displayCartInfo[0].price = data['data'][0].price;
 
         this.displayCartInfo[0].id = 1;
 
-        this.recalculateTotalCartAmount();
+        // this.recalculateTotalCartAmount();
       },
       (error) => {}
     );
@@ -614,11 +665,12 @@ export class CartComponent implements OnInit {
     );
     this.displayCartInfo.forEach((element, index) => {
       if (element.id == event) {
-        this.totalCartAmount -= element.total_amount;
+        this.totalCartAmounts -= element.total_amount;
         this.displayCartInfo.splice(index, 1);
       }
     });
     console.log(this.displayCartInfo);
+    this.recalculateTotalCartAmount();
     console.log(event);
   }
   proceed() {

@@ -15,7 +15,75 @@ import { MapService } from 'src/@theme/Services/map.service';
 })
 export class HomePageComponent implements OnInit {
   Data: any[] = [];
-  slider: any[] = [];
+  slider: any[] = [
+    {
+      id: 1,
+      heading: 'Welcome To ANO',
+      image: 'https://ano-bucket.s3.ap-south-1.amazonaws.com/welcome+ano.png',
+      content:
+        "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
+      buttonContent: 'Subscribe',
+      created_at: '2021-03-20 12:06:38',
+      updated_at: '2021-03-26 09:54:30',
+      buttonURL: null,
+    },
+    {
+      id: 2,
+      heading: 'Mobile Repair',
+      image: 'https://ano-bucket.s3.ap-south-1.amazonaws.com/mobile+ano.jpg',
+      content:
+        "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
+      buttonContent: 'Subscribe',
+      created_at: '2021-03-25 05:16:24',
+      updated_at: '2021-03-26 09:27:32',
+      buttonURL: null,
+    },
+    {
+      id: 3,
+      heading: 'Laptop Repair',
+      image: 'https://ano-bucket.s3.ap-south-1.amazonaws.com/laptop+ano.jpg',
+      content:
+        "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
+      buttonContent: 'Subscribe',
+      created_at: '2021-03-25 05:18:12',
+      updated_at: '2021-03-26 09:50:42',
+      buttonURL: null,
+    },
+    {
+      id: 4,
+      heading: 'Trending Accessories',
+      image:
+        'https://ano-bucket.s3.ap-south-1.amazonaws.com/accessories+ano.jpg',
+      content:
+        "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
+      buttonContent: 'Subscribe',
+      created_at: '2021-03-25 05:29:53',
+      updated_at: '2021-03-26 09:29:54',
+      buttonURL: null,
+    },
+    {
+      id: 5,
+      heading: 'Drop Services',
+      image: 'https://ano-bucket.s3.ap-south-1.amazonaws.com/drop+ano.jpg',
+      content:
+        "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
+      buttonContent: 'Subscribe',
+      created_at: '2021-03-25 05:32:21',
+      updated_at: '2021-03-26 09:51:37',
+      buttonURL: null,
+    },
+    {
+      id: 6,
+      heading: 'Computer Repair',
+      image: 'https://ano-bucket.s3.ap-south-1.amazonaws.com/computer+ano.jpg',
+      content:
+        "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
+      buttonContent: 'Subscribe',
+      created_at: '2021-03-25 06:56:13',
+      updated_at: '2021-03-26 09:54:01',
+      buttonURL: null,
+    },
+  ];
   display: any[] = [];
   driveForm: FormGroup;
   area: any;
@@ -97,14 +165,14 @@ export class HomePageComponent implements OnInit {
 
     localStorage.setItem('Location', JSON.stringify(this.Location));
 
-    this.header.slider().subscribe((data) => {
-      // this.Data.push(data);
-      this.slider = data['data'];
+    // this.header.slider().subscribe((data) => {
+    //   // this.Data.push(data);
+    //   this.slider = data['data'];
 
-      // this.slider.push(this.Data[0].data);
-      console.log(this.slider);
-      this.display.push(this.slider[0]);
-    });
+    //   // this.slider.push(this.Data[0].data);
+    //   console.log(this.slider);
+    this.display.push(this.slider[0]);
+    // });
 
     this.mapService
       .getArea(this.Location.lat, this.Location.lng)
@@ -148,7 +216,6 @@ export class HomePageComponent implements OnInit {
   // }
   OnChange(obj: any) {
     this.display.pop();
-    console.log(obj);
     this.display.push(obj);
   }
 }
