@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonService } from 'src/@theme/Services/common.service';
+import { MailComponent } from '../contact/mail/mail.component';
 
 @Component({
   selector: 'app-contact',
@@ -218,12 +220,11 @@ export class ContactComponent implements OnInit {
   };
   public data = {
     from_name: null,
-    to_name: null,
-    to_email: null,
+    from_email: null,
     subject: null,
     body: null,
   };
-  constructor(private common: CommonService) {}
+  constructor(private common: CommonService, private modalService: NgbModal) {}
 
   ngOnInit(): void {
     this.getInTouch = new FormGroup({
@@ -265,14 +266,18 @@ export class ContactComponent implements OnInit {
       console.log(this.getInTouch.value.body);
 
       this.data['body'] = this.getInTouch.value.body;
-      this.data['to_email'] = this.getInTouch.value.to_email;
+      this.data['from_email'] = this.getInTouch.value.to_email;
       this.data['from_name'] = this.getInTouch.value.from_name;
-      this.data['to_name'] = 'ANO';
-      this.data['subject'] = 'Inquery';
+      this.data['subject'] = this.getInTouch.value.from_name + ' contacted you';
       console.log(this.data);
 
       this.common.getintouch(this.data).subscribe((response) => {
         console.log(response);
+
+        if (response['status']) {
+          this.getInTouch.reset();
+          this.modalService.open(MailComponent);
+        }
       });
     }
   }

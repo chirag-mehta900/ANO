@@ -126,9 +126,15 @@
                             <div class="card-name">
                                 <p>Name on card</p>
                                 <input type="text" name="card-name" id="card-name" class="form-control" formControlName="cardholdername" placeholder="Card Holder Name" required>
+                                <div class="text-dangerr" *ngIf="nameflag">
+                                    Enter your card holder name
+                                </div>
                             </div>
                             <div class="payment-country">
                                 <input type="text" name="country-zip" id="country-zip" class="form-control" maxlength="6" formControlName="zip" placeholder="ZIP" required>
+                                <div class="text-dangerr" *ngIf="zipcodeflag">
+                                    Enter your zipcode
+                                </div>
                             </div>
                             <div class="policy">
                                 <div class="squaredOne">
@@ -137,7 +143,7 @@
                                         <p>I accept all <a href="term" target="_blank"> terms and condition.</a></p>
                                     </label>
                                     <div class="text-dangerr" *ngIf="isTermsAndConditionValidate">
-                                        Please Accept out t&c.
+                                        Please Accept out T&C.
                                     </div>
                                 </div>
                             </div>
@@ -153,8 +159,8 @@
                 <div class="payment-done" *ngIf="isPaid">
                     <div class="payment-done-mess">
                         <h2>Thank you for choosing us</h2>
-                        <p>Your Order Is Is <span>#63486587923</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc odio in et, lectus sit lorem id integer.</p>
-                        <button>Back to home</button>
+                        <p>Your Order Id Is <span>#{{orderId}}</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc odio in et, lectus sit lorem id integer.</p>
+                        <button (click)="home()">Back to home</button>
                     </div>
                     <div class="payment-done-feedback">
                         <h2>Feed us back</h2>
