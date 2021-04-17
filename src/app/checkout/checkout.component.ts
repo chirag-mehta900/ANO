@@ -193,13 +193,7 @@ export class CheckoutComponent implements OnInit {
         // showError(paymentData['error']);
       } else {
         this.orderComplete(paymentData['clientSecret']);
-        // let id = this.route.snapshot.params.id;
-        //   const data = {
-        //     "transactionId": paymentData['clientSecret']
-        //   }
-        //   this.shopService.updateOrder(id,data).subscribe((data) => {
-        //     console.log(data)
-        //   })
+        
         console.log('order Complete');
         this.isLoading = false;
         this.isPaid = true;
@@ -401,6 +395,20 @@ export class CheckoutComponent implements OnInit {
     this.STRIPE.retrievePaymentIntent(Data).subscribe((result) => {
       var paymentIntent = result.paymentIntent;
       var paymentIntentJson = JSON.stringify(paymentIntent, null, 2);
+
+      let id = this.route.snapshot.params.id;
+      const data = {
+        order_id : id,
+        amount : result.paymentIntent.amount,
+        currency : result.paymentIntent.currency,
+        paymentMethodId : result.paymentIntent.payment_method,
+        paymentIntentId : result.paymentIntent.client_secret,
+        paymentId : result.paymentIntent.id
+      }
+
+      this.shopService.transaction(data).subscribe((data) => {
+        console.log(data,"transaction")
+      })
       // document.querySelectorAll(".payment-view").forEach(function (view) {
       //   view.classList.add("hidden");
       // });
