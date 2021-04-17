@@ -1,0 +1,15 @@
+.send{
+    padding: 20px;
+}
+.send p{
+    font-family: "Poppins-SemiBold";
+    font-size: 25px;
+    text-align: center;
+}
+.send img{
+    height: 170px;
+    width: auto;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
