@@ -4,7 +4,7 @@ import { HeaderService } from 'src/@theme/Services/header.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   StripeCardElementOptions,
   StripeElementsOptions,
@@ -65,15 +65,21 @@ export class CheckoutComponent implements OnInit {
   shopDetails;
   productDisplay: any[] = [];
   detail: any[] = [];
+  orderId: any;
   isTermsAndCondition: boolean = false;
   isTermsAndConditionValidate: boolean = false;
   isLoading = false;
+
+  stripeCardValid: boolean = false;
+  nameflag: boolean = false;
+  zipcodeflag: boolean = false;
 
   constructor(
     private header: HeaderService,
     private common: CommonService,
     private STRIPE: StripeService,
     private shopService: ShopService,
+    private router: Router,
     private ngZone: NgZone,
     private route: ActivatedRoute
   ) {
@@ -131,9 +137,13 @@ export class CheckoutComponent implements OnInit {
     });
     console.log(this.productDisplay, 'productdisplay');
 
-    let id = this.route.snapshot.params.id;
-    this.shopService.getOrder(id).subscribe((data) => {
+    this.orderId = this.route.snapshot.params.id;
+    this.shopService.getOrder(this.orderId).subscribe((data) => {
       console.log(data);
+
+      if (data['data'].transactionId) {
+        this.isPaid = true;
+      }
 
       console.log(data['data'].shop, 'orderby id shop details');
       this.shopDetails = data['data'].shop;
@@ -163,6 +173,19 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  onChange({ type, event }) {
+    console.log(type);
+
+    if (type === 'change') {
+      console.log(event.complete);
+
+      this.stripeCardValid = event.complete;
+    }
+  }
+
+  home() {
+    this.router.navigate(['home']);
+  }
   cardnum(card: string) {
     this.CARD = card.split(' ').join('');
     if (this.CARD.length >= 3) {
@@ -193,7 +216,7 @@ export class CheckoutComponent implements OnInit {
         // showError(paymentData['error']);
       } else {
         this.orderComplete(paymentData['clientSecret']);
-        
+
         console.log('order Complete');
         this.isLoading = false;
         this.isPaid = true;
@@ -210,8 +233,30 @@ export class CheckoutComponent implements OnInit {
   //     console.log(response);
   //   });
   // }
+
   pay() {
-    if (this.isTermsAndCondition) {
+    console.log(this.card);
+
+    this.nameflag = false;
+    this.zipcodeflag = false;
+
+    if (
+      this.CardInfo.value.cardholdername == null ||
+      this.CardInfo.value.zip == null ||
+      !this.isTermsAndCondition
+    ) {
+      if (this.CardInfo.value.cardholdername == null) {
+        this.nameflag = true;
+      }
+
+      if (this.CardInfo.value.zip == null) {
+        this.zipcodeflag = true;
+      }
+
+      if (!this.isTermsAndCondition) {
+        this.isTermsAndConditionValidate = true;
+      }
+    } else {
       this.isLoading = true;
       var orderData = {
         currency: 'usd',
@@ -257,8 +302,6 @@ export class CheckoutComponent implements OnInit {
           errorMsg.textContent = '';
         }, 4000);
       };
-    } else {
-      this.isTermsAndConditionValidate = true;
     }
     // let inter = setInterval(() => {
     //   if (this.clientSecret !== undefined) {
@@ -398,17 +441,17 @@ export class CheckoutComponent implements OnInit {
 
       let id = this.route.snapshot.params.id;
       const data = {
-        order_id : id,
-        amount : result.paymentIntent.amount,
-        currency : result.paymentIntent.currency,
-        paymentMethodId : result.paymentIntent.payment_method,
-        paymentIntentId : result.paymentIntent.client_secret,
-        paymentId : result.paymentIntent.id
-      }
+        order_id: id,
+        amount: result.paymentIntent.amount,
+        currency: result.paymentIntent.currency,
+        paymentMethodId: result.paymentIntent.payment_method,
+        paymentIntentId: result.paymentIntent.client_secret,
+        paymentId: result.paymentIntent.id,
+      };
 
       this.shopService.transaction(data).subscribe((data) => {
-        console.log(data,"transaction")
-      })
+        console.log(data, 'transaction');
+      });
       // document.querySelectorAll(".payment-view").forEach(function (view) {
       //   view.classList.add("hidden");
       // });

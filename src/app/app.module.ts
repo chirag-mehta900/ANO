@@ -29,6 +29,7 @@ import { TermComponent } from './term/term.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { GetAllShopComponent } from './get-all-shop/get-all-shop.component';
+import { MailComponent } from './contact/mail/mail.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { GetAllShopComponent } from './get-all-shop/get-all-shop.component';
     PolicyComponent,
     TermComponent,
     GetAllShopComponent,
+    MailComponent,
   ],
   imports: [
     BrowserModule,
