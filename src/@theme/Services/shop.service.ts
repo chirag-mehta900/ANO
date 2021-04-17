@@ -63,4 +63,12 @@ export class ShopService {
       data
     );
   }
+
+  transaction(data) {
+    return this.httpClient.post(
+      this.commonService.envUrl() + 'transaction',
+      data
+    );
+  }
+
 }
