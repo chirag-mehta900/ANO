@@ -12,6 +12,7 @@ import { SharedModule } from 'src/@theme/shared.module';
 import { AddReviewComponent } from './my-service/add-review/add-review.component';
 import { ChangePswComponent } from './change-psw/change-psw.component';
 import { EditAddressComponent } from './edit-address/edit-address.component';
+import { ConfirmComponent } from './address/confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { EditAddressComponent } from './edit-address/edit-address.component';
     AddReviewComponent,
     ChangePswComponent,
     EditAddressComponent,
+    ConfirmComponent,
   ],
   imports: [CommonModule, ProfileRoutingModule, SharedModule],
 })
