@@ -291,6 +291,7 @@ export class CartComponent implements OnInit {
   pickupAddress: any;
   dropAddress: any;
   imageEditFlag: boolean = false;
+  Filter: boolean = false;
   currentImageUrl: any = '';
   addedDeviceProblem;
   displayCartInfo = [];
@@ -317,6 +318,7 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    localStorage.setItem('filter', JSON.stringify(this.Filter));
     var id = JSON.parse(localStorage.getItem('user_id') || '[]');
 
     this.headerService.getAllCart(id).subscribe((response) => {

@@ -104,6 +104,7 @@ export class HomePageComponent implements OnInit {
 
   lat: any;
   lng: any;
+  Filter: boolean = false;
 
   Location = {
     lat: 0,
@@ -125,6 +126,7 @@ export class HomePageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    localStorage.setItem('filter', JSON.stringify(this.Filter));
     this.driveForm = new FormGroup({
       first_name: new FormControl(null, Validators.required),
       last_name: new FormControl(null, Validators.required),
@@ -142,16 +144,28 @@ export class HomePageComponent implements OnInit {
     if (!navigator.geolocation) {
       console.log('location not found');
     }
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.Location.lat = position.coords.latitude;
-      this.Location.lng = position.coords.longitude;
-      console.log(this.Location);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.Location.lat = position.coords.latitude;
+        this.Location.lng = position.coords.longitude;
+        console.log(this.Location);
 
-      localStorage.setItem('Location', JSON.stringify(this.Location));
-      this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
-      this.lat = this.Location.lat;
-      this.lng = this.Location.lng;
-    });
+        localStorage.setItem('Location', JSON.stringify(this.Location));
+        this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+        this.lat = this.Location.lat;
+        this.lng = this.Location.lng;
+      },
+      (error) => {
+        if (this.Location.lat == 0 && this.Location.lng == 0) {
+          this.Location.lat = 33.448376;
+          this.Location.lng = -112.074036;
+
+          this.lat = this.Location.lat;
+          this.lng = this.Location.lng;
+          localStorage.setItem('Location', JSON.stringify(this.Location));
+        }
+      }
+    );
 
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
 
@@ -174,14 +188,17 @@ export class HomePageComponent implements OnInit {
     this.display.push(this.slider[0]);
     // });
 
-    this.mapService
-      .getArea(this.Location.lat, this.Location.lng)
-      .subscribe((data: any) => {
+    this.mapService.getArea(this.Location.lat, this.Location.lng).subscribe(
+      (data: any) => {
         this.area = data.results[0].formatted_address;
         localStorage.setItem('Address', JSON.stringify(this.area));
 
         console.log(this.area);
-      });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   DriverReq() {
@@ -189,19 +206,24 @@ export class HomePageComponent implements OnInit {
 
     console.log(obj);
     if (this.driveForm.valid) {
-      this.header.driverReq(obj).subscribe((response) => {
-        console.log(response);
-        console.log(response['status']);
+      this.header.driverReq(obj).subscribe(
+        (response) => {
+          console.log(response);
+          console.log(response['status']);
 
-        if (response['status']) {
-          this.modalService.open(DriverComponent);
-        } else {
-          console.log('some fields are invalid');
+          if (response['status']) {
+            this.modalService.open(DriverComponent);
+          } else {
+            console.log('some fields are invalid');
+          }
+
+          this.driveForm.reset();
+          this.invalidData = false;
+        },
+        (error) => {
+          console.log(error);
         }
-
-        this.driveForm.reset();
-        this.invalidData = false;
-      });
+      );
     } else {
       this.invalidData = true;
     }

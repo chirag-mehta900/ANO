@@ -25,6 +25,7 @@ export class MappageComponent implements OnInit {
   Lat: any;
   Lng: any;
   area: any;
+  Filter: boolean = false;
   Configs: any[] = [];
   prolist: any[] = [];
   issues: any[] = [];
@@ -298,6 +299,9 @@ export class MappageComponent implements OnInit {
     // this.searchshop = JSON.parse(localStorage.getItem('deviceProblem') || '[]');
     // console.log(this.searchshop);
 
+    this.Filter = false;
+    localStorage.setItem('filter', JSON.stringify(this.Filter));
+
     this.Configs = JSON.parse(localStorage.getItem('deviceProblem') || '[]');
     console.log(this.Configs['device']);
     console.log(this.Configs['problem']);
@@ -350,26 +354,29 @@ export class MappageComponent implements OnInit {
       console.log('location not found');
     }
 
-    // navigator.geolocation.getCurrentPosition((position) => {
-    //   this.Location.lat = position.coords.latitude;
-    //   this.Location.lng = position.coords.longitude;
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.Location.lat = position.coords.latitude;
+        this.Location.lng = position.coords.longitude;
 
-    //   console.log(this.Location);
+        console.log(this.Location);
 
-    //   localStorage.setItem('Location', JSON.stringify(this.Location));
-    //   this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
-    //   this.Lat = this.Location.lat;
-    //   this.Lng = this.Location.lng;
+        localStorage.setItem('Location', JSON.stringify(this.Location));
+        this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+        this.Lat = this.Location.lat;
+        this.Lng = this.Location.lng;
+      },
+      (error) => {
+        console.log(error);
+        if (this.Location.lat == 0 && this.Location.lng == 0) {
+          this.Location.lat = 33.448376;
+          this.Location.lng = -112.074036;
 
-    // });
-
-    if (this.Location.lat == 0 && this.Location.lng == 0) {
-      this.Location.lat = 33.448376;
-      this.Location.lng = -112.074036;
-
-      this.lat = this.Location.lat;
-      this.lng = this.Location.lng;
-    }
+          this.lat = this.Location.lat;
+          this.lng = this.Location.lng;
+        }
+      }
+    );
 
     localStorage.setItem('Location', JSON.stringify(this.Location));
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');

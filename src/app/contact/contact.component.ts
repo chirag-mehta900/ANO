@@ -14,6 +14,7 @@ export class ContactComponent implements OnInit {
   nameflag: boolean = false;
   emailflag: boolean = false;
   msgflag: boolean = false;
+  Filter: boolean = false;
 
   Icon = {
     url:
@@ -227,6 +228,8 @@ export class ContactComponent implements OnInit {
   constructor(private common: CommonService, private modalService: NgbModal) {}
 
   ngOnInit(): void {
+    localStorage.setItem('filter', JSON.stringify(this.Filter));
+
     this.getInTouch = new FormGroup({
       from_name: new FormControl(null, Validators.required),
       to_email: new FormControl(null, [

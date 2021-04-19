@@ -69,6 +69,7 @@ export class CheckoutComponent implements OnInit {
   isTermsAndCondition: boolean = false;
   isTermsAndConditionValidate: boolean = false;
   isLoading = false;
+  Filter: boolean = false;
 
   stripeCardValid: boolean = false;
   nameflag: boolean = false;
@@ -96,6 +97,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.setItem('filter', JSON.stringify(this.Filter));
     this.header.getEmail().subscribe(
       (data) => {
         this.Email = data['data'].email;

@@ -1,9 +1,14 @@
 <section>
-    <div class="bg-map">
+    <div class="bg-map" *ngIf="!filter">
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12" [styles]="styles">
             <!-- <agm-marker *ngFor="let s of shop" [latitude]="s.latitude" [longitude]="s.longitude" [label]="price" [iconUrl]="shopmark.icon"></agm-marker>
             <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="ourmark.icon"></agm-marker> -->
             <agm-direction [origin]="origin" [destination]="destination" [markerOptions]="markerOptions" [renderOptions]="renderOptions"></agm-direction>
+        </agm-map>
+    </div>
+    <div class="bg-map" *ngIf="filter">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12" [styles]="styles">
+            <agm-marker *ngFor="let s of shop" [latitude]="s.latitude" [longitude]="s.longitude" [iconUrl]="shopmark.icon"></agm-marker>
         </agm-map>
     </div>
     <div class="filter">
