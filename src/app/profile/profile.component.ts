@@ -12,6 +12,7 @@ import { ChangePswComponent } from './change-psw/change-psw.component';
 export class ProfileComponent implements OnInit {
   Details: any[] = [];
   defaultAddress: any[] = [];
+  Filter: boolean = false;
 
   constructor(
     private modalService: NgbModal,
@@ -20,6 +21,9 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.Filter = false;
+    localStorage.setItem('filter', JSON.stringify(this.Filter));
+
     this.profile.getUserDetail().subscribe((data) => {
       console.log(data);
       this.Details.push(data['data']);
