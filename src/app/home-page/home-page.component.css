@@ -445,7 +445,7 @@ carousel.carousel {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    /* height: 50vh; */
+    height: 640px;
 }
 
 .home-banner .row {
