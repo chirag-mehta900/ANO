@@ -11,8 +11,11 @@ import { ConfirmComponent } from './confirm/confirm.component';
 })
 export class AddressComponent implements OnInit {
   Address: any;
-  constructor(public router: Router, private profile: ProfileService,
-    private modalService: NgbModal,) {}
+  constructor(
+    public router: Router,
+    private profile: ProfileService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit() {
     this.profile.getAlladdress().subscribe((data) => {
@@ -32,15 +35,12 @@ export class AddressComponent implements OnInit {
     this.router.navigate(['profile']);
   }
   makedefault(event) {
-    
-    if(this.modalService.hasOpenModals()) {
+    if (this.modalService.hasOpenModals()) {
       this.modalService.dismissAll();
     }
     const modalRef = this.modalService.open(ConfirmComponent);
-    modalRef.componentInstance.addressId = event;
-    modalRef.result.then((result) => {
-      
-    });
+    modalRef.componentInstance.address = event;
+    modalRef.result.then((result) => {});
   }
   Addadress() {
     this.router.navigate(['profile/add-address']);

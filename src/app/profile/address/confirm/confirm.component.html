@@ -1,4 +1,6 @@
-<div>Set New Default address as {{address}}</div>
+<div *ngFor="let a of newaddress">
+    <h2>Set New Default address as {{a.address}} {{a.city}} {{a.state}} {{a.zipCode}}</h2>
+</div>
 
-<button class="next" type="submit" (click)="onSave()"  [disabled]="disableButton">Save</button>
-<button class="next" type="submit" (click)="onDontSave()" [disabled]="disableButton">Don't Save</button>
+<button class="next" type="submit" (click)="onSave()" [disabled]="disableButton">Save</button>
+<button class="next" type="submit" (click)="onDontSave()" [disabled]="disableButton">Cancel</button>

@@ -19,9 +19,11 @@ import * as moment from 'moment';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+  startdate: any = moment().format('L');
+
   datePickerConfig = {
     format: 'DD-MM-YYYY',
-    date: moment().format('L'),
+    date: this.startdate,
   };
 
   rating3;
@@ -383,7 +385,10 @@ export class CartComponent implements OnInit {
 
       this.getCurrentDate();
       this.getTimeAccoedingToDate();
-      this.getrepairtime(36);
+
+      var date = Date.now();
+      console.log(date);
+      this.getrepairtime(date, 48);
     });
 
     // this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
@@ -443,10 +448,18 @@ export class CartComponent implements OnInit {
     // console.log(moment().add(3, 'days').calendar(),"time");
   }
 
-  getrepairtime(h) {
-    this.new = Date.now() + h * 60 * 60 * 1000;
+  getrepairtime(date: any, h: any) {
+    console.log(date);
+    console.log(h);
+
+    this.new = date + h * 60 * 60 * 1000;
+    console.log(this.new);
+
     this.expecteddate = moment(this.new).format('YYYY-MM-DD');
+    console.log(this.expecteddate);
+
     this.expectedtime = moment(this.new).format('HH:mm:ss');
+    console.log(this.expectedtime);
 
     this.placeOrder.repairedDate = this.expecteddate;
     this.placeOrder.expectedDelivery = moment(this.new).format('HH:mm:ss');
@@ -459,6 +472,7 @@ export class CartComponent implements OnInit {
     var yyyy = this.today.getFullYear();
     this.today = yyyy + '-' + mm + '-' + dd;
     this.placeOrder.date = this.today;
+    this.startdate = this.today;
     this.modifiedToday = mm + '/' + dd + '/' + yyyy;
   }
   addRepairDevice() {
@@ -580,7 +594,7 @@ export class CartComponent implements OnInit {
     let getTimeObj = {
       durating: 30,
       shopId: this.shop[0].id,
-      date: this.placeOrder.date,
+      date: this.startdate,
     };
     console.log(getTimeObj);
 
@@ -596,7 +610,22 @@ export class CartComponent implements OnInit {
           this.timeList.push(element);
         }
       });
-      console.log(this.timeList);
+
+      if (this.timeList.length == 0) {
+        console.log('empty');
+        const tommorow = new Date(this.today);
+
+        tommorow.setDate(tommorow.getDate() + 1);
+
+        var dd = String(tommorow.getDate()).padStart(2, '0');
+        var MM = String(tommorow.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = tommorow.getFullYear();
+        this.startdate = yyyy + '-' + MM + '-' + dd;
+        this.datePickerConfig.date = this.startdate;
+        console.log(this.startdate);
+
+        this.newtimelist(this.startdate);
+      }
 
       this.placeOrder.startTime = this.timeList[0]['startTime'];
       this.placeOrder.endTime = this.timeList[0]['endTime'];
@@ -610,6 +639,46 @@ export class CartComponent implements OnInit {
       }
     });
     console.log(this.placeOrder);
+  }
+
+  newtimelist(date) {
+    this.timeList = [];
+    let getTimeObj = {
+      durating: 30,
+      shopId: this.shop[0].id,
+      date: date,
+    };
+    console.log(getTimeObj);
+
+    this.shopService.getTimeByDate(getTimeObj).subscribe((data) => {
+      data['data'].forEach((element) => {
+        this.timeList.push(element);
+      });
+      console.log(this.timeList);
+    });
+
+    var DATE = new Date(this.startdate).getTime();
+    console.log(DATE);
+
+    this.getrepairtime(DATE, 48);
+  }
+
+  testDate(event) {
+    console.log(event.date._d);
+    var tempdate = event.date._d;
+
+    var dd = String(tempdate.getDate()).padStart(2, '0');
+    var MM = String(tempdate.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = tempdate.getFullYear();
+    this.startdate = yyyy + '-' + MM + '-' + dd;
+    console.log(this.startdate);
+
+    var date = new Date(this.startdate).getTime();
+    console.log(date);
+    this.newtimelist(this.startdate);
+
+    this.getrepairtime(date, 48);
+    console.log('hello');
   }
 
   setpickupAddress(event) {

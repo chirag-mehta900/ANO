@@ -8,7 +8,7 @@
             <div class="address-radio radio">
             </div> -->
             <div class="radio">
-                <input type="radio" id="{{a.id}}" value="{{a.id}}" (change)="makedefault($event.target.value)" [checked]="a.isDefault" name="adress">
+                <input type="radio" id="{{a.id}}" value="{{a.id}}" (change)="makedefault(a)" [checked]="a.isDefault" name="adress">
                 <label for="{{a.id}}" class="radio-label nane-add-phone">
                     <div>
                         <h2>{{a.name}}</h2>

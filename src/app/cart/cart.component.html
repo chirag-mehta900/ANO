@@ -98,7 +98,7 @@
                         <div class="selectdate-time">
                             <!-- <input type="date" name="date" [(ngModel)]="placeOrder.date"
                                 (input)="getTimeAccoedingToDate()" [min]="today" [value]="placeOrder.date"> -->
-                                <dp-date-picker theme="dp-material"  [config]="datePickerConfig"   placeholder={{datePickerConfig.date}} required="true"
+                                <dp-date-picker theme="dp-material"  [config]="datePickerConfig" (onSelect)="testDate($event)" [minDate]="datePickerConfig.date" placeholder={{datePickerConfig.date}} required="true"
                                 (input)="getTimeAccoedingToDate()" >
                                 </dp-date-picker>
                             <select name="time" (change)="setTime($event)" placeholder="select time">
@@ -140,7 +140,9 @@
                             <!-- <input type="date" name="distance" [(ngModel)]="placeOrder.date"
                                 (input)="getTimeAccoedingToDate()" [value]="expecteddate"  disabled> -->
                                 <input type="date" name="distance" [value]="expecteddate"  disabled>
-                                <input class="middle-inp" type="text" name="time" [value]="tConvert(expectedtime)"  disabled>
+                                <input class="middle-inp" type="text" name="time" 
+                                [value]="expectedtime"
+                                [value]="tConvert(expectedtime)"  disabled>
                             <!-- <select name="time" (change)="setTime($event)" placeholder="select time" disabled>
                                 <option>Select Time</option>
                                 <option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} -
