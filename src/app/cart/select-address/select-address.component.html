@@ -1,26 +1,49 @@
-<div class="select-brand">
-    <div class="close-side">
-        <h2>Select your address</h2>
-        <button><img src="../../../assets/images/close.svg" alt=""></button>
-    </div>
-    <p>Your Address</p>
-    <div>
-        <!-- <ng-select name="address">
-            <ng-option><p>Mota varachha Surat surat gujarat 394101</p></ng-option>
-        </ng-select> -->
+<section class="select-address">
+    <div class="container">
+        <div class="sec-add" *ngFor="let a of Addressdata">
+            <!-- <div>
+                <h2>Wade Warren</h2>
+            <label for="address1" class="radio-label">{{a.addressLine}} {{a.city}} {{a.state}} {{a.zipCode}} </label>
+            </div>
+            <div class="address-radio radio">
+            </div> -->
+            <div class="radio">
+                <input type="radio" id="{{a.id}}" value="{{a.id}}" (change)=select(a) name="adress">
+                <label for="{{a.id}}" class="radio-label nane-add-phone">
+                    <div>
+                        <h2>{{a.name}}</h2>
+                        <p>{{a.addressLine}} {{a.city}} {{a.state}} {{a.zipCode}}</p>
+                    </div>
+                    <div>
+                        <p>{{a.phoneNumber}}</p>
+                    </div>
+                </label>
+                <div class="edit-address">
+                    <button (click)="editaddress(a)"><img src="../../assets/images/edit-yellow.svg" alt=""> Edit</button>
+                </div>
+            </div>
+        </div>
 
-        <!-- <div class="text-dangerr" *ngIf="deviceFlag">
-            select Device.
+
+
+        <!-- <div class="sec-add">
+            <h2 for="address2">202 Wayne St, Durand, MI, 48429</h2>
+            <div class="address-radio">
+                <input type="radio" id="address2" name="address" value="address2">
+            </div>
+        </div>
+        <div class="sec-add">
+            <h2 for="address3">202 Wayne St, Durand, MI, 48429</h2>
+            <div class="address-radio">
+                <input type="radio" id="address3" name="address" value="address3">
+            </div>
         </div> -->
-    </div>
-
-    <div class="sub-btn">
-        <div class="previous">
-            <button>
-                < Previous</button>
+        <div class="add-addr">
+            <button (click)="Addadress()">Add New Address</button>
         </div>
-        <div class="next">
-            <button>Next</button>
+        <div class="profile-save">
+            <button class="cancel-btn" (click)="Cancel()">Cancel</button>
+            <button class="save-btn" (click)="Save()">Savee</button>
         </div>
     </div>
-</div>
+</section>

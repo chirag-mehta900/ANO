@@ -138,9 +138,18 @@
     margin-top: 50px;
 }
 
-.pic-booking-date h3 {
+.pic-booking-date button {
     font-family: "Poppins-SemiBold";
     font-size: 30px;
+    border: none;
+    background-color: transparent;
+}
+
+.text-dangerr {
+    font-family: "Poppins-Regular";
+    padding-left: 30px;
+    font-size: 12px;
+    color: #e64e5d;
 }
 
 .selectdate-time {
@@ -302,11 +311,13 @@
 .rig-no {
     margin-right: 0px !important;
 }
-.pick-ups{
+
+.pick-ups {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
+
 .pick-ups h4 {
     font-family: "Poppins-SemiBold";
     font-size: 15px;
@@ -360,41 +371,49 @@ agm-map {
 .deliver-system {
     margin-top: 30px;
 }
-.middle-inp{
+
+.middle-inp {
     margin-right: 40px;
     margin-left: 40px;
 }
-.base-fee{
+
+.base-fee {
     margin-top: 30px;
 }
-.base-fee-detail{
+
+.base-fee-detail {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-left: 15px;
     padding-right: 15px;
 }
-.base-fee-name h3{
-    font-family: 'Poppins-Regular';
+
+.base-fee-name h3 {
+    font-family: "Poppins-Regular";
     font-size: 15px;
     margin-bottom: 15px;
 }
-.base-fee-name h2{
+
+.base-fee-name h2 {
     font-size: 25px;
 }
-.base-fee-price h3{
-    font-family: 'Poppins-Regular';
+
+.base-fee-price h3 {
+    font-family: "Poppins-Regular";
     font-size: 15px;
     margin-bottom: 15px;
 }
-.base-fee-price h2{
+
+.base-fee-price h2 {
     font-size: 25px;
 }
-.base-fee hr{
+
+.base-fee hr {
     margin-top: 1rem;
     margin-bottom: 1rem;
     border: 0;
-    border-top: 2px solid #FFC542;
+    border-top: 2px solid #ffc542;
 }
 
 dp-date-picker.dp-material .dp-picker-input {
@@ -405,7 +424,8 @@ dp-date-picker.dp-material .dp-picker-input {
     border-radius: 10px !important;
     font-family: "Poppins-Regular" !important;
 }
-.chose-address-page{
+
+.chose-address-page {
     font-size: 15px !important;
     margin-left: 5px;
     position: relative;

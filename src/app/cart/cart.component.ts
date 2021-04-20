@@ -6,6 +6,8 @@ import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { UploadService } from 'src/@theme/Services/upload.service';
 import { MapService } from 'src/@theme/Services/map.service';
 import { AddProductComponent } from './add-product/add-product.component';
+import { AddressComponent } from '../profile/address/address.component';
+
 import { SelectAddressComponent } from './select-address/select-address.component';
 
 import { HeaderService } from 'src/@theme/Services/header.service';
@@ -13,6 +15,8 @@ import { LoginComponent } from '../header-module/login/login.component';
 import { time } from 'node:console';
 import * as moment from 'moment';
 import { ProfileService } from 'src/@theme/Services/profile.service';
+import { CommonService } from 'src/@theme/Services/common.service';
+import { HttpClient } from '@angular/common/http';
 
 // import { AddproductComponent } from './addproduct/addproduct.component';
 
@@ -303,6 +307,7 @@ export class CartComponent implements OnInit {
   dropinrepairFlag: boolean = false;
   address: any;
   Filter: boolean = false;
+  ValidZip: boolean = false;
   currentImageUrl: any = '';
   addedDeviceProblem;
   displayCartInfo = [];
@@ -315,9 +320,11 @@ export class CartComponent implements OnInit {
     private route: ActivatedRoute,
     private shopService: ShopService,
     private modalService: NgbModal,
+    private common: CommonService,
     private storeTokenService: StoreTokenService,
     private uploadService: UploadService,
     private router: Router,
+    private http: HttpClient,
     private headerService: HeaderService,
     private mapService: MapService
   ) {
@@ -402,7 +409,9 @@ export class CartComponent implements OnInit {
         this.deliveryPrices = distance * 0.6;
         this.deliveryPrices = Number(this.deliveryPrices.toFixed(2));
 
-        this.totalCartAmounts += this.deliveryPrices;
+        this.totalCartAmounts = Number(
+          (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
+        );
         // this.setPreviouslyAddedDeviceIssue();
       });
 
@@ -414,6 +423,7 @@ export class CartComponent implements OnInit {
       var date = Date.now();
       console.log(date);
       this.getrepairtime(date, 48);
+      console.log(this.placeOrder);
     });
 
     // this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
@@ -473,8 +483,55 @@ export class CartComponent implements OnInit {
     // console.log(moment().add(3, 'days').calendar(),"time");
   }
 
+  chooseaddres() {
+    const modalRef = this.modalService.open(SelectAddressComponent);
+    modalRef.result.then((result) => {
+      console.log(result);
+
+      var checkzip = result.zipCode;
+      this.pickupAddress =
+        result.addressLine + result.city + result.state + result.zipCode;
+      console.log(this.pickupAddress);
+
+      this.placeOrder.pickupLocation = this.pickupAddress;
+      for (var input = 85001; input <= 85086; input++) {
+        this.ValidZip = true;
+        if (input == checkzip) {
+          console.log('match');
+          this.ValidZip = false;
+          break;
+        }
+      }
+
+      // this.http
+      //   .get('http://ziptasticapi.com/' + result.zipCode)
+      //   .subscribe((data) => {
+      //     console.log(data);
+      //   });
+
+      // this.common.zipcode(85001).subscribe((data) => {
+      //   console.log(data);
+      // });
+
+      // {"country":"US","state":"AZ","city":"PHOENIX"}
+    });
+
+    // this.modalService.open(AddressComponent);
+  }
+
   chooseaddress() {
-    this.modalService.open(SelectAddressComponent);
+    const modalRef = this.modalService.open(SelectAddressComponent);
+    modalRef.result.then((result) => {
+      console.log(result);
+
+      this.dropAddress =
+        result.addressLine + result.city + result.state + result.zipCode;
+      console.log(this.pickupAddress);
+
+      this.placeOrder.dropLocation = this.dropAddress;
+    });
+
+    // this.modalService.open(AddressComponent);
   }
   mailradio(event) {
     console.log(event);
@@ -482,6 +539,8 @@ export class CartComponent implements OnInit {
 
     if (event == 'mail') {
       this.placeOrder.isMail = true;
+
+      this.placeOrder.pickupLocation = null;
       console.log(this.placeOrder);
     } else {
       this.placeOrder.isMail = false;
@@ -497,6 +556,8 @@ export class CartComponent implements OnInit {
 
     if (event == 'selfpickup') {
       this.placeOrder.isCollectFromStore = true;
+      this.placeOrder.dropLocation = null;
+
       console.log(this.placeOrder);
     } else {
       this.placeOrder.isCollectFromStore = false;
@@ -712,6 +773,9 @@ export class CartComponent implements OnInit {
         this.timeList.push(element);
       });
       console.log(this.timeList);
+
+      this.placeOrder.startTime = this.timeList[0]['startTime'];
+      this.placeOrder.endTime = this.timeList[0]['endTime'];
     });
 
     var DATE = new Date(this.startdate).getTime();
@@ -800,74 +864,76 @@ export class CartComponent implements OnInit {
     console.log(event);
   }
   proceed() {
-    //to calculate total cart amount
-    let isLogedIn = localStorage.getItem('token');
-    if (isLogedIn === null) {
-      this.userName = null;
-      if (this.modalService.hasOpenModals()) {
-        this.modalService.dismissAll();
-      }
-      const modalRef = this.modalService.open(LoginComponent);
-      modalRef.result.then((result) => {
-        this.headerService.getUserName().subscribe((data) => {
-          this.userName = data['data'].name;
-          this.storeTokenService.set('user_id', data['data'].id);
-          window.location.reload();
-        });
-      });
-    } else {
-      let totalCartAmount = 0;
-      this.issues = JSON.parse(localStorage.getItem('issues') || '[]');
-
-      this.issues.forEach((e) => {
-        if (e.problemId == this.displayCartInfo[0].problemId) {
-          this.displayCartInfo[0].problemName = e.problem;
+    if (this.ValidZip == false) {
+      //to calculate total cart amount
+      let isLogedIn = localStorage.getItem('token');
+      if (isLogedIn === null) {
+        this.userName = null;
+        if (this.modalService.hasOpenModals()) {
+          this.modalService.dismissAll();
         }
-      });
-      console.log(this.displayCartInfo);
-
-      //Add product in cart
-      this.displayCartInfo.forEach((element) => {
-        this.placeOrder.details.push({
-          device_id: element.device_id,
-          problem_id: element.problem_id,
-          price: element.TotalAmount,
-          image: element.image,
+        const modalRef = this.modalService.open(LoginComponent);
+        modalRef.result.then((result) => {
+          this.headerService.getUserName().subscribe((data) => {
+            this.userName = data['data'].name;
+            this.storeTokenService.set('user_id', data['data'].id);
+            window.location.reload();
+          });
         });
-      });
-      this.placeOrder.details.splice(0, 1);
+      } else {
+        let totalCartAmount = 0;
+        this.issues = JSON.parse(localStorage.getItem('issues') || '[]');
 
-      //calculating cart amount
-      this.placeOrder.details.forEach((element) => {
-        totalCartAmount += element.price;
-      });
-      this.placeOrder.Total_Price = this.totalCartAmounts;
-      console.log(this.placeOrder);
+        this.issues.forEach((e) => {
+          if (e.problemId == this.displayCartInfo[0].problemId) {
+            this.displayCartInfo[0].problemName = e.problem;
+          }
+        });
+        console.log(this.displayCartInfo);
 
-      this.pickupLocation.lat = this.Location.lat;
-      this.pickupLocation.lng = this.Location.lng;
+        //Add product in cart
+        this.displayCartInfo.forEach((element) => {
+          this.placeOrder.details.push({
+            device_id: element.device_id,
+            problem_id: element.problem_id,
+            price: element.TotalAmount,
+            image: element.image,
+          });
+        });
+        this.placeOrder.details.splice(0, 1);
 
-      this.dropLocation.lat = this.shop[0].latitude;
-      this.dropLocation.lng = this.shop[0].longitude;
+        //calculating cart amount
+        this.placeOrder.details.forEach((element) => {
+          totalCartAmount += element.price;
+        });
+        this.placeOrder.Total_Price = this.totalCartAmounts;
+        console.log(this.placeOrder);
 
-      this.placeOrder.pickupLocation = this.pickupAddress;
-      this.placeOrder.dropLocation = this.dropAddress;
-      console.log(this.placeOrder, 'object');
+        this.pickupLocation.lat = this.Location.lat;
+        this.pickupLocation.lng = this.Location.lng;
 
-      console.log(this.placeOrder.details[0].image);
-      if (this.placeOrder.details[0].image == null) {
-        this.placeOrder.details[0].image = [];
+        this.dropLocation.lat = this.shop[0].latitude;
+        this.dropLocation.lng = this.shop[0].longitude;
+
+        this.placeOrder.pickupLocation = this.pickupAddress;
+        this.placeOrder.dropLocation = this.dropAddress;
+        console.log(this.placeOrder, 'object');
+
+        console.log(this.placeOrder.details[0].image);
+        if (this.placeOrder.details[0].image == null) {
+          this.placeOrder.details[0].image = [];
+        }
+        this.shopService.placeOrder(this.placeOrder).subscribe((response) => {
+          console.log(response, 'placeOrder');
+
+          //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
+          var id = response['data'].id;
+          console.log(id, 'id');
+          localStorage.setItem('PlaceOrder', JSON.stringify(response['data']));
+
+          this.router.navigate(['/checkout/', id]);
+        });
       }
-      this.shopService.placeOrder(this.placeOrder).subscribe((response) => {
-        console.log(response, 'placeOrder');
-
-        //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
-        var id = response['data'].id;
-        console.log(id, 'id');
-        localStorage.setItem('PlaceOrder', JSON.stringify(response['data']));
-
-        this.router.navigate(['/checkout/', id]);
-      });
     }
   }
 
