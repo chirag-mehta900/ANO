@@ -405,3 +405,11 @@ dp-date-picker.dp-material .dp-picker-input {
     border-radius: 10px !important;
     font-family: "Poppins-Regular" !important;
 }
+.chose-address-page{
+    font-size: 15px !important;
+    margin-left: 5px;
+    position: relative;
+    top: 6px;
+    cursor: pointer;
+    color: #ffc542;
+}

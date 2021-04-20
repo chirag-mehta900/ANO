@@ -107,7 +107,8 @@
                                 </option>
                             </select>
                             <input type="text" name="pick-off" id="pick-off"  [disabled]="!pickFlag" [value]="pickupAddress" (keyup)="setpickupAddress($event.target.value)" placeholder="Pick-up up Address">
-                            <button (click)="chooseaddress()" [disabled]="!pickFlag">choose</button>
+                            <!-- <button (click)="chooseaddress()" [disabled]="!pickFlag">choose</button> -->
+                            <h3 class="chose-address-page">Select Address</h3>
                         </div>
                     </label><br>
                 </div>
@@ -151,8 +152,8 @@
                                 </option>
                             </select> -->
                             <input type="text" name="drop-off" [value]="dropAddress" [disabled]="!dropFlag" (keyup)="setdropAddress($event.target.value)" id="drop-off" placeholder="Drop up Address">
-                            <button (click)="chooseaddress()" [disabled]="!dropFlag">choose</button>
-
+                            <!-- <button (click)="chooseaddress()" [disabled]="!dropFlag">choose</button> -->
+                            <h3 class="chose-address-page">Select Address</h3>
                         </div>
                     </label><br>
                 </div>

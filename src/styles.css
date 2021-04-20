@@ -75,7 +75,7 @@ body {
 }
 @media (min-width: 576px) {
   .modal-dialog {
-    max-width: 400px !important;
+    max-width: 500px !important;
   }
 }
 
@@ -164,7 +164,7 @@ select:focus{
     font-size: initial !important;
     height: auto !important;
     outline: none !important;
-  width: 100%;
+  width: 100% !important;
 }
 dp-date-picker.dp-material{
   width: 100%;
