@@ -6,10 +6,13 @@ import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { UploadService } from 'src/@theme/Services/upload.service';
 import { MapService } from 'src/@theme/Services/map.service';
 import { AddProductComponent } from './add-product/add-product.component';
+import { SelectAddressComponent } from './select-address/select-address.component';
+
 import { HeaderService } from 'src/@theme/Services/header.service';
 import { LoginComponent } from '../header-module/login/login.component';
 import { time } from 'node:console';
 import * as moment from 'moment';
+import { ProfileService } from 'src/@theme/Services/profile.service';
 
 // import { AddproductComponent } from './addproduct/addproduct.component';
 
@@ -260,6 +263,8 @@ export class CartComponent implements OnInit {
     startTime: null,
     endTime: null,
     date: null,
+    isMail: true,
+    isCollectFromStore: true,
     pickupLocation: null,
     repairedDate: null,
     expectedDelivery: null,
@@ -286,11 +291,17 @@ export class CartComponent implements OnInit {
   temp: File[] = [];
   issues: any[] = [];
   imageUploaded: any[] = [];
-  Address: any;
+  Address: any = '';
   date: any = '';
   pickupAddress: any;
   dropAddress: any;
   imageEditFlag: boolean = false;
+  mailinrepairFlag: boolean = false;
+  pickFlag: boolean = false;
+  dropFlag: boolean = false;
+
+  dropinrepairFlag: boolean = false;
+  address: any;
   Filter: boolean = false;
   currentImageUrl: any = '';
   addedDeviceProblem;
@@ -340,9 +351,21 @@ export class CartComponent implements OnInit {
 
       this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
 
-      this.Address = JSON.parse(localStorage.getItem('Address') || '[]');
+      // this.Address = JSON.parse(localStorage.getItem('Address') || '[]');
+
+      // this.profile.getAlladdress().subscribe((data) => {
+      //   console.log(data);
+      //   this.address = data['data'];
+      //   this.address.forEach((e) => {
+      //     if ((e.isDefault = 1)) {
+      //       this.Address =
+      //         e.addressLine + ' ' + e.city + ' ' + e.state + ' ' + e.zipCode;
+      //     }
+      //   });
+      //   console.log(this.Address);
       this.pickupAddress = this.Address;
       this.dropAddress = this.Address;
+      // });
 
       console.log(this.Location);
       this.lat = this.Location.lat;
@@ -448,6 +471,38 @@ export class CartComponent implements OnInit {
     // var newdate = Date.now(this.new + 36*)
 
     // console.log(moment().add(3, 'days').calendar(),"time");
+  }
+
+  chooseaddress() {
+    this.modalService.open(SelectAddressComponent);
+  }
+  mailradio(event) {
+    console.log(event);
+    this.pickFlag = false;
+
+    if (event == 'mail') {
+      this.placeOrder.isMail = true;
+      console.log(this.placeOrder);
+    } else {
+      this.placeOrder.isMail = false;
+
+      this.pickFlag = true;
+    }
+    console.log(this.placeOrder);
+  }
+
+  dropradio(event) {
+    console.log(event);
+    this.dropFlag = false;
+
+    if (event == 'selfpickup') {
+      this.placeOrder.isCollectFromStore = true;
+      console.log(this.placeOrder);
+    } else {
+      this.placeOrder.isCollectFromStore = false;
+      this.dropFlag = true;
+    }
+    console.log(this.placeOrder);
   }
 
   getrepairtime(date: any, h: any) {

@@ -93,27 +93,28 @@
                     <h4>Pick up Address</h4>
                 </div>
                 <div class="deliver-cab radio">
-                    <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab" checked>
+                    <input class="deliver-radio" type="radio" (click)="mailradio($event.target.value)" id="deliver-cab" name="deliver-system" value="Pickup" [checked]="mailinrepairFlag">
                     <label for="deliver-cab" class="radio-label">
                         <div class="selectdate-time">
                             <!-- <input type="date" name="date" [(ngModel)]="placeOrder.date"
                                 (input)="getTimeAccoedingToDate()" [min]="today" [value]="placeOrder.date"> -->
-                                <dp-date-picker theme="dp-material"  [config]="datePickerConfig" (onSelect)="testDate($event)" [minDate]="datePickerConfig.date" placeholder={{datePickerConfig.date}} required="true"
-                                (input)="getTimeAccoedingToDate()" >
+                                <dp-date-picker theme="dp-material"  [config]="datePickerConfig" [disabled]="!pickFlag" (onSelect)="testDate($event)" [minDate]="datePickerConfig.date" placeholder={{datePickerConfig.date}} required="true"
+                                (input)="getTimeAccoedingToDate()" > 
                                 </dp-date-picker>
-                            <select name="time" (change)="setTime($event)" placeholder="select time">
+                            <select name="time" (change)="setTime($event)" placeholder="select time" [disabled]="!pickFlag">
                                 <option *ngFor="let time of timeList" [value]=time.id>{{tConvert(time.startTime)}} -
                                     {{tConvert(time.endTime) }} 
                                 </option>
                             </select>
-                            <input type="text" name="pick-off" id="pick-off" [value]="pickupAddress" (keyup)="setpickupAddress($event.target.value)" placeholder="Pick-up up Address">
+                            <input type="text" name="pick-off" id="pick-off"  [disabled]="!pickFlag" [value]="pickupAddress" (keyup)="setpickupAddress($event.target.value)" placeholder="Pick-up up Address">
+                            <button (click)="chooseaddress()" [disabled]="!pickFlag">choose</button>
                         </div>
                     </label><br>
                 </div>
 
 
                 <div class="deliver-mail radio">
-                    <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system" value="deliver-mail">
+                    <input class="deliver-radio" type="radio" (click)="mailradio($event.target.value)" id="deliver-mail" name="deliver-system" value="mail" [checked]="!mailinrepairFlag">
                     <label for="deliver-mail" class="radio-label radio-labell">
                         <div class="mail-product">
                             <img src="../../assets/images/checkout/mail.svg" alt="">
@@ -134,7 +135,7 @@
                     <h4>Return Address</h4>
                 </div>
                 <div class="deliver-cab radio">
-                    <input class="deliver-radio" type="radio" id="drop-off-opt" name="deliver-system1" value="drop-off-opt">
+                    <input class="deliver-radio" type="radio" (click)="dropradio($event.target.value)" id="drop-off-opt" name="deliver-system1" value="drop" [checked]="dropinrepairFlag">
                     <label for="drop-off-opt" class="radio-label">
                         <div class="selectdate-time">
                             <!-- <input type="date" name="distance" [(ngModel)]="placeOrder.date"
@@ -142,19 +143,21 @@
                                 <input type="date" name="distance" [value]="expecteddate"  disabled>
                                 <input class="middle-inp" type="text" name="time" 
                                 [value]="expectedtime"
-                                [value]="tConvert(expectedtime)"  disabled>
+                                [value]="tConvert(expectedtime)" [disabled]="!dropFlag">
                             <!-- <select name="time" (change)="setTime($event)" placeholder="select time" disabled>
                                 <option>Select Time</option>
                                 <option *ngFor="let time of timeList" [value]=time.id>{{time.startTime}} -
                                     {{time.endTime}}
                                 </option>
                             </select> -->
-                            <input type="text" name="drop-off" [value]="dropAddress" (keyup)="setdropAddress($event.target.value)" id="drop-off" placeholder="Drop up Address">
+                            <input type="text" name="drop-off" [value]="dropAddress" [disabled]="!dropFlag" (keyup)="setdropAddress($event.target.value)" id="drop-off" placeholder="Drop up Address">
+                            <button (click)="chooseaddress()" [disabled]="!dropFlag">choose</button>
+
                         </div>
                     </label><br>
                 </div>
                 <div class="deliver-mail radio">
-                    <input class="deliver-radio" type="radio" id="pick-up" name="deliver-system1" value="pick-up">
+                    <input class="deliver-radio" type="radio" (click)="dropradio($event.target.value)" id="pick-up" name="deliver-system1" value="selfpickup" [checked]="!dropinrepairFlag">
                     <label for="pick-up" class="radio-label radio-labell">
                         <div class="mail-product">
                             <img src="../../assets/images/checkout/mail.svg" alt="">
