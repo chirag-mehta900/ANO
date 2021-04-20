@@ -30,6 +30,8 @@ import { DpDatePickerModule } from 'ng2-date-picker';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { GetAllShopComponent } from './get-all-shop/get-all-shop.component';
 import { MailComponent } from './contact/mail/mail.component';
+import { WarningComponent } from './shop/warning/warning.component';
+import { FeedbackComponent } from './about/feedback/feedback.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { MailComponent } from './contact/mail/mail.component';
     TermComponent,
     GetAllShopComponent,
     MailComponent,
+    WarningComponent,
+    FeedbackComponent,
   ],
   imports: [
     BrowserModule,

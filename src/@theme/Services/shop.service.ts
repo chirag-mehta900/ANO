@@ -71,4 +71,10 @@ export class ShopService {
     );
   }
 
+  getShopifromcart(data) {
+    return this.httpClient.post(
+      this.commonService.envUrl() + 'cart/validate',
+      data
+    );
+  }
 }
