@@ -30,6 +30,10 @@
             }">
                         <ng-option *ngFor="let brand of deviceList" (change)="getIssueList($event)" [value]="brand.id"><span>{{brand.categoryName}}</span>-{{brand.full_name}}</ng-option>
                     </ng-select>
+
+                    <div class="text-dangerr" *ngIf="deviceFlag">
+                        select Device.
+                    </div>
                 </div>
 
 
@@ -88,6 +92,11 @@
             }">
                         <ng-option *ngFor="let device of issueList" [value]="device.problem.id">{{device.problem.problemName}}</ng-option>
                     </ng-select>
+
+
+                    <div class="text-dangerr" *ngIf="problemFlag">
+                        Select Problem.
+                    </div>
                 </div>
 
 

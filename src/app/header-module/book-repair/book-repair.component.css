@@ -39,6 +39,15 @@
     margin-bottom: 10px;
 }
 
+.text-dangerr {
+    font-family: "Poppins-Regular";
+    margin-top: -20px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    font-size: 10px;
+    color: #e64e5d;
+}
+
 .select-device p,
 .skipdevice p {
     font-family: "Poppins-SemiBold";
@@ -82,7 +91,7 @@
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 5px;
-    color: #FFC542;
+    color: #ffc542;
 }
 
 .sub-btn {
