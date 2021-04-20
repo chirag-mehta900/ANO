@@ -43,6 +43,9 @@ export class BookRepairComponent implements OnInit {
     distanceMile: null,
   };
   selectBrandFlag: boolean = true;
+  deviceFlag: boolean = false;
+  problemFlag: boolean = false;
+
   selectDeviceFlag: boolean = false;
   selectIssueFlag: boolean = false;
   formSubmitted: boolean = false;
@@ -150,8 +153,14 @@ export class BookRepairComponent implements OnInit {
   }
 
   goToDevice() {
-    this.selectBrandFlag = false;
-    this.selectDeviceFlag = true;
+    this.deviceFlag = false;
+
+    if (this.bookRepair.device) {
+      this.selectBrandFlag = false;
+      this.selectDeviceFlag = true;
+    } else {
+      this.deviceFlag = true;
+    }
   }
   nearby() {
     this.router.navigate(['getall']);
@@ -162,82 +171,87 @@ export class BookRepairComponent implements OnInit {
     this.selectIssueFlag = false;
   }
   addRepair(Repair) {
-    localStorage.removeItem('issues');
-    console.log(this.bookRepair);
-    this.issueList.forEach((e) => {
-      var obj = {
-        problemId: e.problem.id,
-        problem: e.problem.problemName,
-      };
-      this.issues.push(obj);
-    });
-    localStorage.setItem('issues', JSON.stringify(this.issues));
+    this.problemFlag = false;
+    if (this.bookRepair.problem) {
+      localStorage.removeItem('issues');
+      console.log(this.bookRepair);
+      this.issueList.forEach((e) => {
+        var obj = {
+          problemId: e.problem.id,
+          problem: e.problem.problemName,
+        };
+        this.issues.push(obj);
+      });
+      localStorage.setItem('issues', JSON.stringify(this.issues));
 
-    this.formSubmitted = true;
-    if (Repair.valid) {
-      this.bookRepair.distanceMile = 30;
-      this.bookRepair.latitude = this.Location.lat;
-      this.bookRepair.longitude = this.Location.lng;
-      console.log(JSON.stringify(this.bookRepair));
+      this.formSubmitted = true;
+      if (Repair.valid) {
+        this.bookRepair.distanceMile = 30;
+        this.bookRepair.latitude = this.Location.lat;
+        this.bookRepair.longitude = this.Location.lng;
+        console.log(JSON.stringify(this.bookRepair));
 
-      localStorage.setItem('deviceProblem', JSON.stringify(this.bookRepair));
+        localStorage.setItem('deviceProblem', JSON.stringify(this.bookRepair));
 
-      this.headerService.searchStore(this.bookRepair).subscribe(
-        (response: ResponseType) => {
-          console.log(response);
+        this.headerService.searchStore(this.bookRepair).subscribe(
+          (response: ResponseType) => {
+            console.log(response);
 
-          response.data.forEach((e) => {
-            if (e.pricing.length) {
-              this.Data.push(e);
-            }
-          });
-          console.log(this.Data);
-          localStorage.removeItem('Shoplist');
-          localStorage.setItem('Shoplist', JSON.stringify(this.Data));
+            response.data.forEach((e) => {
+              if (e.pricing.length) {
+                this.Data.push(e);
+              }
+            });
+            console.log(this.Data);
+            localStorage.removeItem('Shoplist');
+            localStorage.setItem('Shoplist', JSON.stringify(this.Data));
 
-          for (var i = 0; i < this.Data.length; i++) {
-            // console.log(this.Data[i].pricing[0].price);
-            this.shopmarker = {
-              latitude: this.Data[i].latitude,
-              longitude: this.Data[i].longitude,
-              price: {
-                text: '$' + '' + this.Data[i].pricing[0].price.toString(),
-                color: 'white',
-                fontWeight: '500',
-                fontSize: '20px',
-              },
-              icon: {
-                url:
-                  'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
-                scaledSize: {
-                  width: 100,
-                  height: 70,
+            for (var i = 0; i < this.Data.length; i++) {
+              // console.log(this.Data[i].pricing[0].price);
+              this.shopmarker = {
+                latitude: this.Data[i].latitude,
+                longitude: this.Data[i].longitude,
+                price: {
+                  text: '$' + '' + this.Data[i].pricing[0].price.toString(),
+                  color: 'white',
+                  fontWeight: '500',
+                  fontSize: '20px',
                 },
-              },
-            };
+                icon: {
+                  url:
+                    'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+                  scaledSize: {
+                    width: 100,
+                    height: 70,
+                  },
+                },
+              };
 
-            this.Marker.push(this.shopmarker);
-          }
+              this.Marker.push(this.shopmarker);
+            }
 
-          localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
+            localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
 
-          console.log(this.Marker);
-          if (this.href.search('map') === -1) {
-            this.activeModal.close();
+            console.log(this.Marker);
+            if (this.href.search('map') === -1) {
+              this.activeModal.close();
 
-            this.router.navigate([
-              '/map',
-              { storeData: JSON.stringify(response['data']) },
-            ]);
-          } else {
-            window.location.reload();
-          }
-        },
+              this.router.navigate([
+                '/map',
+                { storeData: JSON.stringify(response['data']) },
+              ]);
+            } else {
+              window.location.reload();
+            }
+          },
 
-        (error) => {}
-      );
+          (error) => {}
+        );
+      } else {
+        return;
+      }
     } else {
-      return;
+      this.problemFlag = true;
     }
   }
 }

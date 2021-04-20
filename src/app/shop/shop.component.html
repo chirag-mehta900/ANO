@@ -7,8 +7,9 @@
         </agm-map>
     </div>
     <div class="bg-map" *ngIf="filter">
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12" [styles]="styles">
-            <agm-marker *ngFor="let s of shop" [latitude]="s.latitude" [longitude]="s.longitude" [iconUrl]="shopmark.icon"></agm-marker>
+        <agm-map *ngFor="let s of shop" [latitude]="origin.lat" [longitude]="origin.lng" [zoom]="10" [styles]="styles">
+            <agm-marker [latitude]="origin.lat" [longitude]="origin.lng" [iconUrl]="ourmark.icon"></agm-marker>
+            <agm-marker [latitude]="s.latitude" [longitude]="s.longitude" [iconUrl]="shopmark.icon"></agm-marker>
         </agm-map>
     </div>
     <div class="filter">

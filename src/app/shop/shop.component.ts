@@ -49,10 +49,10 @@ export class ShopComponent implements OnInit {
   ourmark = {
     icon: {
       url:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shopmark.png?alt=media&token=a88b489d-4f6d-470a-9aa4-211f82ce6976',
+        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
       scaledSize: {
-        width: 13,
-        height: 11,
+        width: 90,
+        height: 110,
       },
     },
   };
