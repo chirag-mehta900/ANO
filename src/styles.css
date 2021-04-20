@@ -115,6 +115,9 @@ select:focus{
   padding: 10px;
   border-radius: 5px;
 }
+.select-brand .ng-select.ng-select-single .ng-select-container {
+  padding-left: 25px;
+}
 .ng-select, .ng-select div, .ng-select input, .ng-select span {
   font-family: "Poppins-SemiBold";
 }

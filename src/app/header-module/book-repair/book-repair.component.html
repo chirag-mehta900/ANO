@@ -28,14 +28,16 @@
             device1.invalid &&
             (formSubmitted || device1.touched) 
             }">
-                        <ng-option *ngFor="let brand of deviceList" (change)="getIssueList($event)" [value]="brand.id"><span>{{brand.categoryName}}</span>-{{brand.full_name}}</ng-option>
+                        <ng-option *ngFor="let brand of deviceList" (change)="getIssueList($event)" [value]="brand.id"><span>{{brand.categoryName}}</span> {{brand.full_name}}</ng-option>
                     </ng-select>
 
                     <div class="text-dangerr" *ngIf="deviceFlag">
                         select Device.
                     </div>
                 </div>
-
+                <div class="search-icon">
+                    <img src="../../../assets/images/search.svg" alt="">
+                </div>
 
 
                 <div class="skipdevice">
