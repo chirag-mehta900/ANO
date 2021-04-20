@@ -3,12 +3,25 @@
     display: grid;
     justify-content: center;
 }
-.empty-cart h2{
+
+.empty-cart h2 {
     font-family: "Poppins-SemiBold";
     font-size: 30px;
 }
-.empty-cart img{
+
+.empty-Cart img {
     height: 170px;
     width: auto;
     margin: auto;
+}
+
+.close-side {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-side button {
+    border: none;
+    background-color: transparent;
 }

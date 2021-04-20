@@ -33,4 +33,8 @@ export class CommonService {
   getintouch(data) {
     return this.http.post(this.envUrl() + 'contactUs', data);
   }
+
+  feedback(data) {
+    return this.http.post(this.envUrl() + 'feedback', data);
+  }
 }
