@@ -107,10 +107,16 @@
                                 </option>
                             </select>
                             <input type="text" name="pick-off" id="pick-off"  [disabled]="!pickFlag" [value]="pickupAddress" (keyup)="setpickupAddress($event.target.value)" placeholder="Pick-up up Address">
+                            
+                           
                             <!-- <button (click)="chooseaddress()" [disabled]="!pickFlag">choose</button> -->
-                            <h3 class="chose-address-page">Select Address</h3>
+                            <button class="chose-address-page" [disabled]="!pickFlag" (click)="chooseaddres()">Select Address</button>
                         </div>
                     </label><br>
+
+                </div>
+                <div class="text-dangerr" *ngIf="ValidZip">
+                    Invalid Address for pickup
                 </div>
 
 
@@ -152,8 +158,9 @@
                                 </option>
                             </select> -->
                             <input type="text" name="drop-off" [value]="dropAddress" [disabled]="!dropFlag" (keyup)="setdropAddress($event.target.value)" id="drop-off" placeholder="Drop up Address">
+                           
                             <!-- <button (click)="chooseaddress()" [disabled]="!dropFlag">choose</button> -->
-                            <h3 class="chose-address-page">Select Address</h3>
+                            <button class="chose-address-page" (click)="chooseaddress()">Select Address</button>
                         </div>
                     </label><br>
                 </div>

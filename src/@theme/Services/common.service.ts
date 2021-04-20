@@ -15,6 +15,8 @@ export class CommonService {
     return 'https://ano-apis.herokuapp.com/api/';
   }
 
+  zipUrl = 'http://ziptasticapi.com/';
+
   pay(data) {
     return this.http.post(this.url + 'pay', data);
   }
@@ -36,5 +38,9 @@ export class CommonService {
 
   feedback(data) {
     return this.http.post(this.envUrl() + 'feedback', data);
+  }
+
+  zipcode(id) {
+    return this.http.get(this.zipUrl + id);
   }
 }

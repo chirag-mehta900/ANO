@@ -13,11 +13,13 @@ import { AddReviewComponent } from './my-service/add-review/add-review.component
 import { ChangePswComponent } from './change-psw/change-psw.component';
 import { EditAddressComponent } from './edit-address/edit-address.component';
 import { ConfirmComponent } from './address/confirm/confirm.component';
+import { SelectAddressComponent } from '../cart/select-address/select-address.component';
 
 @NgModule({
   declarations: [
     ProfileComponent,
     AddressComponent,
+    SelectAddressComponent,
     EditUserComponent,
     AddAddressComponent,
     MyServiceComponent,
