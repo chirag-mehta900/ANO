@@ -22,7 +22,7 @@ export class AddProductComponent implements OnInit {
     ShopCommissionFees: null,
     TotalAmount: null,
     shop_id: null,
-    image: [],
+    image: ([] = []),
     cart_id: null,
     user_id: null,
   };
