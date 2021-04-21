@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProfileService } from 'src/@theme/Services/profile.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-add-address',
-  templateUrl: './add-address.component.html',
-  styleUrls: ['./add-address.component.css'],
+  selector: 'app-addaddress',
+  templateUrl: './addaddress.component.html',
+  styleUrls: ['./addaddress.component.css'],
 })
-export class AddAddressComponent implements OnInit {
+export class ADDaddressComponent implements OnInit {
   Addaddress: FormGroup;
 
   nameflag: boolean = false;
@@ -19,7 +20,11 @@ export class AddAddressComponent implements OnInit {
   cityflag: boolean = false;
   stateflag: boolean = false;
 
-  constructor(public router: Router, private profile: ProfileService) {}
+  constructor(
+    public router: Router,
+    private profile: ProfileService,
+    private activeModal: NgbActiveModal
+  ) {}
 
   ngOnInit() {
     this.Addaddress = new FormGroup({
@@ -34,10 +39,12 @@ export class AddAddressComponent implements OnInit {
   }
 
   Cancel() {
-    this.router.navigate(['profile/address']);
+    this.activeModal.close();
   }
 
   address() {
+    console.log(this.Addaddress.value);
+
     this.nameflag = false;
     this.phoneNumberflag = false;
     this.addressLineflag = false;
@@ -83,14 +90,12 @@ export class AddAddressComponent implements OnInit {
       }
     }
 
-    console.log(this.Addaddress.value);
-
     if (this.Addaddress.valid) {
       this.profile.addAddress(this.Addaddress.value).subscribe(
         (response) => {
           console.log(response);
           if (response['status'] == 200) {
-            this.router.navigate(['profile/address']);
+            this.activeModal.close(response['data']);
           }
         },
         (error) => {

@@ -32,6 +32,7 @@ import { GetAllShopComponent } from './get-all-shop/get-all-shop.component';
 import { MailComponent } from './contact/mail/mail.component';
 import { WarningComponent } from './shop/warning/warning.component';
 import { FeedbackComponent } from './about/feedback/feedback.component';
+import { ADDaddressComponent } from './cart/addaddress/addaddress.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { FeedbackComponent } from './about/feedback/feedback.component';
     MailComponent,
     WarningComponent,
     FeedbackComponent,
+    ADDaddressComponent,
   ],
   imports: [
     BrowserModule,

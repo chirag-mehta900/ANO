@@ -897,7 +897,7 @@ export class CartComponent implements OnInit {
             device_id: element.device_id,
             problem_id: element.problem_id,
             price: element.TotalAmount,
-            image: element.image,
+            image: element.images,
           });
         });
         this.placeOrder.details.splice(0, 1);

@@ -52,13 +52,6 @@
     color: #ffffff;
 }
 
-.text-dangerr {
-    font-family: "Poppins-Regular";
-    padding-left: 30px;
-    font-size: 12px;
-    color: #e64e5d;
-}
-
 @media only screen and (max-width: 415px) {
     .cancle-btn {
         margin-right: 10px;
