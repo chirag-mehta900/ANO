@@ -42,7 +42,7 @@ export class EditaddressComponent implements OnInit {
   }
 
   Cancel() {
-    this.activeModal.close();
+    this.activeModal.close(null);
   }
 
   address() {

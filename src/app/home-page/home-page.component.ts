@@ -201,6 +201,9 @@ export class HomePageComponent implements OnInit {
     );
   }
 
+  about() {
+    this.router.navigate(['about']);
+  }
   DriverReq() {
     var obj = this.driveForm.value;
 

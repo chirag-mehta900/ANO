@@ -50,13 +50,15 @@ export class SelectAddressComponent implements OnInit {
       //   }
       // });
 
-      for (var i = 0; i < this.Addressdata.length; i++) {
-        if (this.Addressdata[i].id === a.id) {
-          this.Addressdata.splice(i, 1);
-          this.Addressdata.push(result);
+      if (result != null) {
+        for (var i = 0; i < this.Addressdata.length; i++) {
+          if (this.Addressdata[i].id === a.id) {
+            this.Addressdata.splice(i, 1);
+            this.Addressdata.push(result);
+          }
         }
+        console.log(this.Addressdata);
       }
-      console.log(this.Addressdata);
     });
 
     // this.profile.getEditId(a.id);
@@ -78,8 +80,11 @@ export class SelectAddressComponent implements OnInit {
     const modalRef = this.modalService.open(ADDaddressComponent);
     modalRef.result.then((result) => {
       console.log(result);
-      this.Addressdata.push(result);
-      console.log(this.Addressdata);
+
+      if (result != null) {
+        this.Addressdata.push(result);
+        console.log(this.Addressdata);
+      }
 
       // for (var i = 0; i < this.Addressdata.length; i++) {
       //   if (this.Addressdata[i].id === a.id) {
