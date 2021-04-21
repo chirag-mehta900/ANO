@@ -271,6 +271,7 @@ export class CartComponent implements OnInit {
     isCollectFromStore: true,
     pickupLocation: null,
     repairedDate: null,
+    distanceFees: null,
     expectedDelivery: null,
     dropLocation: null,
     Total_Price: null,
@@ -280,6 +281,10 @@ export class CartComponent implements OnInit {
         problem_id: null,
         image: ([] = []),
         price: null,
+        ANOBaseFees: null,
+        ANOCommissionFees: null,
+        ShopCommissionFees: null,
+        TotalAmount: null,
       },
     ],
   };
@@ -344,6 +349,7 @@ export class CartComponent implements OnInit {
       this.shop.push(response['data'].shop);
       localStorage.setItem('Shop', JSON.stringify(this.shop[0]));
       this.displayCartInfo = response['data'].devices;
+      console.log(this.displayCartInfo, 'test');
 
       this.ANOBaseFeess = Number(response['data'].grandTotalOfBaseFees);
       this.ANOCommissionFeess = Number(
@@ -407,6 +413,7 @@ export class CartComponent implements OnInit {
         // 4. g flag: To get all matches
         var distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
         this.deliveryPrices = distance * 0.6;
+        this.placeOrder.distanceFees = this.deliveryPrices;
         this.deliveryPrices = Number(this.deliveryPrices.toFixed(2));
 
         this.totalCartAmounts = Number(
@@ -896,8 +903,12 @@ export class CartComponent implements OnInit {
           this.placeOrder.details.push({
             device_id: element.device_id,
             problem_id: element.problem_id,
-            price: element.TotalAmount,
-            image: element.images,
+            price: element.price,
+            image: element.image,
+            ANOBaseFees: element.ANOBaseFees,
+            ANOCommissionFees: element.ANOCommissionFees,
+            ShopCommissionFees: element.ShopCommissionFees,
+            TotalAmount: element.TotalAmount,
           });
         });
         this.placeOrder.details.splice(0, 1);
