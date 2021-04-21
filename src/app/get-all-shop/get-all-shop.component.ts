@@ -318,8 +318,8 @@ export class GetAllShopComponent implements OnInit {
       this.Location.lat = 33.448376;
       this.Location.lng = -112.074036;
 
-      this.lat = this.Location.lat;
-      this.lng = this.Location.lng;
+      this.Lat = this.Location.lat;
+      this.Lng = this.Location.lng;
 
       localStorage.setItem('Location', JSON.stringify(this.Location));
 
@@ -328,6 +328,7 @@ export class GetAllShopComponent implements OnInit {
         .subscribe((data: any) => {
           this.area = data.results[0].formatted_address;
           localStorage.setItem('Address', JSON.stringify(this.area));
+          this.shoplist(this.Location);
 
           console.log(this.area);
         });
@@ -341,8 +342,8 @@ export class GetAllShopComponent implements OnInit {
 
         localStorage.setItem('Location', JSON.stringify(this.Location));
         this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
-        this.lat = this.Location.lat;
-        this.lng = this.Location.lng;
+        this.Lat = this.Location.lat;
+        this.Lng = this.Location.lng;
 
         this.mapService
           .getArea(this.Location.lat, this.Location.lng)
@@ -351,6 +352,7 @@ export class GetAllShopComponent implements OnInit {
             localStorage.setItem('Address', JSON.stringify(this.area));
 
             console.log(this.area);
+            this.shoplist(this.Location);
           });
       },
       (error) => {
@@ -362,8 +364,6 @@ export class GetAllShopComponent implements OnInit {
     this.Lat = this.Location.lat;
     this.Lng = this.Location.lng;
     console.log('hello', this.Location);
-
-    this.shoplist(this.Location);
 
     this.Configs = JSON.parse(localStorage.getItem('deviceProblem') || '[]');
     console.log(this.Configs['device']);
@@ -430,20 +430,12 @@ export class GetAllShopComponent implements OnInit {
 
     // });
 
-    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
-    this.Lat = this.Location.lat;
-    this.Lng = this.Location.lng;
-    var Icon = this.Location.Icon;
-    console.log('hello', this.Location);
+    // this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+    // this.Lat = this.Location.lat;
+    // this.Lng = this.Location.lng;
+    // var Icon = this.Location.Icon;
+    // console.log('hello', this.Location);
 
-    this.mapService
-      .getArea(this.Location.lat, this.Location.lng)
-      .subscribe((data: any) => {
-        this.area = data.results[0].formatted_address;
-        localStorage.setItem('Address', JSON.stringify(this.area));
-
-        console.log(this.area);
-      });
     const input = document.getElementById('pac-input') as HTMLInputElement;
     this.autocomplete = new google.maps.places.Autocomplete(input, {});
   }

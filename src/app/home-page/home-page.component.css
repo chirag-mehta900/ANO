@@ -186,6 +186,7 @@ h2 {
 
 .aboutdetail span {
     color: #ffc542;
+    cursor: pointer;
 }
 
 .about-img img {
@@ -397,9 +398,10 @@ carousel.carousel {
     margin-bottom: 20px;
 }
 
-.service-detail-img-detail{
+.service-detail-img-detail {
     height: 150px;
 }
+
 .service-detail p {
     margin: auto;
 }
@@ -461,10 +463,11 @@ carousel.carousel {
     cursor: pointer !important;
 }
 
-.service-detail{
+.service-detail {
     height: 300px;
     width: 300px;
 }
+
 
 /* ````````````````````````````````````````````````
 
@@ -774,7 +777,7 @@ animatiom
         justify-content: end;
         margin-top: 40px;
     }
-    .about-img-12{
+    .about-img-12 {
         margin-top: 0px;
     }
 }
@@ -786,35 +789,36 @@ animatiom
     }
 }
 
-@media only screen and (max-width: 520px){
-    .counts{
+@media only screen and (max-width: 520px) {
+    .counts {
         display: grid;
         justify-content: center;
         width: 70%;
     }
 }
 
-@media only screen and (max-width: 415px){
-    .banner-detail h2{
+@media only screen and (max-width: 415px) {
+    .banner-detail h2 {
         font-size: 55px;
     }
-    .about-img-12 .about-img-1{
+    .about-img-12 .about-img-1 {
         height: 160px;
-    position: relative;
-    bottom: -37px;
+        position: relative;
+        bottom: -37px;
     }
-    .about-img-12 .about-img-2{
+    .about-img-12 .about-img-2 {
         height: 160px;
     }
-    .about-img-34 .about-img-3{
+    .about-img-34 .about-img-3 {
         height: 105px;
         position: relative;
         right: -33px;
     }
-    .about-img-34 .about-img-4{
+    .about-img-34 .about-img-4 {
         height: 200px;
     }
-    .name, .contact{
+    .name,
+    .contact {
         display: grid;
     }
     .requestform input {
@@ -822,25 +826,30 @@ animatiom
         height: 45px;
         background-color: transparent;
     }
-    .contact{
-        margin-top: -18px;   
+    .contact {
+        margin-top: -18px;
     }
-    .hexagon{background-size: contain;
+    .hexagon {
+        background-size: contain;
         height: 242px;
         background-position: center;
     }
     .hexagonetext {
         top: 77px;
     }
-    .howitwork-title h3, .whyus-title h3, .about-title h3, .count-head h3 {
+    .howitwork-title h3,
+    .whyus-title h3,
+    .about-title h3,
+    .count-head h3 {
         font-size: 30px;
         margin-bottom: 10px;
     }
-    .driver-title h3{
+    .driver-title h3 {
         font-size: 30px;
         max-width: 165px;
     }
-    .client-title h3, .service h3{
+    .client-title h3,
+    .service h3 {
         font-size: 30px;
         max-width: 260px;
         margin-bottom: 10px;
@@ -849,26 +858,27 @@ animatiom
         border-top: 2px solid #000;
         margin-top: 20px;
     }
-    .experience-img1 img{
+    .experience-img1 img {
         top: 0px;
     }
-    .store button{
+    .store button {
         margin-bottom: 10px;
     }
     .aboutus {
         margin-top: -30px;
     }
-    .banner-detail p{
+    .banner-detail p {
         padding-top: 35px;
     }
     .service-detail h4 {
         font-size: 15px;
         font-family: "Poppins-SemiBold";
-    }    
-    .service-detail p{
+    }
+    .service-detail p {
         font-size: 12px;
     }
-    .service-detail, .whyus-detail {
+    .service-detail,
+    .whyus-detail {
         height: 200px;
     }
     .service-detail-img {
@@ -877,10 +887,10 @@ animatiom
     .howitwork {
         margin-bottom: 80px;
     }
-    .whyus-detail{
+    .whyus-detail {
         margin-bottom: 95px;
     }
-    .requestform{
+    .requestform {
         padding-top: 25px;
     }
 }

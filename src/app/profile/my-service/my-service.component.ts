@@ -24,8 +24,11 @@ export class MyServiceComponent implements OnInit {
   ngOnInit() {
     this.profile.getOrderlist().subscribe((data) => {
       console.log(data['data']);
-
-      this.orderList = data['data'];
+      for (var i = 0; i < data['data'].length; i++) {
+        if (data['data'][i].transactionId != null) {
+          this.orderList.push(data['data'][i]);
+        }
+      }
 
       this.orderList.reverse();
       // localStorage.setItem('orderList', JSON.stringify(this.orderList));
