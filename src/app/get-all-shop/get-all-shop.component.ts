@@ -253,7 +253,14 @@ export class GetAllShopComponent implements OnInit {
   Location = {
     lat: 0,
     lng: 0,
-    Icon: {},
+    Icon: {
+      url:
+        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
+      scaledSize: {
+        width: 200,
+        height: 100,
+      },
+    },
   };
 
   Filter: boolean = false;
@@ -298,6 +305,7 @@ export class GetAllShopComponent implements OnInit {
     // console.log(this.searchshop);
     this.Filter = true;
     localStorage.setItem('filter', JSON.stringify(this.Filter));
+    localStorage.setItem('Location', JSON.stringify(this.Location));
 
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
     console.log(this.Location);
@@ -305,6 +313,26 @@ export class GetAllShopComponent implements OnInit {
     if (!navigator.geolocation) {
       console.log('location not found');
     }
+
+    if (this.Location.lat == 0 && this.Location.lng == 0) {
+      this.Location.lat = 33.448376;
+      this.Location.lng = -112.074036;
+
+      this.lat = this.Location.lat;
+      this.lng = this.Location.lng;
+
+      localStorage.setItem('Location', JSON.stringify(this.Location));
+
+      this.mapService
+        .getArea(this.Location.lat, this.Location.lng)
+        .subscribe((data: any) => {
+          this.area = data.results[0].formatted_address;
+          localStorage.setItem('Address', JSON.stringify(this.area));
+
+          console.log(this.area);
+        });
+    }
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.Location.lat = position.coords.latitude;
@@ -315,18 +343,18 @@ export class GetAllShopComponent implements OnInit {
         this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
         this.lat = this.Location.lat;
         this.lng = this.Location.lng;
+
+        this.mapService
+          .getArea(this.Location.lat, this.Location.lng)
+          .subscribe((data: any) => {
+            this.area = data.results[0].formatted_address;
+            localStorage.setItem('Address', JSON.stringify(this.area));
+
+            console.log(this.area);
+          });
       },
       (error) => {
         console.log(error);
-        if (this.Location.lat == 0 && this.Location.lng == 0) {
-          this.Location.lat = 33.448376;
-          this.Location.lng = -112.074036;
-
-          this.lat = this.Location.lat;
-          this.lng = this.Location.lng;
-
-          localStorage.setItem('Location', JSON.stringify(this.Location));
-        }
       }
     );
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');

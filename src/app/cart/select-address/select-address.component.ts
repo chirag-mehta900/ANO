@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from 'src/@theme/Services/profile.service';
 import { FormControl } from '@angular/forms';
+import { EditaddressComponent } from '../editaddress/editaddress.component';
+import { ADDaddressComponent } from '../addaddress/addaddress.component';
+
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -17,7 +20,8 @@ export class SelectAddressComponent implements OnInit {
   constructor(
     private profile: ProfileService,
     public router: Router,
-    private activeModal: NgbActiveModal
+    private activeModal: NgbActiveModal,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
@@ -33,6 +37,28 @@ export class SelectAddressComponent implements OnInit {
 
   editaddress(a) {
     console.log(a);
+    this.profile.getEditId(a.id);
+
+    const modalRef = this.modalService.open(EditaddressComponent);
+    modalRef.result.then((result) => {
+      console.log(result);
+      // this.Addressdata.forEach((e) => {
+      //   if (e.id == a.id) {
+      //     debugger;
+      //     this.Addressdata.pop();
+      //     this.Addressdata.push(result);
+      //   }
+      // });
+
+      for (var i = 0; i < this.Addressdata.length; i++) {
+        if (this.Addressdata[i].id === a.id) {
+          this.Addressdata.splice(i, 1);
+          this.Addressdata.push(result);
+        }
+      }
+      console.log(this.Addressdata);
+    });
+
     // this.profile.getEditId(a.id);
 
     // this.router.navigate(['profile/edit']);
@@ -49,11 +75,24 @@ export class SelectAddressComponent implements OnInit {
   }
 
   Addadress() {
-    this.router.navigate(['profile/add-address']);
+    const modalRef = this.modalService.open(ADDaddressComponent);
+    modalRef.result.then((result) => {
+      console.log(result);
+      this.Addressdata.push(result);
+      console.log(this.Addressdata);
+
+      // for (var i = 0; i < this.Addressdata.length; i++) {
+      //   if (this.Addressdata[i].id === a.id) {
+      //     this.Addressdata.splice(i, 1);
+      //     this.Addressdata.push(result);
+      //   }
+      // }
+      // console.log(this.Addressdata);
+    });
   }
 
   Cancel() {
-    this.router.navigate(['profile']);
+    this.activeModal.close(this.tempObj);
   }
 
   changeaddress() {}

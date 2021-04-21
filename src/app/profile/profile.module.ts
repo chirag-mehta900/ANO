@@ -14,6 +14,7 @@ import { ChangePswComponent } from './change-psw/change-psw.component';
 import { EditAddressComponent } from './edit-address/edit-address.component';
 import { ConfirmComponent } from './address/confirm/confirm.component';
 import { SelectAddressComponent } from '../cart/select-address/select-address.component';
+import { EditaddressComponent } from '../cart/editaddress/editaddress.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SelectAddressComponent } from '../cart/select-address/select-address.co
     AddReviewComponent,
     ChangePswComponent,
     EditAddressComponent,
+    EditaddressComponent,
     ConfirmComponent,
   ],
   imports: [CommonModule, ProfileRoutingModule, SharedModule],

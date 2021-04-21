@@ -26,6 +26,8 @@ export class MyServiceComponent implements OnInit {
       console.log(data['data']);
 
       this.orderList = data['data'];
+
+      this.orderList.reverse();
       // localStorage.setItem('orderList', JSON.stringify(this.orderList));
     });
 

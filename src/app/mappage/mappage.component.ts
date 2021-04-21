@@ -354,6 +354,23 @@ export class MappageComponent implements OnInit {
       console.log('location not found');
     }
 
+    if (this.Location.lat == 0 && this.Location.lng == 0) {
+      this.Location.lat = 33.448376;
+      this.Location.lng = -112.074036;
+
+      this.lat = this.Location.lat;
+      this.lng = this.Location.lng;
+
+      this.mapService
+        .getArea(this.Location.lat, this.Location.lng)
+        .subscribe((data: any) => {
+          this.area = data.results[0].formatted_address;
+          localStorage.setItem('Address', JSON.stringify(this.area));
+
+          console.log(this.area);
+        });
+    }
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         this.Location.lat = position.coords.latitude;
@@ -365,16 +382,18 @@ export class MappageComponent implements OnInit {
         this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
         this.Lat = this.Location.lat;
         this.Lng = this.Location.lng;
+
+        this.mapService
+          .getArea(this.Location.lat, this.Location.lng)
+          .subscribe((data: any) => {
+            this.area = data.results[0].formatted_address;
+            localStorage.setItem('Address', JSON.stringify(this.area));
+
+            console.log(this.area);
+          });
       },
       (error) => {
         console.log(error);
-        if (this.Location.lat == 0 && this.Location.lng == 0) {
-          this.Location.lat = 33.448376;
-          this.Location.lng = -112.074036;
-
-          this.lat = this.Location.lat;
-          this.lng = this.Location.lng;
-        }
       }
     );
 
@@ -383,14 +402,6 @@ export class MappageComponent implements OnInit {
     this.Lat = this.Location.lat;
     this.Lng = this.Location.lng;
 
-    this.mapService
-      .getArea(this.Location.lat, this.Location.lng)
-      .subscribe((data: any) => {
-        this.area = data.results[0].formatted_address;
-        localStorage.setItem('Address', JSON.stringify(this.area));
-
-        console.log(this.area);
-      });
     const input = document.getElementById('pac-input') as HTMLInputElement;
     this.autocomplete = new google.maps.places.Autocomplete(input, {});
   }
