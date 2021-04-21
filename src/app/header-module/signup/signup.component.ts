@@ -18,6 +18,8 @@ export class SignupComponent implements OnInit {
   signUpEmailFlag: boolean = false;
   emailExist: boolean = false;
   signUpForm: FormGroup;
+  otpForm: FormGroup;
+
   userAddres: FormGroup;
   userName: any;
   sId: any;
@@ -66,8 +68,14 @@ export class SignupComponent implements OnInit {
       ]),
       mobileNumber: new FormControl(null),
       password: new FormControl(null, Validators.required),
+      otp: new FormControl(null, Validators.required),
       role: new FormControl('user'),
     });
+
+    this.otpForm = new FormGroup({
+      otp: new FormControl(null, Validators.required),
+    });
+
     this.userAddres = new FormGroup({
       email: new FormControl(null, Validators.required),
       birthDate: new FormControl(null),
@@ -136,8 +144,13 @@ export class SignupComponent implements OnInit {
 
     localStorage.setItem('signUp', JSON.stringify(this.signUpForm.value));
 
+    var string = this.signUpForm.value.mobileNumber;
+
+    string = string.replace('(', '');
+    string = string.replace(')', '');
+    string = string.replace('-', '');
     this.verification.email = this.signUpForm.value.email;
-    this.verification.mobileNumber = this.signUpForm.value.mobileNumber;
+    this.verification.mobileNumber = string;
 
     console.log(this.verification);
 
@@ -162,7 +175,12 @@ export class SignupComponent implements OnInit {
 
   resend() {
     if (this.resendOtpFlag) {
-      this.Resend.mobileNumber = this.verification.mobileNumber;
+      var string = this.verification.mobileNumber;
+
+      string = string.replace('(', '');
+      string = string.replace(')', '');
+      string = string.replace('-', '');
+      this.Resend.mobileNumber = string;
       console.log(this.Resend);
       this.counter = 59;
       this.startCountdown(this.counter);
@@ -197,31 +215,38 @@ export class SignupComponent implements OnInit {
   // }
 
   signUpConfirmationComplete(otp: any) {
-    console.log(otp);
+    console.log(this.otpForm.value);
+    var string = this.verification.mobileNumber;
 
-    this.confirmOTP.mobileNumber = this.verification.mobileNumber;
-    this.confirmOTP.otp = otp;
+    string = string.replace('(', '');
+    string = string.replace(')', '');
+    string = string.replace('-', '');
 
-    console.log(this.confirmOTP.otp.length);
+    console.log(string);
 
-    if (this.confirmOTP.otp.length < 4) {
-      if (this.confirmOTP.otp.length == 0) {
-        this.emptyOtpFlag = true;
-        this.validOtpFlag = false;
-      } else {
-        this.emptyOtpFlag = false;
-        this.validOtpFlag = true;
+    this.confirmOTP.mobileNumber = string;
+    this.confirmOTP.otp = this.otpForm.value.otp;
+
+    console.log(this.confirmOTP);
+
+    // if ((this.confirmOTP.otp.length < 4)) {
+    //   if (this.confirmOTP.otp.length == 0) {
+    //     this.emptyOtpFlag = true;
+    //     this.validOtpFlag = false;
+    //   } else {
+    //     this.emptyOtpFlag = false;
+    //     this.validOtpFlag = true;
+    //   }
+    // } else {
+    this.headerService.verifyOTP(this.confirmOTP).subscribe((response) => {
+      console.log('verify', response);
+
+      if (response['status'] == 200) {
+        this.signUpConformationFlag = false;
+        this.signUpEmailFlag = true;
       }
-    } else {
-      this.headerService.verifyOTP(this.confirmOTP).subscribe((response) => {
-        console.log('verify', response);
-
-        if (response['status'] == 200) {
-          this.signUpConformationFlag = false;
-          this.signUpEmailFlag = true;
-        }
-      });
-    }
+    });
+    // }
   }
   setUserName() {
     this.headerService.getUserName().subscribe(
