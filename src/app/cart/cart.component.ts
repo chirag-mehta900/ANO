@@ -308,7 +308,7 @@ export class CartComponent implements OnInit {
   mailinrepairFlag: boolean = false;
   pickFlag: boolean = false;
   dropFlag: boolean = false;
-
+  tempzipchek: boolean = false;
   dropinrepairFlag: boolean = false;
   address: any;
   Filter: boolean = false;
@@ -501,15 +501,21 @@ export class CartComponent implements OnInit {
       console.log(this.pickupAddress);
 
       this.placeOrder.pickupLocation = this.pickupAddress;
+      this.ValidZip = true;
       for (var input = 85001; input <= 85086; input++) {
-        this.ValidZip = true;
         if (input == checkzip) {
           console.log('match');
           this.ValidZip = false;
+
           break;
         }
       }
 
+      if (this.ValidZip) {
+        console.log('hello check');
+
+        this.mailinrepairFlag = true;
+      }
       // this.http
       //   .get('http://ziptasticapi.com/' + result.zipCode)
       //   .subscribe((data) => {
