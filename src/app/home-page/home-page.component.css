@@ -219,7 +219,7 @@ h2 {
 }
 
 .requestform {
-    padding-top: 25px;
+    padding-top: 85px;
     width: 100%;
 }
 
@@ -266,7 +266,7 @@ h2 {
 }
 
 .review {
-    background-image: url(../../assets/images/Card.svg);
+    /* background-image: url(../../assets/images/Card.svg); */
     background-repeat: no-repeat;
     background-size: contain;
     height: auto;
@@ -274,11 +274,10 @@ h2 {
 }
 
 .review-blog {
-    padding: 10px;
-    max-width: 300px;
-    margin: auto;
-    padding-top: 20px;
+    padding: 15px;
     text-align: center;
+    background-color: #ffffff;
+    border-radius: 10px;
 }
 
 .review-blog h4 {
@@ -393,18 +392,21 @@ carousel.carousel {
 }
 
 .service-detail-img {
-    height: 180px;
+    height: 150px;
     width: auto;
     margin-bottom: 20px;
 }
 
+.service-detail-img-detail{
+    height: 150px;
+}
 .service-detail p {
-    max-width: 150px;
     margin: auto;
 }
 
 .about-img-12 {
     display: flex;
+    margin-top: 130px;
 }
 
 .about-img-12 .about-img-1 {
@@ -459,6 +461,10 @@ carousel.carousel {
     cursor: pointer !important;
 }
 
+.service-detail{
+    height: 300px;
+    width: 300px;
+}
 
 /* ````````````````````````````````````````````````
 
@@ -748,7 +754,7 @@ animatiom
     }
     .whyus-detail {
         text-align: center !important;
-        margin-bottom: 25px;
+        margin-bottom: 55px;
     }
     .whyimg {
         justify-content: center;
@@ -767,6 +773,9 @@ animatiom
         display: grid;
         justify-content: end;
         margin-top: 40px;
+    }
+    .about-img-12{
+        margin-top: 0px;
     }
 }
 
@@ -864,5 +873,14 @@ animatiom
     }
     .service-detail-img {
         height: 100px;
+    }
+    .howitwork {
+        margin-bottom: 80px;
+    }
+    .whyus-detail{
+        margin-bottom: 95px;
+    }
+    .requestform{
+        padding-top: 25px;
     }
 }

@@ -427,9 +427,10 @@ dp-date-picker.dp-material .dp-picker-input {
 
 .chose-address-page {
     font-size: 15px !important;
-    margin-left: 5px;
+    margin-left: 0px;
     position: relative;
-    top: 6px;
+    top: 1px;
     cursor: pointer;
     color: #ffc542;
+    text-align: left;
 }
