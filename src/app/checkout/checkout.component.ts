@@ -70,7 +70,7 @@ export class CheckoutComponent implements OnInit {
   isTermsAndConditionValidate: boolean = false;
   isLoading = false;
   Filter: boolean = false;
-
+  grandtotal: any;
   stripeCardValid: boolean = false;
   nameflag: boolean = false;
   zipcodeflag: boolean = false;
@@ -147,11 +147,13 @@ export class CheckoutComponent implements OnInit {
         this.isPaid = true;
       }
 
-      console.log(data['data'].shop, 'orderby id shop details');
-      this.shopDetails = data['data'].shop;
-      this.orderDetails = data['data'];
-      this.detail = data['data'].details;
+      console.log(data['data']['order'].shop, 'orderby id shop details');
+      this.shopDetails = data['data']['order'].shop;
+      this.orderDetails = data['data']['order'];
+      this.detail = data['data']['order'].details;
       console.log(this.orderDetails);
+
+      this.grandtotal = data['data'].grandTotal;
       console.log(this.detail);
 
       this.detail.forEach((e) => {
