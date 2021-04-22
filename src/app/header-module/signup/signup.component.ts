@@ -19,7 +19,7 @@ export class SignupComponent implements OnInit {
   emailExist: boolean = false;
   signUpForm: FormGroup;
   otpForm: FormGroup;
-
+  newmobile: any;
   userAddres: FormGroup;
   userName: any;
   sId: any;
@@ -68,7 +68,6 @@ export class SignupComponent implements OnInit {
       ]),
       mobileNumber: new FormControl(null),
       password: new FormControl(null, Validators.required),
-      otp: new FormControl(null, Validators.required),
       role: new FormControl('user'),
     });
 
@@ -77,6 +76,7 @@ export class SignupComponent implements OnInit {
     });
 
     this.userAddres = new FormGroup({
+      name: new FormControl(null, Validators.required),
       email: new FormControl(null, Validators.required),
       birthDate: new FormControl(null),
       phoneNumber: new FormControl(null),
@@ -116,6 +116,11 @@ export class SignupComponent implements OnInit {
       this.signUpNameFlag = false;
       this.signUpMobileFlag = true;
 
+      this.userAddres.value.name =
+        this.signUpForm.value.fname + ' ' + this.signUpForm.value.lname;
+
+      console.log(this.userAddres.value);
+
       localStorage.setItem('signUp', JSON.stringify(this.signUpForm.value));
     } else {
       return;
@@ -144,13 +149,26 @@ export class SignupComponent implements OnInit {
 
     localStorage.setItem('signUp', JSON.stringify(this.signUpForm.value));
 
-    var string = this.signUpForm.value.mobileNumber;
+    var string = this.mobile;
 
     string = string.replace('(', '');
     string = string.replace(')', '');
     string = string.replace('-', '');
+
+    for (var i = 0; i < string.length; i++) {
+      const item: any = string[i];
+      console.log(item);
+
+      if (!isNaN(item)) {
+      } else {
+        string = string.replace(item, '');
+      }
+    }
+    this.newmobile = string;
     this.verification.email = this.signUpForm.value.email;
-    this.verification.mobileNumber = string;
+    this.verification.mobileNumber = this.newmobile;
+
+    this.signUpForm.value.mobileNumber = this.newmobile;
 
     console.log(this.verification);
 
@@ -175,12 +193,7 @@ export class SignupComponent implements OnInit {
 
   resend() {
     if (this.resendOtpFlag) {
-      var string = this.verification.mobileNumber;
-
-      string = string.replace('(', '');
-      string = string.replace(')', '');
-      string = string.replace('-', '');
-      this.Resend.mobileNumber = string;
+      this.Resend.mobileNumber = this.newmobile;
       console.log(this.Resend);
       this.counter = 59;
       this.startCountdown(this.counter);
@@ -198,7 +211,6 @@ export class SignupComponent implements OnInit {
     this.counter = seconds;
 
     const interval = setInterval(() => {
-      console.log(this.counter);
       this.counter--;
 
       if (this.counter < 1) {
@@ -216,15 +228,8 @@ export class SignupComponent implements OnInit {
 
   signUpConfirmationComplete(otp: any) {
     console.log(this.otpForm.value);
-    var string = this.verification.mobileNumber;
 
-    string = string.replace('(', '');
-    string = string.replace(')', '');
-    string = string.replace('-', '');
-
-    console.log(string);
-
-    this.confirmOTP.mobileNumber = string;
+    this.confirmOTP.mobileNumber = this.verification.mobileNumber;
     this.confirmOTP.otp = this.otpForm.value.otp;
 
     console.log(this.confirmOTP);
@@ -242,6 +247,8 @@ export class SignupComponent implements OnInit {
       console.log('verify', response);
 
       if (response['status'] == 200) {
+        console.log('otp done');
+
         this.signUpConformationFlag = false;
         this.signUpEmailFlag = true;
       }
@@ -262,9 +269,15 @@ export class SignupComponent implements OnInit {
   }
   signUpEmailComplete() {
     this.userAddres.value.email = this.email;
-    this.userAddres.value.phoneNumber = this.mobile;
+    this.userAddres.value.phoneNumber = this.newmobile;
+
+    this.userAddres.value.name =
+      this.signUpForm.value.fname + ' ' + this.signUpForm.value.lname;
+
+    console.log(this.userAddres.value);
 
     console.log(this.signUpForm.value);
+    console.log(this.userAddres.value);
 
     this.headerService.signUp(this.signUpForm.value).subscribe(
       (data) => {
@@ -277,8 +290,11 @@ export class SignupComponent implements OnInit {
           this.headerService.userAddress(this.userAddres.value).subscribe(
             (data) => {
               console.log(data);
+              console.log(data['name']);
 
-              this.activeModal.close(this.userName);
+              if (data['status'] == 200) {
+                this.activeModal.close(data['name']);
+              }
             },
             (error) => {}
           );
