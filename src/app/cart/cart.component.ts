@@ -496,25 +496,26 @@ export class CartComponent implements OnInit {
       console.log(result);
 
       var checkzip = result.zipCode;
-      this.pickupAddress =
-        result.addressLine + result.city + result.state + result.zipCode;
-      console.log(this.pickupAddress);
 
-      this.placeOrder.pickupLocation = this.pickupAddress;
       this.ValidZip = true;
       for (var input = 85001; input <= 85086; input++) {
         if (input == checkzip) {
           console.log('match');
           this.ValidZip = false;
 
+          this.pickupAddress =
+            result.addressLine + result.city + result.state + result.zipCode;
+          console.log(this.pickupAddress);
+
+          this.placeOrder.pickupLocation = this.pickupAddress;
           break;
         }
       }
 
       if (this.ValidZip) {
         console.log('hello check');
-
-        this.mailinrepairFlag = true;
+        this.mailinrepairFlag = false;
+        this.mailradio('mail');
       }
       // this.http
       //   .get('http://ziptasticapi.com/' + result.zipCode)
