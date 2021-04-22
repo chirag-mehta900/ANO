@@ -260,6 +260,11 @@ export class CartComponent implements OnInit {
 
   subscription: any;
   distanceInMiles: any;
+  distance: number = 0;
+
+  Distance: number = 0;
+  DeliveryPrices: number = 0;
+
   deliveryPrices: any;
   placeOrder: any = {
     shop_id: null,
@@ -313,6 +318,8 @@ export class CartComponent implements OnInit {
   address: any;
   Filter: boolean = false;
   ValidZip: boolean = false;
+  ValidZIP: boolean = false;
+
   currentImageUrl: any = '';
   addedDeviceProblem;
   displayCartInfo = [];
@@ -411,14 +418,13 @@ export class CartComponent implements OnInit {
         // 2. \d+: Match one or more numbers
         // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
         // 4. g flag: To get all matches
-        var distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
-        this.deliveryPrices = distance * 0.6;
-        this.placeOrder.distanceFees = this.deliveryPrices;
+        this.distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
+        this.deliveryPrices = this.distance * 0.6;
         this.deliveryPrices = Number(this.deliveryPrices.toFixed(2));
 
-        this.totalCartAmounts = Number(
-          (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
-        );
+        // this.totalCartAmounts = Number(
+        //   (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
+        // );
         // this.setPreviouslyAddedDeviceIssue();
       });
 
@@ -490,6 +496,26 @@ export class CartComponent implements OnInit {
     // console.log(moment().add(3, 'days').calendar(),"time");
   }
 
+  totalplusEvent(event1, event2) {
+    this.Distance = Number(this.Distance + event1);
+
+    this.DeliveryPrices += event2;
+
+    this.totalCartAmounts += this.DeliveryPrices;
+
+    console.log(this.Distance);
+  }
+
+  totalminusEvent(event1, event2) {
+    this.Distance = Number(this.Distance - event1);
+
+    this.DeliveryPrices -= event2;
+
+    this.totalCartAmounts -= this.DeliveryPrices;
+
+    console.log(this.Distance);
+  }
+
   chooseaddres() {
     const modalRef = this.modalService.open(SelectAddressComponent);
     modalRef.result.then((result) => {
@@ -508,6 +534,8 @@ export class CartComponent implements OnInit {
           console.log(this.pickupAddress);
 
           this.placeOrder.pickupLocation = this.pickupAddress;
+
+          this.totalplusEvent(Number(this.distance), this.deliveryPrices);
           break;
         }
       }
@@ -538,11 +566,31 @@ export class CartComponent implements OnInit {
     modalRef.result.then((result) => {
       console.log(result);
 
-      this.dropAddress =
-        result.addressLine + result.city + result.state + result.zipCode;
-      console.log(this.pickupAddress);
+      var checkzip = result.zipCode;
 
-      this.placeOrder.dropLocation = this.dropAddress;
+      this.ValidZIP = true;
+      for (var input = 85001; input <= 85086; input++) {
+        if (input == checkzip) {
+          console.log('match');
+          this.ValidZIP = false;
+
+          this.dropAddress =
+            result.addressLine + result.city + result.state + result.zipCode;
+          console.log(this.dropAddress);
+
+          this.placeOrder.dropLocation = this.dropAddress;
+
+          this.totalplusEvent(Number(this.distance), this.deliveryPrices);
+
+          break;
+        }
+      }
+
+      if (this.ValidZIP) {
+        console.log('hello check');
+        this.dropinrepairFlag = false;
+        this.dropradio('selfpickup');
+      }
     });
 
     // this.modalService.open(AddressComponent);
@@ -555,6 +603,8 @@ export class CartComponent implements OnInit {
       this.placeOrder.isMail = true;
 
       this.placeOrder.pickupLocation = null;
+
+      this.totalminusEvent(Number(this.distance), this.deliveryPrices);
       console.log(this.placeOrder);
     } else {
       this.placeOrder.isMail = false;
@@ -571,7 +621,7 @@ export class CartComponent implements OnInit {
     if (event == 'selfpickup') {
       this.placeOrder.isCollectFromStore = true;
       this.placeOrder.dropLocation = null;
-
+      this.totalminusEvent(Number(this.distance), this.deliveryPrices);
       console.log(this.placeOrder);
     } else {
       this.placeOrder.isCollectFromStore = false;
@@ -633,9 +683,9 @@ export class CartComponent implements OnInit {
       this.ShopCommissionFeess += Number(element.ShopCommissionFees.toFixed(2));
       this.Prices += Number(element.price.toFixed(2));
     });
-    this.totalCartAmounts += this.deliveryPrices;
+    // this.totalCartAmounts += this.deliveryPrices;
     // this.ANOBaseFeess = Number(this.ANOBaseFeess.toFixed(2));
-    this.totalCartAmounts = Number(this.totalCartAmounts.toFixed(2));
+    // this.totalCartAmounts = Number(this.totalCartAmounts.toFixed(2));
     console.log(this.totalCartAmounts, 'hey');
   }
 
@@ -878,6 +928,8 @@ export class CartComponent implements OnInit {
     console.log(event);
   }
   proceed() {
+    console.log(this.totalCartAmounts);
+
     if (this.ValidZip == false) {
       //to calculate total cart amount
       let isLogedIn = localStorage.getItem('token');
@@ -919,7 +971,10 @@ export class CartComponent implements OnInit {
           });
         });
         this.placeOrder.details.splice(0, 1);
+        this.placeOrder.distanceFees = this.DeliveryPrices;
 
+        console.log(this.Distance);
+        console.log(this.DeliveryPrices);
         //calculating cart amount
         this.placeOrder.details.forEach((element) => {
           totalCartAmount += element.price;
@@ -935,12 +990,16 @@ export class CartComponent implements OnInit {
 
         this.placeOrder.pickupLocation = this.pickupAddress;
         this.placeOrder.dropLocation = this.dropAddress;
+
         console.log(this.placeOrder, 'object');
 
         console.log(this.placeOrder.details[0].image);
         if (this.placeOrder.details[0].image == null) {
           this.placeOrder.details[0].image = [];
         }
+
+        console.log(this.placeOrder);
+
         this.shopService.placeOrder(this.placeOrder).subscribe((response) => {
           console.log(response, 'placeOrder');
 
