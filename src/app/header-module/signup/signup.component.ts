@@ -83,7 +83,8 @@ export class SignupComponent implements OnInit {
     });
 
     this.userAddres = new FormGroup({
-      name: new FormControl(null, Validators.required),
+      fname: new FormControl(null, Validators.required),
+      lname: new FormControl(null, Validators.required),
       email: new FormControl(null, Validators.required),
       birthDate: new FormControl(null),
       phoneNumber: new FormControl(null),
@@ -343,8 +344,8 @@ export class SignupComponent implements OnInit {
       this.userAddres.value.email = this.email;
       this.userAddres.value.phoneNumber = this.newmobile;
 
-      this.userAddres.value.name =
-        this.signUpForm.value.fname + ' ' + this.signUpForm.value.lname;
+      this.userAddres.value.fname = this.signUpForm.value.fname;
+      this.userAddres.value.lname = this.signUpForm.value.lname;
 
       console.log(this.userAddres.value);
 

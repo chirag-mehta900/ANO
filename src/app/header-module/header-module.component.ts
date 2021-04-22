@@ -163,6 +163,9 @@ export class HeaderModuleComponent implements OnInit {
   setUserName() {
     this.headerService.getUserName().subscribe(
       (data) => {
+        console.log(data);
+        console.log(data['data'].id);
+
         this.userName = data['data'].fname;
         this.storeTokenService.set('user_id', data['data'].id);
       },

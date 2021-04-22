@@ -12,7 +12,7 @@
                             <p>Total</p>
                             <div class="booking-sho-prices">
                                 <h2>$ {{grandtotal}}</h2>
-                                <h3>$ {{grandtotal + 17}}</h3>
+                                <h3>$ {{orderDetails.Total_Price}}</h3>
                             </div>
                         </div>
                     </div>
@@ -57,34 +57,57 @@
                     </div>
                 </div> -->
                 <div class="deliver-system">
-                    <div class="pick-up">
-                        <h2>Pick up Address</h2>
-                        <p>{{orderDetails.date}} </p>
-                        <p>{{orderDetails.startTime}}</p>
-                    </div>
-                    <div class="deliver-cab radio">
-                        <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab">
-                        <label for="deliver-cab" class="">
+
+                    <div *ngIf="!isMail">
+                        <div class="pick-up">
+                            <h2>Pick up Address</h2>
+                            <p>{{orderDetails.date}} </p>
+                            <p>{{orderDetails.startTime}}</p>
+                        </div>
+                        <div class="deliver-cab radio">
+                            <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab">
+                            <label for="deliver-cab" class="">
                             <div>
-                                <img src="../../assets/images/checkout/pickup.svg" alt="">
+                                <img src="../../assets/images/checkout/pickup1.svg" alt="">
+                            </div>
+                            <div style="width: 100%;">
+                                <input type="text" name="receive-address" id="receive-address"
+                                    placeholder="receive-address" disabled value={{orderDetails.pickupLocation}}>
+                                <hr>
+                                <input type="text" name="shop-address" id="shop-address" placeholder="shop-address"
+                                    disabled value={{shopDetails.addressLine1}}{{shopDetails.addressLine2}}>
+                            </div>
+                        </label><br>
+                        </div>
+                    </div>
+                    <div *ngIf="isMail">
+                        <div class="pick-up">
+                            <h2>Mail-In Address</h2>
+                            <p>{{orderDetails.date}} </p>
+                            <p>{{orderDetails.startTime}}</p>
+                        </div>
+                        <div class="deliver-cab radio">
+                            <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab">
+                            <label for="deliver-cab" class="">
+                            <div>
+                                <img src="../../assets/images/Location-white.svg" alt="">
                             </div>
                             <div style="width: 100%;">
                                 <input type="text" name="shop-address" id="shop-address" placeholder="shop-address"
-                                    disabled value={{shopDetails.addressLine1}}>
-                                <hr>
-                                <input type="text" name="receive-address" id="receive-address"
-                                    placeholder="receive-address" disabled value={{orderDetails.pickupLocation}}>
+                                    disabled value={{shopDetails.addressLine1}}{{shopDetails.addressLine2}}>
                             </div>
                         </label><br>
+                        </div>
                     </div>
-                    <div class="pick-up">
-                        <h2>Drop up Address</h2>
-                        <p>{{orderDetails.repairedDate}} </p>
-                        <p>{{orderDetails.expectedDelivery}}</p>
-                    </div>
-                    <div class="deliver-mail deliver-cab radio">
-                        <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system" value="deliver-mail">
-                        <label for="deliver-mail" class=" radio-labell">
+                    <div *ngIf="!isCollectFromStore">
+                        <div class="pick-up">
+                            <h2>Drop up Address</h2>
+                            <p>{{orderDetails.repairedDate}} </p>
+                            <p>{{orderDetails.expectedDelivery}}</p>
+                        </div>
+                        <div class="deliver-mail deliver-cab radio">
+                            <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system" value="deliver-mail">
+                            <label for="deliver-mail" class=" radio-labell">
                             <div>
                                 <img src="../../assets/images/Location-white.svg" alt="">
                             </div>
@@ -93,6 +116,27 @@
                                     placeholder="drop-off-address" disabled value={{orderDetails.dropLocation}}>
                             </div>
                         </label><br>
+                        </div>
+                    </div>
+
+                    <div *ngIf="isCollectFromStore">
+                        <div class="pick-up">
+                            <h2>Collect Device Address</h2>
+                            <p>{{orderDetails.repairedDate}} </p>
+                            <p>{{orderDetails.expectedDelivery}}</p>
+                        </div>
+                        <div class="deliver-mail deliver-cab radio">
+                            <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system" value="deliver-mail">
+                            <label for="deliver-mail" class=" radio-labell">
+                            <div>
+                                <img src="../../assets/images/Location-white.svg" alt="">
+                            </div>
+                            <div style="width: 100%;">
+                                <input type="text" name="drop-off-address" id="drop-off-address"
+                                    placeholder="drop-off-address" disabled value={{shopDetails.addressLine1}}{{shopDetails.addressLine2}}>
+                            </div>
+                        </label><br>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -150,7 +194,7 @@
                             </div>
                             <div class="payment-btns">
                                 <div class="pay-card">
-                                    <button (click)="pay()" type="submit">Pay ${{orderDetails.Total_Price}}</button>
+                                    <button (click)="pay()" type="submit">Pay ${{grandtotal}}</button>
                                     <img class="img-fluid" *ngIf="isLoading" src="../../assets/images/loader.gif" />
                                 </div>
                             </div>

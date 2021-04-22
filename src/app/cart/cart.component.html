@@ -142,7 +142,7 @@
                     <h4>Return Address</h4>
                 </div>
                 <div class="deliver-cab radio">
-                    <input class="deliver-radio" type="radio" (click)="dropradio($event.target.value)" id="drop-off-opt" name="deliver-system1" value="drop" [checked]="dropinrepairFlag">
+                    <input class="deliver-radio" type="radio" (click)="dropradio($event.target.value)" [(ngModel)]="dropinrepairFlag" id="drop-off-opt" name="deliver-system1" value="drop" [checked]="dropinrepairFlag">
                     <label for="drop-off-opt" class="radio-label">
                         <div class="selectdate-time">
                             <!-- <input type="date" name="distance" [(ngModel)]="placeOrder.date"
@@ -160,10 +160,16 @@
                             <input type="text" name="drop-off" [value]="dropAddress" [disabled]="!dropFlag" (keyup)="setdropAddress($event.target.value)" id="drop-off" placeholder="Drop up Address">
                            
                             <!-- <button (click)="chooseaddress()" [disabled]="!dropFlag">choose</button> -->
-                            <button class="chose-address-page" (click)="chooseaddress()">Select Address</button>
+                            <button class="chose-address-page"  [disabled]="!dropFlag" (click)="chooseaddress()">Select Address</button>
                         </div>
                     </label><br>
                 </div>
+
+
+                <div class="text-dangerr" *ngIf="ValidZIP">
+                    Invalid Address for pickup
+                </div>
+
                 <div class="deliver-mail radio">
                     <input class="deliver-radio" type="radio" (click)="dropradio($event.target.value)" id="pick-up" name="deliver-system1" value="selfpickup" [checked]="!dropinrepairFlag">
                     <label for="pick-up" class="radio-label radio-labell">
@@ -185,7 +191,7 @@
                         <h3>ANO’s Commission Fee: 20%</h3>
                         <h3>ShopCommissionFees</h3>
                         <h3>Repair Charge</h3>
-                        <h3>Delivery(distance {{distanceInMiles}})</h3>
+                        <h3>Delivery(distance {{Distance}} mi)</h3>
                         <h2>Total to pay</h2>
                     </div>
                     <div class="base-fee-price">
@@ -193,7 +199,7 @@
                         <h3>${{ANOCommissionFeess}}</h3>
                         <h3>${{ShopCommissionFeess}}</h3>
                         <h3>${{Prices}}</h3>
-                        <h3>${{deliveryPrices}}</h3>
+                        <h3>${{DeliveryPrices}}</h3>
                         <h2>${{totalCartAmounts}}</h2>
                     </div>
                 </div>

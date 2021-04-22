@@ -40,6 +40,10 @@ export class CheckoutComponent implements OnInit {
   };
 
   isPaid: boolean = false;
+
+  isMail: boolean = false;
+  isCollectFromStore: boolean = false;
+
   CardInfo: FormGroup;
   productdetail = [
     {
@@ -110,8 +114,6 @@ export class CheckoutComponent implements OnInit {
     this.getData();
     this.getOrderAndShopData();
     this.setProductToDisplay();
-
-    this.total = Math.round(this.orderDetails.Total_Price);
   }
 
   getOrderAndShopData() {
@@ -154,6 +156,10 @@ export class CheckoutComponent implements OnInit {
       console.log(this.orderDetails);
 
       this.grandtotal = data['data'].grandTotal;
+      // this.total = Math.round(this.orderDetails.Total_Price);
+
+      console.log(this.grandtotal);
+
       console.log(this.detail);
 
       this.detail.forEach((e) => {
@@ -161,6 +167,17 @@ export class CheckoutComponent implements OnInit {
           e.image = this.url;
         }
       });
+
+      console.log(data['data']['order'].isMail, 'checkmail');
+      console.log(data['data']['order'].isMail, 'checkcollect');
+
+      if (data['data']['order'].isMail == 1) {
+        this.isMail = true;
+      }
+
+      if (data['data']['order'].isCollectFromStore == 1) {
+        this.isCollectFromStore = true;
+      }
 
       console.log(data['data'], 'orderby id order details');
     });
@@ -265,7 +282,7 @@ export class CheckoutComponent implements OnInit {
       var orderData = {
         currency: 'usd',
         paymentMethodId: '',
-        amount: this.total * 100,
+        amount: Number((this.grandtotal * 100).toFixed(2)),
         paymentIntentId: '',
       };
 

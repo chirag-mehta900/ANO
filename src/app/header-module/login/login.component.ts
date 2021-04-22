@@ -95,6 +95,9 @@ export class LoginComponent implements OnInit {
   setUserName() {
     this.headerService.getUserName().subscribe(
       (data) => {
+        console.log(data);
+        console.log(data['data'].id);
+
         this.userName = data['data'].name;
         this.storeTokenService.set('user_id', data['data'].id);
       },
