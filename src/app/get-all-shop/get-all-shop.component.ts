@@ -267,7 +267,7 @@ export class GetAllShopComponent implements OnInit {
 
   filterFlag: boolean = false;
   formSubmitted: boolean = false;
-
+  AllStore = [];
   deviceList: any[] = [];
   issueList: any[] = [];
   brandList: [];
@@ -307,6 +307,10 @@ export class GetAllShopComponent implements OnInit {
     localStorage.setItem('filter', JSON.stringify(this.Filter));
     localStorage.setItem('Location', JSON.stringify(this.Location));
 
+    this.mapService.getAllStore().subscribe((data) => {
+      this.AllStore = data['data'];
+      console.log(this.AllStore, 'get all Store');
+    });
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
     console.log(this.Location);
 

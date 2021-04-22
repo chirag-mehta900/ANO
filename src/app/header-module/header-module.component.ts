@@ -175,6 +175,8 @@ export class HeaderModuleComponent implements OnInit {
     }
     const modalRef = this.modalService.open(SignupComponent);
     modalRef.result.then((result) => {
+      console.log(result);
+
       this.userName = result;
     });
   }
