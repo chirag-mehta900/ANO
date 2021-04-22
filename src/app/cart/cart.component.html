@@ -93,7 +93,7 @@
                     <h4>Pick up Address</h4>
                 </div>
                 <div class="deliver-cab radio">
-                    <input class="deliver-radio" type="radio" (click)="mailradio($event.target.value)" id="deliver-cab" name="deliver-system" value="Pickup" [checked]="mailinrepairFlag">
+                    <input class="deliver-radio" type="radio" (click)="mailradio($event.target.value)" [(ngModel)]="mailinrepairFlag" id="deliver-cab" name="deliver-system" value="Pickup" ng-checked="mailinrepairFlag">
                     <label for="deliver-cab" class="radio-label">
                         <div class="selectdate-time">
                             <!-- <input type="date" name="date" [(ngModel)]="placeOrder.date"

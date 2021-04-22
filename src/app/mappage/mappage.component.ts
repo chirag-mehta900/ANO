@@ -242,6 +242,8 @@ export class MappageComponent implements OnInit {
   url = 'https://maps.googleapis.com/maps/api/geocode/';
   Key = 'AIzaSyA_cl83OpGB8aR6uUnZgx8z12rUGztlel4';
   storeInfo = [];
+  AllStore = [];
+
   formattedaddress = ' ';
   options = {
     type: [],
@@ -341,6 +343,10 @@ export class MappageComponent implements OnInit {
     //   }
     // });
 
+    this.mapService.getAllStore().subscribe((data) => {
+      this.AllStore = data['data'];
+      console.log(this.AllStore, 'get all Store');
+    });
     console.log(this.display);
 
     this.Marker = JSON.parse(localStorage.getItem('shopmarker') || '[]');

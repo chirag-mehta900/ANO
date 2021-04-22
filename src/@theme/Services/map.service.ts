@@ -33,6 +33,13 @@ export class MapService {
   }
 
   getDistanceInMile(data) {
-    return this.httpClient.post(this.commonService.envUrl() + 'calculate/distance', data);
+    return this.httpClient.post(
+      this.commonService.envUrl() + 'calculate/distance',
+      data
+    );
+  }
+
+  getAllStore() {
+    return this.httpClient.get(this.commonService.envUrl() + 'getallstore');
   }
 }

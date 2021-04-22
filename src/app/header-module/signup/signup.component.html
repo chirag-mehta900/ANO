@@ -47,8 +47,11 @@
                     <input type="text" name="txtInput" id="bar" formControlName="mobileNumber" placeholder="Example: (xxx)-xxx-xxxx" [ngClass]="{'is-invalid':(signUpForm.get('mobileNumber').invalid)&&(formSubmitted)}" required onkeydown="javascript:backspacerDOWN(this,event);"
                         onkeyup="javascript:backspacerUP(this,event);">
 
-                    <div class="text-dangerr" *ngIf="(signUpForm.get('mobileNumber').invalid)&&(formSubmitted )">
+                    <div class="text-dangerr" *ngIf="emptymobileFlag">
                         Mobile number is required.
+                    </div>
+                    <div class="text-dangerr" *ngIf="alreadyregisterFlag">
+                        Mobile number is Already registered
                     </div>
                 </div>
             </div>
@@ -79,6 +82,12 @@
                     <div class="text-dangerr" *ngIf="validOtpFlag">
                         Enter valid otp
                     </div>
+                    <div class="text-dangerr" *ngIf="invalidOtp">
+                        Invalid OTP
+                    </div>
+                    <div class="text-dangerr" *ngIf="resenddoneFlag">
+                        OTP Resend Successfully
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -87,7 +96,7 @@
                         Previous</button>
                     </div>
                     <div class="col-md-6">
-                        <button class="next" type="submit" (click)="signUpConfirmationComplete($event.target.value)">Confirm
+                        <button class="next" type="submit" (click)="signUpConfirmationComplete()">Confirm
                         Code</button>
                     </div>
                 </div>
@@ -106,9 +115,25 @@
                 <p>User Details</p>
                 <div class="signup-inp">
                     <textarea name="address" id="address" cols="10" rows="2" formControlName="addressLine" placeholder="Address"></textarea>
+                    <div class="text-dangerr" *ngIf="addressLineFlag">
+                        Enter valid address
+                    </div>
+
                     <input type="text" name="city" id="city" formControlName="city" placeholder="City">
+                    <div class="text-dangerr" *ngIf="cityFlag">
+                        Enter valid city
+                    </div>
+
                     <input type="text" name="state" id="state" formControlName="state" placeholder="State">
+                    <div class="text-dangerr" *ngIf="stateFlag">
+                        Enter valid state
+                    </div>
+
                     <input type="number" name="zip" id="zip" formControlName="zipCode" placeholder="Zip Code">
+                    <div class="text-dangerr" *ngIf="zipCodeFlag">
+                        Enter valid zipcode
+                    </div>
+
                 </div>
             </div>
             <button class="next" type="submit" (click)="signUpEmailComplete()">Sign Up</button>
