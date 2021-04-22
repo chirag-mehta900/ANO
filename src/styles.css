@@ -207,7 +207,7 @@ dp-date-picker.dp-material{
   width: 320px !important;
 }
 .without-dis .carousel-cells{
-  display: flex !important;
+  display: -webkit-box !important;
   width: 1980px !important;
 }
 .without-dis .carousel-cells .carousel-cell{
