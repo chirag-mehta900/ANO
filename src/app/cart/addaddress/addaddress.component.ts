@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ProfileService } from 'src/@theme/Services/profile.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { MapService } from 'src/@theme/Services/map.service';
 
 @Component({
   selector: 'app-addaddress',
@@ -12,7 +13,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ADDaddressComponent implements OnInit {
   Addaddress: FormGroup;
 
-  nameflag: boolean = false;
+  fnameflag: boolean = false;
+  lnameflag: boolean = false;
   phoneNumberflag: boolean = false;
   addressLineflag: boolean = false;
   landMarkflag: boolean = false;
@@ -23,18 +25,22 @@ export class ADDaddressComponent implements OnInit {
   constructor(
     public router: Router,
     private profile: ProfileService,
-    private activeModal: NgbActiveModal
+    private activeModal: NgbActiveModal,
+    private mapService: MapService
   ) {}
 
   ngOnInit() {
     this.Addaddress = new FormGroup({
-      name: new FormControl(null, Validators.required),
+      fname: new FormControl(null, Validators.required),
+      lname: new FormControl(null, Validators.required),
       phoneNumber: new FormControl(null, Validators.required),
       addressLine: new FormControl(null, Validators.required),
       landMark: new FormControl(null, Validators.required),
       zipCode: new FormControl(null, Validators.required),
       city: new FormControl(null, Validators.required),
       state: new FormControl(null, Validators.required),
+      latitude: new FormControl(null, Validators.required),
+      longitude: new FormControl(null, Validators.required),
     });
   }
 
@@ -45,7 +51,8 @@ export class ADDaddressComponent implements OnInit {
   address() {
     console.log(this.Addaddress.value);
 
-    this.nameflag = false;
+    this.fnameflag = false;
+    this.lnameflag = false;
     this.phoneNumberflag = false;
     this.addressLineflag = false;
     this.landMarkflag = false;
@@ -54,7 +61,8 @@ export class ADDaddressComponent implements OnInit {
     this.stateflag = false;
 
     if (
-      this.Addaddress.value.name == null ||
+      this.Addaddress.value.fname == null ||
+      this.Addaddress.value.lname == null ||
       this.Addaddress.value.phoneNumber == null ||
       this.Addaddress.value.addressLine == null ||
       this.Addaddress.value.landMark == null ||
@@ -62,8 +70,11 @@ export class ADDaddressComponent implements OnInit {
       this.Addaddress.value.city == null ||
       this.Addaddress.value.state == null
     ) {
-      if (this.Addaddress.value.name == null) {
-        this.nameflag = true;
+      if (this.Addaddress.value.fname == null) {
+        this.fnameflag = true;
+      }
+      if (this.Addaddress.value.lname == null) {
+        this.lnameflag = true;
       }
 
       if (this.Addaddress.value.phoneNumber == null) {
@@ -88,25 +99,45 @@ export class ADDaddressComponent implements OnInit {
       if (this.Addaddress.value.state == null) {
         this.stateflag = true;
       }
-    }
-
-    if (this.Addaddress.valid) {
-      this.profile.addAddress(this.Addaddress.value).subscribe(
-        (response) => {
-          console.log(response);
-          if (response['status'] == 200) {
-            this.activeModal.close(response['data']);
-          }
-        },
-        (error) => {
-          console.log(error);
-        }
-      ),
-        (error) => {
-          console.log(error);
-        };
     } else {
-      console.log('not update');
+      var area =
+        this.Addaddress.value.addressLine +
+        ' ' +
+        this.Addaddress.value.landMark +
+        ' ' +
+        this.Addaddress.value.city +
+        ' ' +
+        this.Addaddress.value.state +
+        ' ' +
+        this.Addaddress.value.zipCode;
+      console.log(area);
+
+      this.mapService.getlatlong(area).subscribe((data: any) => {
+        console.log(data);
+
+        if (data['status'] == 'OK') {
+          this.Addaddress.value.latitude =
+            data.results[0].geometry.location.lat;
+          this.Addaddress.value.longitude =
+            data.results[0].geometry.location.lng;
+          console.log(this.Addaddress.value);
+
+          this.profile.addAddress(this.Addaddress.value).subscribe(
+            (response) => {
+              console.log(response);
+              if (response['status'] == 200) {
+                this.activeModal.close(response['data']);
+              }
+            },
+            (error) => {
+              console.log(error);
+            }
+          ),
+            (error) => {
+              console.log(error);
+            };
+        }
+      });
     }
   }
 }

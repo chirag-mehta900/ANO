@@ -7,32 +7,60 @@
             </div>
             <div class="add-address-form">
                 <div class="form-cont">
-                    <p>Full Name</p>
-                    <input type="text" formControlName="name" [(ngModel)]="curruntAddress[0].fname" name="fulname" id="fulname" placeholder="Full Name">
+                    <p>First Name</p>
+                    <input type="text" formControlName="fname" [(ngModel)]="curruntAddress[0].fname" name="fname" id="fname" placeholder="First Name">
+                    <div class="text-dangerr" *ngIf="fnameflag">
+                        Enter your First Name
+                    </div>
+                </div>
+                <div class="form-cont">
+                    <p>Last Name</p>
+                    <input type="text" formControlName="lname" [(ngModel)]="curruntAddress[0].lname" name="lname" id="lname" placeholder="Last Name">
+                    <div class="text-dangerr" *ngIf="lnameflag">
+                        Enter your Last Name
+                    </div>
                 </div>
                 <div class="form-cont">
                     <p>Mobile</p>
                     <input type="text" formControlName="phoneNumber" [(ngModel)]="curruntAddress[0].phoneNumber" maxlength="13" required onkeydown="javascript:backspacerDOWN(this,event);" onkeyup="javascript:backspacerUP(this,event);" name="mobile" id="mobile" placeholder="Mobile">
+                    <div class="text-dangerr" *ngIf="phoneNumberflag">
+                        Enter your phoneNumber
+                    </div>
                 </div>
                 <div class="form-cont">
                     <p>Address (Area and Street)</p>
                     <input type="text" formControlName="addressLine" [(ngModel)]="curruntAddress[0].addressLine" name="address" id="address" placeholder="Add Address">
+                    <div class="text-dangerr" *ngIf="addressLineflag">
+                        Enter Your Address
+                    </div>
                 </div>
                 <div class="form-cont">
                     <p>City</p>
                     <input type="text" formControlName="city" [(ngModel)]="curruntAddress[0].city" name="city" id="city" placeholder="Enter City">
+                    <div class="text-dangerr" *ngIf="cityflag">
+                        Enter Your City
+                    </div>
                 </div>
                 <div class="form-cont">
                     <p>State</p>
                     <input type="text" formControlName="state" [(ngModel)]="curruntAddress[0].state" name="state" id="state" placeholder="Enter State">
+                    <div class="text-dangerr" *ngIf="stateflag">
+                        Enter Your State
+                    </div>
                 </div>
                 <div class="form-cont">
                     <p>Landmark</p>
                     <input type="text" formControlName="landMark" [(ngModel)]="curruntAddress[0].landMark" name="landmark" id="landmark" placeholder="Landmark">
+                    <div class="text-dangerr" *ngIf="landMarkflag">
+                        Enter Your Landmark
+                    </div>
                 </div>
                 <div class="form-cont">
                     <p>Zip Code</p>
                     <input type="number" formControlName="zipCode" [(ngModel)]="curruntAddress[0].zipCode" name="zip" id="zip" placeholder="Enter Zip Code">
+                    <div class="text-dangerr" *ngIf="zipCodelflag">
+                        Enter Your Zipcode
+                    </div>
                 </div>
             </div>
 
