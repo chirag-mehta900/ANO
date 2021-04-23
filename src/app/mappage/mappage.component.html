@@ -2,7 +2,8 @@
     <div class="bg-map">
         <agm-map [latitude]="Lat" [longitude]="Lng" [zoom]="12" [styles]="styles">
             <agm-marker [latitude]="Lat" [longitude]="Lng" [iconUrl]="Location.Icon"></agm-marker>
-            <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude" [label]="m.price" [iconUrl]="m.icon"></agm-marker>
+            <agm-marker *ngFor="let m of Marker" [latitude]="m.latitude" [longitude]="m.longitude" [label]="m.price"
+                [iconUrl]="m.icon"></agm-marker>
             <!-- [label]="m.price" -->
         </agm-map>
     </div>
@@ -27,7 +28,8 @@
                         <h2>Filter</h2>
                         <p>DEVICE</p>
                         <div class="optionselect">
-                            <select class="custom" name="brand" [(ngModel)]="bookRepair.device" (change)="getIssueList($event)" placeholder="Select Brand" #device1="ngModel">
+                            <select class="custom" name="brand" [(ngModel)]="bookRepair.device"
+                                (change)="getIssueList($event)" placeholder="Select Brand" #device1="ngModel">
                                 <option *ngFor="let brand of deviceList" [value]="brand.id">{{brand.full_name}}</option>
                             </select>
                             <div class="text-danger" *ngIf="device1.invalid &&
@@ -37,7 +39,8 @@
                         </div>
                         <p>PROBLEM</p>
                         <div class="optionselect">
-                            <select class="custom" name="device" [(ngModel)]="bookRepair.problem" placeholder="Select Device" #device1="ngModel">
+                            <select class="custom" name="device" [(ngModel)]="bookRepair.problem"
+                                placeholder="Select Device" #device1="ngModel">
                                 <option *ngFor="let device of issueList" [value]="device.id">
                                     {{device.problem.problemName}}
                                 </option>
@@ -66,7 +69,8 @@
                         <div class="detail-name">
                             <h2>{{store.shopName}}</h2>
                             <div class="cont">
-                                <ngx-star-rating class="rating" [(ngModel)]="store.average_rating" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
+                                <ngx-star-rating class="rating" [(ngModel)]="store.average_rating" [id]="'rating3'"
+                                    [disabled]="true"></ngx-star-rating>
                             </div>
                         </div>
                         <div class="detail-name2">
@@ -98,35 +102,43 @@
         <div class="container">
             <div class="text-center title-shop">
                 <h2>Top Shop</h2>
-                <p>ANO believes in serving its customers with the best experience ever. Get our App and enjoy a seamless experience. Our services are just easy to avail through your Smartphone.</p>
+                <p>ANO believes in serving its customers with the best experience ever. Get our App and enjoy a seamless
+                    experience. Our services are just easy to avail through your Smartphone.</p>
             </div>
-            <carousel [height]="245" [cellWidth]="320" [arrowsOutside]="true">
-                <div class="carousel-cell shop-box-carousel" *ngFor="let store of AllStore" (click)="shopDetail(store.id,store)" [height]="245" [cellWidth]="320">
-                    <div class="shop-img">
-                        <img class="img-fluid" src="{{store.image}}" alt="">
-                    </div>
-                    <div class="shop-detail">
-                        <div class="detail-name">
-                            <h2>{{store.shopName}}</h2>
-                            <div class="cont">
-                                <ngx-star-rating class="rating" [(ngModel)]="store.average_rating" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
-                            </div>
+            <!-- <carousel [height]="245" [cellWidth]="320" [arrowsOutside]="true"> -->
+            <div class="row">
+                <div class="col-md-4 col-sm-6" *ngFor="let store of AllStore">
+                    <div class="carousel-cell shop-box-carousel" (click)="shopDetail(store.id,store)" [height]="245"
+                        [cellWidth]="320">
+                        <div class="shop-img">
+                            <img class="img-fluid" src="{{store.image}}" alt="">
                         </div>
-                        <div class="detail-name2">
-                            <p>City - {{store.city}}</p>
-
-                            <!-- <div class="dis-f">
-                                <img src="../../assets/images/Icon awesome-car.svg" alt="">
-                                <p>{{store.distance | number : '1.2-2'}}</p>
+                        <div class="shop-detail">
+                            <div class="detail-name">
+                                <h2>{{store.shopName}}</h2>
+                                <div class="cont">
+                                    <ngx-star-rating class="rating" [(ngModel)]="store.average_rating" [id]="'rating3'"
+                                        [disabled]="true"></ngx-star-rating>
+                                </div>
                             </div>
-                            <div class="dis-f">
-                                <img src="../../assets/images/Icon material-attach-money.svg" alt="">
-                                <p *ngFor="let price of store.pricing">{{price.price}}</p>
-                            </div> -->
+                            <div class="detail-name2">
+                                <p>City - {{store.city}}</p>
+
+                                <!-- <div class="dis-f">
+                                        <img src="../../assets/images/Icon awesome-car.svg" alt="">
+                                        <p>{{store.distance | number : '1.2-2'}}</p>
+                                    </div>
+                                    <div class="dis-f">
+                                        <img src="../../assets/images/Icon material-attach-money.svg" alt="">
+                                        <p *ngFor="let price of store.pricing">{{price.price}}</p>
+                                    </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
-            </carousel>
+            </div>
+
+            <!-- </carousel> -->
         </div>
     </div>
     <div class="expe">
@@ -140,7 +152,9 @@
                         <div class="experience-detail">
                             <h3>Get Service from your mobile</h3>
                             <p>Sign-up and get a free quote for your fix!!</p>
-                            <p>Just download the ANO app on your device. Schedule an appointment online at your desired location and time. If you are not nearby our branch, you can get your device repaired by dropping it at us! Get drop services just by
+                            <p>Just download the ANO app on your device. Schedule an appointment online at your desired
+                                location and time. If you are not nearby our branch, you can get your device repaired by
+                                dropping it at us! Get drop services just by
                                 logging in. So why to wait?</p>
                             <h4>Get the App</h4>
                             <div class="store">
