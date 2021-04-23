@@ -261,11 +261,14 @@ export class CartComponent implements OnInit {
   subscription: any;
   distanceInMiles: any;
   distance: number = 0;
+  deliveryPrices: any;
+
+  distances: number = 0;
+  deliveryPricess: any;
 
   Distance: number = 0;
   DeliveryPrices: number = 0;
 
-  deliveryPrices: any;
   placeOrder: any = {
     shop_id: null,
     transactionId: null,
@@ -404,29 +407,29 @@ export class CartComponent implements OnInit {
       //rating
       this.rating3 = parseInt(this.shop[0].average_rating);
 
-      var data = {
-        toLat: this.Location.lat,
-        toLng: this.Location.lng,
-        fromLat: this.shop[0].latitude,
-        fromLng: this.shop[0].longitude,
-      };
-      console.log(data, 'distance');
+      // var data = {
+      //   toLat: this.Location.lat,
+      //   toLng: this.Location.lng,
+      //   fromLat: this.shop[0].latitude,
+      //   fromLng: this.shop[0].longitude,
+      // };
+      // console.log(data, 'distance');
 
-      this.mapService.getDistanceInMile(data).subscribe((data) => {
-        this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
-        // 1. [+-]?: Optional + or - sign before number
-        // 2. \d+: Match one or more numbers
-        // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
-        // 4. g flag: To get all matches
-        this.distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
-        this.deliveryPrices = this.distance * 0.6;
-        this.deliveryPrices = Number(this.deliveryPrices.toFixed(2));
+      // this.mapService.getDistanceInMile(data).subscribe((data) => {
+      //   this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
+      //   // 1. [+-]?: Optional + or - sign before number
+      //   // 2. \d+: Match one or more numbers
+      //   // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
+      //   // 4. g flag: To get all matches
+      //   this.distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
+      //   this.deliveryPrices = this.distance * 0.6;
+      //   this.deliveryPrices = Number(this.deliveryPrices.toFixed(2));
 
-        // this.totalCartAmounts = Number(
-        //   (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
-        // );
-        // this.setPreviouslyAddedDeviceIssue();
-      });
+      //   // this.totalCartAmounts = Number(
+      //   //   (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
+      //   // );
+      //   // this.setPreviouslyAddedDeviceIssue();
+      // });
 
       //get priously selected problem device
 
@@ -499,9 +502,9 @@ export class CartComponent implements OnInit {
   totalplusEvent(event1, event2) {
     this.Distance = Number(this.Distance + event1);
 
-    this.DeliveryPrices += event2;
+    this.DeliveryPrices = Number((this.DeliveryPrices + event2).toFixed(2));
 
-    this.totalCartAmounts += this.DeliveryPrices;
+    this.totalCartAmounts = Number((this.totalCartAmounts + event2).toFixed(2));
 
     console.log(this.Distance);
   }
@@ -509,9 +512,9 @@ export class CartComponent implements OnInit {
   totalminusEvent(event1, event2) {
     this.Distance = Number(this.Distance - event1);
 
-    this.DeliveryPrices -= event2;
+    this.totalCartAmounts = Number((this.totalCartAmounts - event2).toFixed(2));
 
-    this.totalCartAmounts -= this.DeliveryPrices;
+    this.DeliveryPrices = Number((this.DeliveryPrices - event2).toFixed(2));
 
     console.log(this.Distance);
   }
@@ -524,24 +527,52 @@ export class CartComponent implements OnInit {
       var checkzip = result.zipCode;
 
       this.ValidZip = true;
-      for (var input = 85001; input <= 85086; input++) {
-        if (input == checkzip) {
-          console.log('match');
-          this.ValidZip = false;
+      if (checkzip >= 85001 && checkzip <= 85086) {
+        console.log('match');
+        this.ValidZip = false;
 
-          this.pickupAddress =
-            result.addressLine + result.city + result.state + result.zipCode;
-          console.log(this.pickupAddress);
+        this.pickupAddress =
+          result.addressLine + result.city + result.state + result.zipCode;
+        console.log(this.pickupAddress);
+
+        console.log(result.latitude);
+        console.log(result.longitude);
+
+        var data = {
+          toLat: result.latitude,
+          toLng: result.longitude,
+          fromLat: this.shop[0].latitude,
+          fromLng: this.shop[0].longitude,
+        };
+        console.log(data, 'distance');
+
+        this.mapService.getDistanceInMile(data).subscribe((data) => {
+          this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
+
+          this.distances = 0;
+          this.deliveryPricess = 0;
+          // 1. [+-]?: Optional + or - sign before number
+          // 2. \d+: Match one or more numbers
+          // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
+          // 4. g flag: To get all matches
+          this.distances = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
+          this.deliveryPricess = this.distances * 0.6;
+          this.deliveryPricess = Number(this.deliveryPricess.toFixed(2));
+
+          // this.totalCartAmounts = Number(
+          //   (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
+          // );
+          // this.setPreviouslyAddedDeviceIssue();
 
           this.placeOrder.pickupLocation = this.pickupAddress;
 
-          this.totalplusEvent(Number(this.distance), this.deliveryPrices);
-          break;
-        }
+          this.totalplusEvent(Number(this.distances), this.deliveryPricess);
+        });
       }
 
       if (this.ValidZip) {
         console.log('hello check');
+        this.pickupAddress = '';
         this.mailinrepairFlag = false;
         this.mailradio('mail');
       }
@@ -569,25 +600,51 @@ export class CartComponent implements OnInit {
       var checkzip = result.zipCode;
 
       this.ValidZIP = true;
-      for (var input = 85001; input <= 85086; input++) {
-        if (input == checkzip) {
-          console.log('match');
-          this.ValidZIP = false;
+      if (checkzip >= 85001 && checkzip <= 85086) {
+        console.log('match');
+        this.ValidZIP = false;
 
-          this.dropAddress =
-            result.addressLine + result.city + result.state + result.zipCode;
-          console.log(this.dropAddress);
+        this.dropAddress =
+          result.addressLine + result.city + result.state + result.zipCode;
+        console.log(this.dropAddress);
+
+        console.log(result.latitude);
+        console.log(result.longitude);
+
+        var data = {
+          toLat: result.latitude,
+          toLng: result.longitude,
+          fromLat: this.shop[0].latitude,
+          fromLng: this.shop[0].longitude,
+        };
+        console.log(data, 'distance');
+
+        this.mapService.getDistanceInMile(data).subscribe((data) => {
+          this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
+          this.distance = 0;
+          this.deliveryPrices = 0;
+          // 1. [+-]?: Optional + or - sign before number
+          // 2. \d+: Match one or more numbers
+          // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
+          // 4. g flag: To get all matches
+          this.distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
+          this.deliveryPrices = this.distance * 0.6;
+          this.deliveryPrices = Number(this.deliveryPrices.toFixed(2));
+
+          // this.totalCartAmounts = Number(
+          //   (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
+          // );
+          // this.setPreviouslyAddedDeviceIssue();
 
           this.placeOrder.dropLocation = this.dropAddress;
 
           this.totalplusEvent(Number(this.distance), this.deliveryPrices);
-
-          break;
-        }
+        });
       }
 
       if (this.ValidZIP) {
         console.log('hello check');
+        this.dropAddress = '';
         this.dropinrepairFlag = false;
         this.dropradio('selfpickup');
       }
@@ -603,8 +660,9 @@ export class CartComponent implements OnInit {
       this.placeOrder.isMail = true;
 
       this.placeOrder.pickupLocation = null;
+      this.pickupAddress = '';
 
-      this.totalminusEvent(Number(this.distance), this.deliveryPrices);
+      this.totalminusEvent(Number(this.distances), this.deliveryPricess);
       console.log(this.placeOrder);
     } else {
       this.placeOrder.isMail = false;
@@ -620,6 +678,8 @@ export class CartComponent implements OnInit {
 
     if (event == 'selfpickup') {
       this.placeOrder.isCollectFromStore = true;
+      this.dropAddress = '';
+
       this.placeOrder.dropLocation = null;
       this.totalminusEvent(Number(this.distance), this.deliveryPrices);
       console.log(this.placeOrder);

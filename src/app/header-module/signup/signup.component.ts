@@ -366,7 +366,7 @@ export class SignupComponent implements OnInit {
                 console.log(data['data']['name']);
 
                 if (data['status'] == 200) {
-                  this.activeModal.close(data['data']['name']);
+                  this.activeModal.close(data['data']['fname']);
                 }
               },
               (error) => {}

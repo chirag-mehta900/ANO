@@ -7,10 +7,17 @@
             </div>
             <div class="add-address-form">
                 <div class="form-cont">
-                    <p>Full Name</p>
-                    <input type="text" formControlName="name" name="fulname" id="fulname" placeholder="Full Name">
-                    <div class="text-dangerr" *ngIf="nameflag">
-                        Enter your Name
+                    <p>First Name</p>
+                    <input type="text" formControlName="fname" name="fname" id="fname" placeholder="First Name">
+                    <div class="text-dangerr" *ngIf="fnameflag">
+                        Enter your First Name
+                    </div>
+                </div>
+                <div class="form-cont">
+                    <p>Last Name</p>
+                    <input type="text" formControlName="lname" name="lname" id="lname" placeholder="Last Name">
+                    <div class="text-dangerr" *ngIf="lnameflag">
+                        Enter your Last Name
                     </div>
                 </div>
                 <div class="form-cont">
