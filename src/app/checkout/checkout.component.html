@@ -11,8 +11,8 @@
                         <div class="booking-sho-price">
                             <p>Total</p>
                             <div class="booking-sho-prices">
-                                <h2>$ {{grandtotal}}</h2>
-                                <h3>$ {{orderDetails.Total_Price}}</h3>
+                                <h2>$ {{orderDetails.TotalAmountToPay}}</h2>
+                                <h3 *ngIf="!cutprice">$ {{orderDetails.Total_Price}}</h3>
                             </div>
                         </div>
                     </div>
@@ -194,7 +194,7 @@
                             </div>
                             <div class="payment-btns">
                                 <div class="pay-card">
-                                    <button (click)="pay()" type="submit">Pay ${{grandtotal}}</button>
+                                    <button (click)="pay()" type="submit">Pay ${{orderDetails.TotalAmountToPay}}</button>
                                     <img class="img-fluid" *ngIf="isLoading" src="../../assets/images/loader.gif" />
                                 </div>
                             </div>

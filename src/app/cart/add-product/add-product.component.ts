@@ -92,7 +92,7 @@ export class AddProductComponent implements OnInit {
   }
 
   close() {
-    this.activeModal.close();
+    this.activeModal.close(null);
   }
 
   getIssueList(event) {
@@ -228,7 +228,9 @@ export class AddProductComponent implements OnInit {
         localStorage.setItem('cart_id', data['data'].id);
         this.activeModal.close(data['data'][0]);
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
 
     // console.log(this.bookRepair.cart_id);

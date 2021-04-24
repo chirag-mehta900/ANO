@@ -35,6 +35,8 @@
                             <p>ShopCommissionFees</p>
                             <p>Repair Charge</p>
                             <p>Delivery</p>
+                            <p>Discount</p>
+
                         </div>
                         <div class="product-price">
                             <p>${{grandTotalOfBaseFees}}</p>
@@ -42,12 +44,14 @@
                             <p>${{grandTotalOfShopCommissionFees}}</p>
                             <p>${{grandTotalOfPartsFees}}</p>
                             <p>${{o.distanceFees}}</p>
+                            <p>$-{{o.distanceFees}}</p>
+
                         </div>
                     </div>
                     <hr>
                     <div class="total-product">
                         <h2>Total Payment</h2>
-                        <h3>${{grandTotal}}</h3>
+                        <h3>${{o.TotalAmountToPay}}</h3>
                     </div>
                     <hr>
                     <div class="download-invoice">
