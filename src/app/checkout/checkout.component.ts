@@ -67,6 +67,8 @@ export class CheckoutComponent implements OnInit {
   ID: any;
   orderDetails;
   shopDetails;
+  TotalAmountToPay: number = 0;
+  cutprice: boolean = false;
   productDisplay: any[] = [];
   detail: any[] = [];
   orderId: any;
@@ -154,6 +156,13 @@ export class CheckoutComponent implements OnInit {
       this.orderDetails = data['data']['order'];
       this.detail = data['data']['order'].details;
       console.log(this.orderDetails);
+
+      this.TotalAmountToPay = this.orderDetails.TotalAmountToPay;
+      console.log(this.TotalAmountToPay);
+
+      if (this.orderDetails.distanceFees == 0) {
+        this.cutprice = true;
+      }
 
       this.grandtotal = data['data'].grandTotal;
       // this.total = Math.round(this.orderDetails.Total_Price);
@@ -282,7 +291,7 @@ export class CheckoutComponent implements OnInit {
       var orderData = {
         currency: 'usd',
         paymentMethodId: '',
-        amount: Number((this.grandtotal * 100).toFixed(2)),
+        amount: Number((this.TotalAmountToPay * 100).toFixed(2)),
         paymentIntentId: '',
       };
 

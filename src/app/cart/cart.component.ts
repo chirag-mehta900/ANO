@@ -269,6 +269,7 @@ export class CartComponent implements OnInit {
   Distance: number = 0;
   DeliveryPrices: number = 0;
 
+  errorstring: any = '';
   placeOrder: any = {
     shop_id: null,
     transactionId: null,
@@ -280,7 +281,9 @@ export class CartComponent implements OnInit {
     pickupLocation: null,
     repairedDate: null,
     distanceFees: null,
+    discount: null,
     expectedDelivery: null,
+    TotalAmountToPay: null,
     dropLocation: null,
     Total_Price: null,
     details: [
@@ -546,28 +549,36 @@ export class CartComponent implements OnInit {
         };
         console.log(data, 'distance');
 
-        this.mapService.getDistanceInMile(data).subscribe((data) => {
-          this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
+        this.mapService.getDistanceInMile(data).subscribe(
+          (data) => {
+            this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
 
-          this.distances = 0;
-          this.deliveryPricess = 0;
-          // 1. [+-]?: Optional + or - sign before number
-          // 2. \d+: Match one or more numbers
-          // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
-          // 4. g flag: To get all matches
-          this.distances = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
-          this.deliveryPricess = this.distances * 0.6;
-          this.deliveryPricess = Number(this.deliveryPricess.toFixed(2));
+            this.distances = 0;
+            this.deliveryPricess = 0;
+            // 1. [+-]?: Optional + or - sign before number
+            // 2. \d+: Match one or more numbers
+            // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
+            // 4. g flag: To get all matches
+            this.distances = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
+            this.deliveryPricess = this.distances * 0.6;
+            this.deliveryPricess = Number(this.deliveryPricess.toFixed(2));
 
-          // this.totalCartAmounts = Number(
-          //   (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
-          // );
-          // this.setPreviouslyAddedDeviceIssue();
+            // this.totalCartAmounts = Number(
+            //   (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
+            // );
+            // this.setPreviouslyAddedDeviceIssue();
 
-          this.placeOrder.pickupLocation = this.pickupAddress;
+            this.placeOrder.pickupLocation = this.pickupAddress;
 
-          this.totalplusEvent(Number(this.distances), this.deliveryPricess);
-        });
+            this.totalplusEvent(Number(this.distances), this.deliveryPricess);
+          },
+          (error) => {
+            console.log(error);
+
+            if ((error.error['status'] = 400)) {
+            }
+          }
+        );
       }
 
       if (this.ValidZip) {
@@ -721,11 +732,12 @@ export class CartComponent implements OnInit {
     const modalRef = this.modalService.open(AddProductComponent);
     modalRef.result.then((result) => {
       console.log(result);
+      if (result != null) {
+        this.displayCartInfo.push(result);
+        console.log(this.displayCartInfo, 'new');
 
-      this.displayCartInfo.push(result);
-      console.log(this.displayCartInfo, 'new');
-
-      this.recalculateTotalCartAmount();
+        this.recalculateTotalCartAmount();
+      }
     });
     //this.recalculateTotalCartAmount();
   }
@@ -1042,6 +1054,11 @@ export class CartComponent implements OnInit {
         this.placeOrder.Total_Price = this.totalCartAmounts;
         console.log(this.placeOrder);
 
+        this.placeOrder.TotalAmountToPay = Number(
+          (this.totalCartAmounts - this.DeliveryPrices).toFixed(2)
+        );
+
+        this.placeOrder.discount = this.DeliveryPrices;
         this.pickupLocation.lat = this.Location.lat;
         this.pickupLocation.lng = this.Location.lng;
 

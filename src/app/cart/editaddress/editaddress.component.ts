@@ -138,7 +138,7 @@ export class EditaddressComponent implements OnInit {
               (response) => {
                 console.log(response);
                 if (response['status'] == 200) {
-                  this.router.navigate(['profile/address']);
+                  this.activeModal.close(response['data']);
                 }
               },
               (error) => {

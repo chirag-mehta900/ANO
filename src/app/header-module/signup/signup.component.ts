@@ -363,7 +363,10 @@ export class SignupComponent implements OnInit {
             this.headerService.userAddress(this.userAddres.value).subscribe(
               (data) => {
                 console.log(data);
-                console.log(data['data']['name']);
+                console.log(data['data'].fname);
+                console.log(data['data'].user_id);
+
+                this.storeTokenService.set('user_id', data['data'].user_id);
 
                 if (data['status'] == 200) {
                   this.activeModal.close(data['data']['fname']);

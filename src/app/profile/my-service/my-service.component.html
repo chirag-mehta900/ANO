@@ -53,10 +53,10 @@
                 <h6 *ngIf="!order.isReviewed" (click)="addreview(order)">Review Services</h6>
                 <div class="review-star-view">
                     <div class="subm-whwn-no-star">
-                        <div class="cont">
-                            <ngx-star-rating class="rating" [(ngModel)]="rating3" [id]="'rating3'" [disabled]="true">
+                        <!-- <div class="cont">
+                            <ngx-star-rating class="rating" [(ngModel)]="rating0" [id]="'rating0'" [disabled]="true">
                             </ngx-star-rating>
-                        </div>
+                        </div> -->
                     </div>
                     <button (click)="oneOrder(order.id)">View Details > </button>
                 </div>

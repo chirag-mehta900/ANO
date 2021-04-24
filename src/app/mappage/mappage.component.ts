@@ -26,6 +26,8 @@ export class MappageComponent implements OnInit {
   Lng: any;
   area: any;
   Filter: boolean = false;
+  noshop: boolean = false;
+
   Configs: any[] = [];
   prolist: any[] = [];
   issues: any[] = [];
@@ -353,6 +355,12 @@ export class MappageComponent implements OnInit {
     console.log(this.Marker);
 
     this.Shoplist = JSON.parse(localStorage.getItem('Shoplist') || '[]');
+
+    if (this.Shoplist.length == 0) {
+      this.noshop = true;
+    } else {
+      this.noshop = false;
+    }
     console.log(this.Shoplist);
 
     this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get('storeData'));
@@ -360,22 +368,22 @@ export class MappageComponent implements OnInit {
       console.log('location not found');
     }
 
-    if (this.Location.lat == 0 && this.Location.lng == 0) {
-      this.Location.lat = 33.448376;
-      this.Location.lng = -112.074036;
+    // if (this.Location.lat == 0 && this.Location.lng == 0) {
+    //   this.Location.lat = 33.448376;
+    //   this.Location.lng = -112.074036;
 
-      this.lat = this.Location.lat;
-      this.lng = this.Location.lng;
+    //   this.lat = this.Location.lat;
+    //   this.lng = this.Location.lng;
 
-      this.mapService
-        .getArea(this.Location.lat, this.Location.lng)
-        .subscribe((data: any) => {
-          this.area = data.results[0].formatted_address;
-          localStorage.setItem('Address', JSON.stringify(this.area));
+    //   this.mapService
+    //     .getArea(this.Location.lat, this.Location.lng)
+    //     .subscribe((data: any) => {
+    //       this.area = data.results[0].formatted_address;
+    //       localStorage.setItem('Address', JSON.stringify(this.area));
 
-          console.log(this.area);
-        });
-    }
+    //       console.log(this.area);
+    //     });
+    // }
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -483,6 +491,12 @@ export class MappageComponent implements OnInit {
           localStorage.setItem('Shoplist', JSON.stringify(this.Data));
 
           this.Shoplist = JSON.parse(localStorage.getItem('Shoplist') || '[]');
+
+          if (this.Shoplist.length == 0) {
+            this.noshop = true;
+          } else {
+            this.noshop = false;
+          }
 
           for (var i = 0; i < this.Data.length; i++) {
             this.shopmarker = {

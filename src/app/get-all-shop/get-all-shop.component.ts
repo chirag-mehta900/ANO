@@ -264,6 +264,7 @@ export class GetAllShopComponent implements OnInit {
   };
 
   Filter: boolean = false;
+  noshop: boolean = false;
 
   filterFlag: boolean = false;
   formSubmitted: boolean = false;
@@ -451,13 +452,19 @@ export class GetAllShopComponent implements OnInit {
     var obj = {
       latitude: latlong.lat,
       longitude: latlong.lng,
-      distanceMile: 20,
+      distanceMile: 10,
     };
 
     this.Shop.getallstore(obj).subscribe((data) => {
       console.log(data);
 
       this.newShop = data['data'].shop;
+
+      if (this.newShop.length == 0) {
+        this.noshop = true;
+      } else {
+        this.noshop = false;
+      }
       console.log(this.newShop, 'New Shop');
       this.Marker.length = 0;
       for (var i = 0; i < this.newShop.length; i++) {

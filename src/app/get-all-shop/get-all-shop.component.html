@@ -13,6 +13,10 @@
                 <input type="text" name="mapshop" id="shop" placeholder="Search Shop">
                 <button (click)="filter()"><img src="../../assets/images/Sliders.svg" alt=""></button>
             </div>
+
+            <div *ngIf="noshop">
+                <h4>No stores found within 10 miles of your location.</h4>
+            </div>
             <!-- <div class="select-problem" *ngFor="let d of display">
                 <div class="select-device">
                     <h3 (click)="filter()">{{d.Device}}</h3>
@@ -105,36 +109,36 @@
                 <p>ANO believes in serving its customers with the best experience ever. Get our App and enjoy a seamless experience. Our services are just easy to avail through your Smartphone. </p>
             </div>
             <!-- <carousel [height]="245" [cellWidth]="320" [arrowsOutside]="true"> -->
-                <div class="row">
-                    <div class="col-md-4 col-sm-6" *ngFor="let store of AllStore">
-                        <div class="carousel-cell shop-box-carousel" (click)="shopDetail(store.id,store)">
-                            <div class="shop-img">
-                                <img class="img-fluid" src="{{store.image}}" alt="">
-                            </div>
-                            <div class="shop-detail">
-                                <div class="detail-name">
-                                    <h2>{{store.shopName}}</h2>
-                                    <div class="cont">
-                                        <ngx-star-rating class="rating" [(ngModel)]="store.average_rating" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
-                                    </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6" *ngFor="let store of AllStore">
+                    <div class="carousel-cell shop-box-carousel" (click)="shopDetail(store.id,store)">
+                        <div class="shop-img">
+                            <img class="img-fluid" src="{{store.image}}" alt="">
+                        </div>
+                        <div class="shop-detail">
+                            <div class="detail-name">
+                                <h2>{{store.shopName}}</h2>
+                                <div class="cont">
+                                    <ngx-star-rating class="rating" [(ngModel)]="store.average_rating" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
                                 </div>
-                                <div class="detail-name2">
-        
-                                    <p>City - {{store.city}}</p>
-        
-                                    <!-- <div class="dis-f">
+                            </div>
+                            <div class="detail-name2">
+
+                                <p>City - {{store.city}}</p>
+
+                                <!-- <div class="dis-f">
                                         <img src="../../assets/images/Icon awesome-car.svg" alt="">
                                         <p>{{store.distance | number : '1.2-2'}}</p>
                                     </div> -->
-                                    <!-- <div class="dis-f">
+                                <!-- <div class="dis-f">
                                         <img src="../../assets/images/Icon material-attach-money.svg" alt="">
                                         <p *ngFor="let price of store.pricing">{{price.price}}</p>
                                     </div> -->
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
             <!-- </carousel> -->
         </div>
     </div>
