@@ -166,7 +166,7 @@ h2 {
 
 .service-detail img {
     height: 100%;
-    width: 100%;
+    width: auto;
 }
 
 .whyimg {

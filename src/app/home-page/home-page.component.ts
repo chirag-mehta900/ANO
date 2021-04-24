@@ -17,72 +17,65 @@ export class HomePageComponent implements OnInit {
   Data: any[] = [];
   slider: any[] = [
     {
-      id: 1,
-      heading: 'Welcome To ANO',
-      image: 'https://ano-bucket.s3.ap-south-1.amazonaws.com/welcome+ano.png',
-      content:
-        "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
-      buttonContent: 'Subscribe',
-      created_at: '2021-03-20 12:06:38',
-      updated_at: '2021-03-26 09:54:30',
-      buttonURL: null,
-    },
-    {
-      id: 2,
-      heading: 'Mobile Repair',
-      image: 'https://ano-bucket.s3.ap-south-1.amazonaws.com/mobile+ano.jpg',
-      content:
-        "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
-      buttonContent: 'Subscribe',
-      created_at: '2021-03-25 05:16:24',
-      updated_at: '2021-03-26 09:27:32',
-      buttonURL: null,
-    },
-    {
-      id: 3,
-      heading: 'Laptop Repair',
-      image: 'https://ano-bucket.s3.ap-south-1.amazonaws.com/laptop+ano.jpg',
-      content:
-        "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
-      buttonContent: 'Subscribe',
-      created_at: '2021-03-25 05:18:12',
-      updated_at: '2021-03-26 09:50:42',
-      buttonURL: null,
-    },
-    {
-      id: 4,
-      heading: 'Trending Accessories',
-      image:
-        'https://ano-bucket.s3.ap-south-1.amazonaws.com/accessories+ano.jpg',
-      content:
-        "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
-      buttonContent: 'Subscribe',
-      created_at: '2021-03-25 05:29:53',
-      updated_at: '2021-03-26 09:29:54',
-      buttonURL: null,
-    },
-    {
-      id: 5,
-      heading: 'Drop Services',
-      image: 'https://ano-bucket.s3.ap-south-1.amazonaws.com/drop+ano.jpg',
-      content:
-        "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
-      buttonContent: 'Subscribe',
-      created_at: '2021-03-25 05:32:21',
-      updated_at: '2021-03-26 09:51:37',
-      buttonURL: null,
-    },
-    {
-      id: 6,
-      heading: 'Computer Repair',
-      image: 'https://ano-bucket.s3.ap-south-1.amazonaws.com/computer+ano.jpg',
-      content:
-        "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
-      buttonContent: 'Subscribe',
-      created_at: '2021-03-25 06:56:13',
-      updated_at: '2021-03-26 09:54:01',
-      buttonURL: null,
-    },
+      "id": 1,
+      "heading": "Welcome To ANO",
+      "image": "https://ano-bucket.s3.ap-south-1.amazonaws.com/welcome%2Bano-min.jfif",
+      "content": "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
+      "buttonContent": "Subscribe",
+      "created_at": "2021-03-20 12:06:38",
+      "updated_at": "2021-04-23 14:40:20",
+      "buttonURL": null
+  },
+  {
+      "id": 2,
+      "heading": "Mobile Repair",
+      "image": "https://ano-bucket.s3.ap-south-1.amazonaws.com/mobile%2Bano-min.jpg",
+      "content": "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
+      "buttonContent": "Subscribe",
+      "created_at": "2021-03-25 05:16:24",
+      "updated_at": "2021-04-23 14:43:32",
+      "buttonURL": null
+  },
+  {
+      "id": 3,
+      "heading": "Laptop Repair",
+      "image": "https://ano-bucket.s3.ap-south-1.amazonaws.com/laptop%2Bano-min.jpg",
+      "content": "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
+      "buttonContent": "Subscribe",
+      "created_at": "2021-03-25 05:18:12",
+      "updated_at": "2021-04-23 14:44:34",
+      "buttonURL": null
+  },
+  {
+      "id": 4,
+      "heading": "Trending Accessories",
+      "image": "https://ano-bucket.s3.ap-south-1.amazonaws.com/accessories%2Bano-min.jpg",
+      "content": "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
+      "buttonContent": "Subscribe",
+      "created_at": "2021-03-25 05:29:53",
+      "updated_at": "2021-04-23 14:44:59",
+      "buttonURL": null
+  },
+  {
+      "id": 5,
+      "heading": "Drop Services",
+      "image": "https://ano-bucket.s3.ap-south-1.amazonaws.com/drop%2Bano%2Bnew-min.jpg",
+      "content": "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
+      "buttonContent": "Subscribe",
+      "created_at": "2021-03-25 05:32:21",
+      "updated_at": "2021-04-23 14:45:35",
+      "buttonURL": null
+  },
+  {
+      "id": 6,
+      "heading": "Computer Repair",
+      "image": "https://ano-bucket.s3.ap-south-1.amazonaws.com/computer%2Bano-min.jpg",
+      "content": "This word has two main meanings. The first has to do with being pleased and satisfied (feeling content) or making someone else feel happy and at peace with things (contenting them). The other meaning has to do with subject matter: the content of a history class might be American history. The content of a math class might be geometry. As long as there's a topic or subject, there's content.",
+      "buttonContent": "Subscribe",
+      "created_at": "2021-03-25 06:56:13",
+      "updated_at": "2021-04-23 14:46:12",
+      "buttonURL": null
+  }
   ];
   display: any[] = [];
   driveForm: FormGroup;
