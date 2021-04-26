@@ -61,6 +61,29 @@
     color: #e64e5d;
 }
 
+.ng-select.custom .ng-select-container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+.ng-select.custom {
+    border: 10px;
+    min-height: 0px;
+    border-radius: 10px;
+}
+
+.ng-select span {
+    /* padding: 5px; */
+    font-family: "Poppins-Medium";
+    background-color: #cdcdcd;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    color: #000;
+    font-weight: 100 !important;
+    margin-right: 5px;
+}
+
 @media only screen and (max-width: 415px) {
     .cancle-btn {
         margin-right: 10px;

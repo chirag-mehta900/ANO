@@ -1078,19 +1078,24 @@ export class CartComponent implements OnInit {
 
           console.log(this.placeOrder);
 
-          this.shopService.placeOrder(this.placeOrder).subscribe((response) => {
-            console.log(response, 'placeOrder');
+          this.shopService.placeOrder(this.placeOrder).subscribe(
+            (response) => {
+              console.log(response, 'placeOrder');
 
-            //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
-            var id = response['data'].id;
-            console.log(id, 'id');
-            localStorage.setItem(
-              'PlaceOrder',
-              JSON.stringify(response['data'])
-            );
+              //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
+              var id = response['data'].id;
+              console.log(id, 'id');
+              localStorage.setItem(
+                'PlaceOrder',
+                JSON.stringify(response['data'])
+              );
 
-            this.router.navigate(['/checkout/', id]);
-          });
+              this.router.navigate(['/checkout/', id]);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
         }
       }
     } else {
