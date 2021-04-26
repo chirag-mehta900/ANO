@@ -283,7 +283,7 @@ export class GetAllShopComponent implements OnInit {
     device_id: null,
     problem_id: null,
   };
-
+  Locationissue: boolean = false;
   rating3 = 3;
 
   constructor(
@@ -343,27 +343,31 @@ export class GetAllShopComponent implements OnInit {
       (error) => {
         console.log(error);
 
-        this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
-
-        if (this.Location.lat == 0 && this.Location.lng == 0) {
-          this.Location.lat = 33.448376;
-          this.Location.lng = -112.074036;
-
-          this.Lat = this.Location.lat;
-          this.Lng = this.Location.lng;
-
-          localStorage.setItem('Location', JSON.stringify(this.Location));
-
-          this.mapService
-            .getArea(this.Location.lat, this.Location.lng)
-            .subscribe((data: any) => {
-              this.area = data.results[0].formatted_address;
-              localStorage.setItem('Address', JSON.stringify(this.area));
-              this.shoplist(this.Location);
-
-              console.log(this.area);
-            });
+        if (error.code == 1) {
+          this.Locationissue = true;
         }
+
+        // this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+
+        // if (this.Location.lat == 0 && this.Location.lng == 0) {
+        //   this.Location.lat = 33.448376;
+        //   this.Location.lng = -112.074036;
+
+        //   this.Lat = this.Location.lat;
+        //   this.Lng = this.Location.lng;
+
+        //   localStorage.setItem('Location', JSON.stringify(this.Location));
+
+        //   this.mapService
+        //     .getArea(this.Location.lat, this.Location.lng)
+        //     .subscribe((data: any) => {
+        //       this.area = data.results[0].formatted_address;
+        //       localStorage.setItem('Address', JSON.stringify(this.area));
+        //       this.shoplist(this.Location);
+
+        //       console.log(this.area);
+        //     });
+        // }
       }
     );
 

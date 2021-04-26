@@ -9,6 +9,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { AddressComponent } from '../profile/address/address.component';
 
 import { SelectAddressComponent } from './select-address/select-address.component';
+import { EmptycartComponent } from '../header-module/emptycart/emptycart.component';
 
 import { HeaderService } from 'src/@theme/Services/header.service';
 import { LoginComponent } from '../header-module/login/login.component';
@@ -1001,93 +1002,99 @@ export class CartComponent implements OnInit {
   }
   proceed() {
     console.log(this.totalCartAmounts);
-
-    if (this.ValidZip == false) {
-      //to calculate total cart amount
-      let isLogedIn = localStorage.getItem('token');
-      if (isLogedIn === null) {
-        this.userName = null;
-        if (this.modalService.hasOpenModals()) {
-          this.modalService.dismissAll();
-        }
-        const modalRef = this.modalService.open(LoginComponent);
-        modalRef.result.then((result) => {
-          this.headerService.getUserName().subscribe((data) => {
-            this.userName = data['data'].name;
-            this.storeTokenService.set('user_id', data['data'].id);
-            window.location.reload();
-          });
-        });
-      } else {
-        let totalCartAmount = 0;
-        this.issues = JSON.parse(localStorage.getItem('issues') || '[]');
-
-        this.issues.forEach((e) => {
-          if (e.problemId == this.displayCartInfo[0].problemId) {
-            this.displayCartInfo[0].problemName = e.problem;
+    if (this.displayCartInfo.length > 0) {
+      if (this.ValidZip == false) {
+        //to calculate total cart amount
+        let isLogedIn = localStorage.getItem('token');
+        if (isLogedIn === null) {
+          this.userName = null;
+          if (this.modalService.hasOpenModals()) {
+            this.modalService.dismissAll();
           }
-        });
-        console.log(this.displayCartInfo);
-
-        //Add product in cart
-        this.displayCartInfo.forEach((element) => {
-          this.placeOrder.details.push({
-            device_id: element.device_id,
-            problem_id: element.problem_id,
-            price: element.price,
-            image: element.image,
-            ANOBaseFees: element.ANOBaseFees,
-            ANOCommissionFees: element.ANOCommissionFees,
-            ShopCommissionFees: element.ShopCommissionFees,
-            TotalAmount: element.TotalAmount,
+          const modalRef = this.modalService.open(LoginComponent);
+          modalRef.result.then((result) => {
+            this.headerService.getUserName().subscribe((data) => {
+              this.userName = data['data'].name;
+              this.storeTokenService.set('user_id', data['data'].id);
+              window.location.reload();
+            });
           });
-        });
-        this.placeOrder.details.splice(0, 1);
-        this.placeOrder.distanceFees = this.DeliveryPrices;
+        } else {
+          let totalCartAmount = 0;
+          this.issues = JSON.parse(localStorage.getItem('issues') || '[]');
 
-        console.log(this.Distance);
-        console.log(this.DeliveryPrices);
-        //calculating cart amount
-        this.placeOrder.details.forEach((element) => {
-          totalCartAmount += element.price;
-        });
-        this.placeOrder.Total_Price = this.totalCartAmounts;
-        console.log(this.placeOrder);
+          this.issues.forEach((e) => {
+            if (e.problemId == this.displayCartInfo[0].problemId) {
+              this.displayCartInfo[0].problemName = e.problem;
+            }
+          });
+          console.log(this.displayCartInfo);
 
-        this.placeOrder.TotalAmountToPay = Number(
-          (this.totalCartAmounts - this.DeliveryPrices).toFixed(2)
-        );
+          //Add product in cart
+          this.displayCartInfo.forEach((element) => {
+            this.placeOrder.details.push({
+              device_id: element.device_id,
+              problem_id: element.problem_id,
+              price: element.price,
+              image: element.image,
+              ANOBaseFees: element.ANOBaseFees,
+              ANOCommissionFees: element.ANOCommissionFees,
+              ShopCommissionFees: element.ShopCommissionFees,
+              TotalAmount: element.TotalAmount,
+            });
+          });
+          this.placeOrder.details.splice(0, 1);
+          this.placeOrder.distanceFees = this.DeliveryPrices;
 
-        this.placeOrder.discount = this.DeliveryPrices;
-        this.pickupLocation.lat = this.Location.lat;
-        this.pickupLocation.lng = this.Location.lng;
+          console.log(this.Distance);
+          console.log(this.DeliveryPrices);
+          //calculating cart amount
+          this.placeOrder.details.forEach((element) => {
+            totalCartAmount += element.price;
+          });
+          this.placeOrder.Total_Price = this.totalCartAmounts;
+          console.log(this.placeOrder);
 
-        this.dropLocation.lat = this.shop[0].latitude;
-        this.dropLocation.lng = this.shop[0].longitude;
+          this.placeOrder.TotalAmountToPay = Number(
+            (this.totalCartAmounts - this.DeliveryPrices).toFixed(2)
+          );
 
-        this.placeOrder.pickupLocation = this.pickupAddress;
-        this.placeOrder.dropLocation = this.dropAddress;
+          this.placeOrder.discount = this.DeliveryPrices;
+          this.pickupLocation.lat = this.Location.lat;
+          this.pickupLocation.lng = this.Location.lng;
 
-        console.log(this.placeOrder, 'object');
+          this.dropLocation.lat = this.shop[0].latitude;
+          this.dropLocation.lng = this.shop[0].longitude;
 
-        console.log(this.placeOrder.details[0].image);
-        if (this.placeOrder.details[0].image == null) {
-          this.placeOrder.details[0].image = [];
+          this.placeOrder.pickupLocation = this.pickupAddress;
+          this.placeOrder.dropLocation = this.dropAddress;
+
+          console.log(this.placeOrder, 'object');
+
+          console.log(this.placeOrder.details[0].image);
+          if (this.placeOrder.details[0].image == null) {
+            this.placeOrder.details[0].image = [];
+          }
+
+          console.log(this.placeOrder);
+
+          this.shopService.placeOrder(this.placeOrder).subscribe((response) => {
+            console.log(response, 'placeOrder');
+
+            //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
+            var id = response['data'].id;
+            console.log(id, 'id');
+            localStorage.setItem(
+              'PlaceOrder',
+              JSON.stringify(response['data'])
+            );
+
+            this.router.navigate(['/checkout/', id]);
+          });
         }
-
-        console.log(this.placeOrder);
-
-        this.shopService.placeOrder(this.placeOrder).subscribe((response) => {
-          console.log(response, 'placeOrder');
-
-          //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
-          var id = response['data'].id;
-          console.log(id, 'id');
-          localStorage.setItem('PlaceOrder', JSON.stringify(response['data']));
-
-          this.router.navigate(['/checkout/', id]);
-        });
       }
+    } else {
+      this.modalService.open(EmptycartComponent);
     }
   }
 
