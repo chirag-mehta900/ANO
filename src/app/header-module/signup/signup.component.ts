@@ -524,6 +524,10 @@ export class SignupComponent implements OnInit {
   // }
 
   signUpConfirmationComplete() {
+    this.emptyOtpFlag = false;
+    this.validOtpFlag = false;
+    this.invalidOtp = false;
+
     if (this.otpForm.value.otp) {
       if (this.otpForm.value.otp.length == 4) {
         this.validOtpFlag = false;
