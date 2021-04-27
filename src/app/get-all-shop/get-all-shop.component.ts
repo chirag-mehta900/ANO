@@ -311,6 +311,12 @@ export class GetAllShopComponent implements OnInit {
 
     this.mapService.getAllStore().subscribe((data) => {
       this.AllStore = data['data'];
+
+      this.AllStore.forEach((e) => {
+        if (e.average_rating != 0) {
+          e.average_rating = Math.round(e.average_rating);
+        }
+      });
       console.log(this.AllStore, 'get all Store');
     });
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
