@@ -67,7 +67,7 @@
                 </form>
             </div> -->
             <div class="shop-come">
-                <div class="shop-box" *ngFor="let store of newShop" (click)="shopDetail(store.id,store)">
+                <div class="shop-box" *ngFor="let store of newShop" (click)="shopDetail(store.id)">
                     <div class="shop-ing">
                         <img class="img-fluid" src="{{store.image}}" alt="">
                     </div>
@@ -112,7 +112,7 @@
             <!-- <carousel [height]="245" [cellWidth]="320" [arrowsOutside]="true"> -->
             <div class="row">
                 <div class="col-md-4 col-sm-6" *ngFor="let store of AllStore">
-                    <div class="carousel-cell shop-box-carousel" (click)="shopDetail(store.id,store)">
+                    <div class="carousel-cell shop-box-carousel" (click)="shopDetail(store.id)">
                         <div class="shop-img">
                             <img class="img-fluid" src="{{store.image}}" alt="">
                         </div>
@@ -124,9 +124,8 @@
                                 </div>
                             </div>
                             <div class="detail-name2">
+                                <p>{{store.city}}, {{store.state}}</p>
 
-                                <p>City - {{store.city}}</p>
-                                <p>State - {{store.state}}</p>
 
                                 <!-- <div class="dis-f">
                                         <img src="../../assets/images/Icon awesome-car.svg" alt="">

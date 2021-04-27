@@ -204,6 +204,13 @@ export class BookRepairComponent implements OnInit {
             });
             console.log(this.Data);
             localStorage.removeItem('Shoplist');
+
+            this.Data.forEach((element) => {
+              console.log(element);
+              if (element.average_rating != 0)
+                element.average_rating = Math.round(element.average_rating);
+              console.log(element.average_rating);
+            });
             localStorage.setItem('Shoplist', JSON.stringify(this.Data));
 
             for (var i = 0; i < this.Data.length; i++) {
@@ -236,10 +243,7 @@ export class BookRepairComponent implements OnInit {
             if (this.href.search('map') === -1) {
               this.activeModal.close();
 
-              this.router.navigate([
-                '/map',
-                { storeData: JSON.stringify(response['data']) },
-              ]);
+              this.router.navigate(['/map']);
             } else {
               window.location.reload();
             }

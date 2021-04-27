@@ -16,6 +16,7 @@ import { GetAllShopComponent } from './get-all-shop/get-all-shop.component';
 const routes: Routes = [
   { path: 'map', component: MappageComponent },
   { path: 'shop', component: ShopComponent },
+  { path: 'shop/:id', component: ShopComponent },
   { path: 'checkout/:id', component: CheckoutComponent },
   { path: 'about', component: AboutComponent },
   { path: 'tracking', component: TrackingComponent },

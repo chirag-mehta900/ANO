@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'src/@theme/Services/header.service';
 import { BookRepairComponent } from '../header-module/book-repair/book-repair.component';
 import { ShopService } from 'src/@theme/Services/shop.service';
+import { ProfileService } from 'src/@theme/Services/profile.service';
 
 type ResponseType = {
   data: [
@@ -292,6 +293,7 @@ export class GetAllShopComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private headerService: HeaderService,
+    private profile: ProfileService,
     private modalService: NgbModal,
     private Shop: ShopService
   ) {
@@ -419,7 +421,7 @@ export class GetAllShopComponent implements OnInit {
     this.Shoplist = JSON.parse(localStorage.getItem('Shoplist') || '[]');
     console.log(this.Shoplist);
 
-    this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get('storeData'));
+    // this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get('storeData'));
     if (!navigator.geolocation) {
       console.log('location not found');
     }
@@ -459,12 +461,19 @@ export class GetAllShopComponent implements OnInit {
 
       this.newShop = data['data'].shop;
 
+      this.newShop.forEach((element) => {
+        if (element.average_rating != 0)
+          element.average_rating = Math.round(element.average_rating);
+        console.log(element.average_rating);
+      });
+      // localStorage.setItem('Shoplist', JSON.stringify(this.Shoplist));
+      console.log(this.newShop, 'New Shop');
+
       if (this.newShop.length == 0) {
         this.noshop = true;
       } else {
         this.noshop = false;
       }
-      console.log(this.newShop, 'New Shop');
       this.Marker.length = 0;
       for (var i = 0; i < this.newShop.length; i++) {
         this.shopmarker = {
@@ -474,8 +483,8 @@ export class GetAllShopComponent implements OnInit {
             url:
               'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/MicrosoftTeams-image%20(8).png?alt=media&token=6daea4dc-bc59-425f-8862-c2c407b6939a',
             scaledSize: {
-              width: 70,
-              height: 80,
+              width: 40,
+              height: 50,
             },
           },
         };
@@ -578,27 +587,27 @@ export class GetAllShopComponent implements OnInit {
       //   (error) => {}
       // );
 
-      this.storeInfo = JSON.parse(
-        this.route.snapshot.paramMap.get('storeData')
-      );
+      // this.storeInfo = JSON.parse(
+      //   this.route.snapshot.paramMap.get('storeData')
+      // );
     });
   }
 
-  shopDetail(id, shop) {
-    console.log(shop);
-    localStorage.removeItem('Shop');
-    localStorage.setItem('Shop', JSON.stringify(shop));
+  shopDetail(id) {
     console.log(id);
-    let shopDetail = {
-      id: id,
-      distance: shop.distance,
-    };
+    this.profile.getShopId(id);
+
+    // localStorage.setItem('Shop', JSON.stringify(shop));
+    // let shopDetail = {
+    //   id: id,
+    //   distance: shop.distance,
+    // };
     // this.storeInfo.forEach((element) => {
     //   if (element.id == id) {
     //     shopDetail.distance = element.distance;
     //   }
     // });
-    this.router.navigate(['/shop', { id: JSON.stringify(shopDetail) }]);
+    this.router.navigate(['/shop', id]);
   }
   getBrandList() {
     if (this.deviceList.length == 0) {

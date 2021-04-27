@@ -5,6 +5,7 @@ import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderService } from 'src/@theme/Services/header.service';
 import { BookRepairComponent } from '../header-module/book-repair/book-repair.component';
+import { ProfileService } from 'src/@theme/Services/profile.service';
 
 type ResponseType = {
   data: [
@@ -292,6 +293,7 @@ export class MappageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private headerService: HeaderService,
+    private profile: ProfileService,
     private modalService: NgbModal
   ) {
     config.max = 5;
@@ -363,7 +365,7 @@ export class MappageComponent implements OnInit {
     }
     console.log(this.Shoplist);
 
-    this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get('storeData'));
+    // this.storeInfo = JSON.parse(this.route.snapshot.paramMap.get('storeData'));
     if (!navigator.geolocation) {
       console.log('location not found');
     }
@@ -491,6 +493,18 @@ export class MappageComponent implements OnInit {
           localStorage.setItem('Shoplist', JSON.stringify(this.Data));
 
           this.Shoplist = JSON.parse(localStorage.getItem('Shoplist') || '[]');
+          console.log(this.Shoplist, 'before');
+
+          this.Shoplist.forEach((element) => {
+            console.log(element);
+            if (element.average_rating != 0)
+              element.average_rating = Math.round(element.average_rating);
+            console.log(element.average_rating);
+          });
+          localStorage.setItem('Shoplist', JSON.stringify(this.Shoplist));
+
+          this.Shoplist = JSON.parse(localStorage.getItem('Shoplist') || '[]');
+          console.log(this.Shoplist, 'roundup');
 
           if (this.Shoplist.length == 0) {
             this.noshop = true;
@@ -527,35 +541,33 @@ export class MappageComponent implements OnInit {
 
           console.log(this.Marker);
 
-          this.router.navigate([
-            '/map',
-            { storeData: JSON.stringify(response['data']) },
-          ]);
+          this.router.navigate(['/map']);
         },
         (error) => {}
       );
 
-      this.storeInfo = JSON.parse(
-        this.route.snapshot.paramMap.get('storeData')
-      );
+      // this.storeInfo = JSON.parse(
+      //   this.route.snapshot.paramMap.get('storeData')
+      // );
     });
   }
 
-  shopDetail(id, shop) {
-    console.log(shop);
-    localStorage.removeItem('Shop');
-    localStorage.setItem('Shop', JSON.stringify(shop));
+  shopDetail(id) {
     console.log(id);
-    let shopDetail = {
-      id: id,
-      distance: null,
-    };
-    this.storeInfo.forEach((element) => {
-      if (element.id == id) {
-        shopDetail.distance = element.distance;
-      }
-    });
-    this.router.navigate(['/shop', { id: JSON.stringify(shopDetail) }]);
+    // console.log(shop);
+    this.profile.getShopId(id);
+
+    // localStorage.setItem('Shop', JSON.stringify(shop));
+    // let shopDetail = {
+    //   id: id,
+    //   distance: null,
+    // };
+    // this.storeInfo.forEach((element) => {
+    //   if (element.id == id) {
+    //     shopDetail.distance = element.distance;
+    //   }
+    // });
+    this.router.navigate(['/shop', id]);
   }
   getBrandList() {
     if (this.deviceList.length == 0) {

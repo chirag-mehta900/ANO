@@ -9,6 +9,7 @@ import { WarningComponent } from './warning/warning.component';
 import { UploadService } from 'src/@theme/Services/upload.service';
 import { MapService } from 'src/@theme/Services/map.service';
 import { BookRepairComponent } from '../header-module/book-repair/book-repair.component';
+import { ProfileService } from 'src/@theme/Services/profile.service';
 
 @Component({
   selector: 'app-shop',
@@ -290,7 +291,7 @@ export class ShopComponent implements OnInit {
   colorTone = '#000';
   per = 78;
   storeId: any;
-  storeInfo: any[] = [];
+  ShopList: any[] = [];
   filter: any;
   deviceproblem: {};
   timeList: any[];
@@ -335,6 +336,7 @@ export class ShopComponent implements OnInit {
     private modalService: NgbModal,
     private storeTokenService: StoreTokenService,
     private uploadService: UploadService,
+    private profile: ProfileService,
     private router: Router
   ) {
     config.max = 5;
@@ -345,12 +347,31 @@ export class ShopComponent implements OnInit {
     this.filter = JSON.parse(localStorage.getItem('filter') || '[]');
     console.log(this.filter);
 
+    this.profile.responseShopId.subscribe((id) => {
+      console.log(id, 'new');
+      if (id != 0) {
+        this.storeId = id;
+        this.getStoreDetail();
+      } else {
+        this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
+        console.log(this.storeId, 'new');
+        this.getStoreDetail();
+      }
+    });
+    this.ShopList = JSON.parse(localStorage.getItem('Shoplist') || '[]');
+
+    this.ShopList.forEach((e) => {
+      if (e.id == this.storeId) {
+        this.shop.push(e);
+      }
+    });
+
     this.deviceproblem = JSON.parse(
       localStorage.getItem('deviceProblem') || '[]'
     );
     console.log(this.deviceproblem, 'problem');
 
-    this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
+    // this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
     console.log(this.Location);
 
@@ -360,34 +381,43 @@ export class ShopComponent implements OnInit {
     this.origin.lat = this.Location.lat;
     this.origin.lng = this.Location.lng;
     console.log(this.origin);
-    this.shop.push(JSON.parse(localStorage.getItem('Shop') || '[]'));
+
     this.markerOptions.destination.label.text =
       '$' + this.shop[0].pricing[0].price.toString();
     console.log(this.markerOptions);
-
+    ` `;
     this.destination.lat = this.shop[0].latitude;
     this.destination.lng = this.shop[0].longitude;
 
     console.log(this.destination);
 
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
-    console.log(this.shop);
 
-    this.getStoreDetail();
     this.getAnoFee();
     this.getBaseFee();
     //this.getCartData();
   }
   getStoreDetail() {
-    this.shopService.getStoreDetailById(this.storeId.id).subscribe(
+    this.shopService.getStoreDetailById(this.storeId).subscribe(
       (data) => {
-        this.storeInfo = data['data'];
+        // this.shop.push(data['data']);
+        console.log(data);
+
+        // this.storeInfo = data['data'];
         this.shopCommission = data['data'].shopCommision;
-        this.averageRating = data['data'].average_rating;
+        this.averageRating = Math.round(data['data'].average_rating);
         this.ratings = data['data'].ratings;
         this.averageCalculateRating = parseInt(
           String((this.averageRating / 5) * 100)
         );
+
+        // const interval = setInterval(() => {
+        //   if (this.shop.length > 0) {
+
+        //     clearInterval(interval);
+        //   }
+        // }, 1000);
+
         this.calculateReviewBarValue();
       },
       (error) => {}
