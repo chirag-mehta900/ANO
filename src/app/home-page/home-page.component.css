@@ -184,9 +184,11 @@ h2 {
     font-size: 15px;
 }
 
-.aboutdetail span {
+.aboutdetail button {
     color: #ffc542;
     cursor: pointer;
+    border: none;
+    background-color: transparent;
 }
 
 .about-img img {

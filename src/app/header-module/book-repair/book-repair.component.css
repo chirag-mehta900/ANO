@@ -141,7 +141,7 @@
 .close-side {
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: center;
 }
 
 .close-side button {
@@ -178,7 +178,8 @@
     left: 45px;
     z-index: 9999;
 }
-.search-icon img{
+
+.search-icon img {
     height: 16px;
     width: auto;
 }
