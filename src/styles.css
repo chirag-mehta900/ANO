@@ -215,3 +215,7 @@ input.star-5:checked~label.star:before {
     color: #fe7;
     text-shadow: none !important;
 }
+.select-brand .ng-select .ng-select-container .ng-value-container .ng-input>input {
+    margin-left: 24px !important;
+    margin-top: 7px !important;
+}

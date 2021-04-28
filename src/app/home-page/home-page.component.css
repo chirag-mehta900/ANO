@@ -160,8 +160,8 @@ h2 {
 }
 
 .whyus-detail {
-    text-align: left !important;
-    margin-right: 30px;
+    text-align: center !important;
+    margin-right: 40px;
 }
 
 .service-detail img {
@@ -170,8 +170,9 @@ h2 {
 }
 
 .whyimg {
-    display: flex;
+    /* display: flex; */
     height: 100px;
+    z-index: 9;
 }
 
 .aboutus {
@@ -470,6 +471,17 @@ carousel.carousel {
     width: 300px;
 }
 
+.desktop.whyusline {
+    position: relative;
+    margin-top: -55px;
+}
+
+.desktop.whyusline img{
+    position: relative;
+    top: 70px;
+    width: 76%;
+    right: -95px;
+}
 
 /* ````````````````````````````````````````````````
 
