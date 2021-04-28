@@ -355,7 +355,7 @@
 
 .download-invoice button {
     display: flex;
-    align-items: end;
+    align-items: center;
     border: none;
     background-color: transparent;
     padding: 5px;

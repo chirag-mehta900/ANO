@@ -10,11 +10,11 @@ export class StoreTokenService {
     localStorage.setItem(key, value);
   }
 
-  get(key: string) {
-    return localStorage.getItem(key);
+  get(KEY: string) {
+    return localStorage.getItem(KEY);
   }
 
-  remove(key: string) {
-    localStorage.removeItem(key);
+  remove(Key: string) {
+    localStorage.removeItem(Key);
   }
 }

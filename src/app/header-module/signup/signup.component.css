@@ -98,7 +98,7 @@
 .close-side {
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: center;
 }
 
 .close-side button {

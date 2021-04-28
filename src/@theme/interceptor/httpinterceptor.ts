@@ -11,7 +11,7 @@ import {
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { JwtTokenService } from '../services/jwt-token.service';
-import { StoreTokenService } from '../services/store-token.service';
+import { StoreTokenService } from '../Services/store-token.service';
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
   userId;

@@ -1,29 +1,33 @@
-.driver-form{
+.driver-form {
     padding: 20px;
 }
-.close-side{
+
+.close-side {
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: center;
     margin-bottom: 20px;
 }
-.close-side h2{
+
+.close-side h2 {
     font-size: 30px;
-    font-family: 'Poppins-SemiBold';
+    font-family: "Poppins-SemiBold";
 }
-.close-side button{
+
+.close-side button {
     border: none;
     background-color: transparent;
 }
-.form-message h2{
-    font-family: 'Poppins-SemiBold';
-    color: #FFC542;
+
+.form-message h2 {
+    font-family: "Poppins-SemiBold";
+    color: #ffc542;
     font-size: 25px;
     margin-bottom: 15px;
 }
-.form-message p{
-    font-family: 'Poppins-Regular';
+
+.form-message p {
+    font-family: "Poppins-Regular";
     font-size: 12px;
     margin-bottom: 0px;
-    
 }
