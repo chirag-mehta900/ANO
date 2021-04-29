@@ -82,6 +82,8 @@ export class LoginComponent implements OnInit {
           this.disableButton = false;
         },
         (error) => {
+          console.log(error);
+
           this.invalidUserLog = true;
           this.disableButton = false;
         }
@@ -101,7 +103,9 @@ export class LoginComponent implements OnInit {
         this.userName = data['data'].name;
         this.storeTokenService.set('user_id', data['data'].id);
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
 }

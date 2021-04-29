@@ -79,12 +79,17 @@ export class AddReviewComponent implements OnInit {
 
       console.log(this.data);
 
-      this.profile.SubmitReview(this.data, this.shopid).subscribe((data) => {
-        console.log(data);
-        if (data['status'] == 200) {
-          this.activeModal.close();
+      this.profile.SubmitReview(this.data, this.shopid).subscribe(
+        (data) => {
+          console.log(data);
+          if (data['status'] == 200) {
+            this.activeModal.close();
+          }
+        },
+        (error) => {
+          console.log(error);
         }
-      });
+      );
     }
   }
 }

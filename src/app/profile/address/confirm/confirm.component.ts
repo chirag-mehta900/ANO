@@ -24,13 +24,18 @@ export class ConfirmComponent implements OnInit {
   onSave() {
     this.disableButton = true;
     var data: any;
-    this.profile.makedefault(this.address.id, data).subscribe((data) => {
-      console.log(data);
+    this.profile.makedefault(this.address.id, data).subscribe(
+      (data) => {
+        console.log(data);
 
-      if (data['status'] == 200) {
-        this.activeModal.close();
+        if (data['status'] == 200) {
+          this.activeModal.close();
+        }
+      },
+      (error) => {
+        console.log(error);
       }
-    });
+    );
     this.disableButton = false;
   }
 

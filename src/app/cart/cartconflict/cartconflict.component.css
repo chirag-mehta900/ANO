@@ -1,0 +1,15 @@
+.deliver-radio {
+    margin-right: 10px;
+}
+
+.submit button {
+    padding: 10px;
+    border: none;
+    background-color: #ffc542;
+    font-family: "Poppins-SemiBold";
+    padding: 10px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}

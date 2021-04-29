@@ -1,0 +1,23 @@
+<p>Which cart want to continue</p>
+
+
+<input class="deliver-radio" type="radio" (click)="oldcart($event.target.value)" id="deliver-cab" name="deliver-system" value="oldcart">
+<label for="deliver-cab" class="radio-label">
+  <h2>{{shopName1}}</h2>
+</label>
+
+
+<input class="deliver-radio" type="radio" (click)="newcart($event.target.value)" id="deliver-cab" name="deliver-system" value="newcart">
+<label for="deliver-cab" class="radio-label">
+  <h2>{{shopName2}}</h2>
+</label>
+
+
+<div class="text-dangerr" *ngIf="emptyselect">
+    Choose Any One
+</div>
+
+<div class="submit">
+    <button (click)="submit()">Proceed</button>
+
+</div>

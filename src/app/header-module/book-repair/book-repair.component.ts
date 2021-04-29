@@ -102,7 +102,9 @@ export class BookRepairComponent implements OnInit {
           console.log(this.deviceList);
           localStorage.setItem('deviceList', JSON.stringify(this.deviceList));
         },
-        (error) => {}
+        (error) => {
+          console.log(error);
+        }
       );
     }
   }
@@ -138,7 +140,9 @@ export class BookRepairComponent implements OnInit {
 
         this.issueList = data['data'];
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
 
@@ -249,7 +253,9 @@ export class BookRepairComponent implements OnInit {
             }
           },
 
-          (error) => {}
+          (error) => {
+            console.log(error);
+          }
         );
       } else {
         return;

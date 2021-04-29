@@ -77,4 +77,11 @@ export class ShopService {
       data
     );
   }
+
+  getmergeCart(data) {
+    return this.httpClient.post(
+      this.commonService.envUrl() + 'mergecart',
+      data
+    );
+  }
 }

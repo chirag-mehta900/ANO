@@ -108,7 +108,9 @@ export class CheckoutComponent implements OnInit {
       (data) => {
         this.Email = data['data'].email;
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
 
     this.prolist = JSON.parse(localStorage.getItem('issues') || '[]');
@@ -125,71 +127,81 @@ export class CheckoutComponent implements OnInit {
   }
 
   setProductToDisplay() {
-    this.orderDetails.details.forEach((element) => {
-      let obj = {
-        device_id: element.device_id,
-      };
-      this.header.getIssueListById(obj).subscribe((data) => {
-        data['data'].forEach((element1) => {
-          if (element.problem_id == element1.problem.id) {
-            this.productDisplay.push({
-              problem_name: element1.problem.problemName,
-              price: element.price,
-              images: element.image,
-            });
-          }
+    this.orderDetails.details.forEach(
+      (element) => {
+        let obj = {
+          device_id: element.device_id,
+        };
+        this.header.getIssueListById(obj).subscribe((data) => {
+          data['data'].forEach((element1) => {
+            if (element.problem_id == element1.problem.id) {
+              this.productDisplay.push({
+                problem_name: element1.problem.problemName,
+                price: element.price,
+                images: element.image,
+              });
+            }
+          });
         });
-      });
-    });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     console.log(this.productDisplay, 'productdisplay');
 
     this.orderId = this.route.snapshot.params.id;
-    this.shopService.getOrder(this.orderId).subscribe((data) => {
-      console.log(data);
+    this.shopService.getOrder(this.orderId).subscribe(
+      (data) => {
+        console.log(data);
 
-      if (data['data'].transactionId) {
-        this.isPaid = true;
-      }
-
-      console.log(data['data']['order'].shop, 'orderby id shop details');
-      this.shopDetails = data['data']['order'].shop;
-      this.orderDetails = data['data']['order'];
-      this.detail = data['data']['order'].details;
-      console.log(this.orderDetails);
-
-      this.TotalAmountToPay = this.orderDetails.TotalAmountToPay;
-      console.log(this.TotalAmountToPay);
-
-      if (this.orderDetails.distanceFees == 0) {
-        this.cutprice = true;
-      }
-
-      this.grandtotal = data['data'].grandTotal;
-      // this.total = Math.round(this.orderDetails.Total_Price);
-
-      console.log(this.grandtotal);
-
-      console.log(this.detail);
-
-      this.detail.forEach((e) => {
-        if (e.image == '') {
-          e.image = this.url;
+        if (data['data'].transactionId) {
+          this.isPaid = true;
         }
-      });
 
-      console.log(data['data']['order'].isMail, 'checkmail');
-      console.log(data['data']['order'].isMail, 'checkcollect');
+        console.log(data['data']['order'].shop, 'orderby id shop details');
+        this.shopDetails = data['data']['order'].shop;
+        this.orderDetails = data['data']['order'];
+        this.detail = data['data']['order'].details;
+        console.log(this.orderDetails);
 
-      if (data['data']['order'].isMail == 1) {
-        this.isMail = true;
+        this.TotalAmountToPay = this.orderDetails.TotalAmountToPay;
+        console.log(this.TotalAmountToPay);
+
+        if (this.orderDetails.distanceFees == 0) {
+          this.cutprice = true;
+        }
+
+        this.grandtotal = data['data'].grandTotal;
+        // this.total = Math.round(this.orderDetails.Total_Price);
+
+        console.log(this.grandtotal);
+
+        console.log(this.detail);
+
+        this.detail.forEach((e) => {
+          if (e.image == '') {
+            e.image = this.url;
+          }
+        });
+
+        console.log(data['data']['order'].isMail, 'checkmail');
+        console.log(data['data']['order'].isMail, 'checkcollect');
+
+        if (data['data']['order'].isMail == 1) {
+          this.isMail = true;
+        }
+
+        if (data['data']['order'].isCollectFromStore == 1) {
+          this.isCollectFromStore = true;
+        }
+
+        console.log(data['data'], 'orderby id order details');
+      },
+      (error) => {
+        console.log(error);
       }
-
-      if (data['data']['order'].isCollectFromStore == 1) {
-        this.isCollectFromStore = true;
-      }
-
-      console.log(data['data'], 'orderby id order details');
-    });
+    );
   }
 
   getData() {
@@ -232,26 +244,31 @@ export class CheckoutComponent implements OnInit {
   }
 
   payapi(data) {
-    this.common.pay(data).subscribe((paymentData) => {
-      console.log(paymentData);
-      this.clientSecret = paymentData['clientSecret'];
-      console.log(this.clientSecret);
+    this.common.pay(data).subscribe(
+      (paymentData) => {
+        console.log(paymentData);
+        this.clientSecret = paymentData['clientSecret'];
+        console.log(this.clientSecret);
 
-      if (paymentData['requiresAction']) {
-        // Request authentication
-        this.handleAction(paymentData['clientSecret']);
-      } else if (paymentData['error']) {
-        console.log(paymentData['error']);
+        if (paymentData['requiresAction']) {
+          // Request authentication
+          this.handleAction(paymentData['clientSecret']);
+        } else if (paymentData['error']) {
+          console.log(paymentData['error']);
 
-        // showError(paymentData['error']);
-      } else {
-        this.orderComplete(paymentData['clientSecret']);
+          // showError(paymentData['error']);
+        } else {
+          this.orderComplete(paymentData['clientSecret']);
 
-        console.log('order Complete');
-        this.isLoading = false;
-        this.isPaid = true;
+          console.log('order Complete');
+          this.isLoading = false;
+          this.isPaid = true;
+        }
+      },
+      (error) => {
+        console.log(error);
       }
-    });
+    );
   }
 
   setisTermsAndCondition(event) {
@@ -310,18 +327,23 @@ export class CheckoutComponent implements OnInit {
         billing_details: {
           name: cardholderName,
         },
-      }).subscribe((result) => {
-        if (result.error) {
-          showError(result.error.message);
-          console.log(result.error);
-        } else {
-          orderData.paymentMethodId = result.paymentMethod.id;
-          console.log(result, 'result');
-          console.log(orderData, 'orderData');
+      }).subscribe(
+        (result) => {
+          if (result.error) {
+            showError(result.error.message);
+            console.log(result.error);
+          } else {
+            orderData.paymentMethodId = result.paymentMethod.id;
+            console.log(result, 'result');
+            console.log(orderData, 'orderData');
 
-          window['angularComponentReference'].loadAngularFunction(orderData);
+            window['angularComponentReference'].loadAngularFunction(orderData);
+          }
+        },
+        (error) => {
+          console.log(error);
         }
-      });
+      );
 
       var showError = function (errorMsgText) {
         var errorMsg = document.querySelector('.sr-field-error');
@@ -436,64 +458,74 @@ export class CheckoutComponent implements OnInit {
   };
 
   handleAction(Data) {
-    this.STRIPE.handleCardAction(Data).subscribe((data) => {
-      console.log(data);
+    this.STRIPE.handleCardAction(Data).subscribe(
+      (data) => {
+        console.log(data);
 
-      if (data.error) {
-        console.log(data.error);
+        if (data.error) {
+          console.log(data.error);
 
-        // showError('Your card was not authenticated, please try again');
-      } else if (data.paymentIntent.status === 'requires_confirmation') {
-        var obj = { paymentIntentId: data.paymentIntent.id };
-        window['angularComponent']
-          .loadAngularFunctions(obj)
-          .then(function (result) {
-            return result.json();
-          })
-          .then(function (json) {
-            if (json.error) {
-              // showError(json.error);
-              console.log(json);
-            } else {
-              console.log('Done');
+          // showError('Your card was not authenticated, please try again');
+        } else if (data.paymentIntent.status === 'requires_confirmation') {
+          var obj = { paymentIntentId: data.paymentIntent.id };
+          window['angularComponent']
+            .loadAngularFunctions(obj)
+            .then(function (result) {
+              return result.json();
+            })
+            .then(function (json) {
+              if (json.error) {
+                // showError(json.error);
+                console.log(json);
+              } else {
+                console.log('Done');
 
-              // orderComplete(clientSecret);
-            }
-          });
+                // orderComplete(clientSecret);
+              }
+            });
+        }
+      },
+      (error) => {
+        console.log(error);
       }
-    });
+    );
   }
 
   orderComplete(Data) {
-    this.STRIPE.retrievePaymentIntent(Data).subscribe((result) => {
-      var paymentIntent = result.paymentIntent;
-      var paymentIntentJson = JSON.stringify(paymentIntent, null, 2);
+    this.STRIPE.retrievePaymentIntent(Data).subscribe(
+      (result) => {
+        var paymentIntent = result.paymentIntent;
+        var paymentIntentJson = JSON.stringify(paymentIntent, null, 2);
 
-      let id = this.route.snapshot.params.id;
-      const data = {
-        order_id: id,
-        amount: result.paymentIntent.amount,
-        currency: result.paymentIntent.currency,
-        paymentMethodId: result.paymentIntent.payment_method,
-        paymentIntentId: result.paymentIntent.client_secret,
-        paymentId: result.paymentIntent.id,
-      };
+        let id = this.route.snapshot.params.id;
+        const data = {
+          order_id: id,
+          amount: result.paymentIntent.amount,
+          currency: result.paymentIntent.currency,
+          paymentMethodId: result.paymentIntent.payment_method,
+          paymentIntentId: result.paymentIntent.client_secret,
+          paymentId: result.paymentIntent.id,
+        };
 
-      this.shopService.transaction(data).subscribe((data) => {
-        console.log(data, 'transaction');
-      });
-      // document.querySelectorAll(".payment-view").forEach(function (view) {
-      //   view.classList.add("hidden");
-      // });
-      // document.querySelectorAll(".completed-view").forEach(function (view) {
-      //   view.classList.remove("hidden");
-      // });
-      // document.querySelector(".order-status").textContent =
-      //   paymentIntent.status === "succeeded" ? "succeeded" : "failed";
-      // document.querySelector("pre").textContent = paymentIntentJson;
+        this.shopService.transaction(data).subscribe((data) => {
+          console.log(data, 'transaction');
+        });
+        // document.querySelectorAll(".payment-view").forEach(function (view) {
+        //   view.classList.add("hidden");
+        // });
+        // document.querySelectorAll(".completed-view").forEach(function (view) {
+        //   view.classList.remove("hidden");
+        // });
+        // document.querySelector(".order-status").textContent =
+        //   paymentIntent.status === "succeeded" ? "succeeded" : "failed";
+        // document.querySelector("pre").textContent = paymentIntentJson;
 
-      console.log(paymentIntentJson);
-      console.log(result);
-    });
+        console.log(paymentIntentJson);
+        console.log(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

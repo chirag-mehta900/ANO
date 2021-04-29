@@ -18,10 +18,15 @@ export class AddressComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.profile.getAlladdress().subscribe((data) => {
-      console.log(data);
-      this.Address = data['data'];
-    });
+    this.profile.getAlladdress().subscribe(
+      (data) => {
+        console.log(data);
+        this.Address = data['data'];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     console.log(this.Address);
   }
 

@@ -309,16 +309,21 @@ export class GetAllShopComponent implements OnInit {
     localStorage.setItem('filter', JSON.stringify(this.Filter));
     localStorage.setItem('Location', JSON.stringify(this.Location));
 
-    this.mapService.getAllStore().subscribe((data) => {
-      this.AllStore = data['data'];
+    this.mapService.getAllStore().subscribe(
+      (data) => {
+        this.AllStore = data['data'];
 
-      this.AllStore.forEach((e) => {
-        if (e.average_rating != 0) {
-          e.average_rating = Math.round(e.average_rating);
-        }
-      });
-      console.log(this.AllStore, 'get all Store');
-    });
+        this.AllStore.forEach((e) => {
+          if (e.average_rating != 0) {
+            e.average_rating = Math.round(e.average_rating);
+          }
+        });
+        console.log(this.AllStore, 'get all Store');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
     console.log(this.Location);
 
@@ -363,13 +368,18 @@ export class GetAllShopComponent implements OnInit {
 
           this.mapService
             .getArea(this.Location.lat, this.Location.lng)
-            .subscribe((data: any) => {
-              this.area = data.results[0].formatted_address;
-              localStorage.setItem('Address', JSON.stringify(this.area));
-              this.shoplist(this.Location);
+            .subscribe(
+              (data: any) => {
+                this.area = data.results[0].formatted_address;
+                localStorage.setItem('Address', JSON.stringify(this.area));
+                this.shoplist(this.Location);
 
-              console.log(this.area);
-            });
+                console.log(this.area);
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
         }
       }
     );
@@ -462,45 +472,50 @@ export class GetAllShopComponent implements OnInit {
       distanceMile: 10,
     };
 
-    this.Shop.getallstore(obj).subscribe((data) => {
-      console.log(data);
+    this.Shop.getallstore(obj).subscribe(
+      (data) => {
+        console.log(data);
 
-      this.newShop = data['data'].shop;
+        this.newShop = data['data'].shop;
 
-      this.newShop.forEach((element) => {
-        if (element.average_rating != 0)
-          element.average_rating = Math.round(element.average_rating);
-        console.log(element.average_rating);
-      });
-      // localStorage.setItem('Shoplist', JSON.stringify(this.Shoplist));
-      console.log(this.newShop, 'New Shop');
+        this.newShop.forEach((element) => {
+          if (element.average_rating != 0)
+            element.average_rating = Math.round(element.average_rating);
+          console.log(element.average_rating);
+        });
+        localStorage.setItem('Shoplist', JSON.stringify(this.newShop));
+        console.log(this.newShop, 'New Shop');
 
-      if (this.newShop.length == 0) {
-        this.noshop = true;
-      } else {
-        this.noshop = false;
-      }
-      this.Marker.length = 0;
-      for (var i = 0; i < this.newShop.length; i++) {
-        this.shopmarker = {
-          latitude: this.newShop[i].latitude,
-          longitude: this.newShop[i].longitude,
-          icon: {
-            url:
-              'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/MicrosoftTeams-image%20(8).png?alt=media&token=6daea4dc-bc59-425f-8862-c2c407b6939a',
-            scaledSize: {
-              width: 40,
-              height: 50,
+        if (this.newShop.length == 0) {
+          this.noshop = true;
+        } else {
+          this.noshop = false;
+        }
+        this.Marker.length = 0;
+        for (var i = 0; i < this.newShop.length; i++) {
+          this.shopmarker = {
+            latitude: this.newShop[i].latitude,
+            longitude: this.newShop[i].longitude,
+            icon: {
+              url:
+                'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/MicrosoftTeams-image%20(8).png?alt=media&token=6daea4dc-bc59-425f-8862-c2c407b6939a',
+              scaledSize: {
+                width: 40,
+                height: 50,
+              },
             },
-          },
-        };
-        this.Marker.push(this.shopmarker);
-      }
-      localStorage.removeItem('shopmarker');
+          };
+          this.Marker.push(this.shopmarker);
+        }
+        localStorage.removeItem('shopmarker');
 
-      console.log(this.Marker);
-      localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
-    });
+        console.log(this.Marker);
+        localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
   async handleAddressChange(address: any) {
     this.searchshop = JSON.parse(localStorage.getItem('deviceProblem') || '[]');
@@ -511,92 +526,97 @@ export class GetAllShopComponent implements OnInit {
     localStorage.removeItem('Address');
     localStorage.setItem('Address', JSON.stringify(this.area));
 
-    await this.mapService.getlatlong(this.area).subscribe((data: any) => {
-      console.log(data);
+    await this.mapService.getlatlong(this.area).subscribe(
+      (data: any) => {
+        console.log(data);
 
-      this.Location.lat = data.results[0].geometry.location.lat;
-      this.Location.lng = data.results[0].geometry.location.lng;
-      console.log(this.Location);
+        this.Location.lat = data.results[0].geometry.location.lat;
+        this.Location.lng = data.results[0].geometry.location.lng;
+        console.log(this.Location);
 
-      localStorage.setItem('Location', JSON.stringify(this.Location));
-      console.log(this.Location.lng);
+        localStorage.setItem('Location', JSON.stringify(this.Location));
+        console.log(this.Location.lng);
 
-      this.Lat = this.Location.lat;
-      this.Lng = this.Location.lng;
+        this.Lat = this.Location.lat;
+        this.Lng = this.Location.lng;
 
-      this.searchshop.latitude = data.results[0].geometry.location.lat;
-      this.searchshop.longitude = data.results[0].geometry.location.lng;
+        this.searchshop.latitude = data.results[0].geometry.location.lat;
+        this.searchshop.longitude = data.results[0].geometry.location.lng;
 
-      // let inter = setInterval(() => {
-      //   this.searchshop[0].latitude = this.Location.lat;
-      //   this.searchshop[0].longitude = this.Location.lng;
+        // let inter = setInterval(() => {
+        //   this.searchshop[0].latitude = this.Location.lat;
+        //   this.searchshop[0].longitude = this.Location.lng;
 
-      //   if (this.searchshop[0].latitude != undefined) {
-      //     clearInterval(inter);
-      //   }
-      // }, 10);
+        //   if (this.searchshop[0].latitude != undefined) {
+        //     clearInterval(inter);
+        //   }
+        // }, 10);
 
-      console.log(this.searchshop);
-      localStorage.setItem('deviceProblem', JSON.stringify(this.searchshop));
+        console.log(this.searchshop);
+        localStorage.setItem('deviceProblem', JSON.stringify(this.searchshop));
 
-      this.shoplist(this.Location);
-      // this.headerService.searchStore(this.searchshop).subscribe(
-      //   (response: ResponseType) => {
-      //     console.log(response);
-      //     this.Data.length = 0;
-      //     response.data.forEach((e) => {
-      //       if (e.pricing.length) {
-      //         this.Data.push(e);
-      //       }
-      //     });
-      //     console.log(this.Data);
+        this.shoplist(this.Location);
+        // this.headerService.searchStore(this.searchshop).subscribe(
+        //   (response: ResponseType) => {
+        //     console.log(response);
+        //     this.Data.length = 0;
+        //     response.data.forEach((e) => {
+        //       if (e.pricing.length) {
+        //         this.Data.push(e);
+        //       }
+        //     });
+        //     console.log(this.Data);
 
-      //     localStorage.removeItem('Shoplist');
-      //     localStorage.setItem('Shoplist', JSON.stringify(this.Data));
+        //     localStorage.removeItem('Shoplist');
+        //     localStorage.setItem('Shoplist', JSON.stringify(this.Data));
 
-      //     this.Shoplist = JSON.parse(localStorage.getItem('Shoplist') || '[]');
+        //     this.Shoplist = JSON.parse(localStorage.getItem('Shoplist') || '[]');
 
-      //     for (var i = 0; i < this.Data.length; i++) {
-      //       this.shopmarker = {
-      //         latitude: this.Data[i].latitude,
-      //         longitude: this.Data[i].longitude,
-      //         price: {
-      //           text: this.Data[i].pricing[0].price.toString(),
-      //           color: 'white',
-      //           fontWeight: '500',
-      //           fontSize: '20px',
-      //         },
-      //         icon: {
-      //           url:
-      //             'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
-      //           scaledSize: {
-      //             width: 100,
-      //             height: 70,
-      //           },
-      //         },
-      //       };
-      //       this.Marker.push(this.shopmarker);
-      //     }
+        //     for (var i = 0; i < this.Data.length; i++) {
+        //       this.shopmarker = {
+        //         latitude: this.Data[i].latitude,
+        //         longitude: this.Data[i].longitude,
+        //         price: {
+        //           text: this.Data[i].pricing[0].price.toString(),
+        //           color: 'white',
+        //           fontWeight: '500',
+        //           fontSize: '20px',
+        //         },
+        //         icon: {
+        //           url:
+        //             'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
+        //           scaledSize: {
+        //             width: 100,
+        //             height: 70,
+        //           },
+        //         },
+        //       };
+        //       this.Marker.push(this.shopmarker);
+        //     }
 
-      //     console.log(this.Marker);
+        //     console.log(this.Marker);
 
-      //     console.log(this.searchshop);
-      //     localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
+        //     console.log(this.searchshop);
+        //     localStorage.setItem('shopmarker', JSON.stringify(this.Marker));
 
-      //     console.log(this.Marker);
+        //     console.log(this.Marker);
 
-      //     this.router.navigate([
-      //       '/map',
-      //       { storeData: JSON.stringify(response['data']) },
-      //     ]);
-      //   },
-      //   (error) => {}
-      // );
+        //     this.router.navigate([
+        //       '/map',
+        //       { storeData: JSON.stringify(response['data']) },
+        //     ]);
+        //   },
+        //   (error) => {}
+        // );
 
-      // this.storeInfo = JSON.parse(
-      //   this.route.snapshot.paramMap.get('storeData')
-      // );
-    });
+        // this.storeInfo = JSON.parse(
+        //   this.route.snapshot.paramMap.get('storeData')
+        // );
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   shopDetail(id) {
@@ -625,7 +645,9 @@ export class GetAllShopComponent implements OnInit {
           console.log(this.deviceList);
           localStorage.setItem('deviceList', JSON.stringify(this.deviceList));
         },
-        (error) => {}
+        (error) => {
+          console.log(error);
+        }
       );
     }
   }
@@ -650,7 +672,9 @@ export class GetAllShopComponent implements OnInit {
 
         this.issueList = data['data'];
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
   filter() {
@@ -729,7 +753,9 @@ export class GetAllShopComponent implements OnInit {
           //   { storeData: JSON.stringify(response['data']) },
           // ]);
         },
-        (error) => {}
+        (error) => {
+          console.log(error);
+        }
       );
     } else {
       return;

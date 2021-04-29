@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'policy', component: PolicyComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'term', component: TermComponent },
-  { path: 'getall', component: GetAllShopComponent },
+  { path: 'filterShop', component: GetAllShopComponent },
 
   {
     path: '',

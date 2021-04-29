@@ -28,11 +28,16 @@ export class SelectAddressComponent implements OnInit {
     this.href = this.router.url;
     console.log(this.href);
 
-    this.profile.getAlladdress().subscribe((data) => {
-      console.log(data);
-      this.Addressdata = data['data'];
-      console.log(this.Addressdata);
-    });
+    this.profile.getAlladdress().subscribe(
+      (data) => {
+        console.log(data);
+        this.Addressdata = data['data'];
+        console.log(this.Addressdata);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   editaddress(a) {
