@@ -347,17 +347,22 @@ export class ShopComponent implements OnInit {
     this.filter = JSON.parse(localStorage.getItem('filter') || '[]');
     console.log(this.filter);
 
-    this.profile.responseShopId.subscribe((id) => {
-      console.log(id, 'new');
-      if (id != 0) {
-        this.storeId = id;
-        this.getStoreDetail();
-      } else {
-        this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
-        console.log(this.storeId, 'new');
-        this.getStoreDetail();
+    this.profile.responseShopId.subscribe(
+      (id) => {
+        console.log(id, 'new');
+        if (id != 0) {
+          this.storeId = id;
+          this.getStoreDetail();
+        } else {
+          this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
+          console.log(this.storeId, 'new');
+          this.getStoreDetail();
+        }
+      },
+      (error) => {
+        console.log(error);
       }
-    });
+    );
     this.ShopList = JSON.parse(localStorage.getItem('Shoplist') || '[]');
 
     this.ShopList.forEach((e) => {
@@ -420,7 +425,9 @@ export class ShopComponent implements OnInit {
 
         this.calculateReviewBarValue();
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
   calculateReviewBarValue() {
@@ -466,14 +473,24 @@ export class ShopComponent implements OnInit {
     );
   }
   getAnoFee() {
-    this.shopService.getAnoFee().subscribe((data) => {
-      this.ANOFee = data['data'][0].value;
-    });
+    this.shopService.getAnoFee().subscribe(
+      (data) => {
+        this.ANOFee = data['data'][0].value;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
   getBaseFee() {
-    this.shopService.getBaseFee().subscribe((data) => {
-      this.baseFee = data['data'][0].value;
-    });
+    this.shopService.getBaseFee().subscribe(
+      (data) => {
+        this.baseFee = data['data'][0].value;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
   goToCart() {
     console.log(this.shop);
@@ -485,6 +502,11 @@ export class ShopComponent implements OnInit {
       console.log(this.check);
 
       this.modalService.open(BookRepairComponent);
+    }
+
+    let isLogedIn = localStorage.getItem('token');
+    if (isLogedIn === null) {
+      this.product();
     } else {
       var obj = {
         user_id: JSON.parse(localStorage.getItem('user_id') || '[]'),
@@ -534,9 +556,13 @@ export class ShopComponent implements OnInit {
         this.bookRepair.TotalAmount = this.expectedresponse[0].TotalAmount;
         this.bookRepair.price = this.expectedresponse[0].price;
         this.bookRepair.brand_id = this.expectedresponse[0].brand_id;
-        this.bookRepair.user_id = JSON.parse(
-          localStorage.getItem('user_id') || '[]'
-        );
+        let isLogedIn = localStorage.getItem('token');
+        if (isLogedIn != null) {
+          this.bookRepair.user_id = JSON.parse(
+            localStorage.getItem('user_id') || '[]'
+          );
+        }
+
         this.bookRepair.shop_id = this.expectedresponse[0].shop_id;
         this.bookRepair.device_id = this.expectedresponse[0].device_id;
         this.bookRepair.problem_id = this.expectedresponse[0].problem_id;
@@ -545,15 +571,25 @@ export class ShopComponent implements OnInit {
 
         this.shopService.addCartData(this.bookRepair).subscribe(
           (data) => {
-            console.log(data);
-            console.log(data['data'][0]);
+            console.log(data, 'without login');
+            console.log(data['data']['cart_id'], 'cartid');
+
+            localStorage.setItem(
+              'Tempcart',
+              JSON.stringify(data['data'][0]['cart_id'])
+            );
+            console.log(data['data']);
 
             this.router.navigate(['/cart']);
           },
-          (error) => {}
+          (error) => {
+            console.log(error);
+          }
         );
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
   // addRepairDevice() {

@@ -33,6 +33,7 @@ import { MailComponent } from './contact/mail/mail.component';
 import { WarningComponent } from './shop/warning/warning.component';
 import { FeedbackComponent } from './about/feedback/feedback.component';
 import { ADDaddressComponent } from './cart/addaddress/addaddress.component';
+import { CartconflictComponent } from './cart/cartconflict/cartconflict.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ADDaddressComponent } from './cart/addaddress/addaddress.component';
     WarningComponent,
     FeedbackComponent,
     ADDaddressComponent,
+    CartconflictComponent,
   ],
   imports: [
     BrowserModule,

@@ -349,7 +349,9 @@ export class SignupComponent implements OnInit {
           this.emailExist = true;
         }
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
 
@@ -586,7 +588,9 @@ export class SignupComponent implements OnInit {
       (data) => {
         this.userName = data['data'].name;
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
   signUpEmailPrevious() {
@@ -643,11 +647,15 @@ export class SignupComponent implements OnInit {
                   this.activeModal.close(data['data']['fname']);
                 }
               },
-              (error) => {}
+              (error) => {
+                console.log(error);
+              }
             );
           }
         },
-        (error) => {}
+        (error) => {
+          console.log(error);
+        }
       );
     } else {
       console.log(this.userAddres.value);

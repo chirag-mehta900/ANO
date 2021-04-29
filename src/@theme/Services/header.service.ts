@@ -115,9 +115,9 @@ export class HeaderService {
     );
   }
 
-  getAllCart(id) {
+  getAllCart(id, id2) {
     return this.httpClient.get(
-      this.commonService.envUrl() + 'cart?user_id=' + id
+      this.commonService.envUrl() + 'cart?user_id=' + id + '&cart_id=' + id2
     );
   }
 }

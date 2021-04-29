@@ -30,16 +30,21 @@ export class ProfileComponent implements OnInit {
       console.log(this.Details);
     });
 
-    this.profile.getAlladdress().subscribe((data) => {
-      console.log(data);
-      data['data'].filter((x) => {
-        console.log(x);
-        if (x.isDefault) {
-          this.defaultAddress.push(x);
-        }
-      });
-      console.log(this.defaultAddress);
-    });
+    this.profile.getAlladdress().subscribe(
+      (data) => {
+        console.log(data);
+        data['data'].filter((x) => {
+          console.log(x);
+          if (x.isDefault) {
+            this.defaultAddress.push(x);
+          }
+        });
+        console.log(this.defaultAddress);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   Changepsw() {

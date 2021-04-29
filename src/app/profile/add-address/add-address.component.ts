@@ -118,32 +118,37 @@ export class AddAddressComponent implements OnInit {
         this.Addaddress.value.zipCode;
       console.log(area);
 
-      this.mapService.getlatlong(area).subscribe((data: any) => {
-        console.log(data);
+      this.mapService.getlatlong(area).subscribe(
+        (data: any) => {
+          console.log(data);
 
-        if (data['status'] == 'OK') {
-          this.Addaddress.value.latitude =
-            data.results[0].geometry.location.lat;
-          this.Addaddress.value.longitude =
-            data.results[0].geometry.location.lng;
-          console.log(this.Addaddress.value);
+          if (data['status'] == 'OK') {
+            this.Addaddress.value.latitude =
+              data.results[0].geometry.location.lat;
+            this.Addaddress.value.longitude =
+              data.results[0].geometry.location.lng;
+            console.log(this.Addaddress.value);
 
-          this.profile.addAddress(this.Addaddress.value).subscribe(
-            (response) => {
-              console.log(response);
-              if (response['status'] == 200) {
-                this.router.navigate(['profile/address']);
+            this.profile.addAddress(this.Addaddress.value).subscribe(
+              (response) => {
+                console.log(response);
+                if (response['status'] == 200) {
+                  this.router.navigate(['profile/address']);
+                }
+              },
+              (error) => {
+                console.log(error);
               }
-            },
-            (error) => {
-              console.log(error);
-            }
-          ),
-            (error) => {
-              console.log(error);
-            };
+            ),
+              (error) => {
+                console.log(error);
+              };
+          }
+        },
+        (error) => {
+          console.log(error);
         }
-      });
+      );
     }
   }
 }

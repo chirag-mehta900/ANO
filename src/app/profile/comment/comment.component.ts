@@ -24,20 +24,25 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
     var id = JSON.parse(localStorage.getItem('OneOrder') || '[]');
-    this.Profile.getsingleOrder(id).subscribe((response) => {
-      console.log(response, 'response of single order');
-      this.totaldevice = response['data']['order']['details'].length;
-      this.order.push(response['data']['order']);
+    this.Profile.getsingleOrder(id).subscribe(
+      (response) => {
+        console.log(response, 'response of single order');
+        this.totaldevice = response['data']['order']['details'].length;
+        this.order.push(response['data']['order']);
 
-      this.grandTotal = response['data'].grandTotal;
-      this.grandTotalOfANOCommissionFees =
-        response['data'].grandTotalOfANOCommissionFees;
-      this.grandTotalOfBaseFees = response['data'].grandTotalOfBaseFees;
-      this.grandTotalOfPartsFees = response['data'].grandTotalOfPartsFees;
-      this.grandTotalOfShopCommissionFees =
-        response['data'].grandTotalOfShopCommissionFees;
+        this.grandTotal = response['data'].grandTotal;
+        this.grandTotalOfANOCommissionFees =
+          response['data'].grandTotalOfANOCommissionFees;
+        this.grandTotalOfBaseFees = response['data'].grandTotalOfBaseFees;
+        this.grandTotalOfPartsFees = response['data'].grandTotalOfPartsFees;
+        this.grandTotalOfShopCommissionFees =
+          response['data'].grandTotalOfShopCommissionFees;
 
-      console.log(this.order, 'array');
-    });
+        console.log(this.order, 'array');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

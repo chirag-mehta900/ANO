@@ -274,14 +274,19 @@ export class ContactComponent implements OnInit {
       this.data['subject'] = this.getInTouch.value.from_name + ' contacted you';
       console.log(this.data);
 
-      this.common.getintouch(this.data).subscribe((response) => {
-        console.log(response);
+      this.common.getintouch(this.data).subscribe(
+        (response) => {
+          console.log(response);
 
-        if (response['status']) {
-          this.getInTouch.reset();
-          this.modalService.open(MailComponent);
+          if (response['status']) {
+            this.getInTouch.reset();
+            this.modalService.open(MailComponent);
+          }
+        },
+        (error) => {
+          console.log(error);
         }
-      });
+      );
     }
   }
 }

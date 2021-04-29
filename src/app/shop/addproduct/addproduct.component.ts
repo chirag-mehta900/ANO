@@ -44,7 +44,9 @@ export class AddproductComponent implements OnInit {
       (data) => {
         this.brandList = data['data'];
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
 
@@ -54,7 +56,9 @@ export class AddproductComponent implements OnInit {
         console.log(data['data']);
         this.deviceList = data['data'];
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
 
@@ -68,7 +72,9 @@ export class AddproductComponent implements OnInit {
       (data) => {
         this.issueList = data['data'];
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
 
@@ -104,13 +110,18 @@ export class AddproductComponent implements OnInit {
       shop_id: this.shopId,
     };
     this.bookRepair.shop_id = this.shopId;
-    this.shopService.getExpectedPrice(obj).subscribe((data) => {
-      data['data'].forEach((element) => {
-        if (element.shop_id == this.shopId) {
-          this.expectedPrice = element.TotalAmount;
-        }
-      });
-    });
+    this.shopService.getExpectedPrice(obj).subscribe(
+      (data) => {
+        data['data'].forEach((element) => {
+          if (element.shop_id == this.shopId) {
+            this.expectedPrice = element.TotalAmount;
+          }
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
   addToCart(addCart) {
     this.formSubmitted = true;
@@ -124,7 +135,9 @@ export class AddproductComponent implements OnInit {
           console.log(data['data']);
           this.activeModal.close(data['data']);
         },
-        (error) => {}
+        (error) => {
+          console.log(error);
+        }
       );
     } else {
       return;

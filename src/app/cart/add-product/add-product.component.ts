@@ -87,7 +87,9 @@ export class AddProductComponent implements OnInit {
         // debugger;
         // console.log(this.deviceList);
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
 
@@ -110,7 +112,9 @@ export class AddProductComponent implements OnInit {
         this.issueList = data['data'];
         console.log(this.issueList, 'issuelistss');
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
 
     // if (this.bookRepair.device_id && this.bookRepair.problem_id) {
@@ -175,7 +179,9 @@ export class AddProductComponent implements OnInit {
         this.estimatedRepairTime = data['data'][0].estimatedRepaidTime;
         this.setEstimatedTime();
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
   setEstimatedTime() {
@@ -197,7 +203,13 @@ export class AddProductComponent implements OnInit {
     console.log(this.bookRepair);
 
     //check user is log in if log in then set user id
-    this.bookRepair.user_id = JSON.parse(localStorage.getItem('user_id'));
+    let isLogedIn = localStorage.getItem('token');
+    if (isLogedIn != null) {
+      this.bookRepair.user_id = JSON.parse(localStorage.getItem('user_id'));
+    } else {
+      this.bookRepair.user_id = JSON.parse(localStorage.getItem('user_id'));
+      this.bookRepair.cart_id = JSON.parse(localStorage.getItem('Tempcart'));
+    }
 
     //set Cart_id if user is not log in
     // this.bookRepair.cart_id = localStorage.getItem('cart_id');
@@ -225,7 +237,7 @@ export class AddProductComponent implements OnInit {
         console.log(data);
         console.log(data['data'][0]);
         console.log(data['data'].id);
-        localStorage.setItem('cart_id', data['data'].id);
+        localStorage.setItem('cart_id', data['data'].cart_id);
         this.activeModal.close(data['data'][0]);
       },
       (error) => {

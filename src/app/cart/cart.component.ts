@@ -18,6 +18,7 @@ import * as moment from 'moment';
 import { ProfileService } from 'src/@theme/Services/profile.service';
 import { CommonService } from 'src/@theme/Services/common.service';
 import { HttpClient } from '@angular/common/http';
+import { CartconflictComponent } from './cartconflict/cartconflict.component';
 
 // import { AddproductComponent } from './addproduct/addproduct.component';
 
@@ -300,6 +301,12 @@ export class CartComponent implements OnInit {
       },
     ],
   };
+
+  Obj = {
+    user_id: null,
+    cart_id: null,
+    isNewCartMerge: true,
+  };
   title = 'My first AGM project';
 
   colorTone = '#000';
@@ -312,6 +319,7 @@ export class CartComponent implements OnInit {
   temp: File[] = [];
   issues: any[] = [];
   imageUploaded: any[] = [];
+  userID: number = 0;
   Address: any = '';
   date: any = '';
   pickupAddress: any;
@@ -356,95 +364,107 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     localStorage.setItem('filter', JSON.stringify(this.Filter));
-    var id = JSON.parse(localStorage.getItem('user_id') || '[]');
 
-    this.headerService.getAllCart(id).subscribe((response) => {
-      console.log(response);
-      this.shop.push(response['data'].shop);
-      localStorage.setItem('Shop', JSON.stringify(this.shop[0]));
-      this.displayCartInfo = response['data'].devices;
-      console.log(this.displayCartInfo, 'test');
+    this.userID = JSON.parse(localStorage.getItem('user_id') || '0');
 
-      this.ANOBaseFeess = Number(response['data'].grandTotalOfBaseFees);
-      this.ANOCommissionFeess = Number(
-        response['data'].grandTotalOfANOCommissionFees
-      );
-      this.ShopCommissionFeess = Number(
-        response['data'].grandTotalOfShopCommissionFees
-      );
-      this.Prices = Number(response['data'].grandTotalOfPartsFees);
+    if (this.userID == 0) {
+      var id2 = JSON.parse(localStorage.getItem('Tempcart') || '[]');
+    }
+    console.log(this.userID, 'check');
+    console.log(id2, 'check');
 
-      this.totalCartAmounts = response['data'].grandTotal;
+    this.headerService.getAllCart(this.userID, id2).subscribe(
+      (response) => {
+        console.log(response);
+        this.shop.push(response['data'].shop);
+        localStorage.setItem('Shop', JSON.stringify(this.shop[0]));
+        this.displayCartInfo = response['data'].devices;
+        console.log(this.displayCartInfo, 'test');
 
-      this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+        this.ANOBaseFeess = Number(response['data'].grandTotalOfBaseFees);
+        this.ANOCommissionFeess = Number(
+          response['data'].grandTotalOfANOCommissionFees
+        );
+        this.ShopCommissionFeess = Number(
+          response['data'].grandTotalOfShopCommissionFees
+        );
+        this.Prices = Number(response['data'].grandTotalOfPartsFees);
 
-      // this.Address = JSON.parse(localStorage.getItem('Address') || '[]');
+        this.totalCartAmounts = response['data'].grandTotal;
 
-      // this.profile.getAlladdress().subscribe((data) => {
-      //   console.log(data);
-      //   this.address = data['data'];
-      //   this.address.forEach((e) => {
-      //     if ((e.isDefault = 1)) {
-      //       this.Address =
-      //         e.addressLine + ' ' + e.city + ' ' + e.state + ' ' + e.zipCode;
-      //     }
-      //   });
-      //   console.log(this.Address);
-      this.pickupAddress = this.Address;
-      this.dropAddress = this.Address;
-      // });
+        this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
 
-      console.log(this.Location);
-      this.lat = this.Location.lat;
-      this.lng = this.Location.lng;
-      this.origin.lat = this.Location.lat;
-      this.origin.lng = this.Location.lng;
-      console.log(this.origin);
-      this.destination.lat = this.shop[0].latitude;
-      this.destination.lng = this.shop[0].longitude;
-      console.log(this.destination);
-      console.log(this.shop);
+        // this.Address = JSON.parse(localStorage.getItem('Address') || '[]');
 
-      //set Shop id in place order object
-      this.placeOrder.shop_id = this.shop[0].id;
+        // this.profile.getAlladdress().subscribe((data) => {
+        //   console.log(data);
+        //   this.address = data['data'];
+        //   this.address.forEach((e) => {
+        //     if ((e.isDefault = 1)) {
+        //       this.Address =
+        //         e.addressLine + ' ' + e.city + ' ' + e.state + ' ' + e.zipCode;
+        //     }
+        //   });
+        //   console.log(this.Address);
+        this.pickupAddress = this.Address;
+        this.dropAddress = this.Address;
+        // });
 
-      //rating
-      this.rating3 = parseInt(this.shop[0].average_rating);
+        console.log(this.Location);
+        this.lat = this.Location.lat;
+        this.lng = this.Location.lng;
+        this.origin.lat = this.Location.lat;
+        this.origin.lng = this.Location.lng;
+        console.log(this.origin);
+        this.destination.lat = this.shop[0].latitude;
+        this.destination.lng = this.shop[0].longitude;
+        console.log(this.destination);
+        console.log(this.shop);
 
-      // var data = {
-      //   toLat: this.Location.lat,
-      //   toLng: this.Location.lng,
-      //   fromLat: this.shop[0].latitude,
-      //   fromLng: this.shop[0].longitude,
-      // };
-      // console.log(data, 'distance');
+        //set Shop id in place order object
+        this.placeOrder.shop_id = this.shop[0].id;
 
-      // this.mapService.getDistanceInMile(data).subscribe((data) => {
-      //   this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
-      //   // 1. [+-]?: Optional + or - sign before number
-      //   // 2. \d+: Match one or more numbers
-      //   // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
-      //   // 4. g flag: To get all matches
-      //   this.distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
-      //   this.deliveryPrices = this.distance * 0.6;
-      //   this.deliveryPrices = Number(this.deliveryPrices.toFixed(2));
+        //rating
+        this.rating3 = parseInt(this.shop[0].average_rating);
 
-      //   // this.totalCartAmounts = Number(
-      //   //   (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
-      //   // );
-      //   // this.setPreviouslyAddedDeviceIssue();
-      // });
+        // var data = {
+        //   toLat: this.Location.lat,
+        //   toLng: this.Location.lng,
+        //   fromLat: this.shop[0].latitude,
+        //   fromLng: this.shop[0].longitude,
+        // };
+        // console.log(data, 'distance');
 
-      //get priously selected problem device
+        // this.mapService.getDistanceInMile(data).subscribe((data) => {
+        //   this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
+        //   // 1. [+-]?: Optional + or - sign before number
+        //   // 2. \d+: Match one or more numbers
+        //   // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
+        //   // 4. g flag: To get all matches
+        //   this.distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
+        //   this.deliveryPrices = this.distance * 0.6;
+        //   this.deliveryPrices = Number(this.deliveryPrices.toFixed(2));
 
-      this.getCurrentDate();
-      this.getTimeAccoedingToDate();
+        //   // this.totalCartAmounts = Number(
+        //   //   (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
+        //   // );
+        //   // this.setPreviouslyAddedDeviceIssue();
+        // });
 
-      var date = Date.now();
-      console.log(date);
-      this.getrepairtime(date, 48);
-      console.log(this.placeOrder);
-    });
+        //get priously selected problem device
+
+        this.getCurrentDate();
+        this.getTimeAccoedingToDate();
+
+        var date = Date.now();
+        console.log(date);
+        this.getrepairtime(date, 48);
+        console.log(this.placeOrder);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
     // this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
 
@@ -524,143 +544,185 @@ export class CartComponent implements OnInit {
   }
 
   chooseaddres() {
-    const modalRef = this.modalService.open(SelectAddressComponent);
-    modalRef.result.then((result) => {
-      console.log(result);
+    let isLogedIn = localStorage.getItem('token');
+    if (isLogedIn === null) {
+      this.userName = null;
+      if (this.modalService.hasOpenModals()) {
+        this.modalService.dismissAll();
+      }
+      const modalRef = this.modalService.open(LoginComponent);
+      modalRef.result.then((result) => {
+        this.headerService.getUserName().subscribe((data) => {
+          console.log(data);
 
-      var checkzip = result.zipCode;
+          this.userName = data['data'].name;
+          this.storeTokenService.set('user_id', data['data'].id);
+        });
+      });
+    } else {
+      const modalRef = this.modalService.open(SelectAddressComponent);
+      modalRef.result.then((result) => {
+        console.log(result);
 
-      this.ValidZip = true;
-      if (checkzip >= 85001 && checkzip <= 85086) {
-        console.log('match');
-        this.ValidZip = false;
+        var checkzip = result.zipCode;
 
-        this.pickupAddress =
-          result.addressLine + result.city + result.state + result.zipCode;
-        console.log(this.pickupAddress);
+        this.ValidZip = true;
+        if (checkzip >= 85001 && checkzip <= 85086) {
+          console.log('match');
+          this.ValidZip = false;
 
-        console.log(result.latitude);
-        console.log(result.longitude);
+          this.pickupAddress =
+            result.addressLine + result.city + result.state + result.zipCode;
+          console.log(this.pickupAddress);
 
-        var data = {
-          toLat: result.latitude,
-          toLng: result.longitude,
-          fromLat: this.shop[0].latitude,
-          fromLng: this.shop[0].longitude,
-        };
-        console.log(data, 'distance');
+          console.log(result.latitude);
+          console.log(result.longitude);
 
-        this.mapService.getDistanceInMile(data).subscribe(
-          (data) => {
-            this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
+          var data = {
+            toLat: result.latitude,
+            toLng: result.longitude,
+            fromLat: this.shop[0].latitude,
+            fromLng: this.shop[0].longitude,
+          };
+          console.log(data, 'distance');
 
-            this.distances = 0;
-            this.deliveryPricess = 0;
-            // 1. [+-]?: Optional + or - sign before number
-            // 2. \d+: Match one or more numbers
-            // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
-            // 4. g flag: To get all matches
-            this.distances = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
-            this.deliveryPricess = this.distances * 0.6;
-            this.deliveryPricess = Number(this.deliveryPricess.toFixed(2));
+          this.mapService.getDistanceInMile(data).subscribe(
+            (data) => {
+              this.distanceInMiles =
+                data['data'][0]['elements'][0].distance.text;
 
-            // this.totalCartAmounts = Number(
-            //   (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
-            // );
-            // this.setPreviouslyAddedDeviceIssue();
+              this.distances = 0;
+              this.deliveryPricess = 0;
+              // 1. [+-]?: Optional + or - sign before number
+              // 2. \d+: Match one or more numbers
+              // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
+              // 4. g flag: To get all matches
+              this.distances = this.distanceInMiles.match(
+                /[+-]?\d+(?:\.\d+)?/g
+              );
+              this.deliveryPricess = this.distances * 0.6;
+              this.deliveryPricess = Number(this.deliveryPricess.toFixed(2));
 
-            this.placeOrder.pickupLocation = this.pickupAddress;
+              // this.totalCartAmounts = Number(
+              //   (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
+              // );
+              // this.setPreviouslyAddedDeviceIssue();
 
-            this.totalplusEvent(Number(this.distances), this.deliveryPricess);
-          },
-          (error) => {
-            console.log(error);
+              this.placeOrder.pickupLocation = this.pickupAddress;
 
-            if ((error.error['status'] = 400)) {
+              this.totalplusEvent(Number(this.distances), this.deliveryPricess);
+            },
+            (error) => {
+              console.log(error);
+
+              if ((error.error['status'] = 400)) {
+              }
             }
-          }
-        );
-      }
+          );
+        }
 
-      if (this.ValidZip) {
-        console.log('hello check');
-        this.pickupAddress = '';
-        this.mailinrepairFlag = false;
-        this.mailradio('mail');
-      }
-      // this.http
-      //   .get('http://ziptasticapi.com/' + result.zipCode)
-      //   .subscribe((data) => {
-      //     console.log(data);
-      //   });
+        if (this.ValidZip) {
+          console.log('hello check');
+          this.pickupAddress = '';
+          this.mailinrepairFlag = false;
+          this.mailradio('mail');
+        }
+        // this.http
+        //   .get('http://ziptasticapi.com/' + result.zipCode)
+        //   .subscribe((data) => {
+        //     console.log(data);
+        //   });
 
-      // this.common.zipcode(85001).subscribe((data) => {
-      //   console.log(data);
-      // });
+        // this.common.zipcode(85001).subscribe((data) => {
+        //   console.log(data);
+        // });
 
-      // {"country":"US","state":"AZ","city":"PHOENIX"}
-    });
-
+        // {"country":"US","state":"AZ","city":"PHOENIX"}
+      });
+    }
     // this.modalService.open(AddressComponent);
   }
 
   chooseaddress() {
-    const modalRef = this.modalService.open(SelectAddressComponent);
-    modalRef.result.then((result) => {
-      console.log(result);
+    let isLogedIn = localStorage.getItem('token');
+    if (isLogedIn === null) {
+      this.userName = null;
+      if (this.modalService.hasOpenModals()) {
+        this.modalService.dismissAll();
+      }
+      const modalRef = this.modalService.open(LoginComponent);
+      modalRef.result.then((result) => {
+        this.headerService.getUserName().subscribe((data) => {
+          console.log(data);
 
-      var checkzip = result.zipCode;
-
-      this.ValidZIP = true;
-      if (checkzip >= 85001 && checkzip <= 85086) {
-        console.log('match');
-        this.ValidZIP = false;
-
-        this.dropAddress =
-          result.addressLine + result.city + result.state + result.zipCode;
-        console.log(this.dropAddress);
-
-        console.log(result.latitude);
-        console.log(result.longitude);
-
-        var data = {
-          toLat: result.latitude,
-          toLng: result.longitude,
-          fromLat: this.shop[0].latitude,
-          fromLng: this.shop[0].longitude,
-        };
-        console.log(data, 'distance');
-
-        this.mapService.getDistanceInMile(data).subscribe((data) => {
-          this.distanceInMiles = data['data'][0]['elements'][0].distance.text;
-          this.distance = 0;
-          this.deliveryPrices = 0;
-          // 1. [+-]?: Optional + or - sign before number
-          // 2. \d+: Match one or more numbers
-          // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
-          // 4. g flag: To get all matches
-          this.distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
-          this.deliveryPrices = this.distance * 0.6;
-          this.deliveryPrices = Number(this.deliveryPrices.toFixed(2));
-
-          // this.totalCartAmounts = Number(
-          //   (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
-          // );
-          // this.setPreviouslyAddedDeviceIssue();
-
-          this.placeOrder.dropLocation = this.dropAddress;
-
-          this.totalplusEvent(Number(this.distance), this.deliveryPrices);
+          this.userName = data['data'].name;
+          this.storeTokenService.set('user_id', data['data'].id);
         });
-      }
+      });
+    } else {
+      const modalRef = this.modalService.open(SelectAddressComponent);
+      modalRef.result.then((result) => {
+        console.log(result);
 
-      if (this.ValidZIP) {
-        console.log('hello check');
-        this.dropAddress = '';
-        this.dropinrepairFlag = false;
-        this.dropradio('selfpickup');
-      }
-    });
+        var checkzip = result.zipCode;
+
+        this.ValidZIP = true;
+        if (checkzip >= 85001 && checkzip <= 85086) {
+          console.log('match');
+          this.ValidZIP = false;
+
+          this.dropAddress =
+            result.addressLine + result.city + result.state + result.zipCode;
+          console.log(this.dropAddress);
+
+          console.log(result.latitude);
+          console.log(result.longitude);
+
+          var data = {
+            toLat: result.latitude,
+            toLng: result.longitude,
+            fromLat: this.shop[0].latitude,
+            fromLng: this.shop[0].longitude,
+          };
+          console.log(data, 'distance');
+
+          this.mapService.getDistanceInMile(data).subscribe(
+            (data) => {
+              this.distanceInMiles =
+                data['data'][0]['elements'][0].distance.text;
+              this.distance = 0;
+              this.deliveryPrices = 0;
+              // 1. [+-]?: Optional + or - sign before number
+              // 2. \d+: Match one or more numbers
+              // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
+              // 4. g flag: To get all matches
+              this.distance = this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
+              this.deliveryPrices = this.distance * 0.6;
+              this.deliveryPrices = Number(this.deliveryPrices.toFixed(2));
+
+              // this.totalCartAmounts = Number(
+              //   (this.deliveryPrices + this.totalCartAmounts).toFixed(2)
+              // );
+              // this.setPreviouslyAddedDeviceIssue();
+
+              this.placeOrder.dropLocation = this.dropAddress;
+
+              this.totalplusEvent(Number(this.distance), this.deliveryPrices);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+        }
+
+        if (this.ValidZIP) {
+          console.log('hello check');
+          this.dropAddress = '';
+          this.dropinrepairFlag = false;
+          this.dropradio('selfpickup');
+        }
+      });
+    }
 
     // this.modalService.open(AddressComponent);
   }
@@ -833,7 +895,9 @@ export class CartComponent implements OnInit {
 
         // this.recalculateTotalCartAmount();
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
     console.log(this.displayCartInfo, 'cart info');
   }
@@ -853,38 +917,43 @@ export class CartComponent implements OnInit {
     };
     console.log(getTimeObj);
 
-    this.shopService.getTimeByDate(getTimeObj).subscribe((data) => {
-      this.today = new Date();
-      let hh = this.today.getHours();
-      let mm = this.today.getMinutes();
-      // console.log(hh, mm);
-      // console.log(data["data"]);
-      data['data'].forEach((element) => {
-        var hour = new Date('1970-01-01 ' + element.startTime);
-        if (hour.getHours() > hh) {
-          this.timeList.push(element);
+    this.shopService.getTimeByDate(getTimeObj).subscribe(
+      (data) => {
+        this.today = new Date();
+        let hh = this.today.getHours();
+        let mm = this.today.getMinutes();
+        // console.log(hh, mm);
+        // console.log(data["data"]);
+        data['data'].forEach((element) => {
+          var hour = new Date('1970-01-01 ' + element.startTime);
+          if (hour.getHours() > hh) {
+            this.timeList.push(element);
+          }
+        });
+
+        if (this.timeList.length == 0) {
+          console.log('empty');
+          const tommorow = new Date(this.today);
+
+          tommorow.setDate(tommorow.getDate() + 1);
+
+          var dd = String(tommorow.getDate()).padStart(2, '0');
+          var MM = String(tommorow.getMonth() + 1).padStart(2, '0'); //January is 0!
+          var yyyy = tommorow.getFullYear();
+          this.startdate = yyyy + '-' + MM + '-' + dd;
+          this.datePickerConfig.date = this.startdate;
+          console.log(this.startdate);
+
+          this.newtimelist(this.startdate);
         }
-      });
 
-      if (this.timeList.length == 0) {
-        console.log('empty');
-        const tommorow = new Date(this.today);
-
-        tommorow.setDate(tommorow.getDate() + 1);
-
-        var dd = String(tommorow.getDate()).padStart(2, '0');
-        var MM = String(tommorow.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = tommorow.getFullYear();
-        this.startdate = yyyy + '-' + MM + '-' + dd;
-        this.datePickerConfig.date = this.startdate;
-        console.log(this.startdate);
-
-        this.newtimelist(this.startdate);
+        this.placeOrder.startTime = this.timeList[0]['startTime'];
+        this.placeOrder.endTime = this.timeList[0]['endTime'];
+      },
+      (error) => {
+        console.log(error);
       }
-
-      this.placeOrder.startTime = this.timeList[0]['startTime'];
-      this.placeOrder.endTime = this.timeList[0]['endTime'];
-    });
+    );
   }
   setTime(event) {
     this.timeList.forEach((element) => {
@@ -905,15 +974,20 @@ export class CartComponent implements OnInit {
     };
     console.log(getTimeObj);
 
-    this.shopService.getTimeByDate(getTimeObj).subscribe((data) => {
-      data['data'].forEach((element) => {
-        this.timeList.push(element);
-      });
-      console.log(this.timeList);
+    this.shopService.getTimeByDate(getTimeObj).subscribe(
+      (data) => {
+        data['data'].forEach((element) => {
+          this.timeList.push(element);
+        });
+        console.log(this.timeList);
 
-      this.placeOrder.startTime = this.timeList[0]['startTime'];
-      this.placeOrder.endTime = this.timeList[0]['endTime'];
-    });
+        this.placeOrder.startTime = this.timeList[0]['startTime'];
+        this.placeOrder.endTime = this.timeList[0]['endTime'];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
     var DATE = new Date(this.startdate).getTime();
     console.log(DATE);
@@ -957,17 +1031,22 @@ export class CartComponent implements OnInit {
       this.upload(element);
     });
     let arr = [];
-    this.uploadService.imageLocationUrl.subscribe((x) => {
-      this.displayCartInfo.forEach((element) => {
-        arr.push(x);
-        if (element.id == id) {
-          element.images = arr;
-          element.imageFiles = event.addedFiles;
-        }
-      });
-      this.currentImageUrl = x;
-      console.log('Current Image Url', this.currentImageUrl);
-    });
+    this.uploadService.imageLocationUrl.subscribe(
+      (x) => {
+        this.displayCartInfo.forEach((element) => {
+          arr.push(x);
+          if (element.id == id) {
+            element.images = arr;
+            element.imageFiles = event.addedFiles;
+          }
+        });
+        this.currentImageUrl = x;
+        console.log('Current Image Url', this.currentImageUrl);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     console.log(this.displayCartInfo);
   }
   async upload(file) {
@@ -987,8 +1066,12 @@ export class CartComponent implements OnInit {
 
   deleteCartProduct(event) {
     this.shopService.deleteCartData(event).subscribe(
-      (data) => {},
-      (error) => {}
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
     );
     this.displayCartInfo.forEach((element, index) => {
       if (element.id == event) {
@@ -1012,13 +1095,85 @@ export class CartComponent implements OnInit {
             this.modalService.dismissAll();
           }
           const modalRef = this.modalService.open(LoginComponent);
-          modalRef.result.then((result) => {
-            this.headerService.getUserName().subscribe((data) => {
-              this.userName = data['data'].name;
-              this.storeTokenService.set('user_id', data['data'].id);
-              window.location.reload();
-            });
-          });
+          modalRef.result.then(
+            (result) => {
+              this.headerService.getUserName().subscribe((data) => {
+                console.log(data);
+
+                this.userName = data['data'].name;
+                this.storeTokenService.set('user_id', data['data'].id);
+
+                var obj = {
+                  user_id: JSON.parse(localStorage.getItem('user_id') || '[]'),
+                };
+                console.log(obj);
+
+                this.shopService.getShopifromcart(obj).subscribe(
+                  (data) => {
+                    console.log(data);
+                    console.log(data['data']['shop_id']);
+
+                    if (data['data']['shop_id'] == 0) {
+                      // var newobj = {
+                      var user_id = JSON.parse(
+                        localStorage.getItem('user_id') || '[]'
+                      );
+                      var cart_id = JSON.parse(
+                        localStorage.getItem('Tempcart') || '[]'
+                      );
+                      var isNewCartMerge = true;
+                      // };
+
+                      // console.log(newobj);
+                      this.cartApi(user_id, cart_id, isNewCartMerge);
+                    }
+
+                    console.log(data['data']['data'][0]['shop_id']);
+
+                    if (data['data']['data'][0]['shop_id'] != 0) {
+                      const modalRef = this.modalService.open(
+                        CartconflictComponent
+                      );
+                      modalRef.result.then((result) => {
+                        console.log(result);
+
+                        console.log(result['new']);
+                        console.log(result['old']);
+
+                        if (result['new']) {
+                          var user_id = JSON.parse(
+                            localStorage.getItem('user_id') || '[]'
+                          );
+                          var cart_id = JSON.parse(
+                            localStorage.getItem('Tempcart') || '[]'
+                          );
+                          var isNewCartMerge = true;
+                          this.cartApi(user_id, cart_id, isNewCartMerge);
+                        }
+
+                        if (result['old']) {
+                          var user_id = JSON.parse(
+                            localStorage.getItem('user_id') || '[]'
+                          );
+                          var cart_id = JSON.parse(
+                            localStorage.getItem('Tempcart') || '[]'
+                          );
+                          var isNewCartMerge = false;
+                          this.cartApi(user_id, cart_id, isNewCartMerge);
+                        }
+                      });
+                    }
+                  },
+                  (error) => {
+                    console.log(error);
+                  }
+                );
+              });
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
         } else {
           let totalCartAmount = 0;
           this.issues = JSON.parse(localStorage.getItem('issues') || '[]');
@@ -1101,6 +1256,26 @@ export class CartComponent implements OnInit {
     } else {
       this.modalService.open(EmptycartComponent);
     }
+  }
+
+  cartApi(user_id, cart_id, isNewCartMerge) {
+    this.Obj.user_id = user_id;
+    this.Obj.cart_id = cart_id;
+
+    this.Obj.isNewCartMerge = isNewCartMerge;
+
+    console.log(this.Obj);
+
+    this.shopService.getmergeCart(this.Obj).subscribe(
+      (data) => {
+        console.log(data);
+
+        // window.location.reload();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   tConvert(time) {

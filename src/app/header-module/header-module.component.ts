@@ -11,10 +11,9 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { BookRepairComponent } from './book-repair/book-repair.component';
 import { EmptycartComponent } from './emptycart/emptycart.component';
-
-import { ActivatedRoute, Router } from '@angular/router';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { MapService } from 'src/@theme/Services/map.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-module',
@@ -25,10 +24,10 @@ import { MapService } from 'src/@theme/Services/map.service';
   },
 })
 export class HeaderModuleComponent implements OnInit {
-  @ViewChild('toggleButton') toggleButton: ElementRef;
-  @ViewChild('menu') menu: ElementRef;
-  @ViewChild('userProfile') userProfile: ElementRef;
-  @ViewChild('drop') drop: ElementRef;
+  @ViewChild('toggleButton', { static: false }) toggleButton: ElementRef;
+  @ViewChild('menu', { static: false }) menu: ElementRef;
+  @ViewChild('userProfile', { static: false }) userProfile: ElementRef;
+  @ViewChild('drop', { static: false }) drop: ElementRef;
   userName: any = '';
   isModalOpen: boolean = false;
   Location = {
@@ -41,7 +40,6 @@ export class HeaderModuleComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private headerService: HeaderService,
-    private activatedRoute: ActivatedRoute,
     private storeTokenService: StoreTokenService,
     public router: Router,
     private renderer: Renderer2,
@@ -83,15 +81,18 @@ export class HeaderModuleComponent implements OnInit {
   ngOnInit() {
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
 
-    this.mapService
-      .getArea(this.Location.lat, this.Location.lng)
-      .subscribe((data: any) => {
+    this.mapService.getArea(this.Location.lat, this.Location.lng).subscribe(
+      (data: any) => {
         this.area = data.results[0].formatted_address;
         this.area2 = this.area.slice(0, 35);
         localStorage.setItem('Address', JSON.stringify(this.area));
 
         console.log(this.area);
-      });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
     this.headerService.getUserName().subscribe(
       (data) => {
@@ -99,7 +100,9 @@ export class HeaderModuleComponent implements OnInit {
 
         this.userName = data['data'].fname;
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
 
     navigator.geolocation.getCurrentPosition((position) => {
@@ -110,15 +113,18 @@ export class HeaderModuleComponent implements OnInit {
       localStorage.setItem('Location', JSON.stringify(this.Location));
       this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
 
-      this.mapService
-        .getArea(this.Location.lat, this.Location.lng)
-        .subscribe((data: any) => {
+      this.mapService.getArea(this.Location.lat, this.Location.lng).subscribe(
+        (data: any) => {
           this.area = data.results[0].formatted_address;
           this.area2 = this.area.slice(0, 30);
           localStorage.setItem('Address', JSON.stringify(this.area));
 
           console.log(this.area);
-        });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     });
   }
   // formatDevice() {
@@ -169,7 +175,9 @@ export class HeaderModuleComponent implements OnInit {
         this.userName = data['data'].fname;
         this.storeTokenService.set('user_id', data['data'].id);
       },
-      (error) => {}
+      (error) => {
+        console.log(error);
+      }
     );
   }
   signUp() {
@@ -192,7 +200,7 @@ export class HeaderModuleComponent implements OnInit {
   }
 
   nearby() {
-    this.router.navigate(['getall']);
+    this.router.navigate(['filterShop']);
   }
   account() {
     this.router.navigate(['profile']);
@@ -200,16 +208,22 @@ export class HeaderModuleComponent implements OnInit {
   }
   cart() {
     var id = JSON.parse(localStorage.getItem('user_id') || '[]');
-    this.headerService.getAllCart(id).subscribe((response) => {
-      console.log(response);
+    var id2 = 0;
+    this.headerService.getAllCart(id, id2).subscribe(
+      (response) => {
+        console.log(response);
 
-      if (response['message'] == 'Cart is Empty') {
-        this.modalService.open(EmptycartComponent);
-      } else {
-        this.isopenDropdown = !this.isopenDropdown;
-        this.router.navigate(['cart']);
+        if (response['message'] == 'Cart is Empty') {
+          this.modalService.open(EmptycartComponent);
+        } else {
+          this.isopenDropdown = !this.isopenDropdown;
+          this.router.navigate(['cart']);
+        }
+      },
+      (error) => {
+        console.log(error);
       }
-    });
+    );
 
     // this.isopenDropdown = !this.isopenDropdown;
 
