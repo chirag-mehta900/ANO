@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonService } from 'src/@theme/Services/common.service';
+import { MapService } from 'src/@theme/Services/map.service';
 import { MailComponent } from '../contact/mail/mail.component';
 
 @Component({
@@ -24,178 +25,7 @@ export class ContactComponent implements OnInit {
       height: 40,
     },
   };
-  styles = [
-    {
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#f5f5f5',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.icon',
-      stylers: [
-        {
-          visibility: 'off',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#616161',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.text.stroke',
-      stylers: [
-        {
-          color: '#f5f5f5',
-        },
-      ],
-    },
-    {
-      featureType: 'administrative.land_parcel',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#bdbdbd',
-        },
-      ],
-    },
-    {
-      featureType: 'poi',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#eeeeee',
-        },
-      ],
-    },
-    {
-      featureType: 'poi',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#757575',
-        },
-      ],
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#e5e5e5',
-        },
-      ],
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e',
-        },
-      ],
-    },
-    {
-      featureType: 'road',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#ffffff',
-        },
-      ],
-    },
-    {
-      featureType: 'road.arterial',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#757575',
-        },
-      ],
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#dadada',
-        },
-      ],
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#616161',
-        },
-      ],
-    },
-    {
-      featureType: 'road.local',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#e5e5e5',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'labels.text',
-      stylers: [
-        {
-          color: '#afa655',
-        },
-        {
-          visibility: 'on',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.station',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#eeeeee',
-        },
-      ],
-    },
-    {
-      featureType: 'water',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#c9c9c9',
-        },
-      ],
-    },
-    {
-      featureType: 'water',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e',
-        },
-      ],
-    },
-  ];
+  styles: any[] = [];
 
   url = 'https://maps.googleapis.com/maps/api/geocode/';
   Key = 'AIzaSyA_cl83OpGB8aR6uUnZgx8z12rUGztlel4';
@@ -225,10 +55,16 @@ export class ContactComponent implements OnInit {
     subject: null,
     body: null,
   };
-  constructor(private common: CommonService, private modalService: NgbModal) {}
+  constructor(
+    private common: CommonService,
+    private modalService: NgbModal,
+    private mapService: MapService
+  ) {}
 
   ngOnInit(): void {
     localStorage.setItem('filter', JSON.stringify(this.Filter));
+
+    this.styles = this.mapService.getMapStyle();
 
     this.getInTouch = new FormGroup({
       from_name: new FormControl(null, Validators.required),

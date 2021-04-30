@@ -1,11 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ShopService } from 'src/@theme/Services/shop.service';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
-import { AddproductComponent } from './addproduct/addproduct.component';
 import { WarningComponent } from './warning/warning.component';
-
 import { UploadService } from 'src/@theme/Services/upload.service';
 import { MapService } from 'src/@theme/Services/map.service';
 import { BookRepairComponent } from '../header-module/book-repair/book-repair.component';
@@ -100,178 +98,7 @@ export class ShopComponent implements OnInit {
   origin = { lat: 0, lng: 0 };
   destination = { lat: 0, lng: 0 };
 
-  styles = [
-    {
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#f5f5f5',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.icon',
-      stylers: [
-        {
-          visibility: 'off',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#616161',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.text.stroke',
-      stylers: [
-        {
-          color: '#f5f5f5',
-        },
-      ],
-    },
-    {
-      featureType: 'administrative.land_parcel',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#bdbdbd',
-        },
-      ],
-    },
-    {
-      featureType: 'poi',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#eeeeee',
-        },
-      ],
-    },
-    {
-      featureType: 'poi',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#757575',
-        },
-      ],
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#e5e5e5',
-        },
-      ],
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e',
-        },
-      ],
-    },
-    {
-      featureType: 'road',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#ffffff',
-        },
-      ],
-    },
-    {
-      featureType: 'road.arterial',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#757575',
-        },
-      ],
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#dadada',
-        },
-      ],
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#616161',
-        },
-      ],
-    },
-    {
-      featureType: 'road.local',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#e5e5e5',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'labels.text',
-      stylers: [
-        {
-          color: '#afa655',
-        },
-        {
-          visibility: 'on',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.station',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#eeeeee',
-        },
-      ],
-    },
-    {
-      featureType: 'water',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#c9c9c9',
-        },
-      ],
-    },
-    {
-      featureType: 'water',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e',
-        },
-      ],
-    },
-  ];
+  styles: any[] = [];
 
   subscription: any;
 
@@ -333,9 +160,8 @@ export class ShopComponent implements OnInit {
     config: NgbRatingConfig,
     private route: ActivatedRoute,
     private shopService: ShopService,
+    private mapService: MapService,
     private modalService: NgbModal,
-    private storeTokenService: StoreTokenService,
-    private uploadService: UploadService,
     private profile: ProfileService,
     private router: Router
   ) {
@@ -346,6 +172,8 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this.filter = JSON.parse(localStorage.getItem('filter') || '[]');
     console.log(this.filter);
+
+    this.styles = this.mapService.getMapStyle();
 
     this.profile.responseShopId.subscribe(
       (id) => {

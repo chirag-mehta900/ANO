@@ -62,26 +62,8 @@
     font-size: 18px;
 }
 
-.Login_dividerWrapper__3pXsj {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.Login_dividerWrapper__3pXsj .Login_dividerLine__V8_5k {
-    height: 2px;
-    width: 30%;
-    background: #8792a2;
-    margin: 1px;
-}
-
 .Login_dividerWrapper__3pXsj p {
     margin-bottom: 0 !important;
-}
-
-.has-text-white {
-    color: #8792a2;
 }
 
 .destroy-system {
@@ -159,15 +141,6 @@
     margin-bottom: 0px;
 }
 
-.deliver-radio {
-    margin-right: 10px;
-}
-
-.deliver-mail {
-    display: flex;
-    align-items: center;
-}
-
 .deliver-system {
     margin-top: 30px;
 }
@@ -240,10 +213,6 @@
 
 /* payment-done */
 
-.payment-done {
-    margin-top: 30px;
-}
-
 .payment-done-mess h2 {
     font-size: 60px;
     font-family: "Poppins-SemiBold";
@@ -266,10 +235,6 @@
     border-radius: 5px;
     padding: 10px;
     font-family: "Poppins-SemiBold";
-}
-
-.payment-done-feedback {
-    margin-top: 20px;
 }
 
 .payment-done-feedback h2 {

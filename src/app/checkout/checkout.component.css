@@ -89,26 +89,8 @@
     font-size: 18px;
 }
 
-.Login_dividerWrapper__3pXsj {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.Login_dividerWrapper__3pXsj .Login_dividerLine__V8_5k {
-    height: 2px;
-    width: 30%;
-    background: #8792a2;
-    margin: 1px;
-}
-
 .Login_dividerWrapper__3pXsj p {
     margin-bottom: 0 !important;
-}
-
-.has-text-white {
-    color: #8792a2;
 }
 
 .destroy-system {
@@ -531,11 +513,6 @@
 }
 
 .deliver-system {
-    margin-top: 20px;
-}
-
-.mar-bot {
-    margin-bottom: -25px;
     margin-top: 20px;
 }
 

@@ -6,6 +6,8 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
+declare var gtag;
+
 type ResponseType = {
   data: [
     {
@@ -134,6 +136,19 @@ export class BookRepairComponent implements OnInit {
       device_id: this.bookRepair.device,
     };
     console.log(obj);
+
+    this.deviceList.forEach((e) => {
+      if (e.id == this.bookRepair.device) {
+        var dname = e.full_name;
+        console.log(dname);
+
+        gtag('event', 'Proceed_BUTTON_CLICKED', {
+          event_category: 'BUTTON_CLICK',
+          event_label: 'Track Me Click',
+          value: 'User visit BookRepair for device' + dname,
+        });
+      }
+    });
     this.headerService.getIssueListById(obj).subscribe(
       (data) => {
         console.log(data);
@@ -180,6 +195,17 @@ export class BookRepairComponent implements OnInit {
       localStorage.removeItem('issues');
       console.log(this.bookRepair);
       this.issueList.forEach((e) => {
+        if (e.problem.id == this.bookRepair.problem) {
+          var pname = e.problem.problemName;
+          console.log(pname);
+
+          gtag('event', 'Proceed_BUTTON_CLICKED', {
+            event_category: 'BUTTON_CLICK',
+            event_label: 'Track Me Click',
+            value: 'User visit BookRepair for this issue' + pname,
+          });
+        }
+
         var obj = {
           problemId: e.problem.id,
           problem: e.problem.problemName,

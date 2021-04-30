@@ -102,12 +102,6 @@
     width: 100%;
 }
 
-.add-product-btnnn {
-    position: absolute;
-    left: 38%;
-    top: 15%;
-}
-
 .add-product-service {
     height: 365px;
     display: grid;
@@ -308,10 +302,6 @@
     width: 100%;
 }
 
-.rig-no {
-    margin-right: 0px !important;
-}
-
 .pick-ups {
     display: flex;
     justify-content: space-between;
@@ -414,15 +404,6 @@ agm-map {
     margin-bottom: 1rem;
     border: 0;
     border-top: 2px solid #ffc542;
-}
-
-dp-date-picker.dp-material .dp-picker-input {
-    padding: 10px !important;
-    border: 1px solid #000000 !important;
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    border-radius: 10px !important;
-    font-family: "Poppins-Regular" !important;
 }
 
 .chose-address-page {
