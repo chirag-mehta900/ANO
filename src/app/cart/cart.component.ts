@@ -19,6 +19,7 @@ import { ProfileService } from 'src/@theme/Services/profile.service';
 import { CommonService } from 'src/@theme/Services/common.service';
 import { HttpClient } from '@angular/common/http';
 
+declare var gtag
 // import { AddproductComponent } from './addproduct/addproduct.component';
 
 @Component({
@@ -1001,6 +1002,12 @@ export class CartComponent implements OnInit {
     console.log(event);
   }
   proceed() {
+
+    gtag('event', 'Proceed_BUTTON_CLICKED', {
+      'event_category': 'BUTTON_CLICK',
+      'event_label': 'Track Me Click',
+      'value': 'Put a value here that is meaningful with respect to the click event'   })
+
     console.log(this.totalCartAmounts);
     if (this.displayCartInfo.length > 0) {
       if (this.ValidZip == false) {
