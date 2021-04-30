@@ -1,8 +1,9 @@
-.footer{
-    background-color: #FFC542;
+.footer {
+    background-color: #ffc542;
     padding-top: 40px;
     padding-bottom: 40px;
 }
+
 .nav-bar ul {
     display: flex;
     justify-content: space-between;
@@ -19,12 +20,12 @@
 .footer-title {
     display: flex;
     justify-content: center;
-    font-family: 'Poppins-Regular';
+    font-family: "Poppins-Regular";
     color: #000000;
 }
 
-.subscribe p{
-    font-family: 'Poppins-Regular';
+.subscribe p {
+    font-family: "Poppins-Regular";
     font-size: 15px;
     margin-bottom: 0px;
     color: #000000;
@@ -40,17 +41,11 @@
     margin: auto;
     margin-bottom: 20px !important;
 }
-.socail button{
+
+.socail button {
     border: none;
     background-color: transparent;
     margin-left: 10px;
-}
-
-.footer-bottom {
-    justify-content: space-between;
-    display: flex;
-    width: 100%;
-    align-items: baseline;
 }
 
 .footer-bottom p {
@@ -58,13 +53,12 @@
     font-family: "Poppins-regular";
 }
 
-
-@media only screen and (max-width: 415px){
-    .nav-bar ul{
+@media only screen and (max-width: 415px) {
+    .nav-bar ul {
         display: grid;
         text-align: initial;
     }
-    .nav-bar ul li{
+    .nav-bar ul li {
         margin-bottom: 10px;
     }
 }

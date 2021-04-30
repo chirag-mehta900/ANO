@@ -43,22 +43,6 @@ h2 {
     color: #000000;
 }
 
-.banner-service {
-    display: flex;
-    width: 100%;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
-}
-
-.banner-service::-webkit-scrollbar {
-    display: none;
-}
-
 .service-box {
     padding: 10px;
 }
@@ -476,12 +460,13 @@ carousel.carousel {
     margin-top: -55px;
 }
 
-.desktop.whyusline img{
+.desktop.whyusline img {
     position: relative;
     top: 70px;
     width: 76%;
     right: -95px;
 }
+
 
 /* ````````````````````````````````````````````````
 
@@ -521,17 +506,17 @@ animatiom
 
 .banner-detail h2 {
     animation-delay: 0.6s;
-    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
 }
 
 .banner-detail p {
     animation-delay: 0.9s;
-    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
 }
 
 .banner-detail div {
     animation-delay: 1.4s;
-    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
 }
 
 @keyframes titleAnimation {

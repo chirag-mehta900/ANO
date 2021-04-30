@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from 'src/@theme/Services/profile.service';
-import { FormControl } from '@angular/forms';
 import { EditaddressComponent } from '../editaddress/editaddress.component';
 import { ADDaddressComponent } from '../addaddress/addaddress.component';
 

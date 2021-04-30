@@ -3,7 +3,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderService } from 'src/@theme/Services/header.service';
 import { ShopService } from 'src/@theme/Services/shop.service';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
-import { UploadService } from 'src/@theme/Services/upload.service';
 
 @Component({
   selector: 'app-addproduct',
@@ -29,7 +28,6 @@ export class AddproductComponent implements OnInit {
   files: File[] = [];
   constructor(
     private headerService: HeaderService,
-    private uploadService: UploadService,
     private shopService: ShopService,
     private activeModal: NgbActiveModal,
     private storeTokenService: StoreTokenService

@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MapService } from 'src/@theme/Services/map.service';
-import { StoreTokenService } from 'src/@theme/Services/store-token.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { HeaderService } from 'src/@theme/Services/header.service';
 import { BookRepairComponent } from '../header-module/book-repair/book-repair.component';
 import { ShopService } from 'src/@theme/Services/shop.service';
@@ -68,178 +67,7 @@ export class GetAllShopComponent implements OnInit {
       height: 150;
     };
   };
-  styles = [
-    {
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#f5f5f5',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.icon',
-      stylers: [
-        {
-          visibility: 'off',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#616161',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.text.stroke',
-      stylers: [
-        {
-          color: '#f5f5f5',
-        },
-      ],
-    },
-    {
-      featureType: 'administrative.land_parcel',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#bdbdbd',
-        },
-      ],
-    },
-    {
-      featureType: 'poi',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#eeeeee',
-        },
-      ],
-    },
-    {
-      featureType: 'poi',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#757575',
-        },
-      ],
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#e5e5e5',
-        },
-      ],
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e',
-        },
-      ],
-    },
-    {
-      featureType: 'road',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#ffffff',
-        },
-      ],
-    },
-    {
-      featureType: 'road.arterial',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#757575',
-        },
-      ],
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#dadada',
-        },
-      ],
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#616161',
-        },
-      ],
-    },
-    {
-      featureType: 'road.local',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#e5e5e5',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'labels.text',
-      stylers: [
-        {
-          color: '#afa655',
-        },
-        {
-          visibility: 'on',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.station',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#eeeeee',
-        },
-      ],
-    },
-    {
-      featureType: 'water',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#c9c9c9',
-        },
-      ],
-    },
-    {
-      featureType: 'water',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e',
-        },
-      ],
-    },
-  ];
+  styles: any[] = [];
 
   url = 'https://maps.googleapis.com/maps/api/geocode/';
   Key = 'AIzaSyA_cl83OpGB8aR6uUnZgx8z12rUGztlel4';
@@ -289,8 +117,6 @@ export class GetAllShopComponent implements OnInit {
   constructor(
     private config: NgbRatingConfig,
     private mapService: MapService,
-    private storeTokenService: StoreTokenService,
-    private route: ActivatedRoute,
     private router: Router,
     private headerService: HeaderService,
     private profile: ProfileService,
@@ -308,6 +134,8 @@ export class GetAllShopComponent implements OnInit {
     this.Filter = true;
     localStorage.setItem('filter', JSON.stringify(this.Filter));
     localStorage.setItem('Location', JSON.stringify(this.Location));
+
+    this.styles = this.mapService.getMapStyle();
 
     this.mapService.getAllStore().subscribe(
       (data) => {

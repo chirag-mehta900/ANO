@@ -12,7 +12,7 @@ export class CommonService {
   url = 'https://stripe-node-api.herokuapp.com/new/';
 
   envUrl() {
-    return 'http://api.ano.solutions/api/';
+    return 'https://ano-apis.herokuapp.com/api/';
   }
 
   zipUrl = 'http://ziptasticapi.com/';

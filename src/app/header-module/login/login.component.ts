@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderService } from 'src/@theme/Services/header.service';
-import { JwtTokenService } from 'src/@theme/services/jwt-token.service';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { SignupComponent } from '../signup/signup.component';
 import { ForgotComponent } from '../forgot/forgot.component';
-import { ProfileService } from 'src/@theme/Services/profile.service';
 
 @Component({
   selector: 'app-login',
@@ -26,10 +23,7 @@ export class LoginComponent implements OnInit {
     private headerService: HeaderService,
     private modalService: NgbModal,
     private activeModal: NgbActiveModal,
-    private router: Router,
-    private jwtToken: JwtTokenService,
-    private storeTokenService: StoreTokenService,
-    private profile: ProfileService
+    private storeTokenService: StoreTokenService
   ) {}
 
   ngOnInit(): void {

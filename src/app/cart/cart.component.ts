@@ -6,22 +6,15 @@ import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { UploadService } from 'src/@theme/Services/upload.service';
 import { MapService } from 'src/@theme/Services/map.service';
 import { AddProductComponent } from './add-product/add-product.component';
-import { AddressComponent } from '../profile/address/address.component';
-
 import { SelectAddressComponent } from './select-address/select-address.component';
 import { EmptycartComponent } from '../header-module/emptycart/emptycart.component';
-
 import { HeaderService } from 'src/@theme/Services/header.service';
 import { LoginComponent } from '../header-module/login/login.component';
-import { time } from 'node:console';
 import * as moment from 'moment';
-import { ProfileService } from 'src/@theme/Services/profile.service';
 import { CommonService } from 'src/@theme/Services/common.service';
-import { HttpClient } from '@angular/common/http';
 import { CartconflictComponent } from './cartconflict/cartconflict.component';
 
-declare var gtag
-// import { AddproductComponent } from './addproduct/addproduct.component';
+declare var gtag;
 
 @Component({
   selector: 'app-cart',
@@ -88,178 +81,7 @@ export class CartComponent implements OnInit {
   origin = { lat: 0, lng: 0 };
   destination = { lat: 0, lng: 0 };
 
-  styles = [
-    {
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#f5f5f5',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.icon',
-      stylers: [
-        {
-          visibility: 'off',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#616161',
-        },
-      ],
-    },
-    {
-      elementType: 'labels.text.stroke',
-      stylers: [
-        {
-          color: '#f5f5f5',
-        },
-      ],
-    },
-    {
-      featureType: 'administrative.land_parcel',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#bdbdbd',
-        },
-      ],
-    },
-    {
-      featureType: 'poi',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#eeeeee',
-        },
-      ],
-    },
-    {
-      featureType: 'poi',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#757575',
-        },
-      ],
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#e5e5e5',
-        },
-      ],
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e',
-        },
-      ],
-    },
-    {
-      featureType: 'road',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#ffffff',
-        },
-      ],
-    },
-    {
-      featureType: 'road.arterial',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#757575',
-        },
-      ],
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#dadada',
-        },
-      ],
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#616161',
-        },
-      ],
-    },
-    {
-      featureType: 'road.local',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#e5e5e5',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'labels.text',
-      stylers: [
-        {
-          color: '#afa655',
-        },
-        {
-          visibility: 'on',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.station',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#eeeeee',
-        },
-      ],
-    },
-    {
-      featureType: 'water',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#c9c9c9',
-        },
-      ],
-    },
-    {
-      featureType: 'water',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e',
-        },
-      ],
-    },
-  ];
+  styles: any[] = [];
 
   subscription: any;
   distanceInMiles: any;
@@ -345,14 +167,12 @@ export class CartComponent implements OnInit {
   totalCartAmounts = 0;
   constructor(
     config: NgbRatingConfig,
-    private route: ActivatedRoute,
     private shopService: ShopService,
     private modalService: NgbModal,
     private common: CommonService,
     private storeTokenService: StoreTokenService,
     private uploadService: UploadService,
     private router: Router,
-    private http: HttpClient,
     private headerService: HeaderService,
     private mapService: MapService
   ) {
@@ -364,6 +184,7 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.styles = this.mapService.getMapStyle();
     localStorage.setItem('filter', JSON.stringify(this.Filter));
 
     this.userID = JSON.parse(localStorage.getItem('user_id') || '0');
@@ -1085,12 +906,6 @@ export class CartComponent implements OnInit {
     console.log(event);
   }
   proceed() {
-
-    gtag('event', 'Proceed_BUTTON_CLICKED', {
-      'event_category': 'BUTTON_CLICK',
-      'event_label': 'Track Me Click',
-      'value': 'Put a value here that is meaningful with respect to the click event'   })
-
     console.log(this.totalCartAmounts);
     if (this.displayCartInfo.length > 0) {
       if (this.ValidZip == false) {
@@ -1244,6 +1059,12 @@ export class CartComponent implements OnInit {
             (response) => {
               console.log(response, 'placeOrder');
 
+              gtag('event', 'Proceed_BUTTON_CLICKED', {
+                event_category: 'BUTTON_CLICK',
+                event_label: 'Track Me Click',
+                value: 'User place order',
+              });
+
               //localStorage.setItem("PlaceOrder", JSON.stringify(this.placeOrder));
               var id = response['data'].id;
               console.log(id, 'id');
@@ -1268,7 +1089,6 @@ export class CartComponent implements OnInit {
   cartApi(user_id, cart_id, isNewCartMerge) {
     this.Obj.user_id = user_id;
     this.Obj.cart_id = cart_id;
-
     this.Obj.isNewCartMerge = isNewCartMerge;
 
     console.log(this.Obj);
@@ -1276,8 +1096,9 @@ export class CartComponent implements OnInit {
     this.shopService.getmergeCart(this.Obj).subscribe(
       (data) => {
         console.log(data);
-
-        // window.location.reload();
+        if (data['status'] == 200) {
+          window.location.reload();
+        }
       },
       (error) => {
         console.log(error);

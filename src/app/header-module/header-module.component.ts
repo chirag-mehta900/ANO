@@ -15,6 +15,8 @@ import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { MapService } from 'src/@theme/Services/map.service';
 import { Router } from '@angular/router';
 
+declare var gtag;
+
 @Component({
   selector: 'app-header-module',
   templateUrl: './header-module.component.html',
@@ -43,7 +45,6 @@ export class HeaderModuleComponent implements OnInit {
     private storeTokenService: StoreTokenService,
     public router: Router,
     private renderer: Renderer2,
-
     private _eref: ElementRef,
     private mapService: MapService
   ) {
@@ -201,6 +202,11 @@ export class HeaderModuleComponent implements OnInit {
 
   nearby() {
     this.router.navigate(['filterShop']);
+    gtag('event', 'Proceed_BUTTON_CLICKED', {
+      event_category: 'BUTTON_CLICK',
+      event_label: 'Track Me Click',
+      value: 'User visit NearByStore',
+    });
   }
   account() {
     this.router.navigate(['profile']);
@@ -242,6 +248,11 @@ export class HeaderModuleComponent implements OnInit {
       this.modalService.dismissAll();
     }
     const modalRef = this.modalService.open(BookRepairComponent);
+    gtag('event', 'Proceed_BUTTON_CLICKED', {
+      event_category: 'BUTTON_CLICK',
+      event_label: 'Track Me Click',
+      value: 'User visit BookRepair',
+    });
   }
 
   logout() {

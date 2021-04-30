@@ -5,7 +5,7 @@
     top: 1%;
     left: 0%;
     width: 25%;
-    font-family: 'Poppins-Regular';
+    font-family: "Poppins-Regular";
     background: transparent;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
@@ -51,7 +51,6 @@ agm-map {
     width: 100%;
 }
 
-
 .shop-ing img {
     height: 170px;
     width: auto;
@@ -60,7 +59,7 @@ agm-map {
 }
 
 .shop-detail .detail-name h2 {
-    font-family: 'Poppins-SemiBold';
+    font-family: "Poppins-SemiBold";
     font-size: 30px;
     margin-bottom: 0px;
 }
@@ -99,17 +98,6 @@ agm-map {
     width: 100%;
 }
 
-.add-product-box {
-    box-shadow: 0 0 11px #eeeeee;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.add-product-details {
-    padding: 5px;
-    text-align: center;
-}
-
 .add-product-details h2 {
     font-size: 20px;
     font-family: "Poppins-SemiBold";
@@ -135,120 +123,140 @@ agm-map {
     background: transparent;
 }
 
-.add-product-service {
-    transform: translateY(100%);
-}
-.reviews{
+.reviews {
     margin-top: 80px !important;
 }
-.star{
+
+.star {
     display: flex;
     margin-bottom: 15px;
     align-items: center;
 }
-.progres-bar{
+
+.progres-bar {
     position: absolute;
     width: 86%;
     margin-left: 140px;
-    background-color: #F6F6F6;
+    background-color: #f6f6f6;
     height: 12px;
     border-radius: 5px;
 }
-.progres-bar span{
+
+.progres-bar span {
     height: 12px;
     border-radius: 5px;
     position: absolute;
 }
-.star progres-bar{
+
+.star progres-bar {
     width: 85%;
 }
-.review-user{
+
+.review-user {
     margin-top: 30px;
 }
-.review-box{
+
+.review-box {
     display: flex;
     margin-bottom: 25px;
 }
-.review-name{
+
+.review-name {
     display: flex;
     justify-content: space-between;
 }
-.review-name h4{
+
+.review-name h4 {
     font-size: 20px;
-    font-family: 'Poppins-SemiBold';
+    font-family: "Poppins-SemiBold";
     margin-bottom: 0px;
 }
-.review-detal{
+
+.review-detal {
     width: 100%;
     margin-left: 25px;
 }
-.review-detal h2{
-    font-family: 'Poppins-SemiBold';
+
+.review-detal h2 {
+    font-family: "Poppins-SemiBold";
     font-size: 20px;
     margin-bottom: 0px;
 }
-.review-detal h3{
+
+.review-detal h3 {
     font-size: 16px;
     margin-bottom: 0px;
-    font-family: 'Poppins-Regular';
-    color: #6E798C;
+    font-family: "Poppins-Regular";
+    color: #6e798c;
 }
-.review-name p{
-    font-size: 13px;
-    font-family: 'Poppins-Regular';
 
+.review-name p {
+    font-size: 13px;
+    font-family: "Poppins-Regular";
 }
-.review-rating{
+
+.review-rating {
     display: flex;
 }
-.review-rating h3{
+
+.review-rating h3 {
     font-size: 20px;
-    font-family: 'Poppins-SemiBold';
+    font-family: "Poppins-SemiBold";
     color: #001833;
     margin-bottom: 0px;
     margin-right: 5px;
 }
-.location{
+
+.location {
     display: flex;
     align-items: center;
     margin-top: 5px;
     margin-bottom: 10px;
 }
-.location p{
+
+.location p {
     margin-bottom: 0px;
-    font-family: 'Poppins-Regular';
+    font-family: "Poppins-Regular";
     margin-left: 5px;
 }
-.shop-services{
+
+.shop-services {
     margin-top: 20px;
 }
-.shop-ser-box{
+
+.shop-ser-box {
     margin-bottom: 30px;
 }
-.shop-ser-box img{
+
+.shop-ser-box img {
     height: 270px;
     width: auto;
 }
-.shop-ser-box h3{
+
+.shop-ser-box h3 {
     font-size: 20px;
     position: absolute;
     top: 36%;
     right: 40%;
     color: #ffffff;
-    font-family: 'Poppins-SemiBold';
+    font-family: "Poppins-SemiBold";
 }
-.service-service{
+
+.service-service {
     margin-top: 30px;
 }
-.ser-det h2{
-    font-family: 'Poppins-SemiBold';
+
+.ser-det h2 {
+    font-family: "Poppins-SemiBold";
     font-size: 30px;
 }
-.shop-location p{
-    font-family: 'Poppins-Regular';
+
+.shop-location p {
+    font-family: "Poppins-Regular";
     font-size: 15px;
     line-height: 17px;
 }
+
 .shop-filt-inp {
     display: flex;
     justify-content: space-evenly;
@@ -256,9 +264,11 @@ agm-map {
     margin: auto;
     margin-bottom: 20px !important;
 }
+
 .cont {
     display: flex;
 }
+
 .blur-div {
     background: #fff;
     background-size: cover;
@@ -268,63 +278,75 @@ agm-map {
     height: 55px;
     top: -30px;
 }
-.shop-det-para p{
-    font-family: 'Poppins-Regular';
+
+.shop-det-para p {
+    font-family: "Poppins-Regular";
     font-size: 18px;
     text-align: center;
     margin-bottom: 20px;
 }
-.shop-det-para h6{
-    font-family: 'Poppins-SemiBold';
+
+.shop-det-para h6 {
+    font-family: "Poppins-SemiBold";
     font-size: 25px;
     margin-bottom: 20px;
 }
-.pricing-fe{
-    font-family: 'Poppins-Regular';
+
+.pricing-fe {
+    font-family: "Poppins-Regular";
     font: 17px;
 }
-.pricing-fe span{
-    color: #FFC542;
+
+.pricing-fe span {
+    color: #ffc542;
 }
-.add-product-display button{
-    font-family: 'Poppins-SemiBold';
+
+.add-product-display button {
+    font-family: "Poppins-SemiBold";
     border: none;
-    background-color: #FFC542;
+    background-color: #ffc542;
     padding: 10px;
     border-radius: 5px;
     width: 80%;
     margin: 0 auto;
     display: block;
 }
-.shop-achi{
+
+.shop-achi {
     margin-top: 60px;
 }
-.achive{
+
+.achive {
     transform: translateY(20%);
 }
-.achive h2{
-    font-family: 'Poppins-SemiBold';
+
+.achive h2 {
+    font-family: "Poppins-SemiBold";
     font-size: 30px;
     max-width: 250px;
     margin-bottom: 0px;
 }
-.achive span{
-    font-family: 'Poppins-Regular';
+
+.achive span {
+    font-family: "Poppins-Regular";
     font-size: 15px;
 }
-.shop-record h2{
-    font-family: 'Poppins-SemiBold';
+
+.shop-record h2 {
+    font-family: "Poppins-SemiBold";
     font-size: 25px;
     margin-bottom: 0px;
 }
-.shop-record p{
-    font-family: 'Poppins-Regular';
+
+.shop-record p {
+    font-family: "Poppins-Regular";
     font-size: 14px;
     margin-top: 0px;
     margin-bottom: 15px;
 }
-.reviews h2{
-    font-family: 'Poppins-SemiBold';
+
+.reviews h2 {
+    font-family: "Poppins-SemiBold";
     font-size: 30px;
     margin-bottom: 25px;
 }
