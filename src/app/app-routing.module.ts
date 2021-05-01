@@ -62,14 +62,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./profile/profile.module').then((m) => m.ProfileModule),
   },
-  { path: '**', pathMatch: 'full', redirectTo: '/' },
+  { path: '**', pathMatch: 'full', redirectTo: '' },
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
-      useHash: true,
     }),
   ],
   exports: [RouterModule],
