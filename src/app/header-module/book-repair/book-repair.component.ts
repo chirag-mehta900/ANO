@@ -182,7 +182,7 @@ export class BookRepairComponent implements OnInit {
     }
   }
   nearby() {
-    this.router.navigate(['getall']);
+    this.router.navigate(['filterShop']);
     this.activeModal.close();
   }
   goToDeviceBack() {
