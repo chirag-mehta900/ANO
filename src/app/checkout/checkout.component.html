@@ -32,7 +32,7 @@
                 <div class="destroy-system">
                     <div class="destroy-system-box" *ngFor="let details of detail">
                         <div class="destroy-system-img">
-                            <img src="../../assets/images/checkout/image 9.png" alt="">
+                            <img src="{{details.image}}" alt="">
                         </div>
                         <div class="destroy-system-det">
                             <h2>${{details.price}}</h2>

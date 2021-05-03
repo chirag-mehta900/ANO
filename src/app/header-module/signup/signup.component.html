@@ -143,6 +143,11 @@
                         Enter valid zipcode
                     </div>
 
+                    <input type="text" name="message" id="message" formControlName="message" placeholder="Enter your delivery note">
+                    <div class="text-dangerr" *ngIf="deliveryflag">
+                        Enter valid delivery note
+                    </div>
+
                 </div>
             </div>
             <button class="next" type="submit" (click)="signUpEmailComplete()">Sign Up</button>

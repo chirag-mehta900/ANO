@@ -52,18 +52,16 @@
                     </div>
                 </div>
                 <div class="form-cont">
-                    <p>Landmark</p>
-                    <input type="text" formControlName="landMark" name="landmark" id="landmark" placeholder="Landmark">
-                    <div class="text-dangerr" *ngIf="landMarkflag">
-                        Enter your Landmark
-                    </div>
-                </div>
-                <div class="form-cont">
                     <p>Zip Code</p>
                     <input type="number" formControlName="zipCode" name="zip" id="zip" placeholder="Enter Zip Code">
                     <div class="text-dangerr" *ngIf="zipCodeflag">
                         Enter your Zipcode
                     </div>
+                </div>
+                <div class="form-cont">
+                    <p>Add your delivery note</p>
+                    <input type="text" formControlName="message" name="message" id="message" placeholder="Enter your delivery note">
+
                 </div>
             </div>
 

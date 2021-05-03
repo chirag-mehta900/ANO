@@ -14,13 +14,11 @@ export class EditaddressComponent implements OnInit {
   Addaddress: FormGroup;
   editId;
   curruntAddress: any[] = [];
-
   fnameflag: boolean = false;
   lnameflag: boolean = false;
   phoneNumberflag: boolean = false;
   addressLineflag: boolean = false;
-  landMarkflag: boolean = false;
-  zipCodelflag: boolean = false;
+  zipCodeflag: boolean = false;
   cityflag: boolean = false;
   stateflag: boolean = false;
 
@@ -59,7 +57,7 @@ export class EditaddressComponent implements OnInit {
       lname: new FormControl(null, Validators.required),
       phoneNumber: new FormControl(null, Validators.required),
       addressLine: new FormControl(null, Validators.required),
-      landMark: new FormControl(null, Validators.required),
+      message: new FormControl(null),
       zipCode: new FormControl(null, Validators.required),
       city: new FormControl(null, Validators.required),
       state: new FormControl(null, Validators.required),
@@ -83,8 +81,7 @@ export class EditaddressComponent implements OnInit {
     this.lnameflag = false;
     this.phoneNumberflag = false;
     this.addressLineflag = false;
-    this.landMarkflag = false;
-    this.zipCodelflag = false;
+    this.zipCodeflag = false;
     this.cityflag = false;
     this.stateflag = false;
 
@@ -93,7 +90,6 @@ export class EditaddressComponent implements OnInit {
       this.Addaddress.value.lname == null ||
       this.Addaddress.value.phoneNumber == null ||
       this.Addaddress.value.addressLine == null ||
-      this.Addaddress.value.landMark == null ||
       this.Addaddress.value.city == null ||
       this.Addaddress.value.state == null ||
       this.Addaddress.value.zipCode == null
@@ -114,10 +110,6 @@ export class EditaddressComponent implements OnInit {
         this.addressLineflag = true;
       }
 
-      if (this.Addaddress.value.landMark == null) {
-        this.landMarkflag = true;
-      }
-
       if (this.Addaddress.value.city == null) {
         this.cityflag = true;
       }
@@ -126,13 +118,11 @@ export class EditaddressComponent implements OnInit {
       }
 
       if (this.Addaddress.value.zipCode == null) {
-        this.zipCodelflag = true;
+        this.zipCodeflag = true;
       }
     } else {
       var area =
         this.Addaddress.value.addressLine +
-        ' ' +
-        this.Addaddress.value.landMark +
         ' ' +
         this.Addaddress.value.city +
         ' ' +
