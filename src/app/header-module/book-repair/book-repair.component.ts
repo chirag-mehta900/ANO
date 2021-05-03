@@ -290,4 +290,9 @@ export class BookRepairComponent implements OnInit {
       this.problemFlag = true;
     }
   }
+
+  other() {
+    console.log("click on onthe option");
+    
+  }
 }
