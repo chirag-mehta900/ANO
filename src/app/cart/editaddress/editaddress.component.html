@@ -52,18 +52,16 @@
                     </div>
                 </div>
                 <div class="form-cont">
-                    <p>Landmark</p>
-                    <input type="text" formControlName="landMark" [(ngModel)]="curruntAddress[0].landMark" name="landmark" id="landmark" placeholder="Landmark">
-                    <div class="text-dangerr" *ngIf="landMarkflag">
-                        Enter Your Landmark
+                    <p>Zip Code</p>
+                    <input type="number" formControlName="zipCode" name="zip" id="zip" placeholder="Enter Zip Code">
+                    <div class="text-dangerr" *ngIf="zipCodeflag">
+                        Enter your Zipcode
                     </div>
                 </div>
                 <div class="form-cont">
-                    <p>Zip Code</p>
-                    <input type="number" formControlName="zipCode" [(ngModel)]="curruntAddress[0].zipCode" name="zip" id="zip" placeholder="Enter Zip Code">
-                    <div class="text-dangerr" *ngIf="zipCodelflag">
-                        Enter Your Zipcode
-                    </div>
+                    <p>Add your delivery note</p>
+                    <input type="text" formControlName="message" name="message" id="message" placeholder="Enter your delivery note">
+
                 </div>
             </div>
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderService } from 'src/@theme/Services/header.service';
+import { MapService } from 'src/@theme/Services/map.service';
 import { ProfileService } from 'src/@theme/Services/profile.service';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { LoginComponent } from '../login/login.component';
@@ -61,7 +62,8 @@ export class SignupComponent implements OnInit {
     private headerService: HeaderService,
     private storeTokenService: StoreTokenService,
     private modalService: NgbModal,
-    private profile: ProfileService
+    private profile: ProfileService,
+    private mapService: MapService
   ) {}
 
   ngOnInit(): void {
@@ -97,11 +99,11 @@ export class SignupComponent implements OnInit {
       phoneNumber: new FormControl(null),
       addressLine: new FormControl(null, Validators.required),
       zipCode: new FormControl(null, Validators.required),
-      landMark: new FormControl(null),
+      message: new FormControl(null),
       city: new FormControl(null, Validators.required),
       state: new FormControl(null, Validators.required),
-      latitude: new FormControl(null),
-      longitude: new FormControl(null),
+      latitude: new FormControl(null, Validators.required),
+      longitude: new FormControl(null, Validators.required),
     });
   }
 
@@ -389,41 +391,60 @@ export class SignupComponent implements OnInit {
       this.userAddres.value.fname = this.signUpForm.value.fname;
       this.userAddres.value.lname = this.signUpForm.value.lname;
 
-      console.log(this.userAddres.value);
+      var area =
+        this.userAddres.value.addressLine +
+        ' ' +
+        this.userAddres.value.city +
+        ' ' +
+        this.userAddres.value.state +
+        ' ' +
+        this.userAddres.value.zipCode;
+      console.log(area);
 
-      console.log(this.signUpForm.value);
-      console.log(this.userAddres.value);
+      this.mapService.getlatlong(area).subscribe((data: any) => {
+        console.log(data);
 
-      this.headerService.signUp(this.signUpForm.value).subscribe(
-        (data) => {
-          console.log(data);
-          if (data['status'] == 200) {
-            this.storeTokenService.set('token', data['data'].access_token);
-            this.setUserName();
+        if (data['status'] == 'OK') {
+          this.userAddres.value.latitude =
+            data.results[0].geometry.location.lat;
+          this.userAddres.value.longitude =
+            data.results[0].geometry.location.lng;
 
-            console.log(this.userAddres.value);
-            this.headerService.userAddress(this.userAddres.value).subscribe(
-              (data) => {
-                console.log(data);
-                console.log(data['data'].fname);
-                console.log(data['data'].user_id);
+          console.log(this.userAddres.value);
+          console.log(this.signUpForm.value);
 
-                this.storeTokenService.set('user_id', data['data'].user_id);
+          this.headerService.signUp(this.signUpForm.value).subscribe(
+            (data) => {
+              console.log(data);
+              if (data['status'] == 200) {
+                this.storeTokenService.set('token', data['data'].access_token);
+                this.setUserName();
 
-                if (data['status'] == 200) {
-                  this.activeModal.close(data['data']['fname']);
-                }
-              },
-              (error) => {
-                console.log(error);
+                console.log(this.userAddres.value);
+                this.headerService.userAddress(this.userAddres.value).subscribe(
+                  (data) => {
+                    console.log(data);
+                    console.log(data['data'].fname);
+                    console.log(data['data'].user_id);
+
+                    this.storeTokenService.set('user_id', data['data'].user_id);
+
+                    if (data['status'] == 200) {
+                      this.activeModal.close(data['data']['fname']);
+                    }
+                  },
+                  (error) => {
+                    console.log(error);
+                  }
+                );
               }
-            );
-          }
-        },
-        (error) => {
-          console.log(error);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
         }
-      );
+      });
     } else {
       console.log(this.userAddres.value);
 

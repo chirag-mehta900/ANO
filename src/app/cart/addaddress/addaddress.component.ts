@@ -17,7 +17,6 @@ export class ADDaddressComponent implements OnInit {
   lnameflag: boolean = false;
   phoneNumberflag: boolean = false;
   addressLineflag: boolean = false;
-  landMarkflag: boolean = false;
   zipCodeflag: boolean = false;
   cityflag: boolean = false;
   stateflag: boolean = false;
@@ -38,7 +37,7 @@ export class ADDaddressComponent implements OnInit {
       lname: new FormControl(null, Validators.required),
       phoneNumber: new FormControl(null, Validators.required),
       addressLine: new FormControl(null, Validators.required),
-      landMark: new FormControl(null, Validators.required),
+      message: new FormControl(null),
       zipCode: new FormControl(null, Validators.required),
       city: new FormControl(null, Validators.required),
       state: new FormControl(null, Validators.required),
@@ -65,7 +64,6 @@ export class ADDaddressComponent implements OnInit {
     this.lnameflag = false;
     this.phoneNumberflag = false;
     this.addressLineflag = false;
-    this.landMarkflag = false;
     this.zipCodeflag = false;
     this.cityflag = false;
     this.stateflag = false;
@@ -75,7 +73,6 @@ export class ADDaddressComponent implements OnInit {
       this.Addaddress.value.lname == null ||
       this.Addaddress.value.phoneNumber == null ||
       this.Addaddress.value.addressLine == null ||
-      this.Addaddress.value.landMark == null ||
       this.Addaddress.value.zipCode == null ||
       this.Addaddress.value.city == null ||
       this.Addaddress.value.state == null
@@ -95,10 +92,6 @@ export class ADDaddressComponent implements OnInit {
         this.addressLineflag = true;
       }
 
-      if (this.Addaddress.value.landMark == null) {
-        this.landMarkflag = true;
-      }
-
       if (this.Addaddress.value.zipCode == null) {
         this.zipCodeflag = true;
       }
@@ -112,8 +105,6 @@ export class ADDaddressComponent implements OnInit {
     } else {
       var area =
         this.Addaddress.value.addressLine +
-        ' ' +
-        this.Addaddress.value.landMark +
         ' ' +
         this.Addaddress.value.city +
         ' ' +
