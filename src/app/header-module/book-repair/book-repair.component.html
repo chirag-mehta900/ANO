@@ -29,6 +29,7 @@
             (formSubmitted || device1.touched) 
             }">
                         <ng-option *ngFor="let brand of deviceList" (change)="getIssueList($event)" [value]="brand.id"><span>{{brand.categoryName}}</span> {{brand.full_name}}</ng-option>
+                        <ng-option (click)="other()">Other</ng-option>
                     </ng-select>
 
                     <div class="text-dangerr" *ngIf="deviceFlag">
