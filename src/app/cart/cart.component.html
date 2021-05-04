@@ -34,13 +34,16 @@
                 <div class="col-md-3" *ngFor="let info of displayCartInfo">
                     <div class="add-pro">
                         <div class="add-pro-img">
-                            <div id="info.id" class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event,info.id)">
+                            <div id="info.id" class="custom-dropzone" ngx-dropzone [accept]="'image/*'"
+                                (change)="onSelect($event,info.id)">
                                 <ngx-dropzone-label>
                                     <div class="addd-btnn">
                                         <img src="../../assets/images/checkout/addproduct.svg" alt="">
                                     </div>
                                 </ngx-dropzone-label>
-                                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of info.imageFiles" [file]="f" [removable]="true" (removed)="onRemove(f,info.id)">
+                                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"
+                                    *ngFor="let f of info.imageFiles" [file]="f" [removable]="true"
+                                    (removed)="onRemove(f,info.id)">
                                     <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
                                 </ngx-dropzone-image-preview>
                             </div>
@@ -54,14 +57,16 @@
                                 <ng-template #HtmlContent>
                                     <div class="pricing-fact">
                                         <h5>Pricing Factors</h5>
-                                        <p>- Part Price Based on ANO’s Parts Lists (Price Scale) : <span>${{info.price}}</span></p>
+                                        <p>- Part Price Based on ANO’s Parts Lists (Price Scale) :
+                                            <span>${{info.price}}</span></p>
                                         <p>- Base Fee : <span>${{info.ANOBaseFees}}</span></p>
                                         <p>- ANO’s Commission Fee : <span>${{info.ANOCommissionFees}}</span></p>
                                         <p>- Repair Shop Commission Fee :<span>${{info.ShopCommissionFees}} </span></p>
 
                                     </div>
                                 </ng-template>
-                                <img [tooltip]="HtmlContent" content-type="template" placement="right" theme="light" src="../../assets/images/checkout/outline.svg" alt="">
+                                <img [tooltip]="HtmlContent" content-type="template" placement="right" theme="light"
+                                    src="../../assets/images/checkout/outline.svg" alt="">
                             </div>
                             <div class="add-pro-btn">
                                 <button (click)="deleteCartProduct(info.id)">Delete</button>
@@ -93,24 +98,32 @@
                     <h4>Pick up Address</h4>
                 </div>
                 <div class="deliver-cab radio">
-                    <input class="deliver-radio" type="radio" (click)="mailradio($event.target.value)" [(ngModel)]="mailinrepairFlag" id="deliver-cab" name="deliver-system" value="Pickup" ng-checked="mailinrepairFlag">
+                    <input class="deliver-radio" type="radio" (click)="mailradio($event.target.value)"
+                        [(ngModel)]="mailinrepairFlag" id="deliver-cab" name="deliver-system" value="Pickup"
+                        ng-checked="mailinrepairFlag">
                     <label for="deliver-cab" class="radio-label">
                         <div class="selectdate-time">
                             <!-- <input type="date" name="date" [(ngModel)]="placeOrder.date"
                                 (input)="getTimeAccoedingToDate()" [min]="today" [value]="placeOrder.date"> -->
-                                <dp-date-picker theme="dp-material"  [config]="datePickerConfig" [disabled]="!pickFlag" (onSelect)="testDate($event)" [minDate]="datePickerConfig.date" placeholder={{datePickerConfig.date}} required="true"
-                                (input)="getTimeAccoedingToDate()" > 
-                                </dp-date-picker>
-                            <select name="time" (change)="setTime($event)" placeholder="select time" [disabled]="!pickFlag">
+                            <dp-date-picker theme="dp-material" [config]="datePickerConfig" [disabled]="!pickFlag"
+                                (onSelect)="testDate($event)" [minDate]="datePickerConfig.date"
+                                placeholder={{datePickerConfig.date}} required="true"
+                                (input)="getTimeAccoedingToDate()">
+                            </dp-date-picker>
+                            <select name="time" (change)="setTime($event)" placeholder="select time"
+                                [disabled]="!pickFlag">
                                 <option *ngFor="let time of timeList" [value]=time.id>{{tConvert(time.startTime)}} -
-                                    {{tConvert(time.endTime) }} 
+                                    {{tConvert(time.endTime) }}
                                 </option>
                             </select>
-                            <input type="text" name="pick-off" id="pick-off"  [disabled]="!pickFlag" [value]="pickupAddress" (keyup)="setpickupAddress($event.target.value)" placeholder="Pick-up up Address">
-                            
-                           
+                            <input type="text" name="pick-off" id="pick-off" [disabled]="!pickFlag"
+                                [value]="pickupAddress" (keyup)="setpickupAddress($event.target.value)"
+                                placeholder="Pick-up up Address">
+
+
                             <!-- <button (click)="chooseaddress()" [disabled]="!pickFlag">choose</button> -->
-                            <button class="chose-address-page" [disabled]="!pickFlag" (click)="chooseaddres()">Select Address</button>
+                            <button class="chose-address-page" [disabled]="!pickFlag" (click)="chooseaddres()">Select
+                                Address</button>
                         </div>
                     </label><br>
 
@@ -121,7 +134,8 @@
 
 
                 <div class="deliver-mail radio">
-                    <input class="deliver-radio" type="radio" (click)="mailradio($event.target.value)" id="deliver-mail" name="deliver-system" value="mail" [checked]="!mailinrepairFlag">
+                    <input class="deliver-radio" type="radio" (click)="mailradio($event.target.value)" id="deliver-mail"
+                        name="deliver-system" value="mail" [checked]="!mailinrepairFlag">
                     <label for="deliver-mail" class="radio-label radio-labell">
                         <div class="mail-product">
                             <img src="../../assets/images/checkout/mail.svg" alt="">
@@ -142,14 +156,15 @@
                     <h4>Return Address</h4>
                 </div>
                 <div class="deliver-cab radio">
-                    <input class="deliver-radio" type="radio" (click)="dropradio($event.target.value)" [(ngModel)]="dropinrepairFlag" id="drop-off-opt" name="deliver-system1" value="drop" [checked]="dropinrepairFlag">
+                    <input class="deliver-radio" type="radio" (click)="dropradio($event.target.value)"
+                        [(ngModel)]="dropinrepairFlag" id="drop-off-opt" name="deliver-system1" value="drop"
+                        [checked]="dropinrepairFlag">
                     <label for="drop-off-opt" class="radio-label">
                         <div class="selectdate-time">
                             <!-- <input type="date" name="distance" [(ngModel)]="placeOrder.date"
                                 (input)="getTimeAccoedingToDate()" [value]="expecteddate"  disabled> -->
-                                <input type="date" name="distance" [value]="expecteddate"  disabled>
-                                <input class="middle-inp" type="text" name="time" 
-                                [value]="expectedtime"
+                            <input type="date" name="distance" [value]="expecteddate" disabled>
+                            <input class="middle-inp" type="text" name="time" [value]="expectedtime"
                                 [value]="tConvert(expectedtime)" [disabled]="!dropFlag">
                             <!-- <select name="time" (change)="setTime($event)" placeholder="select time" disabled>
                                 <option>Select Time</option>
@@ -157,10 +172,13 @@
                                     {{time.endTime}}
                                 </option>
                             </select> -->
-                            <input type="text" name="drop-off" [value]="dropAddress" [disabled]="!dropFlag" (keyup)="setdropAddress($event.target.value)" id="drop-off" placeholder="Drop up Address">
-                           
+                            <input type="text" name="drop-off" [value]="dropAddress" [disabled]="!dropFlag"
+                                (keyup)="setdropAddress($event.target.value)" id="drop-off"
+                                placeholder="Drop up Address">
+
                             <!-- <button (click)="chooseaddress()" [disabled]="!dropFlag">choose</button> -->
-                            <button class="chose-address-page"  [disabled]="!dropFlag" (click)="chooseaddress()">Select Address</button>
+                            <button class="chose-address-page" [disabled]="!dropFlag" (click)="chooseaddress()">Select
+                                Address</button>
                         </div>
                     </label><br>
                 </div>
@@ -171,7 +189,8 @@
                 </div>
 
                 <div class="deliver-mail radio">
-                    <input class="deliver-radio" type="radio" (click)="dropradio($event.target.value)" id="pick-up" name="deliver-system1" value="selfpickup" [checked]="!dropinrepairFlag">
+                    <input class="deliver-radio" type="radio" (click)="dropradio($event.target.value)" id="pick-up"
+                        name="deliver-system1" value="selfpickup" [checked]="!dropinrepairFlag">
                     <label for="pick-up" class="radio-label radio-labell">
                         <div class="mail-product">
                             <img src="../../assets/images/checkout/mail.svg" alt="">
@@ -211,41 +230,3 @@
         </div>
     </div>
 </section>
-
-<!-- <section class="cart">
-    <div class="add-product-display">
-        <div class="row">
-            <div class="col-md-3" *ngFor="let cart of cartInfo">
-                <div class="add-product-box">
-                    <div class="add-product-imd">
-                        <div *ngIf="!cart.image || imageEditFlag" id="cart.id" class="custom-dropzone"
-                            [multiple]="false" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event,cart.id)">
-                            <ngx-dropzone-label>
-                                <div>
-                                    <h2>+</h2>
-                                </div>
-                            </ngx-dropzone-label>
-                            <ngx-dropzone-image-preview [multiple]="false" ngProjectAs="ngx-dropzone-preview"
-                                *ngFor="let f of cart.image" [file]="f" [removable]="true" (removed)="onRemove(f)">
-                            </ngx-dropzone-image-preview>
-                        </div>
-                        <div *ngIf="cart.image && !imageEditFlag"><img src="{{cart.image}}"> </div>
-                        <div><button (click)="setEditToChangeImage()">Edit</button></div>
-                    </div>
-                    <div class="add-product-details">
-                        <h2>{{cart.brand.brandName}} {{cart.device.modelName}}</h2>
-                        <p>Repair Master, Repair, Dec 16, 09:00 AM to 11:00AM</p>
-                        <p>Expected Price: {{cart.price}}</p>
-                        <button>Delete</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="add-product-service">
-                    <button><img src="../../assets/images/add product.svg" alt="" (click)="addRepairDevice()"></button>
-                    <p>Add More</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->

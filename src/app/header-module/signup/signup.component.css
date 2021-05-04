@@ -121,11 +121,10 @@
 .ng-select span {
     /* padding: 5px; */
     font-family: "Poppins-Medium";
-    background-color: #cdcdcd;
+    background-color: transparent;
     padding-left: 10px;
-    padding-right: 10px;
+    padding-right: 5px;
     border-radius: 5px;
     color: #000;
     font-weight: 100 !important;
-    margin-right: 5px;
 }

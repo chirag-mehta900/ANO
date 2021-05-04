@@ -45,7 +45,7 @@
                     <p>State</p>
                     <!-- <input type="text" formControlName="state" [(ngModel)]="curruntAddress[0].state" name="state" id="state" placeholder="Enter State"> -->
                     <ng-select name="state" [(ngModel)]="curruntAddress[0].state" [ngModelOptions]="{standalone: true}" (change)="setstate($event)" #device1="ngModel">
-                        <ng-option *ngFor="let brand of states" [value]="brand.name" (change)="setstate($event)"><span>{{brand.abbreviation}}</span> {{brand.name}}</ng-option>
+                        <ng-option *ngFor="let brand of states" [value]="brand.name" (change)="setstate($event)"><span>{{brand.abbreviation}}</span>- {{brand.name}}</ng-option>
                     </ng-select>
                     <div class="text-dangerr" *ngIf="stateflag">
                         Enter Your State
