@@ -87,6 +87,10 @@ export class EditAddressComponent implements OnInit {
     console.log(this.Addaddress.value);
   }
   address() {
+    console.log(this.curruntAddress);
+    this.setstate(this.curruntAddress[0].state);
+    console.log(this.Addaddress.value);
+
     this.fnameflag = false;
     this.lnameflag = false;
     this.phoneNumberflag = false;
