@@ -53,14 +53,14 @@
                 </div>
                 <div class="form-cont">
                     <p>Zip Code</p>
-                    <input type="number" formControlName="zipCode" name="zip" id="zip" placeholder="Enter Zip Code">
+                    <input type="number" formControlName="zipCode" [(ngModel)]="curruntAddress[0].zipCode" name="zip" id="zip" placeholder="Enter Zip Code">
                     <div class="text-dangerr" *ngIf="zipCodeflag">
                         Enter your Zipcode
                     </div>
                 </div>
                 <div class="form-cont">
                     <p>Add your delivery note</p>
-                    <input type="text" formControlName="message" name="message" id="message" placeholder="Enter your delivery note">
+                    <input type="text" formControlName="message" [(ngModel)]="curruntAddress[0].message" name="message" id="message" placeholder="Enter your delivery note">
 
                 </div>
             </div>

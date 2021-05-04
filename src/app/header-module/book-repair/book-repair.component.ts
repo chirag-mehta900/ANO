@@ -291,8 +291,9 @@ export class BookRepairComponent implements OnInit {
     }
   }
 
-  other() {
-    console.log("click on onthe option");
-    
+  other(event) {
+    console.log(event);
+
+    console.log('click on onthe option');
   }
 }
