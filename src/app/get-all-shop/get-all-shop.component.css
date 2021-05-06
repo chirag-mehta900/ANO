@@ -340,3 +340,9 @@ agm-map {
     border-radius: 5px;
     width: 50%;
 }
+.review-photo img{
+    border-radius: 50%;
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
+}

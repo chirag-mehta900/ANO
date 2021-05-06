@@ -135,7 +135,7 @@ agm-map {
 
 .progres-bar {
     position: absolute;
-    width: 86%;
+    width: 70%;
     margin-left: 140px;
     background-color: #f6f6f6;
     height: 12px;
@@ -269,6 +269,12 @@ agm-map {
     display: flex;
 }
 
+.cont p {
+    font-family: "Poppins-Regular";
+    margin-bottom: 5px;
+    position: relative;
+    right: -62px;
+}
 .blur-div {
     background: #fff;
     background-size: cover;
@@ -349,4 +355,10 @@ agm-map {
     font-family: "Poppins-SemiBold";
     font-size: 30px;
     margin-bottom: 25px;
+}
+.review-photo img {
+    border-radius: 50%;
+    object-fit: cover;
+    height: 50px;
+    width: 50px;
 }

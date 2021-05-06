@@ -8,6 +8,7 @@ import { UploadService } from 'src/@theme/Services/upload.service';
 import { MapService } from 'src/@theme/Services/map.service';
 import { BookRepairComponent } from '../header-module/book-repair/book-repair.component';
 import { ProfileService } from 'src/@theme/Services/profile.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-shop',
@@ -156,6 +157,7 @@ export class ShopComponent implements OnInit {
   shopCommission;
   baseFee;
   ANOFee;
+  safeSrc: SafeResourceUrl;
   constructor(
     config: NgbRatingConfig,
     private route: ActivatedRoute,
@@ -163,10 +165,12 @@ export class ShopComponent implements OnInit {
     private mapService: MapService,
     private modalService: NgbModal,
     private profile: ProfileService,
-    private router: Router
+    private router: Router,
+    private sanitizer: DomSanitizer
   ) {
     config.max = 5;
     config.readonly = true;
+    this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/c9F5kMUfFKk");
   }
 
   ngOnInit(): void {
