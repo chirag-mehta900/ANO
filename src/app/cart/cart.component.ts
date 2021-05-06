@@ -110,7 +110,7 @@ export class CartComponent implements OnInit {
     expectedDelivery: null,
     TotalAmountToPay: null,
     dropLocation: null,
-    Total_Price: null,
+    TotalPrice: null,
     details: [
       {
         device_id: null,
@@ -1029,7 +1029,7 @@ export class CartComponent implements OnInit {
           this.placeOrder.details.forEach((element) => {
             totalCartAmount += element.price;
           });
-          this.placeOrder.Total_Price = this.totalCartAmounts;
+          this.placeOrder.TotalPrice = this.totalCartAmounts;
           console.log(this.placeOrder);
 
           this.placeOrder.TotalAmountToPay = Number(
