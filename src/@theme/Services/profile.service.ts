@@ -11,6 +11,7 @@ export class ProfileService {
   public getaddressid: number = 0;
 
   public getShopid: number = 0;
+  public checkdelete: boolean = false;
 
   states: any[] = [
     {
@@ -263,6 +264,9 @@ export class ProfileService {
   public geteditid = new BehaviorSubject(this.getaddressid);
   responseeditId = this.geteditid.asObservable();
 
+  public CheckDelete = new BehaviorSubject(this.checkdelete);
+  responsedelete = this.CheckDelete.asObservable();
+
   public getshopid = new BehaviorSubject(this.getShopid);
   responseShopId = this.getshopid.asObservable();
 
@@ -282,6 +286,9 @@ export class ProfileService {
     this.geteditid.next(data);
   }
 
+  getCheckdelete(data) {
+    this.CheckDelete.next(data);
+  }
   getShopId(data) {
     this.getshopid.next(data);
   }
@@ -362,5 +369,14 @@ export class ProfileService {
 
   getstatelist() {
     return this.states;
+  }
+
+  deleteaddress(id) {
+    return this.http.delete(
+      this.commonService.envUrl() + 'user/address/' + id,
+      {
+        headers: this.getAdminHeaders(),
+      }
+    );
   }
 }

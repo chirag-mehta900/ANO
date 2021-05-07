@@ -18,16 +18,7 @@ export class AddressComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.profile.getAlladdress().subscribe(
-      (data) => {
-        console.log(data);
-        this.Address = data['data'];
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    console.log(this.Address);
+    this.getalladdress();
   }
 
   editaddress(a) {
@@ -39,13 +30,29 @@ export class AddressComponent implements OnInit {
   Save() {
     this.router.navigate(['profile']);
   }
+
+  getalladdress() {
+    this.profile.getAlladdress().subscribe(
+      (data) => {
+        console.log(data);
+        this.Address = data['data'];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    console.log(this.Address);
+  }
   makedefault(event) {
     if (this.modalService.hasOpenModals()) {
       this.modalService.dismissAll();
     }
     const modalRef = this.modalService.open(ConfirmComponent);
     modalRef.componentInstance.address = event;
-    modalRef.result.then((result) => {});
+    modalRef.result.then((result) => {
+      console.log(result);
+      this.getalladdress();
+    });
   }
   Addadress() {
     this.router.navigate(['profile/add-address']);
@@ -53,5 +60,17 @@ export class AddressComponent implements OnInit {
 
   Cancel() {
     this.router.navigate(['profile']);
+  }
+
+  deleteaddress(address) {
+    console.log(address.id);
+    this.profile.getCheckdelete(true);
+
+    const modalRef = this.modalService.open(ConfirmComponent);
+    modalRef.componentInstance.address = address;
+    modalRef.result.then((result) => {
+      console.log(result);
+      this.getalladdress();
+    });
   }
 }

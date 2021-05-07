@@ -120,6 +120,8 @@ export class ShopComponent implements OnInit {
   per = 78;
   storeId: any;
   ShopList: any[] = [];
+  videoList: any[] = [];
+
   filter: any;
   deviceproblem: {};
   timeList: any[];
@@ -170,7 +172,6 @@ export class ShopComponent implements OnInit {
   ) {
     config.max = 5;
     config.readonly = true;
-    this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/c9F5kMUfFKk");
   }
 
   ngOnInit(): void {
@@ -195,13 +196,15 @@ export class ShopComponent implements OnInit {
         console.log(error);
       }
     );
-    this.ShopList = JSON.parse(localStorage.getItem('Shoplist') || '[]');
+    // this.ShopList = JSON.parse(localStorage.getItem('Shoplist') || '[]');
 
-    this.ShopList.forEach((e) => {
-      if (e.id == this.storeId) {
-        this.shop.push(e);
-      }
-    });
+    // this.ShopList.forEach((e) => {
+    //   if (e.id == this.storeId) {
+    //     this.shop.push(e);
+    //   }
+    // });
+
+    console.log(this.shop, 'check');
 
     this.deviceproblem = JSON.parse(
       localStorage.getItem('deviceProblem') || '[]'
@@ -239,8 +242,20 @@ export class ShopComponent implements OnInit {
       (data) => {
         // this.shop.push(data['data']);
         console.log(data);
+        this.shop.push(data['data']);
+        console.log(this.shop);
 
-        // this.storeInfo = data['data'];
+        this.shop[0].links.forEach((e) => {
+          console.log(e);
+          var index = e.indexOf('=', 0);
+          var string = e.slice(index + 1, e.length);
+          console.log(string);
+          var url = 'https://www.youtube.com/embed/' + string;
+
+          this.videoList.push(url);
+        });
+        console.log(this.videoList);
+
         this.shopCommission = data['data'].shopCommision;
         this.averageRating = Math.round(data['data'].average_rating);
         this.ratings = data['data'].ratings;

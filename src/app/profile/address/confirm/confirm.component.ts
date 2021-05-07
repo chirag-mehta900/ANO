@@ -10,6 +10,8 @@ import { ProfileService } from 'src/@theme/Services/profile.service';
 export class ConfirmComponent implements OnInit {
   @Output('address') address;
   disableButton: boolean = false;
+  changedefault: boolean = true;
+
   newaddress: any[] = [];
 
   constructor(
@@ -18,7 +20,14 @@ export class ConfirmComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.profile.responsedelete.subscribe((value) => {
+      console.log(value);
+      if (value) {
+        this.changedefault = false;
+      }
+    });
     this.newaddress.push(this.address);
+    console.log(this.newaddress);
   }
 
   onSave() {
@@ -41,5 +50,21 @@ export class ConfirmComponent implements OnInit {
 
   onDontSave() {
     this.activeModal.close();
+  }
+
+  ondelete() {
+    console.log(this.address.id);
+
+    this.profile.deleteaddress(this.address.id).subscribe(
+      (data) => {
+        console.log(data);
+        if (data['status'] == 200) {
+          this.activeModal.close();
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
