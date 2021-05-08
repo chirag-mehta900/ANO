@@ -5,7 +5,10 @@
 @font-face {
     font-family: "Poppins-Regular";
     src: url("./assets/fonts/Poppins-Regular.eot");
-    src: url("./assets/fonts/Poppins-Regular.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/Poppins-Regular.woff2") format("woff2"), url("./assets/fonts/Poppins-Regular.woff") format("woff"), url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-Regular.eot?#iefix") format("embedded-opentype"),
+        url("./assets/fonts/Poppins-Regular.woff2") format("woff2"),
+        url("./assets/fonts/Poppins-Regular.woff") format("woff"),
+        url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -14,7 +17,10 @@
 @font-face {
     font-family: "Poppins-Medium";
     src: url("./assets/fonts/Poppins-Medium.eot");
-    src: url("./assets/fonts/Poppins-Medium.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/Poppins-Medium.woff2") format("woff2"), url("./assets/fonts/Poppins-Medium.woff") format("woff"), url("./assets/fonts/Poppins-Medium.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-Medium.eot?#iefix") format("embedded-opentype"),
+        url("./assets/fonts/Poppins-Medium.woff2") format("woff2"),
+        url("./assets/fonts/Poppins-Medium.woff") format("woff"),
+        url("./assets/fonts/Poppins-Medium.ttf") format("truetype");
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -23,7 +29,10 @@
 @font-face {
     font-family: "Poppins-SemiBold";
     src: url("./assets/fonts/Poppins-SemiBold.eot");
-    src: url("./assets/fonts/Poppins-SemiBold.eot?#iefix") format("embedded-opentype"), url("./assets/fonts/Poppins-SemiBold.woff2") format("woff2"), url("./assets/fonts/Poppins-SemiBold.woff") format("woff"), url("./assets/fonts/Poppins-SemiBold.ttf") format("truetype");
+    src: url("./assets/fonts/Poppins-SemiBold.eot?#iefix") format("embedded-opentype"),
+        url("./assets/fonts/Poppins-SemiBold.woff2") format("woff2"),
+        url("./assets/fonts/Poppins-SemiBold.woff") format("woff"),
+        url("./assets/fonts/Poppins-SemiBold.ttf") format("truetype");
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -69,7 +78,7 @@ body {
     }
 }
 
-input.star~label.star:before {
+input.star ~ label.star:before {
     font-size: 20px !important;
     padding: -5px;
 }
@@ -122,7 +131,6 @@ select:focus {
 .ng-select span {
     font-family: "Poppins-SemiBold";
 }
-
 
 /* `````````````````````````````````
 
@@ -192,7 +200,6 @@ dp-date-picker.dp-material {
     }
 }
 
-
 /* .carousel-cell{
     width: 1980px;
 } */
@@ -211,11 +218,14 @@ dp-date-picker.dp-material {
     position: inherit !important;
 }
 
-input.star-5:checked~label.star:before {
+input.star-5:checked ~ label.star:before {
     color: #fe7;
     text-shadow: none !important;
 }
-.select-brand .ng-select .ng-select-container .ng-value-container .ng-input>input {
+.select-brand .ng-select .ng-select-container .ng-value-container .ng-input > input {
     margin-left: 24px !important;
     margin-top: 7px !important;
+}
+.bigstar input.star ~ label.star:before {
+    font-size: 40px !important;
 }
