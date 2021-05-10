@@ -29,6 +29,8 @@ export class BookRepairComponent implements OnInit {
   shopmarker: object = {};
   tempData: [] = [];
   Data: any[] = [];
+  othernameFlag: boolean = false;
+
   Marker: any[] = [];
   issues: any[] = [];
 
@@ -36,7 +38,7 @@ export class BookRepairComponent implements OnInit {
     lat: 0,
     lng: 0,
   };
-
+  otherProblem: string = '';
   bookRepair = {
     device: null,
     problem: null,
@@ -149,16 +151,34 @@ export class BookRepairComponent implements OnInit {
         });
       }
     });
-    this.headerService.getIssueListById(obj).subscribe(
+    this.headerService.getIssueList().subscribe(
       (data) => {
         console.log(data);
 
         this.issueList = data['data'];
+
+        this.issueList.reverse();
+        console.log(this.issueList);
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  IssueList(event) {
+    this.othernameFlag = false;
+    console.log(event);
+
+    if (event == 1) {
+      console.log('othername');
+      this.othernameFlag = true;
+    }
+  }
+
+  otherproblem(event) {
+    console.log(event);
+    this.otherProblem = event;
   }
 
   goToBrand() {
@@ -195,8 +215,8 @@ export class BookRepairComponent implements OnInit {
       localStorage.removeItem('issues');
       console.log(this.bookRepair);
       this.issueList.forEach((e) => {
-        if (e.problem.id == this.bookRepair.problem) {
-          var pname = e.problem.problemName;
+        if (e.id == this.bookRepair.problem) {
+          var pname = e.problemName;
           console.log(pname);
 
           gtag('event', 'Proceed_BUTTON_CLICKED', {
@@ -207,8 +227,8 @@ export class BookRepairComponent implements OnInit {
         }
 
         var obj = {
-          problemId: e.problem.id,
-          problem: e.problem.problemName,
+          problemId: e.id,
+          problem: e.problemName,
         };
         this.issues.push(obj);
       });
@@ -242,6 +262,10 @@ export class BookRepairComponent implements OnInit {
               console.log(element.average_rating);
             });
             localStorage.setItem('Shoplist', JSON.stringify(this.Data));
+            localStorage.setItem(
+              'otherProblem',
+              JSON.stringify(this.otherProblem)
+            );
 
             for (var i = 0; i < this.Data.length; i++) {
               // console.log(this.Data[i].pricing[0].price);

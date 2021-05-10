@@ -8,7 +8,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class TrackingComponent implements OnInit {
   public form: FormGroup;
-  ID: any;
+  trackid: boolean = false;
+
   config = {
     allowNumbersOnly: false,
     length: 8,
@@ -35,12 +36,18 @@ export class TrackingComponent implements OnInit {
   }
 
   track() {
+    this.trackid = false;
     // console.log(this.form.value);
-    console.log(this.ID);
+    if (this.form.value.tracking.length == 8) {
+      console.log('ok');
+    } else {
+      console.log('write properly');
+      this.trackid = true;
+      this.form.value.tracking = '';
+    }
   }
 
   onOtpChange(event) {
-    console.log(event);
-    this.ID = event;
+    this.form.value.tracking = event;
   }
 }

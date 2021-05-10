@@ -17,7 +17,10 @@
                     <form [formGroup]="form">
 
                         <div class="track-inp-btn">
-                            <ng-otp-input class="track-code" formControlName="tracking" (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
+                            <ng-otp-input class="track-code" formControlName="tracking" [(ngModel)]="form.value.tracking" (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
+                            <div class="text-dangerr" *ngIf="trackid">
+                                Please Enter valid trackingID
+                            </div>
                             <button (click)=track()>Track</button>
                         </div>
                     </form>

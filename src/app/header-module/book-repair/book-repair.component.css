@@ -46,6 +46,15 @@
     color: #ffc542;
 }
 
+.oinput input {
+    padding: 10px;
+    border: 1px solid #d3d8e0;
+    border-radius: 10px;
+    font-family: "Poppins-Regular";
+    width: 100%;
+    margin-bottom: 20px;
+}
+
 .skipdevice p {
     display: flex;
     justify-content: center;
