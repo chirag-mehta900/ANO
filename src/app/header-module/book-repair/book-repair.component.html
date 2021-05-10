@@ -29,7 +29,7 @@
             (formSubmitted || device1.touched) 
             }">
                         <ng-option *ngFor="let brand of deviceList" (change)="getIssueList($event)" [value]="brand.id"><span>{{brand.categoryName}}</span> {{brand.full_name}}</ng-option>
-                        <ng-option (change)="other($event)" [value]="other">Other</ng-option>
+                        <!-- <ng-option (change)="other($event)" [value]="other">Other</ng-option> -->
                     </ng-select>
 
                     <div class="text-dangerr" *ngIf="deviceFlag">
@@ -88,16 +88,19 @@
 
 
                 <div>
-                    <ng-select name="device" [(ngModel)]="bookRepair.problem" #device1="ngModel" [ngClass]="{
+                    <ng-select name="device" [(ngModel)]="bookRepair.problem" (change)="IssueList($event)" #device1="ngModel" [ngClass]="{
             'is-invalid':
             device1.invalid &&
             (formSubmitted || device1.touched) 
             }">
-                        <ng-option *ngFor="let device of issueList" [value]="device.problem.id">{{device.problem.problemName}}</ng-option>
-                        <ng-option (change)="other($event)" [value]="other">Other</ng-option>
+                        <ng-option *ngFor="let device of issueList" [value]="device.id">{{device.problemName}}</ng-option>
+                        <!-- <ng-option (change)="other($event)" [value]="other">Other</ng-option> -->
                     </ng-select>
 
+                    <div class="oinput" *ngIf="othernameFlag">
+                        <input type="text" (keyup)=otherproblem($event.target.value) name="device" id="device" placeholder="Enter your other device">
 
+                    </div>
                     <div class="text-dangerr" *ngIf="problemFlag">
                         Select Problem.
                     </div>

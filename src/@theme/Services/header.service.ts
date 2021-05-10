@@ -37,10 +37,11 @@ export class HeaderService {
     );
   }
   getIssueListById(data) {
-    return this.httpClient.post(
-      this.commonService.envUrl() + 'problem/filter',
-      data
-    );
+    return this.httpClient.post(this.commonService.envUrl() + 'problem', data);
+  }
+
+  getIssueList() {
+    return this.httpClient.get(this.commonService.envUrl() + 'problem');
   }
 
   searchStore(data) {
