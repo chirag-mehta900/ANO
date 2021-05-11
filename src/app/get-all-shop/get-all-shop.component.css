@@ -91,7 +91,7 @@ agm-map {
     cursor: pointer;
     display: grid;
     justify-content: center;
-    box-shadow: 0 0 11px #CFD1D3;
+    box-shadow: 0 0 11px #cfd1d3;
     margin-bottom: 10px;
     border-radius: 5px;
     width: fit-content;
@@ -308,39 +308,39 @@ agm-map {
 .cont {
     display: flex;
 }
-.shop-box-carousel{
+.shop-box-carousel {
     padding: 5px;
     cursor: pointer;
     display: grid;
     justify-content: center;
     border-radius: 5px;
 }
-.select-problem{
+.select-problem {
     width: 100%;
     display: flex;
     margin-bottom: 20px;
 }
-.select-problem h3{
+.select-problem h3 {
     color: #ffffff;
     font-size: 12px;
     margin-bottom: 0px;
     text-align: center;
     padding: 7px;
 }
-.select-device{
-    font-family: 'Poppins-SemiBold';
+.select-device {
+    font-family: "Poppins-SemiBold";
     background-color: #000000;
     border-radius: 5px;
     width: 50%;
     margin-right: 10px;
 }
-.select-issue{
-    font-family: 'Poppins-SemiBold';
+.select-issue {
+    font-family: "Poppins-SemiBold";
     background-color: #000000;
     border-radius: 5px;
     width: 50%;
 }
-.review-photo img{
+.review-photo img {
     border-radius: 50%;
     object-fit: cover;
     height: 50px;

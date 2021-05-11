@@ -204,7 +204,6 @@
     margin-bottom: 0px;
 }
 
-
 /* .deliver-mail button{
     border: none;
     background-color: #000000;
@@ -224,7 +223,7 @@
     opacity: 0;
 }
 
-.radio input[type="radio"]+.radio-label:before {
+.radio input[type="radio"] + .radio-label:before {
     content: "";
     background: #f4f4f4;
     border-radius: 100%;
@@ -242,28 +241,28 @@
     right: 40px;
 }
 
-.radio input[type="radio"]+.radio-labell:before {
+.radio input[type="radio"] + .radio-labell:before {
     top: 33px;
     right: 30px;
 }
 
-.radio input[type="radio"]:checked+.radio-label:before {
+.radio input[type="radio"]:checked + .radio-label:before {
     background-color: #ffc542;
     box-shadow: inset 0 0 0 4px #000;
 }
 
-.radio input[type="radio"]:focus+.radio-label:before {
+.radio input[type="radio"]:focus + .radio-label:before {
     outline: none;
     border-color: #ffc542;
 }
 
-.radio input[type="radio"]:disabled+.radio-label:before {
+.radio input[type="radio"]:disabled + .radio-label:before {
     box-shadow: inset 0 0 0 4px #f4f4f4;
     border-color: #b4b4b4;
     background: #b4b4b4;
 }
 
-.radio input[type="radio"]+.radio-label:empty:before {
+.radio input[type="radio"] + .radio-label:empty:before {
     margin-right: 0;
 }
 
