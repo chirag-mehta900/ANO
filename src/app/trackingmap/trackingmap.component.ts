@@ -3,6 +3,7 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { MapService } from 'src/@theme/Services/map.service';
 import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { ActivatedRoute } from '@angular/router';
+import { ProfileService } from 'src/@theme/Services/profile.service';
 
 @Component({
   selector: 'app-trackingmap',
@@ -15,6 +16,10 @@ export class TrackingmapComponent implements OnInit {
   Lat: any;
   Lng: any;
   area: any;
+  shopDetail;
+  order;
+  device: any[] = [];
+
   autocomplete: any;
   locat;
 
@@ -28,24 +33,31 @@ export class TrackingmapComponent implements OnInit {
       country: ['IN'],
     },
   };
+  trackId: any;
   Location = {
     lat: 0,
     lng: 0,
   };
 
   styles: any[] = [];
+  totaldevice: number = 0;
 
   constructor(
     private config: NgbRatingConfig,
     private mapService: MapService,
     private storeTokenService: StoreTokenService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private profile: ProfileService
   ) {
     config.max = 5;
     config.readonly = true;
   }
 
   ngOnInit() {
+    this.trackId = this.route.snapshot.paramMap.get('Id');
+
+    this.trackorderApi(this.trackId);
+
     this.styles = this.mapService.getMapStyle();
 
     if (!navigator.geolocation) {
@@ -83,6 +95,29 @@ export class TrackingmapComponent implements OnInit {
     });
     const input = document.getElementById('pac-input') as HTMLInputElement;
     this.autocomplete = new google.maps.places.Autocomplete(input, {});
+  }
+
+  trackorderApi(id) {
+    this.profile.trackservice(id).subscribe(
+      (data) => {
+        if (data['status'] == 200) {
+          this.shopDetail = data['data']['order'].shop;
+
+          this.order = data['data']['order'];
+          this.device = data['data']['order'].details;
+          this.totaldevice = data['data']['order']['details'].length;
+          console.log(this.totaldevice);
+
+          console.log(this.order);
+          console.log(this.shopDetail);
+
+          console.log(this.device);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   handleAddressChange(address: any) {
