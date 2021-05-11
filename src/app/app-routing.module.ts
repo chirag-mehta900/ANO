@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'checkout/:id', component: CheckoutComponent },
   { path: 'about', component: AboutComponent },
   { path: 'tracking', component: TrackingComponent },
+  { path: 'trackmap/:Id', component: TrackingmapComponent },
   { path: 'trackmap', component: TrackingmapComponent },
   { path: 'cart', component: CartComponent },
   { path: 'contact', component: ContactComponent },

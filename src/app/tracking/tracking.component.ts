@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tracking',
@@ -27,7 +28,7 @@ export class TrackingComponent implements OnInit {
     },
   };
 
-  constructor() {}
+  constructor(public router: Router) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -35,19 +36,21 @@ export class TrackingComponent implements OnInit {
     });
   }
 
+  onOtpChange(event) {
+    this.form.value.tracking = event;
+  }
+
   track() {
     this.trackid = false;
     // console.log(this.form.value);
     if (this.form.value.tracking.length == 8) {
       console.log('ok');
+
+      this.router.navigate(['trackmap', this.form.value.tracking]);
     } else {
       console.log('write properly');
       this.trackid = true;
       this.form.value.tracking = '';
     }
-  }
-
-  onOtpChange(event) {
-    this.form.value.tracking = event;
   }
 }
