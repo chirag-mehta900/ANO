@@ -50,8 +50,7 @@ export class ShopComponent implements OnInit {
 
   ourmark = {
     icon: {
-      url:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
+      url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
       scaledSize: {
         width: 90,
         height: 110,
@@ -61,8 +60,7 @@ export class ShopComponent implements OnInit {
 
   shopmark = {
     icon: {
-      url:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/MicrosoftTeams-image%20(8).png?alt=media&token=6daea4dc-bc59-425f-8862-c2c407b6939a',
+      url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/MicrosoftTeams-image%20(8).png?alt=media&token=6daea4dc-bc59-425f-8862-c2c407b6939a',
       scaledSize: {
         width: 40,
         height: 50,
@@ -76,8 +74,7 @@ export class ShopComponent implements OnInit {
 
   markerOptions = {
     origin: {
-      icon:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
+      icon: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
       draggable: true,
       size: {
         width: 10,
@@ -85,8 +82,7 @@ export class ShopComponent implements OnInit {
       },
     },
     destination: {
-      icon:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+      icon: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
       label: {
         text: '',
         color: 'white',
@@ -345,39 +341,40 @@ export class ShopComponent implements OnInit {
     this.check = JSON.parse(localStorage.getItem('filter') || '[]');
 
     if (this.check) {
+      localStorage.removeItem('deviceProblem');
       console.log('bookrepair remain');
       console.log(this.check);
 
       this.modalService.open(BookRepairComponent);
-    }
-
-    let isLogedIn = localStorage.getItem('token');
-    if (isLogedIn === null) {
-      this.product();
     } else {
-      var obj = {
-        user_id: JSON.parse(localStorage.getItem('user_id') || '[]'),
-      };
+      let isLogedIn = localStorage.getItem('token');
+      if (isLogedIn === null) {
+        this.product();
+      } else {
+        var obj = {
+          user_id: JSON.parse(localStorage.getItem('user_id') || '[]'),
+        };
 
-      this.shopService.getShopifromcart(obj).subscribe(
-        (data) => {
-          console.log(data);
-          console.log(data['data']['shop_id']);
+        this.shopService.getShopifromcart(obj).subscribe(
+          (data) => {
+            console.log(data);
+            console.log(data['data']['shop_id']);
 
-          if (
-            data['data']['shop_id'] == this.shop[0]['id'] ||
-            data['data']['shop_id'] == 0
-          ) {
-            console.log('same');
-            this.product();
-          } else {
-            this.modalService.open(WarningComponent);
+            if (
+              data['data']['shop_id'] == this.shop[0]['id'] ||
+              data['data']['shop_id'] == 0
+            ) {
+              console.log('same');
+              this.product();
+            } else {
+              this.modalService.open(WarningComponent);
+            }
+          },
+          (error) => {
+            console.log(error);
           }
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+        );
+      }
     }
   }
 
@@ -398,8 +395,10 @@ export class ShopComponent implements OnInit {
         this.bookRepair.ANOBaseFees = Number(
           this.expectedresponse[0].ANOBaseFees
         );
-        this.bookRepair.ANOCommissionFees = this.expectedresponse[0].ANOCommissionFees;
-        this.bookRepair.ShopCommissionFees = this.expectedresponse[0].ShopCommissionFees;
+        this.bookRepair.ANOCommissionFees =
+          this.expectedresponse[0].ANOCommissionFees;
+        this.bookRepair.ShopCommissionFees =
+          this.expectedresponse[0].ShopCommissionFees;
         this.bookRepair.TotalAmount = this.expectedresponse[0].TotalAmount;
         this.bookRepair.price = this.expectedresponse[0].price;
         this.bookRepair.brand_id = this.expectedresponse[0].brand_id;

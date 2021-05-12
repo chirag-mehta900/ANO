@@ -19,6 +19,7 @@ export class AddAddressComponent implements OnInit {
   zipCodeflag: boolean = false;
   cityflag: boolean = false;
   stateflag: boolean = false;
+  tempstate: string = '';
 
   states: any[] = [];
 
@@ -51,12 +52,16 @@ export class AddAddressComponent implements OnInit {
 
   setstate(event) {
     console.log(event);
-    this.Addaddress.value.state = event;
+    this.tempstate = event;
 
     console.log(this.Addaddress.value);
   }
 
   address() {
+    console.log(this.tempstate);
+
+    console.log(this.Addaddress.value);
+
     this.fnameflag = false;
     this.lnameflag = false;
     this.phoneNumberflag = false;
@@ -65,6 +70,9 @@ export class AddAddressComponent implements OnInit {
     this.cityflag = false;
     this.stateflag = false;
 
+    if (this.tempstate != '') {
+      this.Addaddress.value.state = this.tempstate;
+    }
     if (
       this.Addaddress.value.fname == null ||
       this.Addaddress.value.lname == null ||
@@ -97,6 +105,8 @@ export class AddAddressComponent implements OnInit {
       }
       if (this.Addaddress.value.state == null) {
         this.stateflag = true;
+
+        console.log('heyyyyy');
       }
     } else {
       var area =
