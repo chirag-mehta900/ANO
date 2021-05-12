@@ -65,7 +65,8 @@
                             <p>{{orderDetails.startTime}}</p>
                         </div>
                         <div class="deliver-cab radio">
-                            <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab">
+                            <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system"
+                                value="deliver-cab">
                             <label for="deliver-cab" class="">
                             <div>
                                 <img src="../../assets/images/checkout/pickup1.svg" alt="">
@@ -78,6 +79,7 @@
                                     disabled value={{shopDetails.addressLine1}},{{shopDetails.addressLine2}},{{shopDetails.city}},{{shopDetails.state}}>
                             </div>
                         </label><br>
+
                         </div>
                     </div>
                     <div *ngIf="isMail">
@@ -87,8 +89,10 @@
                             <p>{{orderDetails.startTime}}</p>
                         </div>
                         <div class="deliver-cab radio">
-                            <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system" value="deliver-cab">
+                            <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system"
+                                value="deliver-cab">
                             <label for="deliver-cab" class="">
+
                             <div>
                                 <img src="../../assets/images/Location-white.svg" alt="">
                             </div>
@@ -97,6 +101,7 @@
                                     disabled value={{shopDetails.addressLine1}},{{shopDetails.addressLine2}},{{shopDetails.city}},{{shopDetails.state}}>
                             </div>
                         </label><br>
+
                         </div>
                     </div>
                     <div *ngIf="!isCollectFromStore">
@@ -106,16 +111,17 @@
                             <p>{{orderDetails.expectedDelivery}}</p>
                         </div>
                         <div class="deliver-mail deliver-cab radio">
-                            <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system" value="deliver-mail">
+                            <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system"
+                                value="deliver-mail">
                             <label for="deliver-mail" class=" radio-labell">
-                            <div>
-                                <img src="../../assets/images/Location-white.svg" alt="">
-                            </div>
-                            <div style="width: 100%;">
-                                <input type="text" name="drop-off-address" id="drop-off-address"
-                                    placeholder="drop-off-address" disabled value={{orderDetails.dropLocation}}>
-                            </div>
-                        </label><br>
+                                <div>
+                                    <img src="../../assets/images/Location-white.svg" alt="">
+                                </div>
+                                <div style="width: 100%;">
+                                    <input type="text" name="drop-off-address" id="drop-off-address"
+                                        placeholder="drop-off-address" disabled value={{orderDetails.dropLocation}}>
+                                </div>
+                            </label><br>
                         </div>
                     </div>
 
@@ -126,8 +132,10 @@
                             <p>{{orderDetails.expectedDelivery}}</p>
                         </div>
                         <div class="deliver-mail deliver-cab radio">
-                            <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system" value="deliver-mail">
+                            <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system"
+                                value="deliver-mail">
                             <label for="deliver-mail" class=" radio-labell">
+
                             <div>
                                 <img src="../../assets/images/Location-white.svg" alt="">
                             </div>
@@ -136,6 +144,7 @@
                                     placeholder="drop-off-address" disabled value={{shopDetails.addressLine1}},{{shopDetails.addressLine2}},{{shopDetails.city}},{{shopDetails.state}}>
                             </div>
                         </label><br>
+
                         </div>
                     </div>
                 </div>
@@ -169,21 +178,24 @@
                             </div>
                             <div class="card-name">
                                 <p>Name on card</p>
-                                <input type="text" name="card-name" id="card-name" class="form-control" formControlName="cardholdername" placeholder="Card Holder Name" required>
+                                <input type="text" name="card-name" id="card-name" class="form-control"
+                                    formControlName="cardholdername" placeholder="Card Holder Name" required>
                                 <div class="text-dangerr" *ngIf="nameflag">
                                     Enter your card holder name
                                 </div>
                             </div>
                             <div class="payment-country">
                                 <p>Billing Zipcode</p>
-                                <input type="text" name="country-zip" id="country-zip" class="form-control" maxlength="6" formControlName="zip" placeholder="ZIP" required>
+                                <input type="text" name="country-zip" id="country-zip" class="form-control"
+                                    maxlength="6" formControlName="zip" placeholder="ZIP" required>
                                 <div class="text-dangerr" *ngIf="zipcodeflag">
                                     Enter your zipcode
                                 </div>
                             </div>
                             <div class="policy">
                                 <div class="squaredOne">
-                                    <input #squaredOne type="checkbox" value="hello" id="squaredOne" name="check" (change)="setisTermsAndCondition(squaredOne.checked)" />
+                                    <input #squaredOne type="checkbox" value="hello" id="squaredOne" name="check"
+                                        (change)="setisTermsAndCondition(squaredOne.checked)" />
                                     <label for="squaredOne">
                                         <p>I accept all <a href="term" target="_blank"> terms and condition.</a></p>
                                     </label>
@@ -194,7 +206,8 @@
                             </div>
                             <div class="payment-btns">
                                 <div class="pay-card">
-                                    <button (click)="pay()" type="submit">Pay ${{orderDetails.TotalAmountToPay}}</button>
+                                    <button (click)="pay()" type="submit">Pay
+                                        ${{orderDetails.TotalAmountToPay}}</button>
                                     <img class="img-fluid" *ngIf="isLoading" src="../../assets/images/loader.gif" />
                                 </div>
                             </div>
@@ -204,15 +217,18 @@
                 <div class="payment-done" *ngIf="isPaid">
                     <div class="payment-done-mess">
                         <h2>Thank you for choosing us</h2>
-                        <p>Your Order Id Is <span>#{{orderId}}</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc odio in et, lectus sit lorem id integer.</p>
+                        <p>Your Order Id Is <span>#{{orderId}}</span> Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Nunc odio in et, lectus sit lorem id integer.</p>
                         <button (click)="home()">Back to home</button>
                     </div>
                     <div class="payment-done-feedback">
                         <h2>Feed us back</h2>
                         <p>Help us know you better, so that we can serve you better.</p>
-                        <p>Information provided herein will be used solely for research purposes and will not be sold to any third parties.</p>
+                        <p>Information provided herein will be used solely for research purposes and will not be sold to
+                            any third parties.</p>
                         <div class="feedback-input">
-                            <textarea name="feedback" id="feedback" cols="10" rows="2" placeholder="Your Feedback..."></textarea>
+                            <textarea name="feedback" id="feedback" cols="10" rows="2"
+                                placeholder="Your Feedback..."></textarea>
                             <button><img src="../../assets/images/checkout/send.svg" alt=""></button>
                         </div>
                     </div>
