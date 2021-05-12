@@ -3,7 +3,8 @@
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12" [styles]="styles">
             <!-- <agm-marker *ngFor="let s of shop" [latitude]="s.latitude" [longitude]="s.longitude" [label]="price" [iconUrl]="shopmark.icon"></agm-marker>
             <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="ourmark.icon"></agm-marker> -->
-            <agm-direction [origin]="origin" [destination]="destination" [markerOptions]="markerOptions" [renderOptions]="renderOptions"></agm-direction>
+            <agm-direction [origin]="origin" [destination]="destination" [markerOptions]="markerOptions"
+                [renderOptions]="renderOptions"></agm-direction>
         </agm-map>
     </div>
     <div class="bg-map" *ngIf="filter">
@@ -27,7 +28,8 @@
                         <div class="detail-name">
                             <h2>{{store.shopName}}</h2>
                             <div class="cont">
-                                <ngx-star-rating class="rating" [(ngModel)]="averageRating" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
+                                <ngx-star-rating class="rating" [(ngModel)]="averageRating" [id]="'rating3'"
+                                    [disabled]="true"></ngx-star-rating>
                             </div>
                         </div>
                         <div class="detail-name2">
@@ -105,7 +107,7 @@
     </div> -->
     <div class="reviews">
         <div class="text-center">
-            <h2>review & ratings</h2>
+            <h2>Review & Ratings</h2>
         </div>
         <div class="container">
             <div class="row">
@@ -118,7 +120,8 @@
                 <div class="col-md-6">
                     <div class="star">
                         <div class="cont">
-                            <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
+                            <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'"
+                                [disabled]="true" [disabled]=true></ngx-star-rating>
                         </div>
                         <div class="progres-bar">
                             <span style=" background-color: black;" [style.width.%]="fiveStarRatingBarValue"></span>
@@ -127,7 +130,8 @@
                     </div>
                     <div class="star">
                         <div class="cont">
-                            <ngx-star-rating class="rating" [(ngModel)]="starValueFour" [id]="'starValueFour'" [disabled]="true" [disabled]=true></ngx-star-rating>
+                            <ngx-star-rating class="rating" [(ngModel)]="starValueFour" [id]="'starValueFour'"
+                                [disabled]="true" [disabled]=true></ngx-star-rating>
                         </div>
                         <div class="progres-bar">
                             <span style=" background-color: black;" [style.width.%]="fourStarRatingBarValue"></span>
@@ -136,7 +140,8 @@
                     </div>
                     <div class="star">
                         <div class="cont">
-                            <ngx-star-rating class="rating" [(ngModel)]="starValueThree" [id]="'starValueThree'" [disabled]="true" [disabled]=true></ngx-star-rating>
+                            <ngx-star-rating class="rating" [(ngModel)]="starValueThree" [id]="'starValueThree'"
+                                [disabled]="true" [disabled]=true></ngx-star-rating>
                         </div>
                         <div class="progres-bar">
                             <span style=" background-color: black;" [style.width.%]="threeStarRatingBarValue"></span>
@@ -144,7 +149,8 @@
                     </div>
                     <div class="star">
                         <div class="cont">
-                            <ngx-star-rating class="rating" [(ngModel)]="starValueTwo" [id]="'starValueTwo'" [disabled]="true" [disabled]=true></ngx-star-rating>
+                            <ngx-star-rating class="rating" [(ngModel)]="starValueTwo" [id]="'starValueTwo'"
+                                [disabled]="true" [disabled]=true></ngx-star-rating>
                         </div>
                         <div class="progres-bar">
                             <span style="background-color: black;" [style.width.%]="twoStarRatingBarValue"></span>
@@ -152,7 +158,8 @@
                     </div>
                     <div class="star">
                         <div class="cont">
-                            <ngx-star-rating class="rating" [(ngModel)]="starValueOne" [id]="'starValueOne'" [disabled]="true" [disabled]=true></ngx-star-rating>
+                            <ngx-star-rating class="rating" [(ngModel)]="starValueOne" [id]="'starValueOne'"
+                                [disabled]="true" [disabled]=true></ngx-star-rating>
                         </div>
                         <div class="progres-bar">
                             <span style=" background-color: black;" [style.width.%]="oneStarRatingBarValue"></span>
@@ -164,8 +171,9 @@
                         <div class="cont">
                             <p>Services</p>
                         </div>
-                        <div class="progres-bar">
-                            <span style=" background-color: black;" [style.width.%]="fiveStarRatingBarValue"></span>
+                        <div class="progres-star">
+                            <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'"
+                                [disabled]="true" [disabled]=true></ngx-star-rating>
                         </div>
 
                     </div>
@@ -173,8 +181,9 @@
                         <div class="cont">
                             <p>Services</p>
                         </div>
-                        <div class="progres-bar">
-                            <span style=" background-color: black;" [style.width.%]="fourStarRatingBarValue"></span>
+                        <div class="progres-star">
+                            <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'"
+                                [disabled]="true" [disabled]=true></ngx-star-rating>
                         </div>
 
                     </div>
@@ -182,24 +191,27 @@
                         <div class="cont">
                             <p>Services</p>
                         </div>
-                        <div class="progres-bar">
-                            <span style=" background-color: black;" [style.width.%]="threeStarRatingBarValue"></span>
+                        <div class="progres-star">
+                            <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'"
+                                [disabled]="true" [disabled]=true></ngx-star-rating>
                         </div>
                     </div>
                     <div class="star">
                         <div class="cont">
                             <p>Services</p>
                         </div>
-                        <div class="progres-bar">
-                            <span style="background-color: black;" [style.width.%]="twoStarRatingBarValue"></span>
+                        <div class="progres-star">
+                            <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'"
+                                [disabled]="true" [disabled]=true></ngx-star-rating>
                         </div>
                     </div>
                     <div class="star">
                         <div class="cont">
                             <p>Services</p>
                         </div>
-                        <div class="progres-bar">
-                            <span style=" background-color: black;" [style.width.%]="oneStarRatingBarValue"></span>
+                        <div class="progres-star">
+                            <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'"
+                                [disabled]="true" [disabled]=true></ngx-star-rating>
                         </div>
                     </div>
                 </div>
@@ -217,7 +229,8 @@
                         <h2>{{review.title}}</h2>
                         <h3>{{review.commet}}</h3>
                         <div class="review-rating">
-                            <ngx-star-rating class="rating" [(ngModel)]="review.rating" [disabled]="true" [id]="review.id" [disabled]=true></ngx-star-rating>
+                            <ngx-star-rating class="rating" [(ngModel)]="review.rating" [disabled]="true"
+                                [id]="review.id" [disabled]=true></ngx-star-rating>
                         </div>
                     </div>
                 </div>
@@ -232,7 +245,8 @@
             <div class="row">
                 <div class="col-md-6" *ngFor="let link of videoList">
                     <div class="youtube-video">
-                        <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(link)" width="100%" height="350" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(link)" width="100%" height="350"
+                            frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
