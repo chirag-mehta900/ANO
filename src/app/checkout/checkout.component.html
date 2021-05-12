@@ -68,17 +68,18 @@
                             <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system"
                                 value="deliver-cab">
                             <label for="deliver-cab" class="">
-                                <div>
-                                    <img src="../../assets/images/checkout/pickup1.svg" alt="">
-                                </div>
-                                <div style="width: 100%;">
-                                    <input type="text" name="receive-address" id="receive-address"
-                                        placeholder="receive-address" disabled value={{orderDetails.pickupLocation}}>
-                                    <hr>
-                                    <input type="text" name="shop-address" id="shop-address" placeholder="shop-address"
-                                        disabled value={{shopDetails.addressLine1}}{{shopDetails.addressLine2}}>
-                                </div>
-                            </label><br>
+                            <div>
+                                <img src="../../assets/images/checkout/pickup1.svg" alt="">
+                            </div>
+                            <div style="width: 100%;">
+                                <input type="text" name="receive-address" id="receive-address"
+                                    placeholder="receive-address" disabled value={{orderDetails.pickupLocation}}>
+                                <hr>
+                                <input type="text" name="shop-address" id="shop-address" placeholder="shop-address"
+                                    disabled value={{shopDetails.addressLine1}},{{shopDetails.addressLine2}},{{shopDetails.city}},{{shopDetails.state}}>
+                            </div>
+                        </label><br>
+
                         </div>
                     </div>
                     <div *ngIf="isMail">
@@ -91,14 +92,16 @@
                             <input class="deliver-radio" type="radio" id="deliver-cab" name="deliver-system"
                                 value="deliver-cab">
                             <label for="deliver-cab" class="">
-                                <div>
-                                    <img src="../../assets/images/Location-white.svg" alt="">
-                                </div>
-                                <div style="width: 100%;">
-                                    <input type="text" name="shop-address" id="shop-address" placeholder="shop-address"
-                                        disabled value={{shopDetails.addressLine1}}{{shopDetails.addressLine2}}>
-                                </div>
-                            </label><br>
+
+                            <div>
+                                <img src="../../assets/images/Location-white.svg" alt="">
+                            </div>
+                            <div style="width: 100%;">
+                                <input type="text" name="shop-address" id="shop-address" placeholder="shop-address"
+                                    disabled value={{shopDetails.addressLine1}},{{shopDetails.addressLine2}},{{shopDetails.city}},{{shopDetails.state}}>
+                            </div>
+                        </label><br>
+
                         </div>
                     </div>
                     <div *ngIf="!isCollectFromStore">
@@ -132,15 +135,16 @@
                             <input class="deliver-radio" type="radio" id="deliver-mail" name="deliver-system"
                                 value="deliver-mail">
                             <label for="deliver-mail" class=" radio-labell">
-                                <div>
-                                    <img src="../../assets/images/Location-white.svg" alt="">
-                                </div>
-                                <div style="width: 100%;">
-                                    <input type="text" name="drop-off-address" id="drop-off-address"
-                                        placeholder="drop-off-address" disabled
-                                        value={{shopDetails.addressLine1}}{{shopDetails.addressLine2}}>
-                                </div>
-                            </label><br>
+
+                            <div>
+                                <img src="../../assets/images/Location-white.svg" alt="">
+                            </div>
+                            <div style="width: 100%;">
+                                <input type="text" name="drop-off-address" id="drop-off-address"
+                                    placeholder="drop-off-address" disabled value={{shopDetails.addressLine1}},{{shopDetails.addressLine2}},{{shopDetails.city}},{{shopDetails.state}}>
+                            </div>
+                        </label><br>
+
                         </div>
                     </div>
                 </div>
