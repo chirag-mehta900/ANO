@@ -128,6 +128,9 @@ export class ShopComponent implements OnInit {
   currentImageUrl: any = '';
   averageRating: number;
   averageCalculateRating: number;
+  average_CostEffectivenessRating: number;
+  average_serviceRating: number;
+
   ratings: any[];
   //To Count No of star
   oneStar = 0;
@@ -241,19 +244,14 @@ export class ShopComponent implements OnInit {
         this.shop.push(data['data']);
         console.log(this.shop);
 
-        this.shop[0].links.forEach((e) => {
-          console.log(e);
-          var index = e.indexOf('=', 0);
-          var string = e.slice(index + 1, e.length);
-          console.log(string);
-          var url = 'https://www.youtube.com/embed/' + string;
-
-          this.videoList.push(url);
-        });
         console.log(this.videoList);
-
+        this.average_CostEffectivenessRating =
+          data['data'].average_CostEffectivenessRating;
+        this.average_serviceRating = data['data'].average_serviceRating;
         this.shopCommission = data['data'].shopCommision;
         this.averageRating = Math.round(data['data'].average_rating);
+        console.log(this.averageRating);
+
         this.ratings = data['data'].ratings;
         this.averageCalculateRating = parseInt(
           String((this.averageRating / 5) * 100)
@@ -267,6 +265,15 @@ export class ShopComponent implements OnInit {
         // }, 1000);
 
         this.calculateReviewBarValue();
+        this.shop[0].links.forEach((e) => {
+          console.log(e);
+          var index = e.indexOf('=', 0);
+          var string = e.slice(index + 1, e.length);
+          console.log(string);
+          var url = 'https://www.youtube.com/embed/' + string;
+
+          this.videoList.push(url);
+        });
       },
       (error) => {
         console.log(error);

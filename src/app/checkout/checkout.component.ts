@@ -245,7 +245,7 @@ export class CheckoutComponent implements OnInit {
   payapi(data) {
     this.common.pay(data).subscribe(
       (paymentData) => {
-        console.log(paymentData);
+        console.log(paymentData, 'newapi');
         this.clientSecret = paymentData['clientSecret'];
         console.log(this.clientSecret);
 
@@ -307,7 +307,8 @@ export class CheckoutComponent implements OnInit {
       var orderData = {
         currency: 'usd',
         paymentMethodId: '',
-        amount: Number((this.TotalAmountToPay * 100).toFixed(2)),
+        // amount: Number((this.TotalAmountToPay * 100).toFixed(2)),
+        amount: 100,
         paymentIntentId: '',
       };
 
