@@ -167,7 +167,7 @@ agm-map {
 }
 
 .review-name h4 {
-    font-size: 20px;
+    font-size: 25px;
     font-family: "Poppins-SemiBold";
     margin-bottom: 0px;
 }
@@ -184,10 +184,14 @@ agm-map {
 }
 
 .review-detal h3 {
-    font-size: 16px;
-    margin-bottom: 0px;
+    font-family: "Poppins-SemiBold";
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.review-detal p {
     font-family: "Poppins-Regular";
-    color: #6e798c;
+    font-size: 25px;
+    margin-bottom: 0px;
 }
 
 .review-name p {
@@ -356,11 +360,15 @@ agm-map {
     font-size: 30px;
     margin-bottom: 25px;
 }
+.review-photo {
+    display: flex;
+    align-items: center;
+}
 .review-photo img {
     border-radius: 50%;
     object-fit: cover;
-    height: 50px;
-    width: 50px;
+    height: 80px;
+    width: 80px;
 }
 .progres-star {
     margin-left: 90px;
