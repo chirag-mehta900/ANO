@@ -261,20 +261,22 @@
                     </div> -->
             </div>
         </div>
-        <div class="review-user">
-            <div class="review-box" *ngFor="let review of ratings">
-                <div class="review-photo">
-                    <img src={{review.user_image}} alt="" width="50px" height="50px">
-                </div>
-                <div class="review-detal">
-                    <div class="review-name">
-                        <h4>{{review.user_name}}</h4>
-                        <p>01/20/2021, 09:16 AM</p>
+        <div class="container">
+            <div class="review-user">
+                <div class="review-box" *ngFor="let review of ratings">
+                    <div class="review-photo">
+                        <img src="../../assets/images/shop/comment_user_icone.png" alt="" width="50px" height="50px">
                     </div>
-                    <h2>{{review.title}}</h2>
-                    <h3>{{review.commet}}</h3>
-                    <div class="review-rating">
-                        <ngx-star-rating class="rating" [(ngModel)]="review.rating" [disabled]="true" [id]="review.id" [disabled]=true></ngx-star-rating>
+                    <div class="review-detal">
+                        <div class="review-name">
+                            <h4>{{review.user_name}}</h4>
+                            <p>01/20/2021, 09:16 AM</p>
+                        </div>
+                        <h3>{{review.title}}</h3>
+                        <p>{{review.commet}}</p>
+                        <div class="review-rating">
+                            <ngx-star-rating class="rating" [(ngModel)]="review.rating" [disabled]="true" [id]="review.id" [disabled]=true></ngx-star-rating>
+                        </div>
                     </div>
                 </div>
             </div>
