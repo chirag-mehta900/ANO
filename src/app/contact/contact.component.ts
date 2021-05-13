@@ -18,11 +18,10 @@ export class ContactComponent implements OnInit {
   Filter: boolean = false;
 
   Icon = {
-    url:
-      'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/MicrosoftTeams-image%20(8).png?alt=media&token=6daea4dc-bc59-425f-8862-c2c407b6939a',
+    url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/MicrosoftTeams-image%20(8).png?alt=media&token=6daea4dc-bc59-425f-8862-c2c407b6939a',
     scaledSize: {
-      width: 50,
-      height: 40,
+      width: 40,
+      height: 50,
     },
   };
   styles: any[] = [];
@@ -41,8 +40,7 @@ export class ContactComponent implements OnInit {
     lat: 0,
     lng: 0,
     Icon: {
-      url:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
+      url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
       scaledSize: {
         width: 200,
         height: 100,
