@@ -130,6 +130,8 @@ export class ShopComponent implements OnInit {
   averageCalculateRating: number;
   average_CostEffectivenessRating: number;
   average_serviceRating: number;
+  locationReview: number;
+  responseReview: number;
 
   ratings: any[];
   //To Count No of star
@@ -245,9 +247,19 @@ export class ShopComponent implements OnInit {
         console.log(this.shop);
 
         console.log(this.videoList);
-        this.average_CostEffectivenessRating =
-          data['data'].average_CostEffectivenessRating;
-        this.average_serviceRating = data['data'].average_serviceRating;
+        this.average_serviceRating = Math.round(
+          data['data'].average_serviceRating
+        );
+
+        this.average_CostEffectivenessRating = Math.round(
+          data['data'].average_CostEffectivenessRating
+        );
+        this.locationReview = Math.round(data['data'].average_LocationRating);
+        this.responseReview = Math.round(data['data'].average_ResponseRating);
+
+        console.log(this.locationReview);
+        console.log(this.responseReview);
+
         this.shopCommission = data['data'].shopCommision;
         this.averageRating = Math.round(data['data'].average_rating);
         console.log(this.averageRating);
