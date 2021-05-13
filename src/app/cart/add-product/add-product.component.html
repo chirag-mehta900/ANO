@@ -12,11 +12,10 @@
                 device1.invalid &&
                 (formSubmitted || device1.touched) 
                 }">
-                        <option value="select device"  disabled selected value> Select Device</option>
+                        <option> Select Device</option>
                         <option *ngFor="let device of deviceList" [value]="device.device.id">{{device.device.modelName}}</option>
                     </select>
-                    <div class="text-danger" *ngIf="device1.invalid &&
-                (formSubmitted || device1.touched)">
+                    <div class="text-danger" *ngIf="device">
                         Select Device
                     </div>
                 </div>
@@ -28,14 +27,13 @@
                 device1.invalid &&
                 (formSubmitted || device1.touched)  
                 }">
-                <option value="select problem"  disabled selected value> Select problem</option>
+                        <option> Select problem</option>
 
                         <option  *ngFor="let issue of issueList" [value]="issue.problem.id">
                             {{issue.problem.problemName}}
                         </option>
                     </select>
-                    <div class="text-danger" *ngIf="device1.invalid &&
-                (formSubmitted || device1.touched)">
+                    <div class="text-danger" *ngIf="problem">
                         Select Problem
                     </div>
                 </div>

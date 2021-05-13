@@ -31,6 +31,8 @@ export class AddProductComponent implements OnInit {
 
   issueList: any[];
   formSubmitted: boolean = false;
+  device: boolean = false;
+  problem: boolean = false;
   expectedPrice: any = '';
   files: File[] = [];
   shop;
@@ -198,54 +200,78 @@ export class AddProductComponent implements OnInit {
     }
   }
   addDevice() {
-    console.log(this.bookRepair);
+    this.device = false;
 
-    //check user is log in if log in then set user id
-    let isLogedIn = localStorage.getItem('token');
-    if (isLogedIn != null) {
-      this.bookRepair.user_id = JSON.parse(localStorage.getItem('user_id'));
+    this.problem = false;
+
+    console.log(this.bookRepair);
+    if (
+      this.bookRepair.device_id == null ||
+      this.bookRepair.device_id == 'Select Device' ||
+      this.bookRepair.problem_id == null ||
+      this.bookRepair.problem_id == 'Select problem'
+    ) {
+      if (
+        this.bookRepair.device_id == null ||
+        this.bookRepair.device_id == 'Select Device'
+      ) {
+        this.device = true;
+      }
+
+      if (
+        this.bookRepair.problem_id == null ||
+        this.bookRepair.problem_id == 'Select problem'
+      ) {
+        this.problem = true;
+      }
     } else {
-      this.bookRepair.user_id = JSON.parse(localStorage.getItem('user_id'));
-      this.bookRepair.cart_id = JSON.parse(localStorage.getItem('Tempcart'));
+      //check user is log in if log in then set user id
+      let isLogedIn = localStorage.getItem('token');
+      if (isLogedIn != null) {
+        this.bookRepair.user_id = JSON.parse(localStorage.getItem('user_id'));
+      } else {
+        this.bookRepair.user_id = JSON.parse(localStorage.getItem('user_id'));
+        this.bookRepair.cart_id = JSON.parse(localStorage.getItem('Tempcart'));
+      }
+
+      //set Cart_id if user is not log in
+      // this.bookRepair.cart_id = localStorage.getItem('cart_id');
+
+      //set device name in display object
+      this.deviceList.forEach((element) => {
+        if (element.device.id == this.bookRepair.device_id) {
+          this.addedDeviceProblemToDisplayInCart.deviceName =
+            element.device.modelName;
+          this.addedDeviceProblemToDisplayInCart.deviceId = element.device_id;
+        }
+      });
+
+      //set problem name in display object
+      this.issueList.forEach((element) => {
+        if (element.problem.id == this.bookRepair.problem_id) {
+          this.addedDeviceProblemToDisplayInCart.problemName =
+            element.problem.problemName;
+          this.addedDeviceProblemToDisplayInCart.problemId = element.problem.id;
+        }
+      });
+      console.log(this.bookRepair);
+      this.shopService.addCartData(this.bookRepair).subscribe(
+        (data) => {
+          console.log(data);
+          console.log(data['data'][0]);
+          console.log(data['data'].id);
+          localStorage.setItem('cart_id', data['data'].cart_id);
+          this.activeModal.close(data['data'][0]);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+      // console.log(this.bookRepair.cart_id);
+      // console.log('obj', this.addedDeviceProblemToDisplayInCart);
+      // console.log(this.bookRepair);
+      // this.activeModal.close(this.addedDeviceProblemToDisplayInCart);
     }
-
-    //set Cart_id if user is not log in
-    // this.bookRepair.cart_id = localStorage.getItem('cart_id');
-
-    //set device name in display object
-    this.deviceList.forEach((element) => {
-      if (element.device.id == this.bookRepair.device_id) {
-        this.addedDeviceProblemToDisplayInCart.deviceName =
-          element.device.modelName;
-        this.addedDeviceProblemToDisplayInCart.deviceId = element.device_id;
-      }
-    });
-
-    //set problem name in display object
-    this.issueList.forEach((element) => {
-      if (element.problem.id == this.bookRepair.problem_id) {
-        this.addedDeviceProblemToDisplayInCart.problemName =
-          element.problem.problemName;
-        this.addedDeviceProblemToDisplayInCart.problemId = element.problem.id;
-      }
-    });
-    console.log(this.bookRepair);
-    this.shopService.addCartData(this.bookRepair).subscribe(
-      (data) => {
-        console.log(data);
-        console.log(data['data'][0]);
-        console.log(data['data'].id);
-        localStorage.setItem('cart_id', data['data'].cart_id);
-        this.activeModal.close(data['data'][0]);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-
-    // console.log(this.bookRepair.cart_id);
-    // console.log('obj', this.addedDeviceProblemToDisplayInCart);
-    // console.log(this.bookRepair);
-    // this.activeModal.close(this.addedDeviceProblemToDisplayInCart);
   }
 }
