@@ -86,8 +86,7 @@ export class MappageComponent implements OnInit {
     lat: 0,
     lng: 0,
     Icon: {
-      url:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
+      url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
       scaledSize: {
         width: 200,
         height: 100,
@@ -134,6 +133,7 @@ export class MappageComponent implements OnInit {
     this.Filter = false;
     localStorage.setItem('filter', JSON.stringify(this.Filter));
     this.styles = this.mapService.getMapStyle();
+    console.log(this.styles);
 
     this.Configs = JSON.parse(localStorage.getItem('deviceProblem') || '[]');
     console.log(this.Configs['device']);
@@ -379,8 +379,7 @@ export class MappageComponent implements OnInit {
                   fontSize: '20px',
                 },
                 icon: {
-                  url:
-                    'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+                  url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
                   scaledSize: {
                     width: 100,
                     height: 70,
@@ -528,8 +527,7 @@ export class MappageComponent implements OnInit {
                 fontSize: '20px',
               },
               icon: {
-                url:
-                  'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+                url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
                 scaledSize: {
                   width: 100,
                   height: 70,

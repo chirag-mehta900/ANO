@@ -65,8 +65,7 @@ export class CartComponent implements OnInit {
 
   ourmark = {
     icon: {
-      url:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/pin.svg?alt=media&token=6de944f2-889f-4658-8d86-f6fce983ac5c',
+      url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/pin.svg?alt=media&token=6de944f2-889f-4658-8d86-f6fce983ac5c',
       scaledSize: {
         width: 30,
         height: 30,
@@ -419,9 +418,8 @@ export class CartComponent implements OnInit {
               // 2. \d+: Match one or more numbers
               // 3. (?:\.\d+)?: Optional decimal point. ?: denotes non-capturing group.
               // 4. g flag: To get all matches
-              this.distances = this.distanceInMiles.match(
-                /[+-]?\d+(?:\.\d+)?/g
-              );
+              this.distances =
+                this.distanceInMiles.match(/[+-]?\d+(?:\.\d+)?/g);
               this.deliveryPricess = this.distances * 0.6;
               this.deliveryPricess = Number(this.deliveryPricess.toFixed(2));
 
@@ -741,6 +739,8 @@ export class CartComponent implements OnInit {
 
     this.shopService.getTimeByDate(getTimeObj).subscribe(
       (data) => {
+        console.log(data);
+
         this.today = new Date();
         let hh = this.today.getHours();
         let mm = this.today.getMinutes();
@@ -749,9 +749,12 @@ export class CartComponent implements OnInit {
         data['data'].forEach((element) => {
           var hour = new Date('1970-01-01 ' + element.startTime);
           if (hour.getHours() > hh) {
-            this.timeList.push(element);
+            if (element.status == 'AVAILABLE') {
+              this.timeList.push(element);
+            }
           }
         });
+        console.log(this.timeList);
 
         if (this.timeList.length == 0) {
           console.log('empty');
@@ -799,7 +802,9 @@ export class CartComponent implements OnInit {
     this.shopService.getTimeByDate(getTimeObj).subscribe(
       (data) => {
         data['data'].forEach((element) => {
-          this.timeList.push(element);
+          if (element.status == 'AVAILABLE') {
+            this.timeList.push(element);
+          }
         });
         console.log(this.timeList);
 
