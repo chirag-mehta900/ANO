@@ -83,8 +83,7 @@ export class GetAllShopComponent implements OnInit {
     lat: 0,
     lng: 0,
     Icon: {
-      url:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
+      url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
       scaledSize: {
         width: 200,
         height: 100,
@@ -228,9 +227,8 @@ export class GetAllShopComponent implements OnInit {
     this.devicelist = JSON.parse(localStorage.getItem('deviceList') || '[]');
     console.log(this.devicelist[this.Configs['device']]);
 
-    this.display[0].Device = this.devicelist[
-      this.Configs['device'] - 1
-    ].full_name;
+    this.display[0].Device =
+      this.devicelist[this.Configs['device'] - 1].full_name;
 
     for (var i = 0; i < this.prolist.length; i++) {
       if (this.prolist[i].problemId == this.Configs['problem']) {
@@ -325,8 +323,7 @@ export class GetAllShopComponent implements OnInit {
             latitude: this.newShop[i].latitude,
             longitude: this.newShop[i].longitude,
             icon: {
-              url:
-                'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/MicrosoftTeams-image%20(8).png?alt=media&token=6daea4dc-bc59-425f-8862-c2c407b6939a',
+              url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/MicrosoftTeams-image%20(8).png?alt=media&token=6daea4dc-bc59-425f-8862-c2c407b6939a',
               scaledSize: {
                 width: 40,
                 height: 50,
@@ -560,8 +557,7 @@ export class GetAllShopComponent implements OnInit {
                 fontSize: '20px',
               },
               icon: {
-                url:
-                  'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+                url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
                 scaledSize: {
                   width: 100,
                   height: 70,

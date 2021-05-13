@@ -256,10 +256,8 @@ export class BookRepairComponent implements OnInit {
             localStorage.removeItem('Shoplist');
 
             this.Data.forEach((element) => {
-              console.log(element);
               if (element.average_rating != 0)
                 element.average_rating = Math.round(element.average_rating);
-              console.log(element.average_rating);
             });
             localStorage.setItem('Shoplist', JSON.stringify(this.Data));
             localStorage.setItem(
@@ -279,8 +277,7 @@ export class BookRepairComponent implements OnInit {
                   fontSize: '20px',
                 },
                 icon: {
-                  url:
-                    'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
+                  url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
                   scaledSize: {
                     width: 100,
                     height: 70,

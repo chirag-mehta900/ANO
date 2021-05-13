@@ -196,9 +196,6 @@ export class MappageComponent implements OnInit {
     );
     console.log(this.display);
 
-    this.Marker = JSON.parse(localStorage.getItem('shopmarker') || '[]');
-    console.log(this.Marker);
-
     this.Shoplist = JSON.parse(localStorage.getItem('Shoplist') || '[]');
 
     if (this.Shoplist.length == 0) {
@@ -256,32 +253,34 @@ export class MappageComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
-
-        if (this.Location.lat == 0 && this.Location.lng == 0) {
-          this.Location.lat = 33.448376;
-          this.Location.lng = -112.074036;
-
-          this.lat = this.Location.lat;
-          this.lng = this.Location.lng;
-          localStorage.setItem('Location', JSON.stringify(this.Location));
-
-          this.mapService
-            .getArea(this.Location.lat, this.Location.lng)
-            .subscribe(
-              (data: any) => {
-                this.area = data.results[0].formatted_address;
-                localStorage.setItem('Address', JSON.stringify(this.area));
-
-                console.log(this.area);
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
-        }
       }
     );
+
+    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+
+    if (this.Location.lat == 0 && this.Location.lng == 0) {
+      this.Location.lat = 33.448376;
+      this.Location.lng = -112.074036;
+
+      this.lat = this.Location.lat;
+      this.lng = this.Location.lng;
+      localStorage.setItem('Location', JSON.stringify(this.Location));
+
+      this.mapService.getArea(this.Location.lat, this.Location.lng).subscribe(
+        (data: any) => {
+          this.area = data.results[0].formatted_address;
+          localStorage.setItem('Address', JSON.stringify(this.area));
+
+          console.log(this.area);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+
+    this.Marker = JSON.parse(localStorage.getItem('shopmarker') || '[]');
+    console.log(this.Marker);
 
     localStorage.setItem('Location', JSON.stringify(this.Location));
     this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
@@ -294,7 +293,7 @@ export class MappageComponent implements OnInit {
 
   async handleAddressChange(address: any) {
     this.searchshop = JSON.parse(localStorage.getItem('deviceProblem') || '[]');
-    console.log(this.searchshop);
+    console.log(this.searchshop, 'searchshopp');
     this.Marker.length = 0;
     console.log(address);
     this.area = address;
