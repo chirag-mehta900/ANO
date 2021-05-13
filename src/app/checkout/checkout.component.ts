@@ -163,6 +163,15 @@ export class CheckoutComponent implements OnInit {
         this.orderDetails = data['data']['order'];
         this.detail = data['data']['order'].details;
         console.log(this.orderDetails);
+        this.orderDetails.startTime = this.tConvert(
+          this.orderDetails.startTime
+        );
+        console.log(this.orderDetails.startTime);
+
+        this.orderDetails.expectedDelivery = this.tConvert(
+          this.orderDetails.expectedDelivery
+        );
+        console.log(this.orderDetails.expectedDelivery);
 
         this.TotalAmountToPay = this.orderDetails.TotalAmountToPay;
         console.log(this.TotalAmountToPay);
@@ -203,6 +212,29 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
+  tConvert(time) {
+    if (time) {
+      // Check correct time format and split into components
+      time = time
+        .toString()
+        .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+      if (time.length > 1) {
+        // If time format correct
+        time = time.slice(1); // Remove full string match value
+        time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+        time[0] = +time[0] % 12 || 12; // Adjust hours
+      }
+
+      var newTime = '';
+      time.forEach((item, index) => {
+        if (index !== 3) {
+          newTime = newTime + item;
+        }
+      });
+      return newTime; // return adjusted time or original string
+    }
+  }
   getData() {
     this.CardInfo = new FormGroup({
       card_number: new FormControl(null, Validators.required),
