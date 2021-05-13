@@ -105,9 +105,73 @@
     </div> -->
     <div class="reviews">
         <div class="text-center">
-            <h2>Review & Ratings</h2>
+            <h2>Review</h2>
         </div>
         <div class="container">
+            <div class="ratings-box">
+                <div class="row">
+                    <div class="col-md-6" style="display: grid; justify-content: end;">
+                        <div class="average-ratings">
+                            <div class="average-figure">
+                                <h2>4.5</h2>
+                            </div>
+                            <div class="average-start">
+                                <h3>Excellent <span>( 56,989 Review )</span></h3>
+                                <div class="cont">
+                                    <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="avg-que">
+                            <p>We believe in customer satisfaction</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="display: grid; justify-content: center;">
+                        <div class="star">
+                            <div class="cont">
+                                <p>Services</p>
+                            </div>
+                            <div class="progres-star">
+                                <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
+                            </div>
+
+                        </div>
+                        <div class="star">
+                            <div class="cont">
+                                <p>Value</p>
+                            </div>
+                            <div class="progres-star">
+                                <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
+                            </div>
+
+                        </div>
+                        <div class="star">
+                            <div class="cont">
+                                <p>Location</p>
+                            </div>
+                            <div class="progres-star">
+                                <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
+                            </div>
+                        </div>
+                        <div class="star">
+                            <div class="cont">
+                                <p>Response</p>
+                            </div>
+                            <div class="progres-star">
+                                <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
+                            </div>
+                        </div>
+                        <div class="star">
+                            <div class="cont">
+                                <p>etc</p>
+                            </div>
+                            <div class="progres-star">
+                                <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <!-- <div class="col-md-3">
                     <div class="review-circle">
@@ -115,7 +179,7 @@
                         </circle-progress>
                     </div>
                 </div> -->
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <div class="star">
                         <div class="cont">
                             <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
@@ -202,23 +266,22 @@
                             <ngx-star-rating class="rating" [(ngModel)]="starValueFive" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
                         </div>
                     </div> -->
-                </div>
             </div>
-            <div class="review-user">
-                <div class="review-box" *ngFor="let review of ratings">
-                    <div class="review-photo">
-                        <img src={{review.user_image}} alt="" width="50px" height="50px">
+        </div>
+        <div class="review-user">
+            <div class="review-box" *ngFor="let review of ratings">
+                <div class="review-photo">
+                    <img src={{review.user_image}} alt="" width="50px" height="50px">
+                </div>
+                <div class="review-detal">
+                    <div class="review-name">
+                        <h4>{{review.user_name}}</h4>
+                        <p>01/20/2021, 09:16 AM</p>
                     </div>
-                    <div class="review-detal">
-                        <div class="review-name">
-                            <h4>{{review.user_name}}</h4>
-                            <p>01/20/2021, 09:16 AM</p>
-                        </div>
-                        <h2>{{review.title}}</h2>
-                        <h3>{{review.commet}}</h3>
-                        <div class="review-rating">
-                            <ngx-star-rating class="rating" [(ngModel)]="review.rating" [disabled]="true" [id]="review.id" [disabled]=true></ngx-star-rating>
-                        </div>
+                    <h2>{{review.title}}</h2>
+                    <h3>{{review.commet}}</h3>
+                    <div class="review-rating">
+                        <ngx-star-rating class="rating" [(ngModel)]="review.rating" [disabled]="true" [id]="review.id" [disabled]=true></ngx-star-rating>
                     </div>
                 </div>
             </div>
