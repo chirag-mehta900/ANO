@@ -7,7 +7,7 @@
                     <button><img (click)="close()" src="../../../assets/images/close.svg" alt=""></button>
                 </div>
                 <div class="optionselect">
-                    <select class="custom" name="brand" [(ngModel)]="bookRepair.device_id" (click)="getIssueList($event.target.value)" placeholder="Select Brand" #device1="ngModel" [ngClass]="{
+                    <select class="custom" name="brand" [(ngModel)]="bookRepair.device_id" (change)="getIssueList($event.target.value)" placeholder="Select Brand" #device1="ngModel" [ngClass]="{
                 'is-invalid':
                 device1.invalid &&
                 (formSubmitted || device1.touched) 
