@@ -279,6 +279,9 @@ export class MappageComponent implements OnInit {
       );
     }
 
+    this.area = JSON.parse(localStorage.getItem('Address') || '[]');
+    console.log(this.area);
+
     this.Marker = JSON.parse(localStorage.getItem('shopmarker') || '[]');
     console.log(this.Marker);
 
