@@ -19,6 +19,7 @@ export class ShopComponent implements OnInit {
   rating3 = 3;
   shop: any[] = [];
   lat: any;
+  ReviewCount: number = 0;
   lng: any;
   price: {} = {
     text: '$00',
@@ -132,6 +133,8 @@ export class ShopComponent implements OnInit {
   average_serviceRating: number;
   locationReview: number;
   responseReview: number;
+  reviewFlag: boolean = false;
+  showmapFlag: boolean = false;
 
   ratings: any[];
   //To Count No of star
@@ -181,22 +184,22 @@ export class ShopComponent implements OnInit {
 
     this.styles = this.mapService.getMapStyle();
 
-    this.profile.responseShopId.subscribe(
-      (id) => {
-        console.log(id, 'new');
-        if (id != 0) {
-          this.storeId = id;
-          this.getStoreDetail();
-        } else {
-          this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
-          console.log(this.storeId, 'new');
-          this.getStoreDetail();
-        }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    // this.profile.responseShopId.subscribe(
+    //   (id) => {
+    //     console.log(id, 'new');
+    //     if (id != 0) {
+    //       this.storeId = id;
+    //       this.getStoreDetail();
+    //     } else {
+    this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
+    console.log(this.storeId, 'new');
+    this.getStoreDetail();
+    //     }
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
     // this.ShopList = JSON.parse(localStorage.getItem('Shoplist') || '[]');
 
     // this.ShopList.forEach((e) => {
@@ -207,35 +210,6 @@ export class ShopComponent implements OnInit {
 
     console.log(this.shop, 'check');
 
-    this.deviceproblem = JSON.parse(
-      localStorage.getItem('deviceProblem') || '[]'
-    );
-    console.log(this.deviceproblem, 'problem');
-
-    // this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
-    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
-    console.log(this.Location);
-
-    this.lat = this.Location.lat;
-    this.lng = this.Location.lng;
-
-    this.origin.lat = this.Location.lat;
-    this.origin.lng = this.Location.lng;
-    console.log(this.origin);
-
-    this.markerOptions.destination.label.text =
-      '$' + this.shop[0].pricing[0].price.toString();
-    console.log(this.markerOptions);
-    ` `;
-    this.destination.lat = this.shop[0].latitude;
-    this.destination.lng = this.shop[0].longitude;
-
-    console.log(this.destination);
-
-    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
-
-    this.getAnoFee();
-    this.getBaseFee();
     //this.getCartData();
   }
   getStoreDetail() {
@@ -245,8 +219,11 @@ export class ShopComponent implements OnInit {
         console.log(data);
         this.shop.push(data['data']);
         console.log(this.shop);
+        this.shop.forEach((e) => {
+          e.openTime = this.tConvert(e.openTime);
+          e.closeTime = this.tConvert(e.closeTime);
+        });
 
-        console.log(this.videoList);
         this.average_serviceRating = Math.round(
           data['data'].average_serviceRating
         );
@@ -257,14 +234,20 @@ export class ShopComponent implements OnInit {
         this.locationReview = Math.round(data['data'].average_LocationRating);
         this.responseReview = Math.round(data['data'].average_ResponseRating);
 
-        console.log(this.locationReview);
-        console.log(this.responseReview);
-
         this.shopCommission = data['data'].shopCommision;
         this.averageRating = Math.round(data['data'].average_rating);
-        console.log(this.averageRating);
 
         this.ratings = data['data'].ratings;
+
+        this.ratings.forEach((e) => {
+          e.created_at = this.datetimeformat(e.created_at);
+        });
+        console.log(this.ratings);
+        this.ReviewCount = this.ratings.length;
+        if (this.ReviewCount > 0) {
+          this.reviewFlag = true;
+        }
+
         this.averageCalculateRating = parseInt(
           String((this.averageRating / 5) * 100)
         );
@@ -275,6 +258,7 @@ export class ShopComponent implements OnInit {
         //     clearInterval(interval);
         //   }
         // }, 1000);
+        this.remaining();
 
         this.calculateReviewBarValue();
         this.shop[0].links.forEach((e) => {
@@ -292,6 +276,76 @@ export class ShopComponent implements OnInit {
       }
     );
   }
+  remaining() {
+    this.deviceproblem = JSON.parse(
+      localStorage.getItem('deviceProblem') || '[]'
+    );
+    console.log(this.deviceproblem, 'problem');
+
+    // this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
+    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+    console.log(this.Location);
+
+    this.lat = this.Location.lat;
+    this.lng = this.Location.lng;
+
+    this.origin.lat = this.Location.lat;
+    this.origin.lng = this.Location.lng;
+    console.log(this.origin, 'origin');
+
+    this.destination.lat = this.shop[0].latitude;
+    this.destination.lng = this.shop[0].longitude;
+    console.log(this.destination, 'destination');
+
+    console.log(this.destination);
+
+    console.log(this.shop[0], 'check');
+
+    this.markerOptions.destination.label.text =
+      '$' + this.shop[0].details[0].price.toString();
+    console.log(this.markerOptions);
+
+    if (!this.filter) {
+      this.showmapFlag = true;
+    }
+    this.Location = JSON.parse(localStorage.getItem('Location') || '[]');
+
+    this.getAnoFee();
+    this.getBaseFee();
+  }
+  datetimeformat(data) {
+    var year = data.slice(0, 4);
+    var month = data.slice(5, 7);
+    var day = data.slice(8, 10);
+    var time = this.tConvert(data.slice(11, data.length));
+
+    return month + '-' + day + '-' + year + ' ' + ' ' + time;
+  }
+
+  tConvert(time) {
+    if (time) {
+      // Check correct time format and split into components
+      time = time
+        .toString()
+        .match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+      if (time.length > 1) {
+        // If time format correct
+        time = time.slice(1); // Remove full string match value
+        time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+        time[0] = +time[0] % 12 || 12; // Adjust hours
+      }
+
+      var newTime = '';
+      time.forEach((item, index) => {
+        if (index !== 3) {
+          newTime = newTime + item;
+        }
+      });
+      return newTime; // return adjusted time or original string
+    }
+  }
+
   calculateReviewBarValue() {
     this.ratings.forEach((element) => {
       switch (element.rating) {
