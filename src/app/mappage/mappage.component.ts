@@ -439,7 +439,6 @@ export class MappageComponent implements OnInit {
           console.log(data);
 
           this.deviceList = data['data'];
-          console.log(this.deviceList);
           localStorage.setItem('deviceList', JSON.stringify(this.deviceList));
         },
         (error) => {

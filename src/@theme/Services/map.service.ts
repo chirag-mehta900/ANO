@@ -46,6 +46,15 @@ export class MapService {
     },
     {
       featureType: 'administrative.land_parcel',
+      elementType: 'labels',
+      stylers: [
+        {
+          visibility: 'off',
+        },
+      ],
+    },
+    {
+      featureType: 'administrative.land_parcel',
       elementType: 'labels.text.fill',
       stylers: [
         {
@@ -59,6 +68,15 @@ export class MapService {
       stylers: [
         {
           color: '#eeeeee',
+        },
+      ],
+    },
+    {
+      featureType: 'poi',
+      elementType: 'labels.text',
+      stylers: [
+        {
+          visibility: 'off',
         },
       ],
     },
@@ -127,6 +145,15 @@ export class MapService {
     },
     {
       featureType: 'road.local',
+      elementType: 'labels',
+      stylers: [
+        {
+          visibility: 'off',
+        },
+      ],
+    },
+    {
+      featureType: 'road.local',
       elementType: 'labels.text.fill',
       stylers: [
         {
@@ -140,18 +167,6 @@ export class MapService {
       stylers: [
         {
           color: '#e5e5e5',
-        },
-      ],
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'labels.text',
-      stylers: [
-        {
-          color: '#afa655',
-        },
-        {
-          visibility: 'on',
         },
       ],
     },

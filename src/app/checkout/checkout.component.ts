@@ -168,6 +168,16 @@ export class CheckoutComponent implements OnInit {
         );
         console.log(this.orderDetails.startTime);
 
+        this.orderDetails.date = this.dateformat(this.orderDetails.date);
+
+        console.log(this.orderDetails.date);
+
+        this.orderDetails.repairedDate = this.dateformat(
+          this.orderDetails.repairedDate
+        );
+
+        console.log(this.orderDetails.repairedDate);
+
         this.orderDetails.expectedDelivery = this.tConvert(
           this.orderDetails.expectedDelivery
         );
@@ -212,6 +222,13 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
+  dateformat(data) {
+    var year = data.slice(0, 4);
+    var month = data.slice(5, 7);
+    var day = data.slice(8, 10);
+
+    return month + '-' + day + '-' + year;
+  }
   tConvert(time) {
     if (time) {
       // Check correct time format and split into components

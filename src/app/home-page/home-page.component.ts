@@ -114,8 +114,7 @@ export class HomePageComponent implements OnInit {
     lat: 0,
     lng: 0,
     Icon: {
-      url:
-        'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
+      url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
       scaledSize: {
         width: 200,
         height: 100,
@@ -209,11 +208,9 @@ export class HomePageComponent implements OnInit {
     this.router.navigate(['about']);
   }
   DriverReq() {
-    var obj = this.driveForm.value;
-
-    console.log(obj);
+    console.log(this.driveForm.value);
     if (this.driveForm.valid) {
-      this.header.driverReq(obj).subscribe(
+      this.header.driverReq(this.driveForm.value).subscribe(
         (response) => {
           console.log(response);
           console.log(response['status']);

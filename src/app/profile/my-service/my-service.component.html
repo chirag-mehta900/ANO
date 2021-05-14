@@ -21,9 +21,12 @@
             </div>
             <hr class="title-filter-hr">
         </div>
-        <div class="if-service-empty">
+        <div class="if-service-empty" *ngIf="emptyorder">
             <img class="img-fluid" src="../../../assets/images/profile/undraw_empty_xct9 1.png" alt="">
             <p>Get your first Service!</p>
+        </div>
+        <div class="if-service-empty" *ngIf="loader">
+            <img class="img-fluid" src="../../../assets/images/profile/Loading.gif" alt="">
         </div>
         <div class="all-service-display" *ngFor="let order of orderList">
             <div class="order-id-date">

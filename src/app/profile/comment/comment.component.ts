@@ -38,11 +38,22 @@ export class CommentComponent implements OnInit {
         this.grandTotalOfShopCommissionFees =
           response['data'].grandTotalOfShopCommissionFees;
 
+        this.order.forEach((e) => {
+          e.repairedDate = this.dateformat(e.repairedDate);
+        });
         console.log(this.order, 'array');
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  dateformat(data) {
+    var year = data.slice(0, 4);
+    var month = data.slice(5, 7);
+    var day = data.slice(8, 10);
+
+    return month + '-' + day + '-' + year;
   }
 }
