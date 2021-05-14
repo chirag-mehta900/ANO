@@ -113,6 +113,7 @@ agm-map {
 
 .track-view-box {
   display: flex;
+  height: 65px;
 }
 
 .track-view-box h3 {
@@ -124,19 +125,15 @@ agm-map {
   height: 35px;
 }
 
-.track-view-box img {
-  height: 60px;
-  width: auto;
-}
-
 .track-view-address {
   display: flex;
   background-color: #000000;
   padding: 10px;
   border-radius: 5px;
   width: 350px;
-  margin-left: -8px;
+  margin-left: -10px;
   margin-top: -20px;
+  height: 60px;
 }
 
 .track-view-address h3 {
@@ -146,4 +143,26 @@ agm-map {
   font-family: "Poppins-Regular";
   color: #ffffff;
   margin-bottom: 0px;
+}
+
+.loc-none {
+  height: 20px;
+  width: auto;
+  position: relative;
+  top: 10px;
+}
+
+.locc-line {
+  height: 60px;
+  width: auto;
+  position: relative;
+  top: -30px;
+  z-index: 99;
+}
+
+.locc-final {
+  height: 60px;
+  width: auto;
+  position: relative;
+  top: -32px;
 }
