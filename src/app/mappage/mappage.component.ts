@@ -417,19 +417,7 @@ export class MappageComponent implements OnInit {
 
   shopDetail(id) {
     console.log(id);
-    // console.log(shop);
     this.profile.getShopId(id);
-
-    // localStorage.setItem('Shop', JSON.stringify(shop));
-    // let shopDetail = {
-    //   id: id,
-    //   distance: null,
-    // };
-    // this.storeInfo.forEach((element) => {
-    //   if (element.id == id) {
-    //     shopDetail.distance = element.distance;
-    //   }
-    // });
     this.router.navigate(['/shop', id]);
   }
   getBrandList() {
@@ -447,15 +435,6 @@ export class MappageComponent implements OnInit {
       );
     }
   }
-
-  // getDeviceList(event) {
-  //   this.headerService.getDeviceList(event.target.value).subscribe(
-  //     (data) => {
-  //       this.deviceList = data['data'];
-  //     },
-  //     (error) => {}
-  //   );
-  // }
 
   getIssueList(event) {
     let obj = {

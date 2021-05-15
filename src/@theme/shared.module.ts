@@ -18,6 +18,7 @@ import { ProfileService } from './Services/profile.service';
 import { UploadService } from './Services/upload.service';
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { TooltipModule } from 'ng2-tooltip-directive';
+import { MetaserviceService } from './Services/metaservice.service';
 const NB_Module = [
   NgbModule,
   SlickCarouselModule,
@@ -43,6 +44,7 @@ const NB_Module = [
     ShopService,
     UploadService,
     ProfileService,
+    MetaserviceService,
   ],
 })
 export class SharedModule {}

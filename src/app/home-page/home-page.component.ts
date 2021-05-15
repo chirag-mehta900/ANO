@@ -129,6 +129,8 @@ export class HomePageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.display.push(this.slider[0]);
+
     localStorage.setItem('filter', JSON.stringify(this.Filter));
     this.driveForm = new FormGroup({
       first_name: new FormControl(null, Validators.required),
@@ -188,7 +190,6 @@ export class HomePageComponent implements OnInit {
 
     //   // this.slider.push(this.Data[0].data);
     //   console.log(this.slider);
-    this.display.push(this.slider[0]);
     // });
 
     this.mapService.getArea(this.Location.lat, this.Location.lng).subscribe(
@@ -236,10 +237,6 @@ export class HomePageComponent implements OnInit {
     const modalRef = this.modalService.open(BookRepairComponent);
   }
 
-  // call() {
-  //   const modalRef = this.modalService.open(BookRepairComponent);
-  //   this.router.navigate(['']);
-  // }
   OnChange(obj: any) {
     this.display.pop();
     this.display.push(obj);
