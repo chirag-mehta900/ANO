@@ -41,7 +41,9 @@ export class MappageComponent implements OnInit {
   display = [
     {
       Device: null,
+      Deviceid: null,
       problem: null,
+      problemid: null,
     },
   ];
   location: any;
@@ -155,16 +157,20 @@ export class MappageComponent implements OnInit {
         console.log(e);
 
         this.display[0].Device = e.full_name;
+        this.display[0].Deviceid = e.id;
       }
     });
-    console.log(this.display);
 
     for (var i = 0; i < this.prolist.length; i++) {
       if (this.prolist[i].problemId == this.Configs['problem']) {
         console.log(this.prolist[i]);
         this.display[0].problem = this.prolist[i].problem;
+        this.display[0].problemid = this.prolist[i].problemId;
       }
     }
+    console.log(this.display, 'high');
+
+    localStorage.setItem('', JSON.stringify(this.display));
 
     // this.deviceList.forEach((e) => {
     //   console.log(e);

@@ -6,6 +6,7 @@ import { StoreTokenService } from 'src/@theme/Services/store-token.service';
 import { WarningComponent } from './warning/warning.component';
 import { UploadService } from 'src/@theme/Services/upload.service';
 import { MapService } from 'src/@theme/Services/map.service';
+import { HeaderService } from 'src/@theme/Services/header.service';
 import { BookRepairComponent } from '../header-module/book-repair/book-repair.component';
 import { ProfileService } from 'src/@theme/Services/profile.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -116,11 +117,20 @@ export class ShopComponent implements OnInit {
   };
   title = 'My first AGM project';
 
+  display = [
+    {
+      Device: null,
+      Deviceid: null,
+    },
+  ];
   colorTone = '#000';
   per = 78;
   storeId: any;
   ShopList: any[] = [];
   videoList: any[] = [];
+  Configs: any[] = [];
+  devicelist: any[] = [];
+  deviceList: any[];
 
   filter: any;
   deviceproblem: {};
@@ -174,6 +184,8 @@ export class ShopComponent implements OnInit {
     private mapService: MapService,
     private modalService: NgbModal,
     private profile: ProfileService,
+    private headerService: HeaderService,
+
     private router: Router,
     private sanitizer: DomSanitizer
   ) {
@@ -187,6 +199,25 @@ export class ShopComponent implements OnInit {
 
     this.styles = this.mapService.getMapStyle();
 
+    this.Configs = JSON.parse(localStorage.getItem('deviceProblem') || '[]');
+    console.log(this.Configs['device']);
+    console.log(this.Configs['problem']);
+    console.log(this.Configs);
+
+    this.devicelist = JSON.parse(localStorage.getItem('deviceList') || '[]');
+    console.log(this.devicelist);
+
+    this.devicelist.forEach((e) => {
+      if (e.id == this.Configs['device']) {
+        console.log(e);
+
+        this.display[0].Device = e.full_name;
+        this.display[0].Deviceid = e.id;
+      }
+    });
+
+    console.log(this.display);
+
     // this.profile.responseShopId.subscribe(
     //   (id) => {
     //     console.log(id, 'new');
@@ -197,6 +228,7 @@ export class ShopComponent implements OnInit {
     this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
     console.log(this.storeId, 'new');
     this.getStoreDetail();
+    this.Getdevices(this.storeId);
     //     }
     //   },
     //   (error) => {
@@ -239,6 +271,34 @@ export class ShopComponent implements OnInit {
     //this.getCartData();
   }
 
+  Getdevices(id) {
+    var obj = {
+      shop_id: id,
+    };
+    console.log(obj);
+    this.headerService.filterDevice(obj).subscribe(
+      (data) => {
+        console.log(data);
+        this.deviceList = data['data'];
+        console.log(this.deviceList);
+
+        // this.deviceLists.forEach((e) => {
+        //   if (e != null) {
+        //     this.deviceList.push(e);
+        //   }
+        // });
+        // debugger;
+        // console.log(this.deviceList);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  choosedevice(event) {
+    console.log(event);
+  }
   search(event) {
     console.log(event);
     this.searchShoplist.forEach((e) => {
