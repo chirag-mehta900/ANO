@@ -267,6 +267,12 @@ export class BookRepairComponent implements OnInit {
 
             for (var i = 0; i < this.Data.length; i++) {
               // console.log(this.Data[i].pricing[0].price);
+              // for (var j = 0; i < this.Data[i].details[j].length; j++) {
+              //   if (
+              //     this.bookRepair.device == this.Data[i].details[i].device_id
+              //   ) {
+              console.log(this.Data);
+
               this.shopmarker = {
                 latitude: this.Data[i].latitude,
                 longitude: this.Data[i].longitude,
@@ -286,6 +292,8 @@ export class BookRepairComponent implements OnInit {
               };
 
               this.Marker.push(this.shopmarker);
+              //   }
+              // }
             }
 
             localStorage.setItem('shopmarker', JSON.stringify(this.Marker));

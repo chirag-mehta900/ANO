@@ -3,8 +3,7 @@
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12" [styles]="styles">
             <!-- <agm-marker *ngFor="let s of shop" [latitude]="s.latitude" [longitude]="s.longitude" [label]="price" [iconUrl]="shopmark.icon"></agm-marker>
             <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="ourmark.icon"></agm-marker> -->
-            <agm-direction [origin]="origin" [destination]="destination" [markerOptions]="markerOptions"
-                [renderOptions]="renderOptions"></agm-direction>
+            <agm-direction [origin]="origin" [destination]="destination" [markerOptions]="markerOptions" [renderOptions]="renderOptions"></agm-direction>
         </agm-map>
     </div>
     <div class="bg-map" *ngIf="filter">
@@ -16,7 +15,10 @@
     <div class="filter">
         <div class="shop-filter">
             <div class="shop-filt-inp">
-                <input type="text" name="mapshop" id="shop" placeholder="Search Shop">
+                <input type="text" list="shops" name="mapshop" (change)="search($event.target.value)" id="shop" placeholder="Search Shop">
+                <datalist id="shops">
+                    <option *ngFor="let s of searchShoplist" value="{{s.shopName}}"><span>{{s.city}} {{s.city}} {{s.state}}</span></option>
+                  </datalist>
                 <!-- <button><img src="../../assets/images/Sliders.svg" alt=""></button> -->
             </div>
             <div class="shop-come">
@@ -28,8 +30,7 @@
                         <div class="detail-name">
                             <h2>{{store.shopName}}</h2>
                             <div class="cont">
-                                <ngx-star-rating class="rating" [(ngModel)]="averageRating" [id]="'rating3'"
-                                    [disabled]="true"></ngx-star-rating>
+                                <ngx-star-rating class="rating" [(ngModel)]="averageRating" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
                             </div>
                         </div>
 
@@ -184,8 +185,7 @@
                                 <h3 *ngIf="reviewFlag">Excellent </h3>
                                 <h3><span>( {{ReviewCount}} Review )</span></h3>
                                 <div class="cont">
-                                    <ngx-star-rating class="rating" [(ngModel)]="averageRating" [id]="'starValueFive'"
-                                        [disabled]="true" [disabled]=true></ngx-star-rating>
+                                    <ngx-star-rating class="rating" [(ngModel)]="averageRating" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
                                 </div>
                             </div>
                         </div>
@@ -199,8 +199,7 @@
                                 <p>Repair Service</p>
                             </div>
                             <div class="progres-star">
-                                <ngx-star-rating class="rating" [(ngModel)]="average_serviceRating"
-                                    [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
+                                <ngx-star-rating class="rating" [(ngModel)]="average_serviceRating" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
                             </div>
 
                         </div>
@@ -209,8 +208,7 @@
                                 <p>Cost Effectiveness</p>
                             </div>
                             <div class="progres-star">
-                                <ngx-star-rating class="rating" [(ngModel)]="average_CostEffectivenessRating"
-                                    [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
+                                <ngx-star-rating class="rating" [(ngModel)]="average_CostEffectivenessRating" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
                             </div>
 
                         </div>
@@ -219,8 +217,7 @@
                                 <p>Location</p>
                             </div>
                             <div class="progres-star">
-                                <ngx-star-rating class="rating" [(ngModel)]="locationReview" [id]="'starValueFive'"
-                                    [disabled]="true" [disabled]=true></ngx-star-rating>
+                                <ngx-star-rating class="rating" [(ngModel)]="locationReview" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
                             </div>
                         </div>
                         <div class="star">
@@ -228,8 +225,7 @@
                                 <p>Customer Support</p>
                             </div>
                             <div class="progres-star">
-                                <ngx-star-rating class="rating" [(ngModel)]="responseReview" [id]="'starValueFive'"
-                                    [disabled]="true" [disabled]=true></ngx-star-rating>
+                                <ngx-star-rating class="rating" [(ngModel)]="responseReview" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
                             </div>
                         </div>
 
@@ -346,8 +342,7 @@
                         <h3>{{review.title}}</h3>
                         <p>{{review.commet}}</p>
                         <div class="review-rating">
-                            <ngx-star-rating class="rating" [(ngModel)]="review.rating" [disabled]="true"
-                                [id]="review.id" [disabled]=true></ngx-star-rating>
+                            <ngx-star-rating class="rating" [(ngModel)]="review.rating" [disabled]="true" [id]="review.id" [disabled]=true></ngx-star-rating>
                         </div>
                     </div>
                 </div>
@@ -362,8 +357,7 @@
             <div class="row">
                 <div class="col-md-6" *ngFor="let link of videoList">
                     <div class="youtube-video">
-                        <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(link)" width="100%" height="350"
-                            frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(link)" width="100%" height="350" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
