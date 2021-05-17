@@ -83,11 +83,15 @@
     </div>
     <div class="search-devices">
         <div class="container">
-            <div class="device-and-title">
-                <h2>Service For <span>iphone 11 pro</span></h2>
+            <div class="device-and-title" *ngFor="let d of display">
+                <h2>Service For <span>{{d.Device}}</span></h2>
             </div>
             <div class="mobile-search-drop">
+                <input *ngFor="let s of display" type="text" list="devicelist" name="device" (change)="choosedevice($event.target.value)" id="device" value="{{s.Device}}">
+                <datalist id="devicelist">
+                    <option *ngFor="let s of deviceList" value="{{s.device.modelName}}"></option>
 
+                  </datalist>
             </div>
             <div class="all-services">
                 <div class="row">
