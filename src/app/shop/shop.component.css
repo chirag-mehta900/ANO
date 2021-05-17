@@ -402,3 +402,43 @@ agm-map {
     font-family: "Poppins-Regular";
     margin-bottom: 0px;
 }
+
+.search-devices {
+    margin-top: 50px;
+}
+.device-and-title {
+    text-align: center;
+}
+.device-and-title h2 {
+    font-family: "Poppins-SemiBold";
+    font-size: 40px;
+    margin-bottom: 0px;
+}
+.device-and-title h2 span {
+    color: #717a7e;
+}
+.all-services {
+    margin-top: 10px;
+}
+.service-box {
+    padding: 20px;
+    box-shadow: 0 0 11px #e7e7e7;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 20px;
+}
+.service-box h3 {
+    font-family: "Poppins-SemiBold";
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.service-box button {
+    font-family: "Poppins-SemiBold";
+    border: none;
+    background-color: #ffc542;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    display: block;
+    margin-top: 30px;
+}
