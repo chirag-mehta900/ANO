@@ -43,6 +43,9 @@ export class ShopComponent implements OnInit {
     user_id: null,
   };
 
+  AllStore = [];
+  searchShoplist: any[] = [];
+
   Location = {
     lat: 0,
     lng: 0,
@@ -207,11 +210,54 @@ export class ShopComponent implements OnInit {
     //     this.shop.push(e);
     //   }
     // });
+    this.searchShoplist.length = 0;
+    this.mapService.getAllStore().subscribe(
+      (data) => {
+        this.AllStore = data['data'];
+        this.AllStore.forEach((e) => {
+          if (e.average_rating != 0) {
+            e.average_rating = Math.round(e.average_rating);
+          }
+          var searchobj = {
+            id: e.id,
+            shopName: e.shopName,
+            city: e.city,
+            state: e.state,
+          };
+          this.searchShoplist.push(searchobj);
+        });
+        console.log(this.AllStore, 'get all Store');
+        console.log(this.searchShoplist, 'Search Store');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
     console.log(this.shop, 'check');
 
     //this.getCartData();
   }
+
+  search(event) {
+    console.log(event);
+    this.searchShoplist.forEach((e) => {
+      if (event == e.shopName) {
+        console.log(e.id);
+        this.shopDetail(e.id);
+      }
+    });
+
+    // this.autocomplete = new google.maps.places.Autocomplete(input, {});
+  }
+
+  shopDetail(id) {
+    console.log(id);
+    this.profile.getShopId(id);
+    window.location.reload();
+    // this.router.navigate(['/shop', id]);
+  }
+
   getStoreDetail() {
     this.shopService.getStoreDetailById(this.storeId).subscribe(
       (data) => {
@@ -301,9 +347,16 @@ export class ShopComponent implements OnInit {
 
     console.log(this.shop[0], 'check');
 
-    this.markerOptions.destination.label.text =
-      '$' + this.shop[0].details[0].price.toString();
-    console.log(this.markerOptions);
+    for (var i = 0; i < this.shop[0].details.length; i++) {
+      if (
+        this.deviceproblem['device'] == this.shop[0].details[i].device_id &&
+        this.deviceproblem['problem'] == this.shop[0].details[i].problem_id
+      ) {
+        this.markerOptions.destination.label.text =
+          '$' + this.shop[0].details[i].price.toString();
+        console.log(this.markerOptions);
+      }
+    }
 
     if (!this.filter) {
       this.showmapFlag = true;

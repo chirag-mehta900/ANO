@@ -32,9 +32,12 @@ export class MappageComponent implements OnInit {
   prolist: any[] = [];
   issues: any[] = [];
   devicelist: any[] = [];
+  searchShoplist: any[] = [];
 
   shopmarker: object = {};
   autocomplete: any;
+  auto: any;
+
   display = [
     {
       Device: null,
@@ -106,6 +109,7 @@ export class MappageComponent implements OnInit {
     longitude: null,
     distanceMile: 10,
   };
+
   filterData = {
     device_id: null,
     problem_id: null,
@@ -179,7 +183,7 @@ export class MappageComponent implements OnInit {
     //     console.log(e);
     //   }
     // });
-
+    this.searchShoplist.length = 0;
     this.mapService.getAllStore().subscribe(
       (data) => {
         this.AllStore = data['data'];
@@ -187,13 +191,22 @@ export class MappageComponent implements OnInit {
           if (e.average_rating != 0) {
             e.average_rating = Math.round(e.average_rating);
           }
+          var searchobj = {
+            id: e.id,
+            shopName: e.shopName,
+            city: e.city,
+            state: e.state,
+          };
+          this.searchShoplist.push(searchobj);
         });
         console.log(this.AllStore, 'get all Store');
+        console.log(this.searchShoplist, 'Search Store');
       },
       (error) => {
         console.log(error);
       }
     );
+
     console.log(this.display);
 
     this.Shoplist = JSON.parse(localStorage.getItem('Shoplist') || '[]');
@@ -415,6 +428,17 @@ export class MappageComponent implements OnInit {
     );
   }
 
+  search(event) {
+    console.log(event);
+    this.searchShoplist.forEach((e) => {
+      if (event == e.shopName) {
+        console.log(e.id);
+        this.shopDetail(e.id);
+      }
+    });
+
+    // this.autocomplete = new google.maps.places.Autocomplete(input, {});
+  }
   shopDetail(id) {
     console.log(id);
     this.profile.getShopId(id);
