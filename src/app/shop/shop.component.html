@@ -3,13 +3,16 @@
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12" [styles]="styles">
             <!-- <agm-marker *ngFor="let s of shop" [latitude]="s.latitude" [longitude]="s.longitude" [label]="price" [iconUrl]="shopmark.icon"></agm-marker>
             <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="ourmark.icon"></agm-marker> -->
-            <agm-direction [origin]="origin" [destination]="destination" [markerOptions]="markerOptions" [renderOptions]="renderOptions"></agm-direction>
+            <agm-direction [origin]="origin" [destination]="destination" [markerOptions]="markerOptions1" [renderOptions]="renderOptions"></agm-direction>
         </agm-map>
     </div>
     <div class="bg-map" *ngIf="filter">
         <agm-map *ngFor="let s of shop" [latitude]="origin.lat" [longitude]="origin.lng" [zoom]="10" [styles]="styles">
-            <agm-marker [latitude]="origin.lat" [longitude]="origin.lng" [iconUrl]="ourmark.icon"></agm-marker>
-            <agm-marker [latitude]="s.latitude" [longitude]="s.longitude" [iconUrl]="shopmark.icon"></agm-marker>
+
+            <agm-direction [origin]="origin" [destination]="destination" [markerOptions]="markerOptions2" [renderOptions]="renderOptions"></agm-direction>
+
+            <!-- <agm-marker [latitude]="origin.lat" [longitude]="origin.lng" [iconUrl]="ourmark.icon"></agm-marker>
+            <agm-marker [latitude]="s.latitude" [longitude]="s.longitude" [iconUrl]="shopmark.icon"></agm-marker> -->
         </agm-map>
     </div>
     <div class="filter">
@@ -35,15 +38,12 @@
                         </div>
 
                         <div>
-                            <p>Start time - {{store.openTime}}</p>
-                        </div>
-                        <div>
-                            <p>Close time - {{store.closeTime}}</p>
+                            <p>Timing {{store.openTime}} - {{store.closeTime}}</p>
                         </div>
                         <div class="detail-name2">
                             <div class="dis-f">
                                 <img src="../../assets/images/Icon awesome-car.svg" alt="">
-                                <p>{{storeId.distance | number : '1.2-2'}}</p>
+                                <p>{{distance}}</p>
                             </div>
                             <div class="dis-f">
                                 <img src="../../assets/images/Call.svg" alt="">
@@ -53,7 +53,13 @@
                         <div class="shop-location">
                             <div class="location">
                                 <img src="../../assets/images/location.svg" alt="">
-                                <p>{{store.addressLine1}} , {{store.addressLine2}}</p>
+                                <div style="display: grid;">
+                                    <p>{{store.addressLine1}} ,</p>
+                                    <p> {{store.addressLine2}},</p>
+                                    <p> {{store.city}},{{store.state}},{{store.zipCode}}</p>
+                                </div>
+
+
                             </div>
                             <!-- <p>{{store.description}}</p> -->
                         </div>
@@ -87,54 +93,37 @@
                 <h2>Service For <span>{{d.Device}}</span></h2>
             </div>
             <div class="mobile-search-drop">
-                <input *ngFor="let s of display" type="text" list="devicelist" name="device" (change)="choosedevice($event.target.value)" id="device" value="{{s.Device}}">
+
+                <ng-select name="brand" [(ngModel)]="display[0].Device" (change)="getIssue($event)" #device1="ngModel">
+                    <ng-option *ngFor="let brand of deviceList " (change)="getIssue($event)" value="{{brand.device_id}}">{{brand.device.modelName}}</ng-option>
+                </ng-select>
+
+                <!-- <input *ngFor="let s of display" type="text" list="devicelist" name="device" (change)="choosedevice($event.target.value)" id="device" value="{{s.Device}}">
                 <datalist id="devicelist">
                     <option *ngFor="let s of deviceList" value="{{s.device.modelName}}"></option>
 
-                  </datalist>
+                  </datalist> -->
             </div>
             <div class="all-services">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3" *ngFor="let i of issueList">
                         <div class="service-box">
-                            <h3>Screen Repair</h3>
-                            <h3>Price: <span>$45.00</span></h3>
-                            <button>Add To Cart</button>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="service-box">
-                            <h3>Screen Repair</h3>
-                            <h3>Price: <span>$45.00</span></h3>
-                            <button>Add To Cart</button>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="service-box">
-                            <h3>Screen Repair</h3>
-                            <h3>Price: <span>$45.00</span></h3>
-                            <button>Add To Cart</button>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="service-box">
-                            <h3>Screen Repair</h3>
-                            <h3>Price: <span>$45.00</span></h3>
-                            <button>Add To Cart</button>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="service-box">
-                            <h3>Screen Repair</h3>
-                            <h3>Price: <span>$45.00</span></h3>
-                            <button>Add To Cart</button>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="service-box">
-                            <h3>Screen Repair</h3>
-                            <h3>Price: <span>$45.00</span></h3>
-                            <button>Add To Cart</button>
+                            <h3>{{i.problem.problemName}}</h3>
+                            <h3>Price: <span>${{i.TotalAmount}}</span></h3>
+                            <ng-template #HtmlContent>
+                                <div class="pricing-fact">
+                                    <h5>Pricing Factors</h5>
+                                    <p>- Part Price Based on ANO’s Parts Lists (Price Scale) :
+                                        <span>${{i.price}}</span>
+                                    </p>
+                                    <p>- Base Fee : <span>${{i.ANOBaseFees}}</span></p>
+                                    <p>- ANO’s Commission Fee : <span>${{i.ANOCommissionFees}}</span></p>
+                                    <p>- Repair Shop Commission Fee :<span>${{i.ShopCommissionFees}} </span></p>
+
+                                </div>
+                            </ng-template>
+                            <img [tooltip]="HtmlContent" content-type="template" placement="right" theme="light" src="../../assets/images/checkout/outline.svg" alt="">
+                            <button (click)="Cart(i)">Add To Cart</button>
                         </div>
                     </div>
                 </div>
@@ -175,7 +164,7 @@
     </div> -->
     <div class="reviews">
         <div class="text-center">
-            <h2>Review</h2>
+            <h2>Reviews</h2>
         </div>
         <div class="container">
             <div class="ratings-box">
