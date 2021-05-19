@@ -109,7 +109,8 @@
                     <div class="col-md-3" *ngFor="let i of issueList">
                         <div class="service-box">
                             <h3>{{i.problem.problemName}}</h3>
-                            <h3>Price: <span>${{i.TotalAmount}}</span></h3>
+                            <div class="price-info-e">
+                                <h3>Price: <span>${{i.TotalAmount}}</span></h3>
                             <ng-template #HtmlContent>
                                 <div class="pricing-fact">
                                     <h5>Pricing Factors</h5>
@@ -123,6 +124,7 @@
                                 </div>
                             </ng-template>
                             <img [tooltip]="HtmlContent" content-type="template" placement="right" theme="light" src="../../assets/images/checkout/outline.svg" alt="">
+                            </div>
                             <button (click)="Cart(i)">Add To Cart</button>
                         </div>
                     </div>
