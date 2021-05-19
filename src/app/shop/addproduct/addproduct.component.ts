@@ -68,6 +68,8 @@ export class AddproductComponent implements OnInit {
     console.log(obj);
     this.headerService.getIssueListById(obj).subscribe(
       (data) => {
+        console.log(data);
+
         this.issueList = data['data'];
       },
       (error) => {

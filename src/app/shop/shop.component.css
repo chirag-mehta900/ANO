@@ -26,6 +26,29 @@
     width: 100%;
 }
 
+.pricing-fact {
+    display: grid;
+    text-align: left;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.pricing-fact h3 {
+    font-family: "Poppins-SemiBold" !important;
+    font-size: 20px;
+}
+
+.pricing-fact p {
+    font-family: "Poppins-Regular";
+    font-size: 15px;
+    margin-bottom: 0px;
+}
+
+.pricing-fact p span {
+    color: #ffc542;
+}
+
 .shop-filter button {
     border: none;
     background-color: #000;
@@ -188,6 +211,7 @@ agm-map {
     font-size: 18px;
     margin-bottom: 10px;
 }
+
 .review-detal p {
     font-family: "Poppins-Regular";
     font-size: 25px;
@@ -279,6 +303,7 @@ agm-map {
     position: relative;
     right: -62px;
 }
+
 .blur-div {
     background: #fff;
     background-size: cover;
@@ -360,44 +385,53 @@ agm-map {
     font-size: 30px;
     margin-bottom: 25px;
 }
+
 .review-photo {
     display: flex;
     align-items: center;
 }
+
 .review-photo img {
     border-radius: 50%;
     object-fit: cover;
     height: 80px;
     width: 80px;
 }
+
 .progres-star {
     margin-left: 90px;
 }
+
 .ratings-box {
     padding: 40px;
     border: 1px solid #000;
     border-radius: 50px;
 }
+
 .average-ratings {
     display: flex;
 }
+
 .average-figure h2 {
     font-family: "Poppins-SemiBold";
     font-size: 75px;
     margin-bottom: 0px;
     margin-right: 10px;
 }
+
 .average-start h3 {
     font-family: "Poppins-SemiBold";
     font-size: 25px;
     margin-bottom: 0px;
 }
+
 .average-start h3 span {
     font-family: "Poppins-Regular";
     font-weight: 100;
     font-size: 20px;
     padding-top: 10px;
 }
+
 .avg-que p {
     font-family: "Poppins-Regular";
     margin-bottom: 0px;
@@ -406,20 +440,25 @@ agm-map {
 .search-devices {
     margin-top: 50px;
 }
+
 .device-and-title {
     text-align: center;
 }
+
 .device-and-title h2 {
     font-family: "Poppins-SemiBold";
     font-size: 40px;
     margin-bottom: 0px;
 }
+
 .device-and-title h2 span {
     color: #717a7e;
 }
+
 .all-services {
     margin-top: 10px;
 }
+
 .service-box {
     padding: 20px;
     box-shadow: 0 0 11px #e7e7e7;
@@ -427,11 +466,13 @@ agm-map {
     border: none;
     margin-bottom: 20px;
 }
+
 .service-box h3 {
     font-family: "Poppins-SemiBold";
     font-size: 20px;
     margin-bottom: 10px;
 }
+
 .service-box button {
     font-family: "Poppins-SemiBold";
     border: none;

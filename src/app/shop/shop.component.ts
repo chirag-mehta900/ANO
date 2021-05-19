@@ -53,38 +53,19 @@ export class ShopComponent implements OnInit {
     Icon: {},
   };
 
-  ourmark = {
-    icon: {
-      url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
-      scaledSize: {
-        width: 90,
-        height: 110,
-      },
-    },
-  };
-
-  shopmark = {
-    icon: {
-      url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/MicrosoftTeams-image%20(8).png?alt=media&token=6daea4dc-bc59-425f-8862-c2c407b6939a',
-      scaledSize: {
-        width: 40,
-        height: 50,
-      },
-    },
-  };
-
   renderOptions = {
     suppressMarkers: true,
   };
 
-  markerOptions = {
+  markerOptions1 = {
     origin: {
-      icon: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/marker.svg?alt=media&token=09d05df3-5ad9-4f40-b130-f961683ad247',
-      draggable: true,
+      icon: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/pinwithoutshadow.svg?alt=media&token=079d6a6e-25ed-45a4-980f-6f928e2502b9',
+      draggable: false,
       size: {
         width: 10,
         height: 6,
       },
+      opacity: 0.9,
     },
     destination: {
       icon: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/shop-marker.png?alt=media&token=8e0836c0-f669-4ec6-8ad2-215739b2d56e',
@@ -93,6 +74,28 @@ export class ShopComponent implements OnInit {
         color: 'white',
         fontWeight: '500',
         fontSize: '20px',
+      },
+    },
+  };
+
+  markerOptions2 = {
+    origin: {
+      icon: {
+        url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/pinwithoutshadow.svg?alt=media&token=079d6a6e-25ed-45a4-980f-6f928e2502b9',
+        scaledSize: {
+          width: 90,
+          height: 110,
+        },
+      },
+    },
+
+    destination: {
+      icon: {
+        url: 'https://firebasestorage.googleapis.com/v0/b/foodorderingsystem-3e400.appspot.com/o/MicrosoftTeams-image%20(8).png?alt=media&token=6daea4dc-bc59-425f-8862-c2c407b6939a',
+        scaledSize: {
+          width: 40,
+          height: 50,
+        },
       },
     },
   };
@@ -138,12 +141,14 @@ export class ShopComponent implements OnInit {
   cartInfo: any = {};
   files: File[] = [];
   imageUploaded: any[] = [];
+  issueList: any[];
   imageEditFlag: boolean = false;
   currentImageUrl: any = '';
   averageRating: number;
   averageCalculateRating: number;
   average_CostEffectivenessRating: number;
   average_serviceRating: number;
+  distance: number;
   locationReview: number;
   responseReview: number;
   reviewFlag: boolean = false;
@@ -185,7 +190,6 @@ export class ShopComponent implements OnInit {
     private modalService: NgbModal,
     private profile: ProfileService,
     private headerService: HeaderService,
-
     private router: Router,
     private sanitizer: DomSanitizer
   ) {
@@ -296,6 +300,37 @@ export class ShopComponent implements OnInit {
     );
   }
 
+  getIssue(event) {
+    this.devicelist.forEach((e) => {
+      if (e.id == event) {
+        console.log(e);
+
+        this.display[0].Device = e.full_name;
+        this.display[0].Deviceid = e.id;
+      }
+    });
+
+    console.log(this.display);
+
+    console.log(event);
+    var issueobj = {
+      shop_id: this.shop[0].id,
+      device_id: event,
+    };
+
+    console.log(issueobj);
+
+    this.headerService.filterProblem(issueobj).subscribe(
+      (data) => {
+        this.issueList = data['data'];
+        console.log(this.issueList, 'issuelistss');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   choosedevice(event) {
     console.log(event);
   }
@@ -311,6 +346,68 @@ export class ShopComponent implements OnInit {
     // this.autocomplete = new google.maps.places.Autocomplete(input, {});
   }
 
+  Cart(event) {
+    console.log(event);
+
+    let getExpectedPrice = {
+      device_id: event.device_id,
+      problem_id: event.problem_id,
+      shop_id: event.shop_id,
+    };
+    console.log(getExpectedPrice);
+    this.shopService.getExpectedPrice(getExpectedPrice).subscribe(
+      (data) => {
+        console.log(data);
+
+        console.log(data['data']);
+        this.expectedresponse = data['data'];
+
+        this.bookRepair.ANOBaseFees = Number(
+          this.expectedresponse[0].ANOBaseFees
+        );
+        this.bookRepair.ANOCommissionFees =
+          this.expectedresponse[0].ANOCommissionFees;
+        this.bookRepair.ShopCommissionFees =
+          this.expectedresponse[0].ShopCommissionFees;
+        this.bookRepair.TotalAmount = this.expectedresponse[0].TotalAmount;
+        this.bookRepair.price = this.expectedresponse[0].price;
+        this.bookRepair.brand_id = this.expectedresponse[0].brand_id;
+        let isLogedIn = localStorage.getItem('token');
+        if (isLogedIn != null) {
+          this.bookRepair.user_id = JSON.parse(
+            localStorage.getItem('user_id') || '[]'
+          );
+        }
+
+        this.bookRepair.shop_id = this.expectedresponse[0].shop_id;
+        this.bookRepair.device_id = this.expectedresponse[0].device_id;
+        this.bookRepair.problem_id = this.expectedresponse[0].problem_id;
+
+        console.log(this.bookRepair, 'fresh');
+
+        this.shopService.addCartData(this.bookRepair).subscribe(
+          (data) => {
+            console.log(data, 'without login');
+            console.log(data['data']['cart_id'], 'cartid');
+
+            localStorage.setItem(
+              'Tempcart',
+              JSON.stringify(data['data'][0]['cart_id'])
+            );
+            console.log(data['data']);
+
+            this.router.navigate(['/cart']);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
   shopDetail(id) {
     console.log(id);
     this.profile.getShopId(id);
@@ -328,6 +425,7 @@ export class ShopComponent implements OnInit {
         this.shop.forEach((e) => {
           e.openTime = this.tConvert(e.openTime);
           e.closeTime = this.tConvert(e.closeTime);
+          e.mobileNumber = this.convertmobile(e.mobileNumber);
         });
 
         this.average_serviceRating = Math.round(
@@ -382,6 +480,15 @@ export class ShopComponent implements OnInit {
       }
     );
   }
+
+  convertmobile(phoneNumberString) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return '(' + match[1] + ')' + match[2] + '-' + match[3];
+    }
+    return null;
+  }
   remaining() {
     this.deviceproblem = JSON.parse(
       localStorage.getItem('deviceProblem') || '[]'
@@ -405,6 +512,22 @@ export class ShopComponent implements OnInit {
 
     console.log(this.destination);
 
+    var Data = {
+      toLat: this.origin.lat,
+      toLng: this.origin.lng,
+      fromLat: this.destination.lat,
+      fromLng: this.destination.lng,
+    };
+    console.log(Data, 'distance');
+
+    this.mapService.getDistanceInMile(Data).subscribe((data) => {
+      console.log(data);
+      var d = data['data'][0]['elements'][0].distance.text;
+      this.distance = Number(d.slice(0, d.length - 2));
+
+      console.log(this.distance);
+    });
+
     console.log(this.shop[0], 'check');
 
     for (var i = 0; i < this.shop[0].details.length; i++) {
@@ -412,9 +535,9 @@ export class ShopComponent implements OnInit {
         this.deviceproblem['device'] == this.shop[0].details[i].device_id &&
         this.deviceproblem['problem'] == this.shop[0].details[i].problem_id
       ) {
-        this.markerOptions.destination.label.text =
+        this.markerOptions1.destination.label.text =
           '$' + this.shop[0].details[i].price.toString();
-        console.log(this.markerOptions);
+        console.log(this.markerOptions1);
       }
     }
 
@@ -425,6 +548,7 @@ export class ShopComponent implements OnInit {
 
     this.getAnoFee();
     this.getBaseFee();
+    this.getIssue(this.Configs['device']);
   }
   datetimeformat(data) {
     var year = data.slice(0, 4);
