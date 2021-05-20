@@ -23,6 +23,7 @@
 
 .cont {
     display: flex;
+    position: absolute;
 }
 
 .dis-f {

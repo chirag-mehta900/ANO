@@ -178,10 +178,10 @@
                             </div>
                             <div class="average-start">
                                 <h3 *ngIf="reviewFlag">Excellent </h3>
-                                <h3><span>( {{ReviewCount}} Review )</span></h3>
-                                <div class="cont">
+                                <div class="average-start">
                                     <ngx-star-rating class="rating" [(ngModel)]="averageRating" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
                                 </div>
+                                <h3><span>( {{ReviewCount}} Review )</span></h3>
                             </div>
                         </div>
                         <div class="avg-que">

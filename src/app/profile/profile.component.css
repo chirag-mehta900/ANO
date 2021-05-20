@@ -74,7 +74,7 @@
 .profile-add {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: end;
 }
 
 .profile-add button {
