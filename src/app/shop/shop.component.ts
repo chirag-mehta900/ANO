@@ -301,6 +301,8 @@ export class ShopComponent implements OnInit {
   }
 
   getIssue(event) {
+    console.log(event);
+
     this.devicelist.forEach((e) => {
       if (e.id == event) {
         console.log(e);
@@ -324,6 +326,12 @@ export class ShopComponent implements OnInit {
       (data) => {
         this.issueList = data['data'];
         console.log(this.issueList, 'issuelistss');
+
+        if (this.issueList.length == 0) {
+          console.log(this.deviceList);
+          // this.getIssue(this.deviceList[0]);
+          this.againcall(this.deviceList[0].device_id);
+        }
       },
       (error) => {
         console.log(error);
@@ -331,9 +339,11 @@ export class ShopComponent implements OnInit {
     );
   }
 
-  choosedevice(event) {
-    console.log(event);
+  againcall(id) {
+    console.log(id);
+    this.getIssue(id);
   }
+
   search(event) {
     console.log(event);
     this.searchShoplist.forEach((e) => {
@@ -342,8 +352,6 @@ export class ShopComponent implements OnInit {
         this.shopDetail(e.id);
       }
     });
-
-    // this.autocomplete = new google.maps.places.Autocomplete(input, {});
   }
 
   Cart(event) {
