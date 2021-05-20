@@ -98,6 +98,7 @@ export class GetAllShopComponent implements OnInit {
   formSubmitted: boolean = false;
   AllStore = [];
   deviceList: any[] = [];
+  searchShoplist: any[] = [];
   issueList: any[] = [];
   brandList: [];
   bookRepair = {
@@ -136,6 +137,8 @@ export class GetAllShopComponent implements OnInit {
 
     this.styles = this.mapService.getMapStyle();
 
+    this.searchShoplist.length = 0;
+
     this.mapService.getAllStore().subscribe(
       (data) => {
         this.AllStore = data['data'];
@@ -144,8 +147,17 @@ export class GetAllShopComponent implements OnInit {
           if (e.average_rating != 0) {
             e.average_rating = Math.round(e.average_rating);
           }
+
+          var searchobj = {
+            id: e.id,
+            shopName: e.shopName,
+            city: e.city,
+            state: e.state,
+          };
+          this.searchShoplist.push(searchobj);
         });
         console.log(this.AllStore, 'get all Store');
+        console.log(this.searchShoplist, 'Search Store');
       },
       (error) => {
         console.log(error);
@@ -200,7 +212,6 @@ export class GetAllShopComponent implements OnInit {
                 this.area = data.results[0].formatted_address;
                 localStorage.setItem('Address', JSON.stringify(this.area));
                 this.shoplist(this.Location);
-
                 console.log(this.area);
               },
               (error) => {
@@ -289,6 +300,18 @@ export class GetAllShopComponent implements OnInit {
 
     const input = document.getElementById('pac-input') as HTMLInputElement;
     this.autocomplete = new google.maps.places.Autocomplete(input, {});
+  }
+
+  search(event) {
+    console.log(event);
+    this.searchShoplist.forEach((e) => {
+      if (event == e.shopName) {
+        console.log(e.id);
+        this.shopDetail(e.id);
+      }
+    });
+
+    // this.autocomplete = new google.maps.places.Autocomplete(input, {});
   }
 
   shoplist(latlong) {

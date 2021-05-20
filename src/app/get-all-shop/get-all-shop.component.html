@@ -10,8 +10,11 @@
     <div class="filter">
         <div class="shop-filter shop-in-box">
             <div class="shop-filt-inp">
-                <input type="text" name="mapshop" id="shop" placeholder="Search Shop">
-                <button (click)="filter()"><img src="../../assets/images/Sliders.svg" alt=""></button>
+                <input type="text" list="shops" name="mapshop" (change)="search($event.target.value)" id="shop" placeholder="Search Shop">
+                <datalist id="shops">
+                    <option *ngFor="let s of searchShoplist" value="{{s.shopName}}"><span>{{s.city}} {{s.city}} {{s.state}}</span></option>
+                  </datalist>
+                <input type="hidden" name="answer" id="shop-hidden"> <button (click)="filter()"><img src="../../assets/images/Sliders.svg" alt=""></button>
             </div>
 
             <div *ngIf="noshop" style="text-align: center;">
@@ -75,8 +78,7 @@
                         <div class="detail-name">
                             <h2>{{store.shopName}}</h2>
                             <div class="cont">
-                                <ngx-star-rating class="rating" [(ngModel)]="store.average_rating" [id]="'rating3'"
-                                    [disabled]="true"></ngx-star-rating>
+                                <ngx-star-rating class="rating" [(ngModel)]="store.average_rating" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
                             </div>
                         </div>
                         <div class="detail-name2">
@@ -107,9 +109,8 @@
     <div class="top-shop">
         <div class="container">
             <div class="text-center title-shop">
-                <h2>Top Shop</h2>
-                <p>ANO believes in serving its customers with the best experience ever. Get our App and enjoy a seamless
-                    experience. Our services are just easy to avail through your Smartphone. </p>
+                <h2>All Stores</h2>
+                <p>ANO believes in serving its customers with the best experience ever. Get our App and enjoy a seamless experience. Our services are just easy to avail through your Smartphone. </p>
             </div>
             <!-- <carousel [height]="245" [cellWidth]="320" [arrowsOutside]="true"> -->
             <div class="row">
@@ -122,8 +123,7 @@
                             <div class="detail-name">
                                 <h2>{{store.shopName}}</h2>
                                 <div class="cont">
-                                    <ngx-star-rating class="rating" [(ngModel)]="store.average_rating" [id]="'rating3'"
-                                        [disabled]="true"></ngx-star-rating>
+                                    <ngx-star-rating class="rating" [(ngModel)]="store.average_rating" [id]="'rating3'" [disabled]="true"></ngx-star-rating>
                                 </div>
                             </div>
                             <div class="detail-name2">
@@ -157,9 +157,7 @@
                         <div class="experience-detail">
                             <h3>Get Service from your mobile</h3>
                             <p>Sign-up and get a free quote for your fix!!</p>
-                            <p>Just download the ANO app on your device. Schedule an appointment online at your desired
-                                location and time. If you are not nearby our branch, you can get your device repaired by
-                                dropping it at us! Get drop services just by
+                            <p>Just download the ANO app on your device. Schedule an appointment online at your desired location and time. If you are not nearby our branch, you can get your device repaired by dropping it at us! Get drop services just by
                                 logging in. So why to wait?</p>
                             <h4>Get the App</h4>
                             <div class="store">

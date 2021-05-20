@@ -38,10 +38,10 @@
                         </div>
 
                         <div>
-                            <p>Timing {{store.openTime}} - {{store.closeTime}}</p>
+                            <p>Timings: {{store.openTime}} - {{store.closeTime}}</p>
                         </div>
                         <div class="detail-name2">
-                            <div class="dis-f">
+                            <div class="dis-f" *ngIf="distance > 0">
                                 <img src="../../assets/images/Icon awesome-car.svg" alt="">
                                 <p>{{distance}}</p>
                             </div>
@@ -111,19 +111,19 @@
                             <h3>{{i.problem.problemName}}</h3>
                             <div class="price-info-e">
                                 <h3>Price: <span>${{i.TotalAmount}}</span></h3>
-                            <ng-template #HtmlContent>
-                                <div class="pricing-fact">
-                                    <h5>Pricing Factors</h5>
-                                    <p>- Part Price Based on ANO’s Parts Lists (Price Scale) :
-                                        <span>${{i.price}}</span>
-                                    </p>
-                                    <p>- Base Fee : <span>${{i.ANOBaseFees}}</span></p>
-                                    <p>- ANO’s Commission Fee : <span>${{i.ANOCommissionFees}}</span></p>
-                                    <p>- Repair Shop Commission Fee :<span>${{i.ShopCommissionFees}} </span></p>
+                                <ng-template #HtmlContent>
+                                    <div class="pricing-fact">
+                                        <h5>Pricing Factors</h5>
+                                        <p>- Part Price Based on ANO’s Parts Lists (Price Scale) :
+                                            <span>${{i.price}}</span>
+                                        </p>
+                                        <p>- Base Fee : <span>${{i.ANOBaseFees}}</span></p>
+                                        <p>- ANO’s Commission Fee : <span>${{i.ANOCommissionFees}}</span></p>
+                                        <p>- Repair Shop Commission Fee :<span>${{i.ShopCommissionFees}} </span></p>
 
-                                </div>
-                            </ng-template>
-                            <img [tooltip]="HtmlContent" content-type="template" placement="right" theme="light" src="../../assets/images/checkout/outline.svg" alt="">
+                                    </div>
+                                </ng-template>
+                                <img [tooltip]="HtmlContent" content-type="template" placement="right" theme="light" src="../../assets/images/checkout/outline.svg" alt="">
                             </div>
                             <button (click)="Cart(i)">Add To Cart</button>
                         </div>
