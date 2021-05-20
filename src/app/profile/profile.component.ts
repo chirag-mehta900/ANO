@@ -27,6 +27,10 @@ export class ProfileComponent implements OnInit {
     this.profile.getUserDetail().subscribe((data) => {
       console.log(data);
       this.Details.push(data['data']);
+      this.Details[0].mobileNumber = this.convertmobile(
+        this.Details[0].mobileNumber
+      );
+
       console.log(this.Details);
     });
 
@@ -45,6 +49,14 @@ export class ProfileComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+  convertmobile(phoneNumberString) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return '(' + match[1] + ')' + match[2] + '-' + match[3];
+    }
+    return null;
   }
 
   Changepsw() {

@@ -236,7 +236,7 @@ export class BookRepairComponent implements OnInit {
 
       this.formSubmitted = true;
       if (Repair.valid) {
-        this.bookRepair.distanceMile = 30;
+        this.bookRepair.distanceMile = 20;
         this.bookRepair.latitude = this.Location.lat;
         this.bookRepair.longitude = this.Location.lng;
         console.log(JSON.stringify(this.bookRepair));

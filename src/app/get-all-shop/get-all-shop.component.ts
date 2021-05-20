@@ -318,7 +318,7 @@ export class GetAllShopComponent implements OnInit {
     var obj = {
       latitude: latlong.lat,
       longitude: latlong.lng,
-      distanceMile: 10,
+      distanceMile: 20,
     };
 
     this.Shop.getallstore(obj).subscribe(
