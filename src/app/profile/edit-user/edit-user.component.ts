@@ -19,15 +19,26 @@ export class EditUserComponent implements OnInit {
       fname: new FormControl(null, Validators.required),
       lname: new FormControl(null, Validators.required),
     });
-
     this.Details = JSON.parse(localStorage.getItem('users') || '[]');
     console.log(this.Details);
+
+    this.Details[0].mobileNumber = this.convertmobile(
+      this.Details[0].mobileNumber
+    );
   }
 
   Cancel() {
     this.router.navigate(['profile']);
   }
 
+  convertmobile(phoneNumberString) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return '(' + match[1] + ')' + match[2] + '-' + match[3];
+    }
+    return null;
+  }
   save() {
     console.log(this.editprofile.value.fname);
     console.log(this.editprofile.value.lname);
