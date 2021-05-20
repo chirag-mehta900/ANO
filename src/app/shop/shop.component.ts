@@ -153,6 +153,7 @@ export class ShopComponent implements OnInit {
   responseReview: number;
   reviewFlag: boolean = false;
   showmapFlag: boolean = false;
+  notavailableFlag: boolean = false;
 
   ratings: any[];
   //To Count No of star
@@ -586,18 +587,31 @@ export class ShopComponent implements OnInit {
     });
 
     console.log(this.shop[0], 'check');
-
-    for (var i = 0; i < this.shop[0].details.length; i++) {
-      if (
-        this.deviceproblem['device'] == this.shop[0].details[i].device_id &&
-        this.deviceproblem['problem'] == this.shop[0].details[i].problem_id
-      ) {
-        this.markerOptions1.destination.label.text =
-          '$' + this.shop[0].details[i].price.toString();
-        console.log(this.markerOptions1);
+    this.notavailableFlag = false;
+    if (this.shop[0].details.length > 0) {
+      for (var i = 0; i < this.shop[0].details.length; i++) {
+        if (
+          this.deviceproblem['device'] == this.shop[0].details[i].device_id &&
+          this.deviceproblem['problem'] == this.shop[0].details[i].problem_id
+        ) {
+          this.markerOptions1.destination.label.text =
+            '$' + this.shop[0].details[i].price.toString();
+          console.log(this.markerOptions1);
+          this.notavailableFlag = true;
+        }
+        if (i == this.shop[0].details.length - 1 && !this.notavailableFlag) {
+          this.markerOptions1.destination.label.text =
+            '$' + this.shop[0].details[0].price.toString();
+          console.log(this.markerOptions1);
+        }
       }
-    }
+    } else {
+      console.log(this.deviceList);
 
+      this.markerOptions1.destination.label.text =
+        '$' + this.deviceList[0].price.toString();
+      console.log(this.markerOptions1);
+    }
     if (!this.filter) {
       this.showmapFlag = true;
     }
