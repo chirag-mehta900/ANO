@@ -355,6 +355,48 @@ export class ShopComponent implements OnInit {
   }
 
   Cart(event) {
+    console.log(this.shop);
+
+    this.check = JSON.parse(localStorage.getItem('filter') || '[]');
+
+    if (this.check) {
+      localStorage.removeItem('deviceProblem');
+      console.log('bookrepair remain');
+      console.log(this.check);
+
+      this.modalService.open(BookRepairComponent);
+    } else {
+      let isLogedIn = localStorage.getItem('token');
+      if (isLogedIn === null) {
+        this.product();
+      } else {
+        var obj = {
+          user_id: JSON.parse(localStorage.getItem('user_id') || '[]'),
+        };
+
+        this.shopService.getShopifromcart(obj).subscribe(
+          (data) => {
+            console.log(data);
+            console.log(data['data']['shop_id']);
+
+            if (
+              data['data']['shop_id'] == this.shop[0]['id'] ||
+              data['data']['shop_id'] == 0
+            ) {
+              console.log('same');
+              this.products(event);
+            } else {
+              this.modalService.open(WarningComponent);
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
+    }
+  }
+  products(event) {
     console.log(event);
 
     let getExpectedPrice = {
@@ -416,6 +458,7 @@ export class ShopComponent implements OnInit {
       }
     );
   }
+
   shopDetail(id) {
     console.log(id);
     this.profile.getShopId(id);
