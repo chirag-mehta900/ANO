@@ -148,7 +148,7 @@ export class ShopComponent implements OnInit {
   averageCalculateRating: number;
   average_CostEffectivenessRating: number;
   average_serviceRating: number;
-  distance: number;
+  distance: number = 0;
   locationReview: number;
   responseReview: number;
   reviewFlag: boolean = false;
@@ -222,23 +222,23 @@ export class ShopComponent implements OnInit {
 
     console.log(this.display);
 
-    // this.profile.responseShopId.subscribe(
-    //   (id) => {
-    //     console.log(id, 'new');
-    //     if (id != 0) {
-    //       this.storeId = id;
-    //       this.getStoreDetail();
-    //     } else {
-    this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
-    console.log(this.storeId, 'new');
-    this.getStoreDetail();
-    this.Getdevices(this.storeId);
-    //     }
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //   }
-    // );
+    this.profile.responseShopId.subscribe(
+      (id) => {
+        console.log(id, 'new');
+        if (id != 0) {
+          this.storeId = id;
+          this.getStoreDetail();
+        } else {
+          this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
+          console.log(this.storeId, 'new');
+          this.getStoreDetail();
+          this.Getdevices(this.storeId);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     // this.ShopList = JSON.parse(localStorage.getItem('Shoplist') || '[]');
 
     // this.ShopList.forEach((e) => {
@@ -411,8 +411,14 @@ export class ShopComponent implements OnInit {
   shopDetail(id) {
     console.log(id);
     this.profile.getShopId(id);
-    window.location.reload();
-    // this.router.navigate(['/shop', id]);
+    this.router.navigate(['/shop', id]);
+
+    let inter = setInterval(() => {
+      if (id == JSON.parse(this.route.snapshot.paramMap.get('id'))) {
+        window.location.reload();
+        clearInterval(inter);
+      }
+    }, 10);
   }
 
   getStoreDetail() {
