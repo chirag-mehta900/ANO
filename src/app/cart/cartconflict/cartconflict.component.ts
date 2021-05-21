@@ -28,9 +28,9 @@ export class CartconflictComponent implements OnInit {
 
     this.shopService.getShopifromcart(obj).subscribe((data) => {
       console.log(data);
-      console.log(data['data']['data'][0]['shopName']);
+      console.log(data['data']['shopName']);
 
-      this.shopName1 = data['data']['data'][0]['shopName'];
+      this.shopName1 = data['data']['shopName'];
 
       (this.shop = JSON.parse(localStorage.getItem('Shop') || '[]')),
         (this.shopName2 = this.shop.shopName);

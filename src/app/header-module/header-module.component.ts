@@ -177,6 +177,11 @@ export class HeaderModuleComponent implements OnInit {
     }
     const modalRef = this.modalService.open(LoginComponent);
     modalRef.result.then((result) => {
+      console.log(result);
+      console.log(result.userDetails[0].mobileNumber);
+
+      this.Phonenumber = this.convertmobile(result.userDetails[0].mobileNumber);
+
       this.setUserName();
     });
   }

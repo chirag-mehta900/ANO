@@ -356,7 +356,7 @@ export class ShopComponent implements OnInit {
   }
 
   Cart(event) {
-    console.log(this.shop);
+    console.log(event);
 
     this.check = JSON.parse(localStorage.getItem('filter') || '[]');
 
@@ -369,7 +369,7 @@ export class ShopComponent implements OnInit {
     } else {
       let isLogedIn = localStorage.getItem('token');
       if (isLogedIn === null) {
-        this.product();
+        this.products(event);
       } else {
         var obj = {
           user_id: JSON.parse(localStorage.getItem('user_id') || '[]'),
@@ -424,9 +424,16 @@ export class ShopComponent implements OnInit {
         this.bookRepair.price = this.expectedresponse[0].price;
         this.bookRepair.brand_id = this.expectedresponse[0].brand_id;
         let isLogedIn = localStorage.getItem('token');
+        let cartid = localStorage.getItem('Tempcart');
+
         if (isLogedIn != null) {
           this.bookRepair.user_id = JSON.parse(
             localStorage.getItem('user_id') || '[]'
+          );
+        }
+        if (cartid != null) {
+          this.bookRepair.cart_id = JSON.parse(
+            localStorage.getItem('Tempcart') || '[]'
           );
         }
 
@@ -784,9 +791,15 @@ export class ShopComponent implements OnInit {
         this.bookRepair.price = this.expectedresponse[0].price;
         this.bookRepair.brand_id = this.expectedresponse[0].brand_id;
         let isLogedIn = localStorage.getItem('token');
+        let cartid = localStorage.getItem('Tempcart');
         if (isLogedIn != null) {
           this.bookRepair.user_id = JSON.parse(
             localStorage.getItem('user_id') || '[]'
+          );
+        }
+        if (cartid != null) {
+          this.bookRepair.cart_id = JSON.parse(
+            localStorage.getItem('Tempcart') || '[]'
           );
         }
 
