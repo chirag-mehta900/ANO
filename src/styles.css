@@ -90,6 +90,9 @@ label.star {
     margin-right: 7px;
     padding: 0px !important;
 }
+label.star:hover {
+    transform: rotate(0deg) scale(1.3) !important;
+}
 
 input:focus {
     outline: 0 !important;
