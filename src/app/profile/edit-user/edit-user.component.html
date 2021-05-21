@@ -10,15 +10,18 @@
                 </div>
                 <div class="user-profile-detail" *ngFor="let d of Details">
                     <div class="profile-detail">
-                        <input type="text" formControlName="fname" name="user-name" id="f-name" placeholder="Enter new First Name">
+                        <input type="text" formControlName="fname" name="user-name" id="f-name"
+                            placeholder="Enter new First Name">
 
                     </div>
 
                     <div class="profile-detail">
-                        <input type="text" formControlName="lname" name="user-name" id="l-name" placeholder="Enter new Last Name">
-
+                        <input type="text" formControlName="lname" name="user-name" id="l-name"
+                            placeholder="Enter new Last Name">
                     </div>
-                    <p>+1{{d.mobileNumber}}</p>
+                    <div class="profile-detail">
+                        <p>+1{{d.mobileNumber}}</p>
+                    </div>
                 </div>
             </div>
             <div class="profile-save">

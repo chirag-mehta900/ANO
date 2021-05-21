@@ -20,6 +20,12 @@
     border-bottom: 1px solid #000;
     margin-bottom: 10px;
 }
+.profile-detail p {
+    font-family: "Poppins-SemiBold";
+    border: none;
+    border-bottom: 1px solid #000;
+    margin-bottom: 10px;
+}
 
 .user-profile-detail p {
     font-family: "Poppins-SemiBold";
@@ -58,11 +64,11 @@
     background-color: #000000;
     color: #ffffff;
 }
-.user-profile-img button{
+.user-profile-img button {
     border: none;
     background-color: transparent;
 }
-.user-profile-img button img{
+.user-profile-img button img {
     height: 30px;
     width: auto;
     border: none;
@@ -70,7 +76,7 @@
     left: -110px;
 }
 
-@media only screen and (max-width: 415px){
+@media only screen and (max-width: 415px) {
     .cancel-btn {
         margin-right: 10px;
     }
