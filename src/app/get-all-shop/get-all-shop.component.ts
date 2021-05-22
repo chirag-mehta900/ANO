@@ -320,6 +320,7 @@ export class GetAllShopComponent implements OnInit {
       longitude: latlong.lng,
       distanceMile: 20,
     };
+    console.log(obj);
 
     this.Shop.getallstore(obj).subscribe(
       (data) => {
@@ -525,11 +526,7 @@ export class GetAllShopComponent implements OnInit {
       }
     );
   }
-  filter() {
-    // this.filterFlag = true;
 
-    this.modalService.open(BookRepairComponent);
-  }
   applyFilter(Repair) {
     console.log(Repair);
 

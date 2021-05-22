@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderService } from 'src/@theme/Services/header.service';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { ProblemsComponent } from '../problems/problems.component';
 
 declare var gtag;
 
@@ -38,6 +39,7 @@ export class BookRepairComponent implements OnInit {
     lat: 0,
     lng: 0,
   };
+
   otherProblem: string = '';
   bookRepair = {
     device: null,
@@ -50,7 +52,6 @@ export class BookRepairComponent implements OnInit {
   deviceFlag: boolean = false;
   problemFlag: boolean = false;
 
-  selectDeviceFlag: boolean = false;
   selectIssueFlag: boolean = false;
   formSubmitted: boolean = false;
   selectedDeviceName: any;
@@ -67,6 +68,8 @@ export class BookRepairComponent implements OnInit {
   constructor(
     private activeModal: NgbActiveModal,
     private headerService: HeaderService,
+    private modalService: NgbModal,
+
     private router: Router
   ) {}
 
@@ -97,20 +100,18 @@ export class BookRepairComponent implements OnInit {
   }
 
   getBrandList() {
-    if (this.deviceList.length == 0) {
-      this.headerService.getBrandList().subscribe(
-        (data) => {
-          console.log(data);
+    this.headerService.getBrandList().subscribe(
+      (data) => {
+        console.log(data);
 
-          this.deviceList = data['data'];
-          console.log(this.deviceList);
-          localStorage.setItem('deviceList', JSON.stringify(this.deviceList));
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
+        this.deviceList = data['data'];
+        console.log(this.deviceList);
+        localStorage.setItem('deviceList', JSON.stringify(this.deviceList));
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   close() {
@@ -133,37 +134,44 @@ export class BookRepairComponent implements OnInit {
   //   );
   // }
 
-  getIssueList(event) {
-    let obj = {
-      device_id: this.bookRepair.device,
-    };
-    console.log(obj);
+  getIssueList() {
+    if (this.bookRepair.device) {
+      this.deviceFlag = false;
+      let obj = {
+        device_id: this.bookRepair.device,
+      };
+      console.log(obj);
 
-    this.deviceList.forEach((e) => {
-      if (e.id == this.bookRepair.device) {
-        var dname = e.full_name;
-        console.log(dname);
+      this.deviceList.forEach((e) => {
+        if (e.id == this.bookRepair.device) {
+          var dname = e.full_name;
+          console.log(dname);
 
-        gtag('event', 'Proceed_BUTTON_CLICKED', {
-          event_category: 'BUTTON_CLICK',
-          event_label: 'Track Me Click',
-          value: 'User visit BookRepair for device' + dname,
-        });
-      }
-    });
-    this.headerService.getIssueList().subscribe(
-      (data) => {
-        console.log(data);
+          gtag('event', 'Proceed_BUTTON_CLICKED', {
+            event_category: 'BUTTON_CLICK',
+            event_label: 'Track Me Click',
+            value: 'User visit BookRepair for device' + dname,
+          });
+        }
+      });
+      console.log(this.bookRepair);
 
-        this.issueList = data['data'];
+      // this.headerService.getIssueList().subscribe(
+      //   (data) => {
+      //     console.log(data);
 
-        this.issueList.reverse();
-        console.log(this.issueList);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+      //     this.issueList = data['data'];
+
+      //     this.issueList.reverse();
+      //     console.log(this.issueList);
+      //   },
+      //   (error) => {
+      //     console.log(error);
+      //   }
+      // );
+    } else {
+      this.deviceFlag = true;
+    }
   }
 
   IssueList(event) {
@@ -183,20 +191,15 @@ export class BookRepairComponent implements OnInit {
 
   goToBrand() {
     this.selectBrandFlag = true;
-    this.selectDeviceFlag = false;
-  }
-
-  goToIssue() {
-    this.selectDeviceFlag = false;
-    this.selectIssueFlag = true;
   }
 
   goToDevice() {
     this.deviceFlag = false;
-
     if (this.bookRepair.device) {
-      this.selectBrandFlag = false;
-      this.selectDeviceFlag = true;
+      this.activeModal.close();
+      console.log(this.bookRepair);
+      localStorage.setItem('deviceProblem', JSON.stringify(this.bookRepair));
+      const modalRef = this.modalService.open(ProblemsComponent);
     } else {
       this.deviceFlag = true;
     }
@@ -206,7 +209,6 @@ export class BookRepairComponent implements OnInit {
     this.activeModal.close();
   }
   goToDeviceBack() {
-    this.selectDeviceFlag = true;
     this.selectIssueFlag = false;
   }
   addRepair(Repair) {

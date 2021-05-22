@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,14 +8,15 @@ import { Injectable } from '@angular/core';
 export class CommonService {
   constructor(private http: HttpClient) {}
   URL = 'https://stripenodefoodito.herokuapp.com/';
+  Url = environment.baseUrl;
 
   url = 'https://stripe-node-api.herokuapp.com/new/';
 
   envUrl() {
-    return 'https://api.ano.solutions/api/';
+    return this.Url;
   }
 
-  zipUrl = 'http://ziptasticapi.com/';
+  // zipUrl = 'http://ziptasticapi.com/';
 
   pay(data) {
     return this.http.post(this.url + 'pay', data);
@@ -40,7 +41,7 @@ export class CommonService {
     return this.http.post(this.envUrl() + 'feedback', data);
   }
 
-  zipcode(id) {
-    return this.http.get(this.zipUrl + id);
-  }
+  // zipcode(id) {
+  //   return this.http.get(this.zipUrl + id);
+  // }
 }
