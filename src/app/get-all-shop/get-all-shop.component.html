@@ -14,7 +14,7 @@
                 <datalist id="shops">
                     <option *ngFor="let s of searchShoplist" value="{{s.shopName}}"><span>{{s.city}} {{s.city}} {{s.state}}</span></option>
                   </datalist>
-                <input type="hidden" name="answer" id="shop-hidden"> <button (click)="filter()"><img src="../../assets/images/Sliders.svg" alt=""></button>
+                <input type="hidden" name="answer" id="shop-hidden"> <button><img src="../../assets/images/Sliders.svg" alt=""></button>
             </div>
 
             <div *ngIf="noshop" style="text-align: center;">

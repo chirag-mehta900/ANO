@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { HeaderService } from 'src/@theme/Services/header.service';
 import { BookRepairComponent } from '../header-module/book-repair/book-repair.component';
 import { ProfileService } from 'src/@theme/Services/profile.service';
+import { ProblemsComponent } from '../header-module/problems/problems.component';
 
 type ResponseType = {
   data: [
@@ -482,10 +483,15 @@ export class MappageComponent implements OnInit {
       }
     );
   }
-  filter() {
+  device() {
     // this.filterFlag = true;
 
     this.modalService.open(BookRepairComponent);
+  }
+  problem() {
+    // this.filterFlag = true;
+
+    this.modalService.open(ProblemsComponent);
   }
   applyFilter(Repair) {
     console.log(Repair);

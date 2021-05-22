@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://stripenodefoodito.herokuapp.com/',
+  baseUrl: 'https://api.ano.solutions/api/',
 };
 
 /*
