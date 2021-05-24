@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://api.ano.solutions/api/',
+  baseUrl: 'https://ano-apis-v8.herokuapp.com/api/',
 };

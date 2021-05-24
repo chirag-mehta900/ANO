@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CommonService } from './common.service';
 import { StoreTokenService } from './store-token.service';
-import { threadId } from 'node:worker_threads';
 
 @Injectable({
   providedIn: 'root',
