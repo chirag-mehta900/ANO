@@ -136,8 +136,8 @@ export class SignupComponent implements OnInit {
       this.signUpNameFlag = false;
       this.signUpMobileFlag = true;
 
-      this.userAddres.value.name =
-        this.signUpForm.value.fname + ' ' + this.signUpForm.value.lname;
+      this.userAddres.value.fname = this.signUpForm.value.fname;
+      this.userAddres.value.lname = this.signUpForm.value.lname;
 
       console.log(this.userAddres.value);
 
@@ -421,7 +421,7 @@ export class SignupComponent implements OnInit {
                 this.setUserName();
 
                 console.log(this.userAddres.value);
-                this.headerService.userAddress(this.userAddres.value).subscribe(
+                this.headerService.userAddress(this.signUpForm.value).subscribe(
                   (data) => {
                     console.log(data);
                     console.log(data['data'].fname);
