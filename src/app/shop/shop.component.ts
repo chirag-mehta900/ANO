@@ -214,8 +214,6 @@ export class ShopComponent implements OnInit {
 
     this.devicelist.forEach((e) => {
       if (e.id == this.Configs['device']) {
-        console.log(e);
-
         this.display[0].Device = e.full_name;
         this.display[0].Deviceid = e.id;
       }
@@ -223,23 +221,23 @@ export class ShopComponent implements OnInit {
 
     console.log(this.display);
 
-    this.profile.responseShopId.subscribe(
-      (id) => {
-        console.log(id, 'new');
-        if (id != 0) {
-          this.storeId = id;
-          this.getStoreDetail();
-        } else {
-          this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
-          console.log(this.storeId, 'new');
-          this.getStoreDetail();
-          this.Getdevices(this.storeId);
-        }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    // this.profile.responseShopId.subscribe(
+    //   (id) => {
+    //     console.log(id, 'new');
+    //     if (id != 0) {
+    //       this.storeId = id;
+    //       this.getStoreDetail();
+    //     } else {
+    this.storeId = JSON.parse(this.route.snapshot.paramMap.get('id'));
+    console.log(this.storeId, 'new');
+    this.getStoreDetail();
+    this.Getdevices(this.storeId);
+    //     }
+    //   },
+    //   (error) => {
+    //     console.log(error);
+    //   }
+    // );
     // this.ShopList = JSON.parse(localStorage.getItem('Shoplist') || '[]');
 
     // this.ShopList.forEach((e) => {
@@ -285,7 +283,7 @@ export class ShopComponent implements OnInit {
       (data) => {
         console.log(data);
         this.deviceList = data['data'];
-        console.log(this.deviceList);
+        console.log(this.deviceList, 'dropdown');
 
         // this.deviceLists.forEach((e) => {
         //   if (e != null) {
@@ -360,41 +358,37 @@ export class ShopComponent implements OnInit {
 
     this.check = JSON.parse(localStorage.getItem('filter') || '[]');
 
-    if (this.check) {
-      localStorage.removeItem('deviceProblem');
-      console.log('bookrepair remain');
-      console.log(this.check);
+    // localStorage.removeItem('deviceProblem');
+    // console.log('bookrepair remain');
+    // console.log(this.check);
 
-      this.modalService.open(BookRepairComponent);
+    let isLogedIn = localStorage.getItem('token');
+    if (isLogedIn === null) {
+      this.products(event);
     } else {
-      let isLogedIn = localStorage.getItem('token');
-      if (isLogedIn === null) {
-        this.products(event);
-      } else {
-        var obj = {
-          user_id: JSON.parse(localStorage.getItem('user_id') || '[]'),
-        };
+      var obj = {
+        user_id: JSON.parse(localStorage.getItem('user_id') || '[]'),
+      };
 
-        this.shopService.getShopifromcart(obj).subscribe(
-          (data) => {
-            console.log(data);
-            console.log(data['data']['shop_id']);
+      this.shopService.getShopifromcart(obj).subscribe(
+        (data) => {
+          console.log(data);
+          console.log(data['data']['shop_id']);
 
-            if (
-              data['data']['shop_id'] == this.shop[0]['id'] ||
-              data['data']['shop_id'] == 0
-            ) {
-              console.log('same');
-              this.products(event);
-            } else {
-              this.modalService.open(WarningComponent);
-            }
-          },
-          (error) => {
-            console.log(error);
+          if (
+            data['data']['shop_id'] == this.shop[0]['id'] ||
+            data['data']['shop_id'] == 0
+          ) {
+            console.log('same');
+            this.products(event);
+          } else {
+            this.modalService.open(WarningComponent);
           }
-        );
-      }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     }
   }
   products(event) {

@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://ano-apis-v8.herokuapp.com/api/',
+  baseUrl:
+    'http://anoapis-env.eba-gcjpnm6v.ap-south-1.elasticbeanstalk.com/api/',
 };
