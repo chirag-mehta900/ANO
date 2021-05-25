@@ -50,9 +50,10 @@ export class ChangePswComponent implements OnInit {
         this.profile.changepassword(obj).subscribe((data) => {
           console.log(data);
           if (data['status'] == 200) {
-            // this.activeModal.close();
             this.changepsw.reset();
             this.msg = data['message'];
+
+            this.activeModal.close();
           }
         }),
           (error) => {

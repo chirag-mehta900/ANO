@@ -13,7 +13,7 @@
             device1.invalid &&
             (formSubmitted || device1.touched) 
             }">
-                        <ng-option *ngFor="let brand of deviceList" (change)="getIssueList($event)" [value]="brand.id"><span>{{brand.categoryName}}</span> {{brand.full_name}}</ng-option>
+                        <ng-option *ngFor="let brand of deviceList" (change)="getIssueList($event)" [value]="brand.id"><span>{{brand.brandName}}</span> {{brand.modelName}}</ng-option>
                         <!-- <ng-option (change)="other($event)" [value]="other">Other</ng-option> -->
                     </ng-select>
 
