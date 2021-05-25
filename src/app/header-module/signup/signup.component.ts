@@ -22,6 +22,7 @@ export class SignupComponent implements OnInit {
   signUpForm: FormGroup;
   otpForm: FormGroup;
   newmobile: any;
+  displaymob: any;
   userAddres: FormGroup;
   userName: any;
   sId: any;
@@ -190,6 +191,7 @@ export class SignupComponent implements OnInit {
       }
       console.log(string);
 
+      this.displaymob = this.convertmobile(string);
       this.newmobile = string;
       this.verification.email = this.signUpForm.value.email;
       this.verification.mobileNumber = this.newmobile;
@@ -239,6 +241,15 @@ export class SignupComponent implements OnInit {
     } else {
       this.emptymobileFlag = true;
     }
+  }
+
+  convertmobile(phoneNumberString) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return '(' + match[1] + ')' + match[2] + '-' + match[3];
+    }
+    return null;
   }
 
   close() {
