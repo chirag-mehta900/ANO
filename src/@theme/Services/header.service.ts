@@ -29,7 +29,7 @@ export class HeaderService {
   }
 
   getBrandList() {
-    return this.httpClient.get(this.commonService.envUrl() + 'models');
+    return this.httpClient.get(this.commonService.envUrl() + 'device');
   }
   getDeviceList(id) {
     return this.httpClient.get(
