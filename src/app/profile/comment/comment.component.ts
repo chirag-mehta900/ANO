@@ -40,6 +40,7 @@ export class CommentComponent implements OnInit {
 
         this.order.forEach((e) => {
           e.repairedDate = this.dateformat(e.repairedDate);
+          e.shop.mobileNumber = this.convertmobile(e.shop.mobileNumber);
         });
         console.log(this.order, 'array');
       },
@@ -47,6 +48,15 @@ export class CommentComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  convertmobile(phoneNumberString) {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+    var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+    if (match) {
+      return '(' + match[1] + ')' + match[2] + '-' + match[3];
+    }
+    return null;
   }
 
   dateformat(data) {

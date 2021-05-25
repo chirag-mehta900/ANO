@@ -171,6 +171,7 @@ export class HeaderModuleComponent implements OnInit {
   }
 
   logIn() {
+    this.isopenDropdown = false;
     this.userName = null;
     if (this.modalService.hasOpenModals()) {
       this.modalService.dismissAll();
@@ -200,6 +201,8 @@ export class HeaderModuleComponent implements OnInit {
     );
   }
   signUp() {
+    this.isopenDropdown = false;
+
     if (this.modalService.hasOpenModals()) {
       this.modalService.dismissAll();
     }
@@ -212,13 +215,19 @@ export class HeaderModuleComponent implements OnInit {
   }
 
   onhome() {
+    this.isopenDropdown = false;
+
     this.router.navigate(['home']);
   }
   onContact() {
+    this.isopenDropdown = false;
+
     this.router.navigate(['contact']);
   }
 
   nearby() {
+    this.isopenDropdown = false;
+
     this.router.navigate(['filterShop']);
     gtag('event', 'Proceed_BUTTON_CLICKED', {
       event_category: 'BUTTON_CLICK',
@@ -259,9 +268,13 @@ export class HeaderModuleComponent implements OnInit {
     this.router.navigate(['profile/service']);
   }
   onabout() {
+    this.isopenDropdown = false;
+
     this.router.navigate(['about']);
   }
   bookRepair() {
+    this.isopenDropdown = false;
+
     if (this.modalService.hasOpenModals()) {
       this.modalService.dismissAll();
     }
