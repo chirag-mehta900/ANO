@@ -112,7 +112,7 @@ export class ProblemsComponent implements OnInit {
       this.problemFlag = false;
       this.othernameFlag = false;
       console.log(event);
-      if (event == 1) {
+      if (event == 3) {
         console.log('othername');
         this.othernameFlag = true;
       }
