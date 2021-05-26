@@ -410,11 +410,12 @@ agm-map {
 
 .average-ratings {
     display: flex;
+    align-items: center;
 }
 
 .average-figure h2 {
     font-family: "Poppins-SemiBold";
-    font-size: 75px;
+    font-size: 70px;
     margin-bottom: 0px;
     margin-right: 15px;
 }
