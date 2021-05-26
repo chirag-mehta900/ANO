@@ -502,7 +502,7 @@ export class ShopComponent implements OnInit {
         });
         console.log(this.ratings);
         this.ReviewCount = this.ratings.length;
-        if (this.ReviewCount > 0) {
+        if (this.ReviewCount > 1) {
           this.reviewFlag = true;
         }
 
