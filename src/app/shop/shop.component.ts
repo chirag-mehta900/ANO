@@ -285,13 +285,13 @@ export class ShopComponent implements OnInit {
         this.deviceList = data['data'];
         console.log(this.deviceList, 'dropdown');
 
-        // this.deviceLists.forEach((e) => {
-        //   if (e != null) {
-        //     this.deviceList.push(e);
-        //   }
-        // });
-        // debugger;
-        // console.log(this.deviceList);
+        if (this.Configs.length == 0 && this.filter) {
+          this.display[0].Device = this.deviceList[0].device.modelName;
+          this.display[0].Deviceid = this.deviceList[0].device.id;
+          var ID = this.deviceList[0].device.id;
+          console.log(this.display, 'check');
+          this.getIssue(ID);
+        }
       },
       (error) => {
         console.log(error);
@@ -304,16 +304,11 @@ export class ShopComponent implements OnInit {
 
     this.devicelist.forEach((e) => {
       if (e.id == event) {
-        console.log(e);
-
         this.display[0].Device = e.full_name;
         this.display[0].Deviceid = e.id;
       }
     });
-
     console.log(this.display);
-
-    console.log(event);
     var issueobj = {
       shop_id: this.shop[0].id,
       device_id: event,

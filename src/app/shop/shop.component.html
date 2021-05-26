@@ -95,7 +95,7 @@
             <div class="mobile-search-drop">
 
                 <ng-select name="brand" [(ngModel)]="display[0].Device" (change)="getIssue($event)" #device1="ngModel">
-                    <ng-option *ngFor="let brand of deviceList " (change)="getIssue($event)" value="{{brand.device.id}}">{{brand.device.modelName}}</ng-option>
+                    <ng-option *ngFor="let brand of deviceList " (change)="getIssue($event)" value="{{brand.device.id}}"><span>{{brand.device.categoryName}}</span> {{brand.device.modelName}}</ng-option>
                 </ng-select>
 
                 <!-- <input *ngFor="let s of display" type="text" list="devicelist" name="device" (change)="choosedevice($event.target.value)" id="device" value="{{s.Device}}">
@@ -104,6 +104,8 @@
 
                   </datalist> -->
             </div>
+
+
             <div class="all-services">
                 <div class="row">
                     <div class="col-md-3" *ngFor="let i of issueList">
@@ -177,7 +179,7 @@
                                 <h2>{{averageRating}}</h2>
                             </div>
                             <div class="average-start">
-                                <h3 *ngIf="reviewFlag">Excellent </h3>
+                                <!-- <h3 *ngIf="reviewFlag">Excellent </h3> -->
                                 <div class="average-start">
                                     <ngx-star-rating class="rating" [(ngModel)]="averageRating" [id]="'starValueFive'" [disabled]="true" [disabled]=true></ngx-star-rating>
                                 </div>
