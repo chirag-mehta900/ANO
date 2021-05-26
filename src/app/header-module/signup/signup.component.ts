@@ -432,7 +432,7 @@ export class SignupComponent implements OnInit {
                 this.setUserName();
 
                 console.log(this.userAddres.value);
-                this.headerService.userAddress(this.signUpForm.value).subscribe(
+                this.headerService.userAddress(this.userAddres.value).subscribe(
                   (data) => {
                     console.log(data);
                     console.log(data['data'].fname);
