@@ -895,19 +895,20 @@ export class CartComponent implements OnInit {
     this.shopService.deleteCartData(event).subscribe(
       (data) => {
         console.log(data);
+        window.location.reload();
       },
       (error) => {
         console.log(error);
       }
     );
-    this.displayCartInfo.forEach((element, index) => {
-      if (element.id == event) {
-        this.totalCartAmounts -= element.total_amount;
-        this.displayCartInfo.splice(index, 1);
-      }
-    });
+    // this.displayCartInfo.forEach((element, index) => {
+    //   if (element.id == event) {
+    //     this.totalCartAmounts -= element.total_amount;
+    //     this.displayCartInfo.splice(index, 1);
+    //   }
+    // });
     console.log(this.displayCartInfo);
-    this.recalculateTotalCartAmount();
+    // this.recalculateTotalCartAmount();
     console.log(event);
   }
   proceed() {

@@ -356,8 +356,8 @@ export class CheckoutComponent implements OnInit {
       var orderData = {
         currency: 'usd',
         paymentMethodId: '',
-        // amount: Number((this.TotalAmountToPay * 100).toFixed(2)),
-        amount: 100,
+        amount: Number((this.TotalAmountToPay * 100).toFixed(2)),
+        // amount: 100,
         paymentIntentId: '',
       };
 

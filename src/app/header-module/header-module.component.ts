@@ -210,7 +210,9 @@ export class HeaderModuleComponent implements OnInit {
     modalRef.result.then((result) => {
       console.log(result);
 
-      this.userName = result;
+      this.userName = result['fname'];
+      this.Phonenumber = this.convertmobile(result['phoneNumber']);
+      console.log(this.Phonenumber);
     });
   }
 
