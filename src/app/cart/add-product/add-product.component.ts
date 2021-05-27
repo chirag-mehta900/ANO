@@ -261,7 +261,8 @@ export class AddProductComponent implements OnInit {
           console.log(data['data'][0]);
           console.log(data['data'].id);
           localStorage.setItem('cart_id', data['data'].cart_id);
-          this.activeModal.close(data['data'][0]);
+          this.activeModal.close();
+          window.location.reload();
         },
         (error) => {
           console.log(error);

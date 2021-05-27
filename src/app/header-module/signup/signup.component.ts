@@ -441,7 +441,7 @@ export class SignupComponent implements OnInit {
                     this.storeTokenService.set('user_id', data['data'].user_id);
 
                     if (data['status'] == 200) {
-                      this.activeModal.close(data['data']['fname']);
+                      this.activeModal.close(data['data']);
                     }
                   },
                   (error) => {

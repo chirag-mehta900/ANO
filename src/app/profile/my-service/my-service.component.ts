@@ -64,7 +64,7 @@ export class MyServiceComponent implements OnInit {
     var year = data.slice(0, 4);
     var month = data.slice(5, 7);
     var day = data.slice(8, 10);
-    var time = this.tConvert(data.slice(11, data.length));
+    var time = this.tConvert(data.slice(11, 19));
 
     return month + '-' + day + '-' + year + ' ' + ' ' + time;
   }
